@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d5e210ffa98264f996ba5dba0812d3, type: 3}
+  m_Name: SoundDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::Sound.SoundDataBase
+  _seData:
+  - Type: 1
+    Clip: {fileID: 8300000, guid: ca203f76c4c49314da9ee8d58852b6e7, type: 3}
+    Volume: 10
+  - Type: 2
+    Clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
+    Volume: 10
+  _bgmData: []

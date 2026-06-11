@@ -1,0 +1,90 @@
+using R3;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+public class EditorManager : SingletonMonoBehaviour<EditorManager>
+{
+    [SerializeField] private SongDataBase _songData;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private float _bpm;
+    [SerializeField] private Scrollbar _scrollBar;
+    [SerializeField] private float _magnification;
+    [SerializeField] private RectTransform _displayRange;
+    [SerializeField ] private int _divition;
+    public float DisplayRange => _displayRange.sizeDelta.x;
+    public float Magnification => _magnification;
+    public float BPM => _bpm;
+    public int Divition => _divition;
+    public AudioClip AudioClip => _audioClip;
+    public int SongIndex { get; private set; } = -1;
+
+    private readonly ReactiveProperty<bool> _isPlaying = new();
+    public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
+
+    private readonly ReactiveProperty<double> _editorTime = new();
+    public ReadOnlyReactiveProperty<double> EditorTime => _editorTime;
+    public double StartDsp;
+
+    private void Start()
+    {
+        _editorTime.Value = 0;
+        _isPlaying.Value = false;
+
+        EditorTime
+            .Subscribe(time =>
+            {
+                _scrollBar.SetValueWithoutNotify(
+                    (float)(time / _audioClip.length));
+            })
+            .AddTo(this);
+    }
+    public void SetData(float bpm,int soundIndex)
+    {
+        _bpm = bpm;
+        if (soundIndex >= 0 && soundIndex < _audioClip.length)
+        {
+            _audioClip = _songData._audioClipList[soundIndex];
+            SongIndex = soundIndex;
+        }
+    }
+    public void ReloadTime()
+    {
+        _editorTime.Value = _editorTime.Value;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            _isPlaying.Value = !_isPlaying.Value;
+            _scrollBar.interactable = !IsPlaying.CurrentValue;
+
+            if (_isPlaying.CurrentValue)
+            {
+                StartDsp = AudioSettings.dspTime - _editorTime.Value;
+            }
+
+        }
+
+        if (_isPlaying.CurrentValue)
+        {
+            _editorTime.Value = AudioSettings.dspTime - StartDsp;
+        }
+    }
+
+    public void OnBarChangeValue(float value)
+    {
+        _editorTime.Value = _audioClip.length * value;
+
+        // Ä¶’†‚ÉƒV[ƒN‚µ‚½ê‡‚à“¯Šú
+        if (_isPlaying.CurrentValue)
+        {
+            StartDsp = AudioSettings.dspTime - _editorTime.Value;
+        }
+    }
+    public void ChangeDivisionCount(int count)
+    {
+        _divition = count;
+    }
+}
