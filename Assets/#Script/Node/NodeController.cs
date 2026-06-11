@@ -52,6 +52,7 @@ namespace InGame.Node
                 {
                     var judgeData = _nodeJudgement.JudgementDifference(node.NodeData.Time - GameManager.I.StageTime);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
+                    ScoreManager.I.AddMiss();
                 }
                 PoolManager.I.Release(node);
                 _nodes.Remove(node);
@@ -90,6 +91,7 @@ namespace InGame.Node
                 PoolManager.I.Release(targetNode);
                 var judgeData = _nodeJudgement.JudgementDifference(nodeTime - GameManager.I.StageTime);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
+                ScoreManager.I.AddScore(judgeData);
             }
         }
     }
