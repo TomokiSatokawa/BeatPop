@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using Input;
 using R3;
 using Sound;
 using UnityEngine;
-using UnityEngine.iOS;
 namespace InGame.Node
 {
     public class NodeController : MonoBehaviour
@@ -20,11 +20,15 @@ namespace InGame.Node
 
         public void Start()
         {
-            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0,PoolPrefabType.NormalNote,SESoundType.NormalTap)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
             InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
+            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
+            InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
+            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
 
-            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0,PoolPrefabType.FlickNote,SESoundType.FlickTap)).AddTo(this);
-            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1,PoolPrefabType.FlickNote,SESoundType.FlickTap)).AddTo(this);
+            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
+            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)
@@ -37,7 +41,9 @@ namespace InGame.Node
             List<NodeObject> removeNode = new();
             foreach (NodeObject node in _nodes)
             {
-                if (node.NodeData.Time <= GameManager.I.StageTime - _nodeJudgement.DeleteTime)
+                float deleteTime = GameManager.I.StageTime - _nodeJudgement.DeleteTime;
+
+                if (node.NodeData.Time <= deleteTime)
                 {
                     removeNode.Add(node);
                 }
@@ -68,7 +74,7 @@ namespace InGame.Node
             foreach (var node in _nodes)
             {
                 if (node.NodeData.Lane != lane) continue;
-                if(node.Type != type) continue;
+                if (node.Type != type) continue;
 
                 float difference =
                     Mathf.Abs(node.NodeData.Time - GameManager.I.StageTime);
@@ -93,6 +99,10 @@ namespace InGame.Node
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
                 ScoreManager.I.AddScore(judgeData);
             }
+        }
+        public NodeObject GetClonedNode(int nodeID)
+        {
+            return _nodes.Where(x => x.NodeData.NodeID == nodeID).FirstOrDefault();
         }
     }
 }

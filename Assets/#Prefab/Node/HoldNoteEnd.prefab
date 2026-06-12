@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7856448349964799655}
   - component: {fileID: 4321049287285603919}
   - component: {fileID: 106631584671292514}
-  - component: {fileID: 9099308411616484299}
+  - component: {fileID: 5351719247677405752}
   m_Layer: 0
   m_Name: HoldNoteEnd
   m_TagString: Untagged
@@ -113,7 +113,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9099308411616484299
+--- !u!114 &5351719247677405752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +124,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0aa1440404d82944afb0653818f8267, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeObject
+  m_EditorClassIdentifier: Assembly-CSharp::NodeObject
   NodeData:
     NodeID: 0
     Lane: 0
     Time: 0
     PrefabType: 0
+    Connect: 0
   StartPosition: {x: 0, y: 0, z: 0}
   MoveAmount: 0

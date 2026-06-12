@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace InGame.Node
 {
-    public class NodeGenerator : MonoBehaviour
+    public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>
     {
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private TextAsset _textAsset;
@@ -16,7 +16,8 @@ namespace InGame.Node
         private List<NodeData> _nodeDatas = new();
         private int _nextNode = 0;
         private float _nextLine = 0;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        public float ArraivalSeconds => _arrivalSeconds;
+
         void Start()
         {
             LoadFile();
@@ -68,17 +69,33 @@ namespace InGame.Node
 
         private void CreateNode(NodeData nodeData)
         {
-            if(nodeData.PrefabType != PoolPrefabType.Line)
+            if (nodeData.PrefabType == PoolPrefabType.HoldNoteStart)
             {
-            Debug.Log(nodeData.NodeID);
+                CreateHoldNode(nodeData);
+                return;
             }
-            var newObject = PoolManager.I.Get<NodeObject>(nodeData.PrefabType);
+            if (nodeData.PrefabType != PoolPrefabType.Line)
+            {
+                Debug.Log(nodeData.NodeID);
+            }
+            GenerateNode<NodeObject>(nodeData);
+        }
+
+        private T GenerateNode<T>(NodeData nodeData) where T :NodeObject
+        {
+            var newObject = PoolManager.I.Get<T>(nodeData.PrefabType);
             newObject.transform.position = _clonePosition[nodeData.Lane].position;
             newObject.transform.rotation = Quaternion.identity;
 
             newObject.SetMoveData(nodeData);
             newObject.SetGoal(_goalZ);
             _nodeController.AddNode(newObject);
+            return newObject;
+        }
+
+        private void CreateHoldNode(NodeData holdNode)
+        {
+            var holdObject = GenerateNode<HoldNode>(holdNode);
         }
     }
 

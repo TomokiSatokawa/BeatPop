@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NodeJudgement
   m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
   ToleranceValue: 0.1
-  DeleteTime: 0.12
+  DeleteTime: 0.16
   JudgementDatas:
   - Name: Perfect
     Value: 0.04
@@ -28,7 +28,7 @@ MonoBehaviour:
     ShowEarlyLateText: 1
     Prefab: {fileID: 8428856643022149301, guid: f0430bcb990d1004387edc9ce0efa506, type: 3}
   - Name: Bad
-    Value: 0.11
+    Value: 0.15
     ShowEarlyLateText: 1
     Prefab: {fileID: 2888143394473825163, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
   - Name: Miss

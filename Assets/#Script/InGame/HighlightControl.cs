@@ -8,5 +8,4 @@ namespace InGame.Field
         [SerializeField] private float _alpha;
         [SerializeField] private float _duration;
     }
-
 }

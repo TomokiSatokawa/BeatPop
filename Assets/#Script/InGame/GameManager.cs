@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip _songClip;
     [SerializeField] private float _bpm;
     [SerializeField] private TextMeshProUGUI _timeText;
+    [SerializeField] private float _timeOffset;
     private bool _isPlaying = false;
     private double _startDspTime;
     public float BPM => _bpm;
@@ -54,6 +55,6 @@ public class GameManager : MonoBehaviour
         }
         if (!_isPlaying) return;
 
-        StageTime = (float)(AudioSettings.dspTime - _startDspTime);
+        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
     }
 }

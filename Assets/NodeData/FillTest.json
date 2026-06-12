@@ -1,0 +1,470 @@
+{
+    "DataVersion": "1.0",
+    "BPM": 104.55000305175781,
+    "SoundIndex": -1,
+    "SongName": "104.55000305175781",
+    "Nodes": [
+        {
+            "NodeID": 0,
+            "Lane": 0,
+            "Time": 0.0,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 1,
+            "Lane": 1,
+            "Time": 0.0,
+            "PrefabType": 3,
+            "Connect": 5
+        },
+        {
+            "NodeID": 2,
+            "Lane": 0,
+            "Time": 0.5738880634307861,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 3,
+            "Lane": 0,
+            "Time": 1.1477761268615723,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 4,
+            "Lane": 0,
+            "Time": 1.7216641902923585,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 5,
+            "Lane": 1,
+            "Time": 2.2955522537231447,
+            "PrefabType": 5,
+            "Connect": 1
+        },
+        {
+            "NodeID": 6,
+            "Lane": 0,
+            "Time": 3.443328380584717,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 7,
+            "Lane": 1,
+            "Time": 3.443328380584717,
+            "PrefabType": 3,
+            "Connect": 11
+        },
+        {
+            "NodeID": 8,
+            "Lane": 0,
+            "Time": 3.7302722930908205,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 9,
+            "Lane": 0,
+            "Time": 4.017216682434082,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 10,
+            "Lane": 0,
+            "Time": 4.3041605949401859,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 11,
+            "Lane": 1,
+            "Time": 4.3041605949401859,
+            "PrefabType": 5,
+            "Connect": 7
+        },
+        {
+            "NodeID": 12,
+            "Lane": 0,
+            "Time": 5.738880634307861,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 13,
+            "Lane": 1,
+            "Time": 5.738880634307861,
+            "PrefabType": 3,
+            "Connect": 17
+        },
+        {
+            "NodeID": 14,
+            "Lane": 0,
+            "Time": 6.025824546813965,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 15,
+            "Lane": 0,
+            "Time": 6.312768936157227,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 16,
+            "Lane": 0,
+            "Time": 6.59971284866333,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 17,
+            "Lane": 1,
+            "Time": 6.59971284866333,
+            "PrefabType": 5,
+            "Connect": 13
+        },
+        {
+            "NodeID": 18,
+            "Lane": 1,
+            "Time": 8.034433364868164,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 19,
+            "Lane": 0,
+            "Time": 8.034433364868164,
+            "PrefabType": 3,
+            "Connect": 23
+        },
+        {
+            "NodeID": 20,
+            "Lane": 1,
+            "Time": 8.32137680053711,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 21,
+            "Lane": 1,
+            "Time": 8.608321189880371,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 22,
+            "Lane": 1,
+            "Time": 8.895264625549317,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 23,
+            "Lane": 0,
+            "Time": 8.895264625549317,
+            "PrefabType": 5,
+            "Connect": 19
+        },
+        {
+            "NodeID": 24,
+            "Lane": 1,
+            "Time": 10.329984664916993,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 25,
+            "Lane": 0,
+            "Time": 10.329984664916993,
+            "PrefabType": 3,
+            "Connect": 29
+        },
+        {
+            "NodeID": 26,
+            "Lane": 1,
+            "Time": 10.616929054260254,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 27,
+            "Lane": 1,
+            "Time": 10.903873443603516,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 28,
+            "Lane": 1,
+            "Time": 11.190816879272461,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 29,
+            "Lane": 0,
+            "Time": 11.190816879272461,
+            "PrefabType": 5,
+            "Connect": 25
+        },
+        {
+            "NodeID": 30,
+            "Lane": 0,
+            "Time": 13.773313522338868,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 31,
+            "Lane": 1,
+            "Time": 13.773313522338868,
+            "PrefabType": 3,
+            "Connect": 35
+        },
+        {
+            "NodeID": 32,
+            "Lane": 0,
+            "Time": 14.060257911682129,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 33,
+            "Lane": 0,
+            "Time": 14.347201347351075,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 34,
+            "Lane": 0,
+            "Time": 14.634145736694336,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 35,
+            "Lane": 1,
+            "Time": 14.634145736694336,
+            "PrefabType": 5,
+            "Connect": 31
+        },
+        {
+            "NodeID": 36,
+            "Lane": 1,
+            "Time": 14.921089172363282,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 37,
+            "Lane": 0,
+            "Time": 14.921089172363282,
+            "PrefabType": 3,
+            "Connect": 41
+        },
+        {
+            "NodeID": 38,
+            "Lane": 1,
+            "Time": 15.208033561706543,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 39,
+            "Lane": 1,
+            "Time": 15.494977951049805,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 40,
+            "Lane": 1,
+            "Time": 15.78192138671875,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 41,
+            "Lane": 0,
+            "Time": 15.78192138671875,
+            "PrefabType": 5,
+            "Connect": 37
+        },
+        {
+            "NodeID": 42,
+            "Lane": 0,
+            "Time": 16.068866729736329,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 43,
+            "Lane": 1,
+            "Time": 16.068866729736329,
+            "PrefabType": 3,
+            "Connect": 47
+        },
+        {
+            "NodeID": 44,
+            "Lane": 0,
+            "Time": 16.355810165405275,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 45,
+            "Lane": 0,
+            "Time": 16.64275360107422,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 46,
+            "Lane": 0,
+            "Time": 16.929697036743165,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 47,
+            "Lane": 1,
+            "Time": 16.929697036743165,
+            "PrefabType": 5,
+            "Connect": 43
+        },
+        {
+            "NodeID": 48,
+            "Lane": 1,
+            "Time": 17.216642379760743,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 49,
+            "Lane": 0,
+            "Time": 17.216642379760743,
+            "PrefabType": 3,
+            "Connect": 53
+        },
+        {
+            "NodeID": 50,
+            "Lane": 1,
+            "Time": 17.503585815429689,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 51,
+            "Lane": 1,
+            "Time": 17.790529251098634,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 52,
+            "Lane": 1,
+            "Time": 18.07747459411621,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 53,
+            "Lane": 0,
+            "Time": 18.07747459411621,
+            "PrefabType": 5,
+            "Connect": 49
+        },
+        {
+            "NodeID": 54,
+            "Lane": 0,
+            "Time": 18.364418029785158,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 55,
+            "Lane": 1,
+            "Time": 18.364418029785158,
+            "PrefabType": 3,
+            "Connect": 59
+        },
+        {
+            "NodeID": 56,
+            "Lane": 0,
+            "Time": 18.6513614654541,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 57,
+            "Lane": 0,
+            "Time": 18.93830680847168,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 58,
+            "Lane": 0,
+            "Time": 19.225250244140626,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 59,
+            "Lane": 1,
+            "Time": 19.225250244140626,
+            "PrefabType": 5,
+            "Connect": 55
+        },
+        {
+            "NodeID": 60,
+            "Lane": 1,
+            "Time": 19.51219367980957,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 61,
+            "Lane": 0,
+            "Time": 19.51219367980957,
+            "PrefabType": 3,
+            "Connect": 65
+        },
+        {
+            "NodeID": 62,
+            "Lane": 1,
+            "Time": 19.79913902282715,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 63,
+            "Lane": 1,
+            "Time": 20.086082458496095,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 64,
+            "Lane": 1,
+            "Time": 20.37302589416504,
+            "PrefabType": 1,
+            "Connect": 0
+        },
+        {
+            "NodeID": 65,
+            "Lane": 0,
+            "Time": 20.37302589416504,
+            "PrefabType": 5,
+            "Connect": 61
+        }
+    ]
+}

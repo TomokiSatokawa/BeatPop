@@ -48,6 +48,6 @@ namespace Sound
     }
     public enum SESoundType
     {
-       Npme,NormalTap,FlickTap,Hit
+       Npme,NormalTap,FlickTap,HoldStart,HoldEnd,Hit
     }
 }

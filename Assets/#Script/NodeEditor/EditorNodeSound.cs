@@ -10,7 +10,10 @@ public class EditorNodeSound : MonoBehaviour
     public List<NodeData> _soundTimeData;
     public void Start()
     {
-        EditorManager.I.IsPlaying.Where(x => x).Subscribe(_ => UpdateNodeData()).AddTo(this);
+        EditorManager.I.IsPlaying
+            .Where(x => x)
+            .Subscribe(_ => UpdateNodeData())
+            .AddTo(this);
     }
     public void UpdateNodeData()
     {

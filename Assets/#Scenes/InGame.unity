@@ -1431,7 +1431,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1252056264}
   - component: {fileID: 1252056263}
-  - component: {fileID: 1252056265}
   - component: {fileID: 1252056266}
   m_Layer: 0
   m_Name: Node
@@ -1459,7 +1458,7 @@ MonoBehaviour:
   - {fileID: 840021716}
   - {fileID: 1032196361}
   _goalZ: -10
-  _arrivalSeconds: 1
+  _arrivalSeconds: 0.65
   _isGenerating: 1
 --- !u!4 &1252056264
 Transform:
@@ -1476,20 +1475,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1252056265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252056262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d22ba23f0a058940ad670c827361516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodePool
-  _prefabDatas:
-  - {Prefab: {fileID: 6634633610155461654, guid: 33d09549b74a0a5499db03844a6d8cc5, type: 3}, Type: 1}
 --- !u!114 &1252056266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1642,7 +1627,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.126
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2213,9 +2198,10 @@ MonoBehaviour:
   StageTime: 0
   _songData: {fileID: 11400000, guid: 450c01e5042b9534794a09a7199a51f2, type: 2}
   _waitSeconds: 3
-  _songClip: {fileID: 8300000, guid: 53d66be6cfbcce647a8f195e7475b74c, type: 3}
+  _songClip: {fileID: 8300000, guid: da27006bedb7fe544bd300d1f74ed063, type: 3}
   _bpm: 104.55
   _timeText: {fileID: 1463515347}
+  _timeOffset: -0.17
 --- !u!114 &1946836282
 MonoBehaviour:
   m_ObjectHideFlags: 0

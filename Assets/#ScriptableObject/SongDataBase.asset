@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SongDataBase
   m_EditorClassIdentifier: Assembly-CSharp::SongDataBase
   _audioClipList:
-  - {fileID: 8300000, guid: 53d66be6cfbcce647a8f195e7475b74c, type: 3}
+  - {fileID: 8300000, guid: da27006bedb7fe544bd300d1f74ed063, type: 3}
