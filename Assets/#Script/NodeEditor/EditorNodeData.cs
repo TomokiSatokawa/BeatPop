@@ -72,37 +72,52 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 
         if (string.IsNullOrEmpty(path))
             return;
-        File.WriteAllText(path, NodeDataSerializer.SerializeJson(_nodes,EditorManager.I.BPM,EditorManager.I.SongIndex));
+        File.WriteAllText(path, NodeDataSerializer.SerializeJson(FinalizeNodes(_nodes),EditorManager.I.BPM,EditorManager.I.SongIndex));
     }
     public List<NodeData> FinalizeNodes(List<NodeData> nodes)
     {
         List<NodeData> result = nodes.OrderBy(x => x.Time).ToList();
 
-        int index = 0;
-        for(int i = 0 ; i < result.Count; i++)
+        // NodeID振り直し
+        for (int i = 0; i < result.Count; i++)
         {
-            var nodeData = result[i];
-            nodeData.NodeID = index;
-            result[i] = nodeData;
-            index++;
+            var node = result[i];
+            node.NodeID = i;
+            result[i] = node;
         }
 
-        for(int i = 0 ;i < result.Count; i++)
+        // Hold接続
+        for (int i = 0; i < result.Count; i++)
         {
-            var nodeData = result[i];
-            if(nodeData.PrefabType == PoolPrefabType.HoldNoteStart)
+            var startNode = result[i];
+
+            if (startNode.PrefabType != PoolPrefabType.HoldNoteStart)
+                continue;
+
+            for (int j = i + 1; j < result.Count; j++)
             {
-                int findIndex = i;
-                while(findIndex < result.Count)
+                var targetNode = result[j];
+
+                // 他レーンは無視
+                if (targetNode.Lane != startNode.Lane)
+                    continue;
+
+                // 同レーンの終点発見
+                if (targetNode.PrefabType == PoolPrefabType.HoldNoteEnd)
                 {
-                    if(result[findIndex].PrefabType != PoolPrefabType.HoldNoteEnd)
-                    {
-                        findIndex++;
-                        continue;
-                    }
-                    nodeData.Connect = findIndex;
+                    startNode.Connect = targetNode.NodeID;
+
+                    targetNode.Connect = startNode.NodeID;
+                    result[j] = targetNode;
+
+                    break;
                 }
+
+                // 同レーンに別ノーツがあったら接続失敗
+                break;
             }
+
+            result[i] = startNode;
         }
 
         return result;
