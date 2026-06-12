@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using InGame.Node;
 using R3;
 using UnityEditor;
@@ -72,5 +73,38 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
         if (string.IsNullOrEmpty(path))
             return;
         File.WriteAllText(path, NodeDataSerializer.SerializeJson(_nodes,EditorManager.I.BPM,EditorManager.I.SongIndex));
+    }
+    public List<NodeData> FinalizeNodes(List<NodeData> nodes)
+    {
+        List<NodeData> result = nodes.OrderBy(x => x.Time).ToList();
+
+        int index = 0;
+        for(int i = 0 ; i < result.Count; i++)
+        {
+            var nodeData = result[i];
+            nodeData.NodeID = index;
+            result[i] = nodeData;
+            index++;
+        }
+
+        for(int i = 0 ;i < result.Count; i++)
+        {
+            var nodeData = result[i];
+            if(nodeData.PrefabType == PoolPrefabType.HoldNoteStart)
+            {
+                int findIndex = i;
+                while(findIndex < result.Count)
+                {
+                    if(result[findIndex].PrefabType != PoolPrefabType.HoldNoteEnd)
+                    {
+                        findIndex++;
+                        continue;
+                    }
+                    nodeData.Connect = findIndex;
+                }
+            }
+        }
+
+        return result;
     }
 }

@@ -90,5 +90,15 @@ namespace InGame.Node
         public int Lane;
         public float Time;
         public PoolPrefabType PrefabType;
+        public int Connect;
+
+        public NodeData(int id = -1)
+        {
+            NodeID = id;
+            Lane = -1;
+            Time = -1;
+            PrefabType = PoolPrefabType.None;
+            Connect = -1;
+        }
     }
 }

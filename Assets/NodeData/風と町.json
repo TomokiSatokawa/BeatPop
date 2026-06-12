@@ -338,13 +338,13 @@
             "NodeID": 55,
             "Lane": 1,
             "Time": 22.955522537231447,
-            "PrefabType": 1
+            "PrefabType": 3
         },
         {
             "NodeID": 56,
             "Lane": 1,
             "Time": 23.816354751586915,
-            "PrefabType": 1
+            "PrefabType": 5
         },
         {
             "NodeID": 57,

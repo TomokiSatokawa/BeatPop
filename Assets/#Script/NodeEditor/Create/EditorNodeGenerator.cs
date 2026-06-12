@@ -63,6 +63,15 @@ public class EditorNodeGenerator : MonoBehaviour
                 case PoolPrefabType.FlickNote:
                     newNode.ChangeColor(Color.yellow);
                     break;
+                case PoolPrefabType.HoldNoteStart:
+                    newNode.ChangeColor(Color.green);
+                    break;
+                case PoolPrefabType.HoldNoteFill:
+                    newNode.ChangeColor(Color.lightGreen);
+                    break;
+                case PoolPrefabType.HoldNoteEnd:
+                    newNode.ChangeColor(Color.darkGreen);
+                    break;
             }
 
             _clonedNode.Add(node, newNode);
