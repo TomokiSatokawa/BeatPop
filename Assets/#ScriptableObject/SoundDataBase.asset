@@ -17,6 +17,6 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: ca203f76c4c49314da9ee8d58852b6e7, type: 3}
     Volume: 10
   - Type: 2
-    Clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
+    Clip: {fileID: 8300000, guid: ea13e5c2d40c8e74f8dcbbd2382ed845, type: 3}
     Volume: 10
   _bgmData: []

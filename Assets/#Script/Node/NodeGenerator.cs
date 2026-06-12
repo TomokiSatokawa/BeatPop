@@ -73,7 +73,6 @@ namespace InGame.Node
             Debug.Log(nodeData.NodeID);
             }
             var newObject = PoolManager.I.Get<NodeObject>(nodeData.PrefabType);
-            newObject.NodeType = NodeType.Normal;
             newObject.transform.position = _clonePosition[nodeData.Lane].position;
             newObject.transform.rotation = Quaternion.identity;
 

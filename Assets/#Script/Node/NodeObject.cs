@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class NodeObject : PoolObject
 {
-    public NodeType NodeType;
     public NodeData NodeData;
     public Vector3 StartPosition;
 

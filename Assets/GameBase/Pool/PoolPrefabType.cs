@@ -1,4 +1,4 @@
 public enum PoolPrefabType
 {
-  None,NormalNote, FlickNote, Line, EditorNote, EditorLine,
+  None,NormalNote, FlickNote,HoldNoteStart, HoldNoteFill, HoldNoteEnd, Line, EditorNote, EditorLine,
 }
