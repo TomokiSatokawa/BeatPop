@@ -43,6 +43,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
 
         result.transform.parent = parent;
         result.gameObject.SetActive(true);
+        result.OnPoolActive();
 
         return result;
     }
@@ -59,5 +60,6 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
 
         poolObject.gameObject.SetActive(false);
         queue.Enqueue(poolObject);
+        poolObject.OnPoolInactive();
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Input;
 using R3;
 using Sound;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 namespace InGame.Node
 {
@@ -11,6 +12,7 @@ namespace InGame.Node
         [SerializeField] private NodeJudgement _nodeJudgement;
         [SerializeField] private float _nodeSpeed;
         [SerializeField] private float _goalPos;
+        [SerializeField] private HoldNodeFillRenderer _nodeFillRenderer;
 
         private List<NodeObject> _nodes = new();
 
@@ -59,6 +61,10 @@ namespace InGame.Node
                     var judgeData = _nodeJudgement.JudgementDifference(node.NodeData.Time - GameManager.I.StageTime);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
                     ScoreManager.I.AddMiss();
+                    if(node.Type == PoolPrefabType.HoldNoteEnd)
+                    {
+                        _nodeFillRenderer.DeleteFill(node.NodeData);
+                    }
                 }
                 PoolManager.I.Release(node);
                 _nodes.Remove(node);
@@ -94,6 +100,10 @@ namespace InGame.Node
                 SoundManager.I.PlaySESound(se);
 
                 _nodes.Remove(targetNode);
+                if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
+                {
+                    _nodeFillRenderer.DeleteFill(targetNode.NodeData);
+                }
                 PoolManager.I.Release(targetNode);
                 var judgeData = _nodeJudgement.JudgementDifference(nodeTime - GameManager.I.StageTime);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));

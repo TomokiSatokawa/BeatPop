@@ -12,6 +12,7 @@ namespace InGame.Node
         [SerializeField] private float _goalZ;
         [SerializeField] private float _arrivalSeconds;
         [SerializeField] private bool _isGenerating;
+        [SerializeField] private HoldNodeFillRenderer _nodeFillRenderer;
 
         private List<NodeData> _nodeDatas = new();
         private int _nextNode = 0;
@@ -69,19 +70,20 @@ namespace InGame.Node
 
         private void CreateNode(NodeData nodeData)
         {
-            if (nodeData.PrefabType == PoolPrefabType.HoldNoteStart)
+            PoolPrefabType prefabType = nodeData.PrefabType;
+            if (prefabType == PoolPrefabType.HoldNoteStart || prefabType == PoolPrefabType.HoldNoteEnd)
             {
                 CreateHoldNode(nodeData);
                 return;
             }
-            if (nodeData.PrefabType != PoolPrefabType.Line)
+            if (prefabType != PoolPrefabType.Line)
             {
                 Debug.Log(nodeData.NodeID);
             }
             GenerateNode<NodeObject>(nodeData);
         }
 
-        private T GenerateNode<T>(NodeData nodeData) where T :NodeObject
+        private T GenerateNode<T>(NodeData nodeData) where T : NodeObject
         {
             var newObject = PoolManager.I.Get<T>(nodeData.PrefabType);
             newObject.transform.position = _clonePosition[nodeData.Lane].position;
@@ -95,7 +97,38 @@ namespace InGame.Node
 
         private void CreateHoldNode(NodeData holdNode)
         {
-            var holdObject = GenerateNode<HoldNode>(holdNode);
+            var holdObject = GenerateNode<NodeObject>(holdNode);
+
+            if (holdNode.PrefabType == PoolPrefabType.HoldNoteStart)
+            {
+                int endIndex = -1;
+
+                for (int j = holdNode.NodeID + 1; j < _nodeDatas.Count; j++)
+                {
+                    var node = _nodeDatas[j];
+
+                    if (node.Lane != holdNode.Lane)
+                        continue;
+
+                    if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
+                    {
+                        endIndex = j;
+                        break;
+                    }
+                }
+
+                if (endIndex < 0)
+                {
+                    Debug.LogError($"HoldEnd is not found. StartNodeID:{holdNode.NodeID}");
+                    return;
+                }
+
+                _nodeFillRenderer.AddClone(holdNode, _nodeDatas[endIndex], holdObject);
+            }
+            else if (holdNode.PrefabType == PoolPrefabType.HoldNoteEnd)
+            {
+                _nodeFillRenderer.SetEndObject(holdNode, holdObject);
+            }
         }
     }
 
