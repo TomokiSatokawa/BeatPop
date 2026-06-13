@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace Sound
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager :MonoBehaviour
     {
         public static SoundManager I;
         [SerializeField] private AudioSource _seAudio;

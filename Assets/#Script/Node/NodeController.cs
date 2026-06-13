@@ -23,7 +23,7 @@ namespace InGame.Node
             InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
             InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
             InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
-            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
+            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
             InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
             InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
 

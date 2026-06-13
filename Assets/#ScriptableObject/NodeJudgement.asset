@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152734e35f891ff4198ab8770185e547, type: 3}
   m_Name: NodeJudgement
   m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
-  ToleranceValue: 0.1
+  ToleranceValue: 0.16
   DeleteTime: 0.16
   JudgementDatas:
   - Name: Perfect
