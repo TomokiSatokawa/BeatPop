@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
+using InGame.Node;
+using R3;
 using Sound;
 using TMPro;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager I;
@@ -15,8 +16,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _timeOffset;
     private bool _isPlaying = false;
     private double _startDspTime;
+    private float _endTime = float.MaxValue;
     public float BPM => _bpm;
     public AudioClip SongClip => _songClip;
+
+    private Subject<Unit> _onGameClear = new();
+    public Observable<Unit> OnGameClear => _onGameClear;
     public void Awake()
     {
         if (I == null) I = this;
@@ -24,9 +29,13 @@ public class GameManager : MonoBehaviour
     }
     public void Start()
     {
+        NodeGenerator.I.OnFileLoaded.Subscribe(_ =>
+        {
+            _endTime = NodeGenerator.I.NodeDatas[NodeGenerator.I.NodeDatas.Count - 1].Time;
+        }).AddTo(this);
         WaitLoad();
     }
-    public void SetData(float bpm,int index)
+    public void SetData(float bpm, int index)
     {
         _bpm = bpm;
         if (index >= 0 && index < _songData._audioClipList.Count)
@@ -49,12 +58,19 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(_timeText != null)
+        if (_timeText != null)
         {
-        _timeText.text = StageTime.ToString("N2");
+            _timeText.text = StageTime.ToString("N2");
         }
+
         if (!_isPlaying) return;
 
         StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
+
+        if (StageTime >= _endTime + 2f)
+        {
+            _isPlaying = false;
+            _onGameClear.OnNext(Unit.Default);
+        }
     }
 }

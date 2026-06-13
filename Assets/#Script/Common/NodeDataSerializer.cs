@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using InGame.Node;
 using UnityEditor;
 using UnityEngine;
@@ -89,9 +90,9 @@ public static class NodeDataSerializer
         return PoolPrefabType.NormalNote;
     }
 
-    public static NodeSaveData DesrializeJson(string json)
+    public static async UniTask<NodeSaveData> DesrializeJson(string json)
     {
-
+        await UniTask.Yield();
         if (string.IsNullOrWhiteSpace(json))
             return null;
 
@@ -110,7 +111,7 @@ public static class NodeDataSerializer
             return null;
         }
     }
-    public static string SerializeJson(List<NodeData> nodes ,float bpm,int songIndex ,string songName = "null")
+    public static string SerializeJson(List<NodeData> nodes, float bpm, int songIndex, string songName = "null")
     {
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -139,13 +140,13 @@ public static class NodeDataSerializer
             return null;
         }
     }
-    public static NodeSaveData AutoDeserialize(string text, string path)
+    public static async UniTask<NodeSaveData> AutoDeserialize(string text, string path)
     {
         string extension = Path.GetExtension(path).ToLower();
 
         if (extension == ".json")
         {
-            return DesrializeJson(text);
+            return await DesrializeJson(text);
         }
         else if (extension == ".csv")
         {
@@ -162,10 +163,11 @@ public static class NodeDataSerializer
             return null;
         }
     }
-    public static NodeSaveData AutoDeserialize(TextAsset textAsset)
+    public static async UniTask<NodeSaveData> AutoDeserialize(TextAsset textAsset)
     {
-        string path = AssetDatabase.GetAssetPath(textAsset);
-        return AutoDeserialize(textAsset.text, path);
+        return await DesrializeJson(textAsset.text);
+        //string path = Path.Combine(Application.streamingAssetsPath, textAsset.name);
+        //return await AutoDeserialize(textAsset.text, path);
     }
 }
 

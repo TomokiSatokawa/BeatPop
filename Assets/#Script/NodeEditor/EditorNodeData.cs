@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using InGame.Node;
 using R3;
 using UnityEditor;
@@ -20,13 +21,18 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     private readonly double _epsilon = 0.0001;
     public void Start()
     {
-        var data = NodeDataSerializer.AutoDeserialize(_editFile);
+        FileLoad();
+    }
+
+    private async void FileLoad()
+    {
+        var data = await NodeDataSerializer.AutoDeserialize(_editFile);
         _nodes = data.Nodes;
         EditorManager.I.SetData(data.BPM, data.SoundIndex);
         _importButon.onClick.AddListener(OnImport);
         _exportButton.onClick.AddListener(OnExport);
     }
-    
+
     public void AddNode(PoolPrefabType prefab,double time,int lean)
     {
         if (_nodes.Exists(x => Math.Abs(x.Time - time) < _epsilon && x.Lane == lean)) return;
@@ -48,6 +54,7 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     }
     public void OnImport()
     {
+#if UNITY_EDITOR
         string path = EditorUtility.OpenFilePanel(
            "Open Save Data",
            "",
@@ -58,12 +65,12 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 
         string fileText = File.ReadAllText(path);
 
-        var data = NodeDataSerializer.AutoDeserialize(fileText,path);
-        _nodes = data.Nodes;
-        EditorManager.I.SetData(data.BPM, data.SoundIndex);
+        FileLoad();
+#endif
     }
     public void OnExport()
     {
+#if UNITY_EDITOR
         string path = EditorUtility.SaveFilePanel(
             "Save Save Data",
             "",
@@ -73,6 +80,7 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
         if (string.IsNullOrEmpty(path))
             return;
         File.WriteAllText(path, NodeDataSerializer.SerializeJson(FinalizeNodes(_nodes),EditorManager.I.BPM,EditorManager.I.SongIndex));
+#endif
     }
     public List<NodeData> FinalizeNodes(List<NodeData> nodes)
     {

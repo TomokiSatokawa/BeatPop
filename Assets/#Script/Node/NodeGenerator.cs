@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 
 namespace InGame.Node
@@ -14,38 +16,44 @@ namespace InGame.Node
         [SerializeField] private bool _isGenerating;
         [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
 
-        private List<NodeData> _nodeDatas = new();
+        public List<NodeData> NodeDatas { get; private set; }
         private int _nextNode = 0;
         private float _nextLine = 0;
         public float ArraivalSeconds => _arrivalSeconds; 
         private int _lineIndex =0;
 
+        private Subject<Unit> _onFileLoaded = new();
+        public Observable<Unit> OnFileLoaded => _onFileLoaded;
         void Start()
         {
             LoadFile();
         }
 
-        private void LoadFile()
+        private async void LoadFile()
         {
-            var data = NodeDataSerializer.AutoDeserialize(_textAsset);
-            _nodeDatas = data.Nodes;
+            await UniTask.Yield();
+            var data = await NodeDataSerializer.AutoDeserialize(_textAsset);
+            NodeDatas = data.Nodes;
             GameManager.I.SetData(data.BPM, data.SoundIndex);
+            _onFileLoaded.OnNext(Unit.Default);
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (NodeDatas == null) return;
+
             // 全ノード生成済みなら終了
-            if (_nextNode >= _nodeDatas.Count)
+            if (_nextNode >= NodeDatas.Count)
             {
                 _isGenerating = false;
                 return;
             }
 
             // 同時押し対応のため while
-            while (_nextNode < _nodeDatas.Count && _nodeDatas[_nextNode].Time <= GameManager.I.StageTime + _arrivalSeconds)
+            while (_nextNode < NodeDatas.Count && NodeDatas[_nextNode].Time <= GameManager.I.StageTime + _arrivalSeconds)
             {
-                NodeData nodeData = _nodeDatas[_nextNode];
+                NodeData nodeData = NodeDatas[_nextNode];
 
                 CreateNode(nodeData);
                 _nextNode++;
@@ -105,9 +113,9 @@ namespace InGame.Node
             {
                 int endIndex = -1;
 
-                for (int j = holdNode.NodeID + 1; j < _nodeDatas.Count; j++)
+                for (int j = holdNode.NodeID + 1; j < NodeDatas.Count; j++)
                 {
-                    var node = _nodeDatas[j];
+                    var node = NodeDatas[j];
 
                     if (node.Lane != holdNode.Lane)
                         continue;
@@ -125,7 +133,7 @@ namespace InGame.Node
                     return;
                 }
 
-                _nodeFillRenderer.AddClone(holdNode, _nodeDatas[endIndex], holdObject);
+                _nodeFillRenderer.AddClone(holdNode, NodeDatas[endIndex], holdObject);
             }
             else if (holdNode.PrefabType == PoolPrefabType.HoldNoteEnd)
             {
