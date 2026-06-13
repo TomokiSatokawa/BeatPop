@@ -3,8 +3,10 @@ using System.Linq;
 using Input;
 using R3;
 using Sound;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+
 namespace InGame.Node
 {
     public class NodeController : MonoBehaviour
@@ -12,13 +14,15 @@ namespace InGame.Node
         [SerializeField] private NodeJudgement _nodeJudgement;
         [SerializeField] private float _nodeSpeed;
         [SerializeField] private float _goalPos;
-        [SerializeField] private HoldNodeFillRenderer _nodeFillRenderer;
+        [SerializeField] private HoldNodeFillManager _nodeFillManager;
 
         private List<NodeObject> _nodes = new();
 
         private readonly Subject<(JudgementData, int)> _showJudge = new();
 
         public Observable<(JudgementData, int)> ShowJudge => _showJudge;
+        private float _nextFillJudge;
+        private float _fillJudgeIndex = 0;
 
         public void Start()
         {
@@ -61,13 +65,37 @@ namespace InGame.Node
                     var judgeData = _nodeJudgement.JudgementDifference(node.NodeData.Time - GameManager.I.StageTime);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
                     ScoreManager.I.AddMiss();
-                    if(node.Type == PoolPrefabType.HoldNoteEnd)
+                    if (node.Type == PoolPrefabType.HoldNoteEnd)
                     {
-                        _nodeFillRenderer.DeleteFill(node.NodeData);
+                        _nodeFillManager.DeleteFill(node.NodeData);
                     }
                 }
                 PoolManager.I.Release(node);
                 _nodes.Remove(node);
+            }
+            if (_nextFillJudge <= GameManager.I.StageTime)
+            {
+                HoldLane(0,InputManager.LeftLane.CurrentValue);
+                HoldLane(1, InputManager.RightLane.CurrentValue);
+
+                _fillJudgeIndex++;
+                _nextFillJudge = _fillJudgeIndex * 30f / GameManager.I.BPM;
+            }
+        }
+        public void HoldLane(int lane,bool isHold)
+        {
+            if (_nodeFillManager.HasFill(lane))
+            {
+                var judgeData = _nodeJudgement.JudgementDifference(isHold ? 0:_nodeJudgement.ToleranceValue*2); 
+                _showJudge.OnNext((judgeData, lane));
+                if (isHold)
+                {
+                    ScoreManager.I.AddScore(judgeData);
+                }
+                else
+                {
+                    ScoreManager.I.AddMiss();
+                }
             }
         }
 
@@ -102,7 +130,7 @@ namespace InGame.Node
                 _nodes.Remove(targetNode);
                 if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
                 {
-                    _nodeFillRenderer.DeleteFill(targetNode.NodeData);
+                    _nodeFillManager.DeleteFill(targetNode.NodeData);
                 }
                 PoolManager.I.Release(targetNode);
                 var judgeData = _nodeJudgement.JudgementDifference(nodeTime - GameManager.I.StageTime);

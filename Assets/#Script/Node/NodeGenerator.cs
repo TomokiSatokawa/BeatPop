@@ -12,12 +12,13 @@ namespace InGame.Node
         [SerializeField] private float _goalZ;
         [SerializeField] private float _arrivalSeconds;
         [SerializeField] private bool _isGenerating;
-        [SerializeField] private HoldNodeFillRenderer _nodeFillRenderer;
+        [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
 
         private List<NodeData> _nodeDatas = new();
         private int _nextNode = 0;
         private float _nextLine = 0;
-        public float ArraivalSeconds => _arrivalSeconds;
+        public float ArraivalSeconds => _arrivalSeconds; 
+        private int _lineIndex =0;
 
         void Start()
         {
@@ -64,7 +65,8 @@ namespace InGame.Node
                 nodeData2.Lane = 1;
                 CreateNode(nodeData2);
 
-                _nextLine += 60f / GameManager.I.BPM;
+                _lineIndex++;
+                _nextLine = _lineIndex * 60f / GameManager.I.BPM; 
             }
         }
 

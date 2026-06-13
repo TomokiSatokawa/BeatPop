@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeGenerator
   _nodeController: {fileID: 1252056266}
-  _textAsset: {fileID: 4900000, guid: 720aeb01b87998d4fa6a1f54317d95e1, type: 3}
+  _textAsset: {fileID: 4900000, guid: 372d8c9eba0409248a3d08e119238bd0, type: 3}
   _nodePrefab: {fileID: 2467571380591132674, guid: 33d09549b74a0a5499db03844a6d8cc5, type: 3}
   _clonePosition:
   - {fileID: 840021716}
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   _nodeJudgement: {fileID: 11400000, guid: 1638c43d8c25bbf4bb11578e16ba5daf, type: 2}
   _nodeSpeed: 1
   _goalPos: -10
-  _nodeFillRenderer: {fileID: 1252056267}
+  _nodeFillManager: {fileID: 1252056267}
 --- !u!114 &1252056267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1643,7 +1643,7 @@ AudioSource:
   m_GameObject: {fileID: 1412095899}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2438417714071878195, guid: ad03b4767590df8489450f54a946a749, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -2308,7 +2308,7 @@ AudioSource:
   m_GameObject: {fileID: 1969352823}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4190649692464087936, guid: ad03b4767590df8489450f54a946a749, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

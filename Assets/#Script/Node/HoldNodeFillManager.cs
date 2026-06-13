@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using InGame.Node;
 using UnityEngine;
 
-public class HoldNodeFillRenderer : MonoBehaviour
+public class HoldNodeFillManager : MonoBehaviour
 {
     [SerializeField] private Transform[] _lane;
     [SerializeField] private float _cloneZ;
@@ -28,6 +29,18 @@ public class HoldNodeFillRenderer : MonoBehaviour
         fillData.Remove();
         _activeFillData.Remove(end);
     }
+
+    public bool HasFill(int lane)
+    {
+        foreach (var fillData in _activeFillData.Values)
+        {
+            if(fillData.StartNode.Lane == lane && fillData.StartNode.Time <= GameManager.I.StageTime)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public void Update()
     {
         foreach (var fillDataPir in _activeFillData)
@@ -38,7 +51,7 @@ public class HoldNodeFillRenderer : MonoBehaviour
     public class FillData
     {
         private PoolObject _fillObject;
-        public NodeData _startNode;
+        public NodeData StartNode { get;private set; }
         public NodeData _endNode;
         public PoolObject _startObject;
         public PoolObject EndObject { get; private set; }
@@ -49,7 +62,7 @@ public class HoldNodeFillRenderer : MonoBehaviour
         public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float deleteZ)
         {
             _fillObject = PoolManager.I.Get<PoolObject>(PoolPrefabType.HoldNoteFill);
-            _startNode = start;
+            StartNode = start;
             _endNode = end;
             _lane = lane;
             _clonePosZ = cloneZ;
