@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using InGame.Node;
 using UnityEngine;
@@ -13,7 +12,7 @@ public class HoldNodeFillManager : MonoBehaviour
     public void AddClone(NodeData start, NodeData end, PoolObject startObject)
     {
         if (_activeFillData.ContainsKey(end)) return;
-
+        Debug.Log($"{end.NodeID} start");
         var fillData = new FillData(start, end, _lane[start.Lane], _cloneZ, _deleteZ);
         fillData.SetNodeObject(start: startObject);
         _activeFillData.Add(end, fillData);
@@ -21,11 +20,13 @@ public class HoldNodeFillManager : MonoBehaviour
     public void SetEndObject(NodeData end, PoolObject endObject)
     {
         if (!_activeFillData.TryGetValue(end, out var fillData)) return;
+        Debug.Log($"{end.NodeID} setEnd");
         fillData.SetNodeObject(end: endObject);
     }
     public void DeleteFill(NodeData end)
     {
         if (!_activeFillData.TryGetValue(end, out var fillData)) return;
+        Debug.Log($"{end.NodeID} delete");
         fillData.Remove();
         _activeFillData.Remove(end);
     }
@@ -34,7 +35,7 @@ public class HoldNodeFillManager : MonoBehaviour
     {
         foreach (var fillData in _activeFillData.Values)
         {
-            if(fillData.StartNode.Lane == lane && fillData.StartNode.Time <= GameManager.I.StageTime)
+            if (fillData.StartNode.Lane == lane && fillData.StartNode.Time <= GameManager.I.StageTime)
             {
                 return true;
             }
@@ -51,7 +52,7 @@ public class HoldNodeFillManager : MonoBehaviour
     public class FillData
     {
         private PoolObject _fillObject;
-        public NodeData StartNode { get;private set; }
+        public NodeData StartNode { get; private set; }
         public NodeData _endNode;
         public PoolObject _startObject;
         public PoolObject EndObject { get; private set; }
@@ -79,6 +80,7 @@ public class HoldNodeFillManager : MonoBehaviour
             else
             {
                 start.z = _deletePosZ;
+                _startObject = null;
             }
 
             Vector3 end = _lane.transform.position;
@@ -89,6 +91,7 @@ public class HoldNodeFillManager : MonoBehaviour
             else
             {
                 end.z = _clonePosZ;
+                EndObject = null;
             }
             SetFill(_fillObject.transform, start, end);
         }
