@@ -21,14 +21,12 @@ namespace Common.UI
             _activeAction?.Invoke();
             _canvasGroup.alpha = 1.0f;
             _canvasGroup.blocksRaycasts = true;
-            _canvasGroup.interactable = true;
         }
         public void OnHidden()
         {
             _hiddenAction?.Invoke();
             _canvasGroup.alpha = 0f;
             _canvasGroup.blocksRaycasts = false;
-            _canvasGroup.interactable = false;
         }
     }
 }

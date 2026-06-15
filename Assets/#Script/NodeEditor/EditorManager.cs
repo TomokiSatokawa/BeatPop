@@ -1,3 +1,4 @@
+using System;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 public class EditorManager : SingletonMonoBehaviour<EditorManager>
 {
-    [SerializeField] private SongDataBase _songData;
+    [SerializeField] private SongListDataBase _songData;
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private float _bpm;
     [SerializeField] private Scrollbar _scrollBar;
@@ -43,10 +44,10 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     public void SetData(float bpm,int soundIndex)
     {
         _bpm = bpm;
-        if (soundIndex >= 0 && soundIndex < _audioClip.length)
+        var song = _songData.GetSongData(soundIndex);
+        if (song == null)
         {
-            _audioClip = _songData._audioClipList[soundIndex];
-            SongIndex = soundIndex;
+            _audioClip = song.Audio;
         }
     }
     public void ReloadTime()

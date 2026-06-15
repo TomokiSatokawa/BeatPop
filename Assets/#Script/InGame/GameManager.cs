@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager I;
     [HideInInspector] public float StageTime = -1;
-    [SerializeField] private SongDataBase _songData;
+    [SerializeField] private SongListDataBase _songData;
     [SerializeField] private float _waitSeconds;
     [SerializeField] private AudioClip _songClip;
     [SerializeField] private float _bpm;
@@ -32,16 +32,18 @@ public class GameManager : MonoBehaviour
         NodeGenerator.I?.OnFileLoaded.Subscribe(_ =>
         {
             _endTime = NodeGenerator.I.NodeDates[NodeGenerator.I.NodeDates.Count - 1].Time;
-        WaitLoad();
+            WaitLoad();
         }).AddTo(this);
     }
     public void SetData(float bpm, int index)
     {
         _bpm = bpm;
-        if (index >= 0 && index < _songData._audioClipList.Count)
+        var song = _songData.GetSongData(index);
+        if (song == null)
         {
-            _songClip = _songData._audioClipList[index];
+            _songClip = song.Audio;
         }
+
     }
     public async void WaitLoad()
     {
