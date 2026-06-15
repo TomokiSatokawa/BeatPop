@@ -16,10 +16,10 @@ namespace InGame.Node
         [SerializeField] private bool _isGenerating;
         [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
 
-        public List<NodeData> NodeDatas { get; private set; }
+        public List<NodeData> NodeDates { get; private set; }
         private int _nextNode = 0;
         private float _nextLine = 0;
-        public float ArraivalSeconds => _arrivalSeconds; 
+        public float ArrivalSeconds => _arrivalSeconds; 
         private int _lineIndex =0;
 
         private Subject<Unit> _onFileLoaded = new();
@@ -33,7 +33,7 @@ namespace InGame.Node
         {
             await UniTask.Yield();
             var data = await NodeDataSerializer.AutoDeserialize(_textAsset.text);
-            NodeDatas = data.Nodes;
+            NodeDates = data.Nodes;
             GameManager.I.SetData(data.BPM, data.SoundIndex);
             _onFileLoaded.OnNext(Unit.Default);
         }
@@ -41,19 +41,19 @@ namespace InGame.Node
         // Update is called once per frame
         void Update()
         {
-            if (NodeDatas == null) return;
+            if (NodeDates == null) return;
 
             // 全ノード生成済みなら終了
-            if (_nextNode >= NodeDatas.Count)
+            if (_nextNode >= NodeDates.Count)
             {
                 _isGenerating = false;
                 return;
             }
 
             // 同時押し対応のため while
-            while (_nextNode < NodeDatas.Count && NodeDatas[_nextNode].Time <= GameManager.I.StageTime + _arrivalSeconds)
+            while (_nextNode < NodeDates.Count && NodeDates[_nextNode].Time <= GameManager.I.StageTime + _arrivalSeconds)
             {
-                NodeData nodeData = NodeDatas[_nextNode];
+                NodeData nodeData = NodeDates[_nextNode];
 
                 CreateNode(nodeData);
                 _nextNode++;
@@ -113,9 +113,9 @@ namespace InGame.Node
             {
                 int endIndex = -1;
 
-                for (int j = holdNode.NodeID + 1; j < NodeDatas.Count; j++)
+                for (int j = holdNode.NodeID + 1; j < NodeDates.Count; j++)
                 {
-                    var node = NodeDatas[j];
+                    var node = NodeDates[j];
 
                     if (node.Lane != holdNode.Lane)
                         continue;
@@ -133,7 +133,7 @@ namespace InGame.Node
                     return;
                 }
 
-                _nodeFillRenderer.AddClone(holdNode, NodeDatas[endIndex], holdObject);
+                _nodeFillRenderer.AddClone(holdNode, NodeDates[endIndex], holdObject);
             }
             else if (holdNode.PrefabType == PoolPrefabType.HoldNoteEnd)
             {

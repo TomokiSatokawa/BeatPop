@@ -1,0 +1,34 @@
+using UnityEngine;
+using UnityEngine.Events;
+namespace Common.UI
+{
+    [RequireComponent(typeof(CanvasGroup))]
+    public class PanelControl : MonoBehaviour
+    {
+        [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private UnityEvent _activeAction;
+        [SerializeField] private UnityEvent _hiddenAction;
+        private void Awake()
+        {
+            if (_canvasGroup == null) 
+                _canvasGroup = GetComponent<CanvasGroup>();
+
+            OnHidden();
+        }
+
+        public void OnActive()
+        {
+            _activeAction?.Invoke();
+            _canvasGroup.alpha = 1.0f;
+            _canvasGroup.blocksRaycasts = true;
+            _canvasGroup.interactable = true;
+        }
+        public void OnHidden()
+        {
+            _hiddenAction?.Invoke();
+            _canvasGroup.alpha = 0f;
+            _canvasGroup.blocksRaycasts = false;
+            _canvasGroup.interactable = false;
+        }
+    }
+}

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         NodeGenerator.I?.OnFileLoaded.Subscribe(_ =>
         {
-            _endTime = NodeGenerator.I.NodeDatas[NodeGenerator.I.NodeDatas.Count - 1].Time;
+            _endTime = NodeGenerator.I.NodeDates[NodeGenerator.I.NodeDates.Count - 1].Time;
         WaitLoad();
         }).AddTo(this);
     }
