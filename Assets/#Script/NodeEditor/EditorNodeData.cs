@@ -21,14 +21,20 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     private readonly double _epsilon = 0.0001;
     public void Start()
     {
-        FileLoad();
+        if(_editFile != null)
+        {
+        FileLoad(_editFile.text);
+        }
     }
 
-    private async void FileLoad()
+    private async void FileLoad(string file)
     {
-        var data = await NodeDataSerializer.AutoDeserialize(_editFile);
-        _nodes = data.Nodes;
-        EditorManager.I.SetData(data.BPM, data.SoundIndex);
+        var data = await NodeDataSerializer.AutoDeserialize(file);
+        if (data != null)
+        {
+            _nodes = data.Nodes;
+            EditorManager.I.SetData(data.BPM, data.SoundIndex);
+        }
         _importButon.onClick.AddListener(OnImport);
         _exportButton.onClick.AddListener(OnExport);
     }
@@ -65,7 +71,7 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 
         string fileText = File.ReadAllText(path);
 
-        FileLoad();
+        FileLoad(fileText);
 #endif
     }
     public void OnExport()

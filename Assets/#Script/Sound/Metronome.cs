@@ -1,3 +1,4 @@
+using Unity.Content;
 using UnityEngine;
 
 namespace InGame.Sound
@@ -17,6 +18,7 @@ namespace InGame.Sound
 
         void FixedUpdate()
         {
+            ChangeBPM();
             float stageTime = GameManager.I.StageTime;
 
             int beat = Mathf.FloorToInt(stageTime / _bpmInterval);

@@ -1663,12 +1663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorManager
   _songData: {fileID: 11400000, guid: 450c01e5042b9534794a09a7199a51f2, type: 2}
-  _audioClip: {fileID: 8300000, guid: 53d66be6cfbcce647a8f195e7475b74c, type: 3}
-  _bpm: 104.55
+  _audioClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
+  _bpm: 160.15
   _scrollBar: {fileID: 940475955}
   _magnification: 1500
   _displayRange: {fileID: 564475092}
   _divition: 4
+  _timeOffSet: 0.045
   StartDsp: 0
 --- !u!4 &781383601
 Transform:
@@ -1762,11 +1763,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   StageTime: -1
-  _songData: {fileID: 0}
+  _songData: {fileID: 11400000, guid: 450c01e5042b9534794a09a7199a51f2, type: 2}
   _waitSeconds: 0
-  _songClip: {fileID: 8300000, guid: 53d66be6cfbcce647a8f195e7475b74c, type: 3}
-  _bpm: 104.55
+  _songClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
+  _bpm: 160.15
   _timeText: {fileID: 0}
+  _timeOffset: -0.045
 --- !u!114 &781383607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,7 +2199,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3884,6 +3886,7 @@ GameObject:
   - component: {fileID: 1619532591}
   - component: {fileID: 1619532593}
   - component: {fileID: 1619532594}
+  - component: {fileID: 1619532595}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -3950,6 +3953,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorNodeSound
   _soundTimeData: []
+--- !u!114 &1619532595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619532590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84fe14076a21914f9d3b98a9feb1505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Sound.Metronome
+  _audioSource: {fileID: 423568901}
+  _clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
 --- !u!1 &1644154912
 GameObject:
   m_ObjectHideFlags: 0

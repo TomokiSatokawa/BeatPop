@@ -12,6 +12,7 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     [SerializeField] private float _magnification;
     [SerializeField] private RectTransform _displayRange;
     [SerializeField ] private int _divition;
+    [SerializeField] private float _timeOffSet;
     public float DisplayRange => _displayRange.sizeDelta.x;
     public float Magnification => _magnification;
     public float BPM => _bpm;
@@ -69,7 +70,7 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
 
         if (_isPlaying.CurrentValue)
         {
-            _editorTime.Value = AudioSettings.dspTime - StartDsp;
+            _editorTime.Value = AudioSettings.dspTime - StartDsp + _timeOffSet;
         }
     }
 

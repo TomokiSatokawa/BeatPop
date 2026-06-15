@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     }
     public void Start()
     {
-        NodeGenerator.I.OnFileLoaded.Subscribe(_ =>
+        NodeGenerator.I?.OnFileLoaded.Subscribe(_ =>
         {
             _endTime = NodeGenerator.I.NodeDatas[NodeGenerator.I.NodeDatas.Count - 1].Time;
-        }).AddTo(this);
         WaitLoad();
+        }).AddTo(this);
     }
     public void SetData(float bpm, int index)
     {
@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
 
         StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
 
-        if (StageTime >= _endTime + 2f)
-        {
-            _isPlaying = false;
-            _onGameClear.OnNext(Unit.Default);
-        }
+        //if (StageTime >= _endTime + 2f)
+        //{
+        //    _isPlaying = false;
+        //    _onGameClear.OnNext(Unit.Default);
+        //}
     }
 }
