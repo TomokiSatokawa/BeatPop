@@ -1,3 +1,4 @@
+using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame.Node;
 using R3;
@@ -35,14 +36,10 @@ public class GameManager : MonoBehaviour
             WaitLoad();
         }).AddTo(this);
     }
-    public void SetData(float bpm, int index)
+    public void SetData(float bpm)
     {
         _bpm = bpm;
-        var song = _songData.GetSongData(index);
-        if (song == null)
-        {
-            _songClip = song.Audio;
-        }
+        _songClip = SongPlayManager.I.SongData.Audio;
 
     }
     public async void WaitLoad()
@@ -67,7 +64,7 @@ public class GameManager : MonoBehaviour
 
         if (!_isPlaying) return;
 
-        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
+        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + SongPlayManager.I.SongData.StageTimeOffSet;
 
         //if (StageTime >= _endTime + 2f)
         //{

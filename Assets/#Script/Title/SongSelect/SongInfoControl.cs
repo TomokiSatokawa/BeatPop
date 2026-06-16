@@ -1,3 +1,4 @@
+using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
 using TMPro;
@@ -16,6 +17,8 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private Button _clauseButton;
     [SerializeField] private Button _backGroundArea;
+    [SerializeField] private SongPlayLoader _playLoader;
+    [SerializeField] private SceneLoad _sceneLoad;
 
     private IReadOnlySongData _currentData;
     private void Start()
@@ -43,5 +46,10 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
         _mainPanel.anchoredPosition = _pos;
         _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
             .OnComplete(() => _panelControl.OnHidden());
+    }
+    public void OnPlay()
+    {
+        _playLoader.OnLoad(_currentData);
+        _sceneLoad.ChangeScene("InGame");
     }
 }

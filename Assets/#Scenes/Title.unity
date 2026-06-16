@@ -1838,7 +1838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0005745762}
+  m_AnchoredPosition: {x: 0, y: 0.000060398008}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &402656383
@@ -4797,6 +4797,8 @@ MonoBehaviour:
   _nameText: {fileID: 1744609445}
   _clauseButton: {fileID: 1920405234}
   _backGroundArea: {fileID: 964413185}
+  _playLoader: {fileID: 1569844618}
+  _sceneLoad: {fileID: 1569844619}
 --- !u!114 &829016000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9358,6 +9360,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569844617}
+  - component: {fileID: 1569844618}
+  - component: {fileID: 1569844619}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -9380,6 +9384,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1569844618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569844616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede7c1ed35d02cc4180d4f5c5a2d8add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.PlaySystem.SongPlayLoader
+  _managerPrefab: {fileID: 4254867409842358438, guid: 702c6bda8d51e8a4fa3741ee15f38b4f, type: 3}
+--- !u!114 &1569844619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569844616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200411cdcc1f3bd4e93b5c16a8b0963d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
+  _fadeImageControl: {fileID: 2005575151}
 --- !u!1 &1570107661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10594,7 +10624,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1779415526}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 829015999}
+        m_TargetAssemblyTypeName: SongInfoControl, Assembly-CSharp
+        m_MethodName: OnPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1779415526
 MonoBehaviour:
   m_ObjectHideFlags: 0

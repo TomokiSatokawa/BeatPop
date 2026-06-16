@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -8,7 +9,6 @@ namespace InGame.Node
     public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>
     {
         [SerializeField] private NodeController _nodeController;
-        [SerializeField] private TextAsset _textAsset;
         [SerializeField] private GameObject _nodePrefab;
         [SerializeField] private Transform[] _clonePosition;
         [SerializeField] private float _goalZ;
@@ -32,9 +32,9 @@ namespace InGame.Node
         private async void LoadFile()
         {
             await UniTask.Yield();
-            var data = await NodeDataSerializer.AutoDeserialize(_textAsset.text);
+            var data = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.NodeDataJson.text);
             NodeDates = data.Nodes;
-            GameManager.I.SetData(data.BPM, data.SoundIndex);
+            GameManager.I.SetData(data.BPM);
             _onFileLoaded.OnNext(Unit.Default);
         }
 
