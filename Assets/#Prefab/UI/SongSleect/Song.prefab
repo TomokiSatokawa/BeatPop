@@ -424,6 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e1c362f7e8d84b9041908165dba1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongUIControl
+  _selectButton: {fileID: 8342128079153671363}
+  _nameText: {fileID: 2638105141653340208}
 --- !u!1 &5492008963789595376
 GameObject:
   m_ObjectHideFlags: 0
