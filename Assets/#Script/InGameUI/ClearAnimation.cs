@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ClearAnimation : MonoBehaviour
 {
     [SerializeField] private Image _mainVisualMask;
+    [SerializeField] private SceneLoad _sceneLoad;
     [SerializeField] private float _maxWith;
     [SerializeField] private float _animationDuration;
     private void Start()
@@ -13,10 +14,13 @@ public class ClearAnimation : MonoBehaviour
     }
     public void OnAnimation()
     {
+        _sceneLoad.ChangeScene(3);
         _mainVisualMask.rectTransform.sizeDelta = new Vector2(0, _mainVisualMask.rectTransform.sizeDelta.y);
         _mainVisualMask.gameObject.SetActive(true);
         _mainVisualMask.rectTransform
-            .DOSizeDelta(new Vector2(_maxWith, _mainVisualMask.rectTransform.sizeDelta.y),_animationDuration)
+            .DOSizeDelta(new Vector2(_maxWith, _mainVisualMask.rectTransform.sizeDelta.y), _animationDuration)
             .SetEase(Ease.InOutCubic);
+            //TODO: ‰¼
+            //.OnComplete(() => );
     }
 }

@@ -66,10 +66,10 @@ public class GameManager : MonoBehaviour
 
         StageTime = (float)(AudioSettings.dspTime - _startDspTime) + SongPlayManager.I.SongData.StageTimeOffSet;
 
-        //if (StageTime >= _endTime + 2f)
-        //{
-        //    _isPlaying = false;
-        //    _onGameClear.OnNext(Unit.Default);
-        //}
+        if (StageTime >= _endTime + 2f)
+        {
+            _isPlaying = false;
+            _onGameClear.OnNext(Unit.Default);
+        }
     }
 }

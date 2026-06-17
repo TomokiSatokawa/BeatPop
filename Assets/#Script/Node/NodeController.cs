@@ -16,9 +16,9 @@ namespace InGame.Node
 
         private List<NodeObject> _nodes = new();
 
-        private readonly Subject<(JudgementData, int)> _showJudge = new();
+        private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
 
-        public Observable<(JudgementData, int)> ShowJudge => _showJudge;
+        public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
         private float _nextFillJudge;
         private float _fillJudgeIndex = 0;
 
@@ -60,9 +60,10 @@ namespace InGame.Node
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                    var judgeData = _nodeJudgement.JudgementDifference(node.NodeData.Time - GameManager.I.StageTime);
+                    float difference = node.NodeData.Time - GameManager.I.StageTime;
+                    var judgeData = _nodeJudgement.JudgementDifference(difference);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
-                    ScoreManager.I.AddMiss();
+                    ScoreManager.I.AddScore(judgeData,node.NodeData, difference);
                     if (node.Type == PoolPrefabType.HoldNoteEnd)
                     {
                         _nodeFillManager.DeleteFill(node.NodeData);
@@ -86,14 +87,7 @@ namespace InGame.Node
             {
                 var judgeData = _nodeJudgement.JudgementDifference(isHold ? 0:_nodeJudgement.ToleranceValue*2); 
                 _showJudge.OnNext((judgeData, lane));
-                if (isHold)
-                {
-                    ScoreManager.I.AddScore(judgeData);
-                }
-                else
-                {
-                    ScoreManager.I.AddMiss();
-                }
+                    ScoreManager.I.AddHoldScore(judgeData);
             }
         }
 
@@ -131,9 +125,10 @@ namespace InGame.Node
                     _nodeFillManager.DeleteFill(targetNode.NodeData);
                 }
                 PoolManager.I.Release(targetNode);
-                var judgeData = _nodeJudgement.JudgementDifference(nodeTime - GameManager.I.StageTime);
+                float difference = nodeTime - GameManager.I.StageTime;
+                var judgeData = _nodeJudgement.JudgementDifference(difference);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
-                ScoreManager.I.AddScore(judgeData);
+                ScoreManager.I.AddScore(judgeData,targetNode.NodeData, difference);
             }
         }
         public NodeObject GetClonedNode(int nodeID)

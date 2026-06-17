@@ -6,7 +6,7 @@ public class JudgementView : MonoBehaviour
 
     [SerializeField] private RectTransform[] _pos;
 
-    public void ViewPrefab(JudgementData judgeData, int lane)
+    public void ViewPrefab(IReadOnlyJudgementData judgeData, int lane)
     {
         GameObject obj = Instantiate(judgeData.Prefab, _canvas.transform);
 

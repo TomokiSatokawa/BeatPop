@@ -686,6 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearAnimation
   _mainVisualMask: {fileID: 1953305748}
+  _sceneLoad: {fileID: 2101936842}
   _maxWith: 1637
   _animationDuration: 1
 --- !u!1 &644539285
@@ -1700,6 +1701,50 @@ MonoBehaviour:
   - {fileID: 1032196361}
   _cloneZ: 31.95
   _deleteZ: -15
+--- !u!1 &1258396494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258396496}
+  - component: {fileID: 1258396495}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1258396495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258396494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b6c85c7aba4ac418eaf7fbe0a8a878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+--- !u!4 &1258396496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258396494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1549.6469, y: 1678.2347, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276317405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2391,6 @@ GameObject:
   - component: {fileID: 1946836279}
   - component: {fileID: 1946836281}
   - component: {fileID: 1946836282}
-  - component: {fileID: 1946836283}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2428,18 +2472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
   _poolPrefabData: {fileID: 11400000, guid: 0ddd117c95e14d640853aacb66629de9, type: 2}
---- !u!114 &1946836283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946836277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b6c85c7aba4ac418eaf7fbe0a8a878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
 --- !u!1 &1950628530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,8 +2735,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101936841}
+  - component: {fileID: 2101936842}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneLoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2725,6 +2758,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2101936842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101936840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200411cdcc1f3bd4e93b5c16a8b0963d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
+  _fadeImageControl: {fileID: 2134767051}
 --- !u!1 &2134767049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2134767050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2792,7 +2838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2832,3 +2878,4 @@ SceneRoots:
   - {fileID: 1469794270}
   - {fileID: 894298784}
   - {fileID: 2101936841}
+  - {fileID: 1258396496}

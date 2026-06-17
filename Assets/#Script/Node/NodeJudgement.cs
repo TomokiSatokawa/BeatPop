@@ -9,7 +9,7 @@ public class NodeJudgement : ScriptableObject
 
   
 
-    public JudgementData JudgementDifference(float difference)
+    public IReadOnlyJudgementData JudgementDifference(float difference)
     {
         float absDiff = Mathf.Abs(difference);
 
@@ -29,11 +29,39 @@ public class NodeJudgement : ScriptableObject
         return null;
     }
 }
+public interface IReadOnlyJudgementData
+{
+    string Name { get; }
+    float Value { get; }
+
+    bool ShowEarlyLateText { get; }
+
+    GameObject Prefab { get; }
+
+    bool IsComboContinued { get; }
+
+    bool IsAllPerfectContinued { get; }
+}
+
 [System.Serializable]
-public class JudgementData
+public class JudgementData : IReadOnlyJudgementData
 {
     public string Name;
     public float Value;
     public bool ShowEarlyLateText;
     public GameObject Prefab;
+
+    public bool IsComboContinued;
+    public bool IsAllPerfectContinued;
+
+    string IReadOnlyJudgementData.Name => Name;
+    float IReadOnlyJudgementData.Value => Value;
+
+    bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
+
+    GameObject IReadOnlyJudgementData.Prefab => Prefab;
+
+    bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
+
+    bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
 }
