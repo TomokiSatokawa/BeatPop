@@ -1838,7 +1838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000060398008}
+  m_AnchoredPosition: {x: 0, y: 0.000015639382}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &402656383
@@ -4111,7 +4111,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CE\u30FC\u30C4"
+  m_text: "\u901F\u5EA6"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
   m_sharedMaterial: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
@@ -4887,7 +4887,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CE\u30FC\u30C4"
+  m_text: "\u5224\u5B9A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
   m_sharedMaterial: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
@@ -5348,7 +5348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CE\u30FC\u30C4"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
   m_sharedMaterial: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
@@ -8273,7 +8273,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337337626}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -8334,7 +8334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CE\u30FC\u30C4"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
   m_sharedMaterial: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
@@ -11459,7 +11459,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909526568}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -11904,7 +11904,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CE\u30FC\u30C4"
+  m_text: "\u97F3\u8272"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
   m_sharedMaterial: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
