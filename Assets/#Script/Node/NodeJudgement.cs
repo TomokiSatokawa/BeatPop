@@ -17,12 +17,6 @@ public class NodeJudgement : ScriptableObject
         {
             if (absDiff <= judgement.Value)
             {
-                string result = judgement.Name;
-                if (judgement.ShowEarlyLateText)
-                {
-                    result += "\n" +( difference > 0 ? "fast" : "late");
-                }
-
                 return judgement;
             }
         }
@@ -31,7 +25,7 @@ public class NodeJudgement : ScriptableObject
 }
 public interface IReadOnlyJudgementData
 {
-    string Name { get; }
+    JudgementType Name { get; }
     float Value { get; }
 
     bool ShowEarlyLateText { get; }
@@ -46,7 +40,7 @@ public interface IReadOnlyJudgementData
 [System.Serializable]
 public class JudgementData : IReadOnlyJudgementData
 {
-    public string Name;
+    public JudgementType Name;
     public float Value;
     public bool ShowEarlyLateText;
     public GameObject Prefab;
@@ -54,7 +48,7 @@ public class JudgementData : IReadOnlyJudgementData
     public bool IsComboContinued;
     public bool IsAllPerfectContinued;
 
-    string IReadOnlyJudgementData.Name => Name;
+    JudgementType IReadOnlyJudgementData.Name => Name;
     float IReadOnlyJudgementData.Value => Value;
 
     bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
@@ -64,4 +58,8 @@ public class JudgementData : IReadOnlyJudgementData
     bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
 
     bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
+}
+public enum JudgementType
+{
+    Perfect, Great, Good, Bad,Miss
 }

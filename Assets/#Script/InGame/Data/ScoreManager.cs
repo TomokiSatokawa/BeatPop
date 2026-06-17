@@ -7,7 +7,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private ReactiveProperty<int> _combo = new();
     public ReadOnlyReactiveProperty<int> Combo => _combo;
     public bool IsAllPerfect { get; private set; }
-    public Dictionary<IReadOnlyJudgementData, int> _judgeCount = new();
+    private Dictionary<IReadOnlyJudgementData, int> _judgeCount = new();
+    public IReadOnlyDictionary<IReadOnlyJudgementData,int> JudgeData => _judgeCount;
     public Dictionary<PoolPrefabType, AverageData> _nodeAverage = new();
     private float _sumDifference = 0;
     private void Start()
