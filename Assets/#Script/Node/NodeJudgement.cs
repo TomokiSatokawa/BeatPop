@@ -35,6 +35,8 @@ public interface IReadOnlyJudgementData
     bool IsComboContinued { get; }
 
     bool IsAllPerfectContinued { get; }
+
+    int Score { get; }
 }
 
 [System.Serializable]
@@ -47,6 +49,7 @@ public class JudgementData : IReadOnlyJudgementData
 
     public bool IsComboContinued;
     public bool IsAllPerfectContinued;
+    public int Score;
 
     JudgementType IReadOnlyJudgementData.Name => Name;
     float IReadOnlyJudgementData.Value => Value;
@@ -58,6 +61,7 @@ public class JudgementData : IReadOnlyJudgementData
     bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
 
     bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
+    int IReadOnlyJudgementData.Score => Score;
 }
 public enum JudgementType
 {

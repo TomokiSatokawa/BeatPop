@@ -11,11 +11,16 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public IReadOnlyDictionary<IReadOnlyJudgementData,int> JudgeData => _judgeCount;
     public Dictionary<PoolPrefabType, AverageData> _nodeAverage = new();
     private float _sumDifference = 0;
+    public IReadOnlyJudgementData _maxScore;
     private void Start()
     {
         _sumDifference = 0;
         IsAllPerfect = true;
         DontDestroyOnLoad(this.gameObject);
+    }
+    public void SetMaxJudge(IReadOnlyJudgementData judge)
+    {
+        _maxScore = judge;
     }
     public void AddScore(IReadOnlyJudgementData judgement,NodeData nodeData,float difference)
     {
@@ -46,6 +51,16 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         {
             _combo.Value = 0;
             IsAllPerfect = false;
+        }
+    }
+    public void GetSumScore(out int score ,out int maxScore)
+    {
+        score = 0;
+        maxScore = 0;
+        foreach(var kv in _judgeCount)
+        {
+            score += kv.Key.Score * kv.Value;
+            maxScore += _maxScore.Score * kv.Value;
         }
     }
     private void AddJudgeCount(IReadOnlyJudgementData judgement)

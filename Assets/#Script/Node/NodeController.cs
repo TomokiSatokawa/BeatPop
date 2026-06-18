@@ -33,6 +33,8 @@ namespace InGame.Node
 
             InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
             InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
+
+            ScoreManager.I.SetMaxJudge(_nodeJudgement.JudgementDifference(0));
         }
 
         public void AddNode(NodeObject node)
