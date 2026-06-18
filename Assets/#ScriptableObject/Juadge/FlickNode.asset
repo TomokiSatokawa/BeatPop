@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152734e35f891ff4198ab8770185e547, type: 3}
+  m_Name: FlickNode
+  m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
+  ToleranceValue: 0.16
+  DeleteTime: 0.16
+  JudgementDatas:
+  - Name: 0
+    Value: 0.07
+    ShowEarlyLateText: 0
+    Prefab: {fileID: 2671467441514653439, guid: 5252b225fc2c92a4e8305ef0fa45e234, type: 3}
+    IsComboContinued: 1
+    IsAllPerfectContinued: 1
+    Score: 20
+  - Name: 1
+    Value: 0.09
+    ShowEarlyLateText: 0
+    Prefab: {fileID: 7269690442944772748, guid: 1d34eeeda49e12a42ad2b9a5e75c759a, type: 3}
+    IsComboContinued: 1
+    IsAllPerfectContinued: 1
+    Score: 15
+  - Name: 2
+    Value: 0.11
+    ShowEarlyLateText: 1
+    Prefab: {fileID: 8428856643022149301, guid: f0430bcb990d1004387edc9ce0efa506, type: 3}
+    IsComboContinued: 1
+    IsAllPerfectContinued: 0
+    Score: 10
+  - Name: 3
+    Value: 0.18
+    ShowEarlyLateText: 1
+    Prefab: {fileID: 2888143394473825163, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+    IsComboContinued: 1
+    IsAllPerfectContinued: 0
+    Score: 5
+  - Name: 4
+    Value: 10
+    ShowEarlyLateText: 0
+    Prefab: {fileID: 2888143394473825163, guid: 9edf24a39c5747b49af03b129b973356, type: 3}
+    IsComboContinued: 0
+    IsAllPerfectContinued: 0
+    Score: 0

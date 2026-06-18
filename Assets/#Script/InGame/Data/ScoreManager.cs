@@ -10,20 +10,18 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private Dictionary<IReadOnlyJudgementData, int> _judgeCount = new();
     public IReadOnlyDictionary<IReadOnlyJudgementData,int> JudgeData => _judgeCount;
     public Dictionary<PoolPrefabType, AverageData> _nodeAverage = new();
+    public int MaxScore { get; private set; } 
     private float _sumDifference = 0;
-    public IReadOnlyJudgementData _maxScore;
     private void Start()
     {
         _sumDifference = 0;
         IsAllPerfect = true;
         DontDestroyOnLoad(this.gameObject);
     }
-    public void SetMaxJudge(IReadOnlyJudgementData judge)
+    public IReadOnlyJudgementData AddScore(PoolPrefabType type, float difference, NodeData nodeData)
     {
-        _maxScore = judge;
-    }
-    public void AddScore(IReadOnlyJudgementData judgement,NodeData nodeData,float difference)
-    {
+        var judgement = JudgementManager.I.JudgementDifference(type, difference);
+        MaxScore += JudgementManager.I.JudgementDifference(type, 0).Score;
         if (!judgement.IsAllPerfectContinued)
             IsAllPerfect = false;
 
@@ -38,10 +36,14 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         }
         AddJudgeCount(judgement);
         AddNodeCount(nodeData.PrefabType, judgement.IsComboContinued);
+        return judgement;
     }
-    public void AddHoldScore(IReadOnlyJudgementData judgementData)
+    public IReadOnlyJudgementData AddHoldScore(PoolPrefabType type, float difference)
     {
+        var judgementData = JudgementManager.I.JudgementDifference(type, difference);
+        MaxScore += JudgementManager.I.JudgementDifference(type, 0).Score;
         AddJudgeCount(judgementData);
+
         AddNodeCount(PoolPrefabType.HoldNoteFill, judgementData.IsComboContinued);
         if (judgementData.IsComboContinued)
         {
@@ -52,15 +54,14 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
             _combo.Value = 0;
             IsAllPerfect = false;
         }
+        return judgementData;
     }
-    public void GetSumScore(out int score ,out int maxScore)
+    public void GetSumScore(out int score)
     {
         score = 0;
-        maxScore = 0;
         foreach(var kv in _judgeCount)
         {
             score += kv.Key.Score * kv.Value;
-            maxScore += _maxScore.Score * kv.Value;
         }
     }
     private void AddJudgeCount(IReadOnlyJudgementData judgement)

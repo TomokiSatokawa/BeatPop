@@ -9,7 +9,6 @@ namespace InGame.Node
 {
     public class NodeController : MonoBehaviour
     {
-        [SerializeField] private NodeJudgement _nodeJudgement;
         [SerializeField] private float _nodeSpeed;
         [SerializeField] private float _goalPos;
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
@@ -33,8 +32,6 @@ namespace InGame.Node
 
             InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
             InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
-
-            ScoreManager.I.SetMaxJudge(_nodeJudgement.JudgementDifference(0));
         }
 
         public void AddNode(NodeObject node)
@@ -47,7 +44,7 @@ namespace InGame.Node
             List<NodeObject> removeNode = new();
             foreach (NodeObject node in _nodes)
             {
-                float deleteTime = GameManager.I.StageTime - _nodeJudgement.DeleteTime;
+                float deleteTime = GameManager.I.StageTime - JudgementManager.I.DeleteTime;
 
                 if (node.NodeData.Time <= deleteTime)
                 {
@@ -63,9 +60,8 @@ namespace InGame.Node
                 if (node.Type != PoolPrefabType.Line)
                 {
                     float difference = node.NodeData.Time - GameManager.I.StageTime;
-                    var judgeData = _nodeJudgement.JudgementDifference(difference);
+                    var judgeData = ScoreManager.I.AddScore(node.Type, difference, node.NodeData);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
-                    ScoreManager.I.AddScore(judgeData,node.NodeData, difference);
                     if (node.Type == PoolPrefabType.HoldNoteEnd)
                     {
                         _nodeFillManager.DeleteFill(node.NodeData);
@@ -76,20 +72,20 @@ namespace InGame.Node
             }
             if (_nextFillJudge <= GameManager.I.StageTime)
             {
-                HoldLane(0,InputManager.LeftLane.CurrentValue);
+                HoldLane(0, InputManager.LeftLane.CurrentValue);
                 HoldLane(1, InputManager.RightLane.CurrentValue);
 
                 _fillJudgeIndex++;
                 _nextFillJudge = _fillJudgeIndex * 30f / GameManager.I.BPM;
             }
         }
-        public void HoldLane(int lane,bool isHold)
+        public void HoldLane(int lane, bool isHold)
         {
             if (_nodeFillManager.HasFill(lane))
             {
-                var judgeData = _nodeJudgement.JudgementDifference(isHold ? 0:_nodeJudgement.ToleranceValue*2); 
+                float difference = isHold ? 0 : JudgementManager.I.ToleranceValue * 2;
+                var judgeData = ScoreManager.I.AddHoldScore(PoolPrefabType.HoldNoteFill, difference);
                 _showJudge.OnNext((judgeData, lane));
-                    ScoreManager.I.AddHoldScore(judgeData);
             }
         }
 
@@ -117,7 +113,7 @@ namespace InGame.Node
 
             if (targetNode == null) return;
 
-            if (bestDifference <= _nodeJudgement.ToleranceValue)
+            if (bestDifference <= JudgementManager.I.ToleranceValue)
             {
                 SoundManager.I.PlaySESound(se);
 
@@ -128,9 +124,8 @@ namespace InGame.Node
                 }
                 PoolManager.I.Release(targetNode);
                 float difference = nodeTime - GameManager.I.StageTime;
-                var judgeData = _nodeJudgement.JudgementDifference(difference);
+                var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
-                ScoreManager.I.AddScore(judgeData,targetNode.NodeData, difference);
             }
         }
         public NodeObject GetClonedNode(int nodeID)

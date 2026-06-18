@@ -119,6 +119,64 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &56954441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56954443}
+  - component: {fileID: 56954442}
+  m_Layer: 0
+  m_Name: JudgeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &56954442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a162762cb647a084d9f6a9b5926568b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JudgementManager
+  _deleteTime: 0.18
+  _toleranceValue: 0.18
+  _nodeTypeJudge:
+    _items:
+    - Key: 1
+      Value: {fileID: 11400000, guid: 1638c43d8c25bbf4bb11578e16ba5daf, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: c318a8f17c55e8842b53100e75f83040, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 6429e3ab406f4c04bad122469bfdd790, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: c19943713762a0744821784895a5d69b, type: 2}
+    - Key: 5
+      Value: {fileID: 11400000, guid: 111c03707f400d64db44b0fbf79186ae, type: 2}
+--- !u!4 &56954443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56954441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1973.3768, y: 1252.7052, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59360525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,7 +1738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e89c500cce62d4db704a93fedd32c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
-  _nodeJudgement: {fileID: 11400000, guid: 1638c43d8c25bbf4bb11578e16ba5daf, type: 2}
   _nodeSpeed: 1
   _goalPos: -10
   _nodeFillManager: {fileID: 1252056267}
@@ -2879,3 +2936,4 @@ SceneRoots:
   - {fileID: 894298784}
   - {fileID: 2101936841}
   - {fileID: 1258396496}
+  - {fileID: 56954443}

@@ -7,5 +7,9 @@ namespace Common.PlaySystem
         {
             SongData = song;
         }
+        public void Delete()
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

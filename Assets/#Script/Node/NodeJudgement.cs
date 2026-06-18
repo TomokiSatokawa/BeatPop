@@ -50,7 +50,6 @@ public class JudgementData : IReadOnlyJudgementData
     public bool IsComboContinued;
     public bool IsAllPerfectContinued;
     public int Score;
-
     JudgementType IReadOnlyJudgementData.Name => Name;
     float IReadOnlyJudgementData.Value => Value;
 

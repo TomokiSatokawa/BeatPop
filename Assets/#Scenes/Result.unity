@@ -4406,7 +4406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Result.UI.ScoreUIControl
   _scoreSlider: {fileID: 2107185129}
   _scoreValue: {fileID: 1521405501}
-  _animationDuration: 0
+  _animationDuration: 3
 --- !u!1 &1732375709
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,10 +4641,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89348880}
-        m_TargetAssemblyTypeName: SceneLoad, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 3
+      - m_Target: {fileID: 2103821571}
+        m_TargetAssemblyTypeName: ResultManager, Assembly-CSharp
+        m_MethodName: ReturnTitle
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5214,6 +5214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c98c8931ec69b4ba21ab4f28504c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultManager
+  _sceneLoad: {fileID: 89348880}
 --- !u!1 &2107185127
 GameObject:
   m_ObjectHideFlags: 0
