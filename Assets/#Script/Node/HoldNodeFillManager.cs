@@ -12,7 +12,6 @@ public class HoldNodeFillManager : MonoBehaviour
     public void AddClone(NodeData start, NodeData end, PoolObject startObject)
     {
         if (_activeFillData.ContainsKey(end)) return;
-        Debug.Log($"{end.NodeID} start");
         var fillData = new FillData(start, end, _lane[start.Lane], _cloneZ, _deleteZ);
         fillData.SetNodeObject(start: startObject);
         _activeFillData.Add(end, fillData);
@@ -20,13 +19,11 @@ public class HoldNodeFillManager : MonoBehaviour
     public void SetEndObject(NodeData end, PoolObject endObject)
     {
         if (!_activeFillData.TryGetValue(end, out var fillData)) return;
-        Debug.Log($"{end.NodeID} setEnd");
         fillData.SetNodeObject(end: endObject);
     }
     public void DeleteFill(NodeData end)
     {
         if (!_activeFillData.TryGetValue(end, out var fillData)) return;
-        Debug.Log($"{end.NodeID} delete");
         fillData.Remove();
         _activeFillData.Remove(end);
     }

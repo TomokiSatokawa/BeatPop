@@ -86,10 +86,6 @@ namespace InGame.Node
                 CreateHoldNode(nodeData);
                 return;
             }
-            if (prefabType != PoolPrefabType.Line)
-            {
-                Debug.Log(nodeData.NodeID);
-            }
             GenerateNode<NodeObject>(nodeData);
         }
 
