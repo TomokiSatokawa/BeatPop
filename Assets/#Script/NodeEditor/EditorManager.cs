@@ -45,9 +45,10 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     {
         _bpm = bpm;
         var song = _songData.GetSongData(soundIndex);
-        if (song == null)
+        if (song != null)
         {
             _audioClip = song.Audio;
+            _timeOffSet = song.EditorTimeOffSet;
         }
     }
     public void ReloadTime()

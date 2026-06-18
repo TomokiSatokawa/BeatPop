@@ -8,12 +8,14 @@ public class SongData : ScriptableObject, IReadOnlySongData
     [SerializeField] private TextAsset _nodeDataJson;
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private float _stageTimeOffSet;
+    [SerializeField] private float _editorTimeOffSet;
 
     public string SongName => _songName;
     public int SongID => _songID;
     public TextAsset NodeDataJson => _nodeDataJson;
     public AudioClip Audio => _audioClip;
     public float StageTimeOffSet => _stageTimeOffSet;
+    public float EditorTimeOffSet => _editorTimeOffSet;
 }
 public interface IReadOnlySongData
 {
@@ -22,4 +24,5 @@ public interface IReadOnlySongData
     public TextAsset NodeDataJson { get; }
     public AudioClip Audio { get; }
     public float StageTimeOffSet { get; }
+    public float EditorTimeOffSet { get; }  
 }
