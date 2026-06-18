@@ -19,7 +19,6 @@ public class EditorNode : FollowTime
     
     public override void ChangePos(double time)
     {
-        Debug.Log($"ChangePos ID: { Data.NodeID} Time{Data.Time}");
         var pos = _rect.anchoredPosition;
         pos.x = (float)(Time - time) * EditorManager.I.Magnification;
         pos.y = LeanY;
