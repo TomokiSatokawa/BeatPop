@@ -32,7 +32,7 @@ namespace InGame.Node
         private async void LoadFile()
         {
             await UniTask.Yield();
-            var data = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.NodeDataJson.text);
+            var data = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.GetNodeJson().text);
             NodeDates = data.Nodes;
             GameManager.I.SetData(data.BPM);
             _onFileLoaded.OnNext(Unit.Default);

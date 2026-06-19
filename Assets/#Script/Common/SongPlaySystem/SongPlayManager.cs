@@ -2,8 +2,8 @@ namespace Common.PlaySystem
 {
     public class SongPlayManager : SingletonMonoBehaviour<SongPlayManager>
     {
-        public IReadOnlySongData SongData { get; private set; } 
-        public void SetData(IReadOnlySongData song)
+        public SongSelectData SongData { get; private set; } 
+        public void SetData(SongSelectData song)
         {
             SongData = song;
         }

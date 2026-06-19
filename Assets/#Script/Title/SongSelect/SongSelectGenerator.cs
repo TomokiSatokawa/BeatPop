@@ -23,7 +23,7 @@ namespace Title.SongSelect
             title.text = text;
             _clonedObject.Add(title.gameObject);
         }
-        private void AddContentsList(IReadOnlyList<IReadOnlySongData> datas)
+        private void AddContentsList(IReadOnlyList<SongSelectData> datas)
         {
             var list = InstantiateContent(_contentsListPrefab);
             list.ViewList(datas, _listSongPrefab);

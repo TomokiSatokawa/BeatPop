@@ -20,17 +20,17 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     [SerializeField] private SongPlayLoader _playLoader;
     [SerializeField] private SceneLoad _sceneLoad;
 
-    private IReadOnlySongData _currentData;
+    private SongSelectData _currentData;
     private void Start()
     {
         _clauseButton.onClick.AddListener(OnClause);
         _backGroundArea.onClick.AddListener(OnClause);
     }
 
-    public void ShowInfo(IReadOnlySongData data)
+    public void ShowInfo(SongSelectData data)
     {
         _currentData = data;
-        _nameText.text = data.SongName;
+        _nameText.text = data.SongData.SongName;
         OnActiveAnimation();
     }
     private void OnActiveAnimation()

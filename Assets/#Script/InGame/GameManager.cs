@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void SetData(float bpm)
     {
         _bpm = bpm;
-        _songClip = SongPlayManager.I.SongData.Audio;
+        _songClip = SongPlayManager.I.SongData.SongData.Audio;
 
     }
     public async void WaitLoad()
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
         if (!_isPlaying) return;
 
-        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + SongPlayManager.I.SongData.StageTimeOffSet;
+        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + SongPlayManager.I.SongData.SongData.StageTimeOffSet;
 
         if (StageTime >= _endTime + 2f)
         {

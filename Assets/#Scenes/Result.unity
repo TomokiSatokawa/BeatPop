@@ -465,6 +465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 162826663}
+  - component: {fileID: 162826664}
   m_Layer: 5
   m_Name: Rank
   m_TagString: Untagged
@@ -494,6 +495,29 @@ RectTransform:
   m_AnchoredPosition: {x: -1189.6034, y: 314.14893}
   m_SizeDelta: {x: 1268.886, y: 724.7312}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &162826664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162826662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85c6733c95cf514bbfd254e5f53c83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RankUIControl
+  _rankImage: {fileID: 213882999}
+  _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
+  _fadeDuration: 0.15
+  _scaleUpDuration: 0.25
+  _scaleDownDuration: 0.15
+  _startScale: 0
+  _maxScale: 1.25
+  _endScale: 1
+  _scaleUpEase: 27
+  _scaleDownEase: 30
+  _waitTime: 1
 --- !u!1 &213882997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4406,7 +4430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Result.UI.ScoreUIControl
   _scoreSlider: {fileID: 2107185129}
   _scoreValue: {fileID: 1521405501}
-  _animationDuration: 3
+  _animationDuration: 1
 --- !u!1 &1732375709
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,6 +5226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ResultUIPresenter
   _judgementCount: {fileID: 255538298}
   _scoreUIControl: {fileID: 1694712882}
+  _rankUIControl: {fileID: 162826664}
 --- !u!114 &2103821571
 MonoBehaviour:
   m_ObjectHideFlags: 0

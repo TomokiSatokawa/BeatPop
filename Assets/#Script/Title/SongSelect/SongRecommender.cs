@@ -1,11 +1,37 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
 {
     [SerializeField] private SongListDataBase _songListData;
-    public IReadOnlyList<IReadOnlySongData> GetRecommendation()
+    public IReadOnlyList<SongSelectData> GetRecommendation()
     {
-        return _songListData.SongDates;
+        var result = new List<SongSelectData>();
+        foreach (var songData in _songListData.SongDates)
+        {
+            foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+            {
+                if (songData.Charts.GetChart(difficulty) == null) continue;
+
+                result.Add(new SongSelectData(songData, difficulty));
+            }
+        }
+        return result;
+    }
+
+}
+public struct SongSelectData
+{
+    public readonly IReadOnlySongData SongData;
+    public readonly Difficulty Difficulty;
+    public SongSelectData(IReadOnlySongData songData, Difficulty difficulty)
+    {
+        SongData = songData;
+        Difficulty = difficulty;
+    }
+    public TextAsset GetNodeJson()
+    {
+        return SongData.Charts.GetChart(Difficulty);
     }
 }

@@ -29,5 +29,9 @@ namespace Title
 
             _currentIndex = i;
         }
+        public void SetButtonActive(int i, bool isActive)
+        {
+            _buttons[i].interactable = isActive;
+        }
     }
 }

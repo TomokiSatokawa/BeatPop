@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d2e695076ed9d4fab1b923a1f6b932, type: 3}
+  m_Name: RankData
+  m_EditorClassIdentifier: Assembly-CSharp::RankData
+  _rankValue:
+    _items:
+    - Key: {fileID: 21300000, guid: 76204cc7bf7d031458c7b68c45e3d15a, type: 3}
+      Value: 0.85
+    - Key: {fileID: 21300000, guid: 7cfcd5b61e4f8f3408847a4e8190bd44, type: 3}
+      Value: 0.65
+    - Key: {fileID: 21300000, guid: ab025b81bbef81140a466d9072fbfc66, type: 3}
+      Value: 5
+    - Key: {fileID: 21300000, guid: 6fdbc8dd64c77db49b9e28ec88e88d67, type: 3}
+      Value: 0.4
+    - Key: {fileID: 21300000, guid: 0cdde4f95f42e5d4caf7bb35deade875, type: 3}
+      Value: 0

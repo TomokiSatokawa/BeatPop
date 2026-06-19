@@ -5,7 +5,7 @@ namespace Common.PlaySystem
     {
         [SerializeField] private SongPlayManager _managerPrefab;
 
-        public void OnLoad(IReadOnlySongData songData)
+        public void OnLoad(SongSelectData songData)
         {
             if(SongPlayManager.I != null)
             {
