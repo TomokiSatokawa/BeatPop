@@ -1,6 +1,8 @@
+using System;
 using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
+using Title;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +20,8 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     [SerializeField] private Button _clauseButton;
     [SerializeField] private Button _backGroundArea;
     [SerializeField] private SongPlayLoader _playLoader;
-    [SerializeField] private SceneLoad _sceneLoad;
+    [SerializeField] private SceneLoad _sceneLoad;//TODO:âº
+    [SerializeField] private SegmentedControl _segmentControl;
 
     private SongSelectData _currentData;
     private void Start()
@@ -32,6 +35,21 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
         _currentData = data;
         _nameText.text = data.SongData.SongName;
         OnActiveAnimation();
+        foreach(Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+        {
+            bool isExist = data.SongData.Charts.GetChart(difficulty) != null;
+            _segmentControl.SetButtonActive((int)difficulty, isExist);
+        }
+        _segmentControl.OnClick((int)data.Difficulty);
+    }
+    public void OnChangeDifficulty(int value)
+    {
+        if (Enum.IsDefined(typeof(Difficulty), value))
+        {
+            _currentData.ChangeDifficulty((Difficulty)value);
+            return;
+        }
+        Debug.LogError("ïsê≥Ç»ìÔà’ìxÇÃíl");
     }
     private void OnActiveAnimation()
     {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 namespace Title
 {
@@ -8,7 +9,8 @@ namespace Title
         [SerializeField] private Color _selectColor;
         [SerializeField] private Color _unSelectColor;
         [SerializeField] private int _startIndex;
-        private int _currentIndex = 0;
+        [SerializeField] private UnityEvent<int> _onValueChanged;
+        private int _currentIndex = -1;
         public int CurrentIndex => _currentIndex;
         private void Start()
         {
@@ -18,8 +20,11 @@ namespace Title
                 _buttons[i].onClick.AddListener(() => OnClick(index));
                 _buttons[i].image.color= _unSelectColor;
             }
-            _currentIndex = _startIndex;
-            OnClick(_currentIndex);
+            if (_currentIndex == -1)
+            {
+                _currentIndex = _startIndex;
+                OnClick(_currentIndex);
+            }
         }
         public void OnClick(int i)
         {
@@ -28,6 +33,7 @@ namespace Title
             _buttons[i].image.color = _selectColor;
 
             _currentIndex = i;
+            _onValueChanged?.Invoke(i);
         }
         public void SetButtonActive(int i, bool isActive)
         {

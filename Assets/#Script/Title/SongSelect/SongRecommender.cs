@@ -24,10 +24,14 @@ public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
 public struct SongSelectData
 {
     public readonly IReadOnlySongData SongData;
-    public readonly Difficulty Difficulty;
+    public Difficulty Difficulty { get; private set; }
     public SongSelectData(IReadOnlySongData songData, Difficulty difficulty)
     {
         SongData = songData;
+        Difficulty = difficulty;
+    }
+    public void ChangeDifficulty(Difficulty difficulty)
+    {
         Difficulty = difficulty;
     }
     public TextAsset GetNodeJson()
