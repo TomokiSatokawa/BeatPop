@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace Common.UI
 {
-    public class PanelManager : SingletonMonoBehaviour<PanelManager>
+    public class PanelManager : MonoBehaviour
     {
         [SerializeField] private PanelControl _fastActive;
 
