@@ -18,11 +18,14 @@ MonoBehaviour:
     Volume: 10
   - Type: 2
     Clip: {fileID: 8300000, guid: ea13e5c2d40c8e74f8dcbbd2382ed845, type: 3}
-    Volume: 10
+    Volume: 5
   - Type: 3
     Clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
     Volume: 10
   - Type: 4
+    Clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
+    Volume: 10
+  - Type: 9
     Clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
     Volume: 10
   _bgmData: []

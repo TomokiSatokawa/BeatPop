@@ -37,7 +37,7 @@ public class EditorNodeSound : MonoBehaviour
         {
             if (nodeData.Time <= EditorManager.I.EditorTime.CurrentValue)
             {
-                SoundManager.I.PlaySESound(SESoundType.NormalTap);
+                SoundManager.I.PlaySESound(SESoundType.Tap1);
                 removeList.Add(nodeData);
                 continue;
             }

@@ -23,15 +23,15 @@ namespace InGame.Node
 
         public void Start()
         {
-            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
-            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, SESoundType.NormalTap)).AddTo(this);
-            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
-            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.HoldStart)).AddTo(this);
-            InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
-            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, SESoundType.HoldEnd)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, SESoundType.Tap1)).AddTo(this);
+            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, SESoundType.Tap1)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, SESoundType.Tap3)).AddTo(this);
+            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.Tap3)).AddTo(this);
+            InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, SESoundType.Tap4)).AddTo(this);
+            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, SESoundType.Tap4)).AddTo(this);
 
-            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
-            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.FlickTap)).AddTo(this);
+            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.Tap2)).AddTo(this);
+            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.Tap2)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)
