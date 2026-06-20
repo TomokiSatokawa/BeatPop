@@ -52,7 +52,7 @@ namespace Title.Custom
         {
             var result = new CustomSoundPattern();
 
-            result.NormalSE = _soundData.TapSE[_normalNotes.value].Value;
+            result.NormalSE = _normalNotes.value;
 
             return result;
         }
@@ -67,10 +67,6 @@ namespace Title.Custom
             _isReviewSound = true;
         }
         
-    }
-    public struct CustomSoundPattern
-    {
-        public SESoundType NormalSE;
     }
 }
 

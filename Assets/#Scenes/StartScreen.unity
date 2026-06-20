@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab3a5cf1e36ba84bb5d9823f983345d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
+  _manifestLoader: {fileID: 227749956}
   _onClickAction:
     m_PersistentCalls:
       m_Calls:
@@ -319,6 +320,8 @@ GameObject:
   m_Component:
   - component: {fileID: 227749953}
   - component: {fileID: 227749954}
+  - component: {fileID: 227749956}
+  - component: {fileID: 227749955}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -354,6 +357,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
   _fadeImageControl: {fileID: 67526974}
+--- !u!114 &227749955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227749952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60332e6c70374974184a318ce4a6d839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomPatternLoader
+  _customSoundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
+--- !u!114 &227749956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227749952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ff47a589af7b1419dd557bf09c052b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomManifestLoader
+  _patternLoader: {fileID: 227749955}
+  _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
 --- !u!1 &281715675
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,4 +15,26 @@ public class CustomSoundData : ScriptableObject
     [SerializeField] public int _longEndDefault;
     public IReadOnlyList<KeyPair> TapSE => _tapSE.Items;
     public IReadOnlyList<KeyPair> HoldSE => _holdSE.Items;
+
+    public CustomSoundPattern GetDefaultCustom()
+    {
+        var result = new CustomSoundPattern();
+
+        result.NormalSE = _normalDefault;
+        result.FlickSE = _flickDefault;
+        result.HoldStart = _longStartDefault;
+        result.HoldFill = _longFillDefault;
+        result.HoldEnd = _longEndDefault;
+
+        return result;
+    }
+}
+[System.Serializable]
+public struct CustomSoundPattern
+{
+    public int NormalSE;
+    public int FlickSE;
+    public int HoldStart;
+    public int HoldFill;
+    public int HoldEnd;
 }
