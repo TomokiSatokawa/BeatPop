@@ -9,11 +9,11 @@ public class PoolObject : MonoBehaviour
     {
         _poolPrefabType = poolPrefabType;
     }
-    public void OnPoolActive()
+    public virtual void OnPoolActive()
     {
         IsPoolActive = true;
     }
-    public void OnPoolInactive()
+    public virtual void OnPoolInactive()
     {
         IsPoolActive = false;
     }

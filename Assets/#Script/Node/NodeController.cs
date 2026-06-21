@@ -123,6 +123,11 @@ namespace InGame.Node
                     _nodeFillManager.DeleteFill(targetNode.NodeData);
                 }
                 PoolManager.I.Release(targetNode);
+                var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.TapEffect);
+                Vector3 pos = targetNode.transform.position;
+                pos.z = _goalPos;
+                effect.transform.position = pos;
+
                 float difference = nodeTime - GameManager.I.StageTime;
                 var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
