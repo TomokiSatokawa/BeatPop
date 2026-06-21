@@ -1663,13 +1663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorManager
   _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
-  _audioClip: {fileID: 8300000, guid: da27006bedb7fe544bd300d1f74ed063, type: 3}
-  _bpm: 160.15
+  _audioClip: {fileID: 8300000, guid: 288b8d48adc8f204eb3c5053998404c6, type: 3}
+  _bpm: 138.35
   _scrollBar: {fileID: 940475955}
   _magnification: 1500
   _displayRange: {fileID: 564475092}
   _divition: 4
-  _timeOffSet: 0
+  _timeOffSet: -0.2
   StartDsp: 0
 --- !u!4 &781383601
 Transform:
@@ -1766,7 +1766,7 @@ MonoBehaviour:
   _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _waitSeconds: 0
   _songClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
-  _bpm: 160.15
+  _bpm: 138
   _timeText: {fileID: 0}
   _timeOffset: -0.045
 --- !u!114 &781383607
