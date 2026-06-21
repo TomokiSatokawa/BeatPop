@@ -4,6 +4,7 @@ using Common.UI;
 using DG.Tweening;
 using Title;
 using TMPro;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,8 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     [SerializeField] private SceneLoad _sceneLoad;//TODO:仮
     [SerializeField] private SegmentedControl _segmentControl;
 
-    private SongSelectData _currentData;
+    private SongSelectData? _currentData;
+    public SongSelectData? CurrentData => _currentData;
     private void Start()
     {
         _clauseButton.onClick.AddListener(OnClause);
@@ -44,9 +46,14 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     }
     public void OnChangeDifficulty(int value)
     {
+        if (!_currentData.HasValue)
+        {
+            Debug.LogError("選択中の曲データがありません");
+            return;
+        }
         if (Enum.IsDefined(typeof(Difficulty), value))
         {
-            _currentData.ChangeDifficulty((Difficulty)value);
+            _currentData.Value.ChangeDifficulty((Difficulty)value);
             return;
         }
         Debug.LogError("不正な難易度の値");
@@ -67,7 +74,8 @@ public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
     }
     public void OnPlay()
     {
-        _playLoader.OnLoad(_currentData);
+        if (!_currentData.HasValue) return;
+        _playLoader.OnLoad(_currentData.Value);
         _sceneLoad.ChangeScene("InGame");
     }
 }

@@ -3376,6 +3376,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401317855}
+  - component: {fileID: 401317857}
+  - component: {fileID: 401317856}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -3400,8 +3402,48 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00012207031}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &401317856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401317854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 8
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 8.89
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &401317857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401317854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &402656383
 GameObject:
   m_ObjectHideFlags: 0
@@ -11697,6 +11739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1278408203}
+  - component: {fileID: 1278408204}
   m_Layer: 5
   m_Name: Pattern
   m_TagString: Untagged
@@ -11729,6 +11772,20 @@ RectTransform:
   m_AnchoredPosition: {x: -698.053, y: -31.3871}
   m_SizeDelta: {x: 471.2699, y: 924.9302}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1278408204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278408202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc4146ef5f49df4d9f795428fa52d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatternUIList
+  _content: {fileID: 401317855}
+  _prefab: {fileID: 1229822027298472374, guid: 9454f34c926039049b19ac2a6f9b12db, type: 3}
 --- !u!1 &1281822421
 GameObject:
   m_ObjectHideFlags: 0
@@ -12400,7 +12457,19 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1337337629}
   _activeAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: PatternUIList, Assembly-CSharp
+        m_MethodName: ShowList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
       m_Calls: []

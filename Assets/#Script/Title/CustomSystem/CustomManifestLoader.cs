@@ -1,6 +1,6 @@
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
@@ -31,7 +31,33 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
                 }
             }
         }
+        DontDestroyOnLoad(this.gameObject);
     }
+
+    public async UniTask<PatternJsonData[]> GetCustomPattern(int songId)
+    {
+        var manifestSongData = _manifestData.Datas.Where(x => x.SongID == songId).FirstOrDefault();
+        if(manifestSongData == null)
+        {
+            Debug.LogError("Song Pattern not found");
+            return null;
+        }
+
+        var result = new PatternJsonData[manifestSongData.FileName.Length];
+        for(int i = 0; i < manifestSongData.FileName.Length; i++)
+        {
+            string patternJson = "";
+            string fileName = manifestSongData.FileName[i];
+            if (!await CustomPatternFile.TryGetText(fileName,t =>  patternJson = t))
+            {
+                Debug.LogError($"{fileName}");
+                continue;
+            }
+            result[i] = JsonUtility.FromJson<PatternJsonData>(patternJson);
+        }
+        return result;
+    }
+
     private async UniTask<string> CreateDefaultManifest()
     {
         var manifestSongDatas = new ManifestSongData[_songData.SongDates.Count];

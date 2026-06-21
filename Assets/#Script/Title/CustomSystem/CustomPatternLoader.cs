@@ -9,8 +9,9 @@ public class CustomPatternLoader : MonoBehaviour
         pattern.SoundPattern = _customSoundData.GetDefaultCustom();
         return JsonUtility.ToJson(pattern,true);
     }
-    public class PatternJsonData
-    {
-        public CustomSoundPattern SoundPattern;
-    }
+}
+
+public class PatternJsonData
+{
+    public CustomSoundPattern SoundPattern;
 }
