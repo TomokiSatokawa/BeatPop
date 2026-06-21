@@ -48,11 +48,25 @@ namespace Title.Custom
             if (!_isReviewSound) return;
             SoundManager.I.PlaySESound(seSound);
         }
+        public void SetCustom(CustomSoundPattern customSound)
+        {
+            _isReviewSound = false;
+            _normalNotes.value = customSound.NormalSE;
+            _flickNotes.value = customSound.FlickSE;
+            _longStartNotes.value = customSound.HoldStart;
+            _longFillNotes.value = customSound.HoldFill;
+            _longEndNotes.value = customSound.HoldEnd;
+            _isReviewSound = true;
+        }
         public CustomSoundPattern GetCustom()
         {
             var result = new CustomSoundPattern();
 
             result.NormalSE = _normalNotes.value;
+            result.FlickSE = _flickNotes.value;
+            result.HoldStart = _longStartNotes.value;
+            result.HoldFill  = _longFillNotes.value;
+            result.HoldEnd = _longEndNotes.value;
 
             return result;
         }

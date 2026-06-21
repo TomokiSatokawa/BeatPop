@@ -2,80 +2,80 @@ using System;
 using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
-using Title;
 using TMPro;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
+namespace Title.SongSelect
 {
-    [Header("Animation")]
-    [SerializeField] private PanelControl _panelControl;
-    [SerializeField] private RectTransform _mainPanel;
-    [SerializeField] private Vector2 _offScreen;
-    [SerializeField] private Vector2 _pos;
-    [SerializeField] private float _animationDuration;
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private Button _clauseButton;
-    [SerializeField] private Button _backGroundArea;
-    [SerializeField] private SongPlayLoader _playLoader;
-    [SerializeField] private SceneLoad _sceneLoad;//TODO:仮
-    [SerializeField] private SegmentedControl _segmentControl;
+    public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
+    {
+        [Header("Animation")]
+        [SerializeField] private PanelControl _panelControl;
+        [SerializeField] private RectTransform _mainPanel;
+        [SerializeField] private Vector2 _offScreen;
+        [SerializeField] private Vector2 _pos;
+        [SerializeField] private float _animationDuration;
+        [Header("UI")]
+        [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private Button _clauseButton;
+        [SerializeField] private Button _backGroundArea;
+        [SerializeField] private SongPlayLoader _playLoader;
+        [SerializeField] private SceneLoad _sceneLoad;//TODO:仮
+        [SerializeField] private SegmentedControl _segmentControl;
 
-    private SongSelectData? _currentData;
-    public SongSelectData? CurrentData => _currentData;
-    private void Start()
-    {
-        _clauseButton.onClick.AddListener(OnClause);
-        _backGroundArea.onClick.AddListener(OnClause);
-    }
+        private SongSelectData? _currentData;
+        public SongSelectData? CurrentData => _currentData;
+        private void Start()
+        {
+            _clauseButton.onClick.AddListener(OnClause);
+            _backGroundArea.onClick.AddListener(OnClause);
+        }
 
-    public void ShowInfo(SongSelectData data)
-    {
-        _currentData = data;
-        _nameText.text = data.SongData.SongName;
-        OnActiveAnimation();
-        foreach(Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+        public void ShowInfo(SongSelectData data)
         {
-            bool isExist = data.SongData.Charts.GetChart(difficulty) != null;
-            _segmentControl.SetButtonActive((int)difficulty, isExist);
+            _currentData = data;
+            _nameText.text = data.SongData.SongName;
+            OnActiveAnimation();
+            foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+            {
+                bool isExist = data.SongData.Charts.GetChart(difficulty) != null;
+                _segmentControl.SetButtonActive((int)difficulty, isExist);
+            }
+            _segmentControl.OnClick((int)data.Difficulty);
         }
-        _segmentControl.OnClick((int)data.Difficulty);
-    }
-    public void OnChangeDifficulty(int value)
-    {
-        if (!_currentData.HasValue)
+        public void OnChangeDifficulty(int value)
         {
-            Debug.LogError("選択中の曲データがありません");
-            return;
+            if (!_currentData.HasValue)
+            {
+                return;
+            }
+            if (Enum.IsDefined(typeof(Difficulty), value))
+            {
+                _currentData.Value.ChangeDifficulty((Difficulty)value);
+                return;
+            }
+            Debug.LogError("不正な難易度の値");
         }
-        if (Enum.IsDefined(typeof(Difficulty), value))
+        private void OnActiveAnimation()
         {
-            _currentData.Value.ChangeDifficulty((Difficulty)value);
-            return;
+            _panelControl.OnActive();
+            _mainPanel.DOKill(true);
+            _mainPanel.anchoredPosition = _offScreen;
+            _mainPanel.DOAnchorPos(_pos, _animationDuration);
         }
-        Debug.LogError("不正な難易度の値");
-    }
-    private void OnActiveAnimation()
-    {
-        _panelControl.OnActive();
-        _mainPanel.DOKill(true);
-        _mainPanel.anchoredPosition = _offScreen;
-        _mainPanel.DOAnchorPos(_pos, _animationDuration);
-    }
-    public void OnClause()
-    {
-        _mainPanel.DOKill(true);
-        _mainPanel.anchoredPosition = _pos;
-        _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
-            .OnComplete(() => _panelControl.OnHidden());
-    }
-    public void OnPlay()
-    {
-        if (!_currentData.HasValue) return;
-        _playLoader.OnLoad(_currentData.Value);
-        _sceneLoad.ChangeScene("InGame");
+        public void OnClause()
+        {
+            _mainPanel.DOKill(true);
+            _mainPanel.anchoredPosition = _pos;
+            _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
+                .OnComplete(() => _panelControl.OnHidden());
+        }
+        public void OnPlay()
+        {
+            if (!_currentData.HasValue) return;
+            _playLoader.OnLoad(_currentData.Value);
+            _sceneLoad.ChangeScene("InGame");
+        }
     }
 }

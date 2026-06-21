@@ -885,7 +885,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1521799527}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.58165586
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5512,7 +5512,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 640238855}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: PatternUIList, Assembly-CSharp
+        m_MethodName: CreatePattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &640238855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11740,6 +11752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278408203}
   - component: {fileID: 1278408204}
+  - component: {fileID: 1278408205}
   m_Layer: 5
   m_Name: Pattern
   m_TagString: Untagged
@@ -11786,6 +11799,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatternUIList
   _content: {fileID: 401317855}
   _prefab: {fileID: 1229822027298472374, guid: 9454f34c926039049b19ac2a6f9b12db, type: 3}
+  _patternLoader: {fileID: 1278408205}
+  _sound: {fileID: 329494180}
+--- !u!114 &1278408205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278408202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60332e6c70374974184a318ce4a6d839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomPatternLoader
+  _customSoundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
 --- !u!1 &1281822421
 GameObject:
   m_ObjectHideFlags: 0
@@ -16943,7 +16971,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.58165586
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -23,11 +24,11 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
         _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
         foreach (var manifestSongData in _manifestData.Datas)
         {
-            foreach(var fillpath in manifestSongData.FileName)
+            foreach (var fillPath in manifestSongData.FileName)
             {
-                if(!await CustomPatternFile.TryGetText(fillpath, null))
+                if (!await CustomPatternFile.TryGetText(fillPath, null))
                 {
-                    Debug.LogError($"ファイル破損 {fillpath}");
+                    Debug.LogError($"ファイル破損 {fillPath}");
                 }
             }
         }
@@ -37,18 +38,18 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
     public async UniTask<PatternJsonData[]> GetCustomPattern(int songId)
     {
         var manifestSongData = _manifestData.Datas.Where(x => x.SongID == songId).FirstOrDefault();
-        if(manifestSongData == null)
+        if (manifestSongData == null)
         {
             Debug.LogError("Song Pattern not found");
             return null;
         }
 
         var result = new PatternJsonData[manifestSongData.FileName.Length];
-        for(int i = 0; i < manifestSongData.FileName.Length; i++)
+        for (int i = 0; i < manifestSongData.FileName.Length; i++)
         {
             string patternJson = "";
             string fileName = manifestSongData.FileName[i];
-            if (!await CustomPatternFile.TryGetText(fileName,t =>  patternJson = t))
+            if (!await CustomPatternFile.TryGetText(fileName, t => patternJson = t))
             {
                 Debug.LogError($"{fileName}");
                 continue;
@@ -56,6 +57,37 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
             result[i] = JsonUtility.FromJson<PatternJsonData>(patternJson);
         }
         return result;
+    }
+    public async void AddPattern(int songId, PatternJsonData patternData)
+    {
+        var manifestSongData = _manifestData.Datas.Where(x => x.SongID == songId).FirstOrDefault();
+        Array.Resize(ref manifestSongData.FileName, manifestSongData.FileName.Length + 1);
+
+        string filName = $"song_{songId:D4}_{(manifestSongData.FileName.Length - 1):D4}.json";
+        manifestSongData.FileName[manifestSongData.FileName.Length - 1] = filName;
+        patternData.FillName = filName;
+        string patternJson = JsonUtility.ToJson(patternData, true);
+        await CustomPatternFile.CreateFile(filName, patternJson);
+        await UpdateManifestFill();
+    }
+
+    public async void SavePattern(PatternJsonData patternData)
+    {
+        string patternJson = JsonUtility.ToJson(patternData, true);
+        if (!await CustomPatternFile.UpdateFile(patternData.FillName, patternJson))
+        {
+            Debug.LogError($"パターンセーブ失敗 {patternData.PatternName} {patternData.FillName}");
+        }
+    }
+
+    private async UniTask UpdateManifestFill()
+    {
+        string manifestJosn = JsonUtility.ToJson(_manifestData, true);
+        if (!await CustomPatternFile.UpdateFile(MANIFEST_FILE_NAME, manifestJosn))
+        {
+            Debug.LogError("manifest更新失敗");
+            return;
+        }
     }
 
     private async UniTask<string> CreateDefaultManifest()
@@ -68,7 +100,11 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
 
             if (!await CustomPatternFile.TryGetText(filName, null))
             {
-                await CustomPatternFile.CreateFile(filName, _patternLoader.GetDefaultPattern());
+                PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
+                patternJsonData.IsSelect = true;
+                patternJsonData.FillName = filName;
+                string patternJson = JsonUtility.ToJson(patternJsonData, true);
+                await CustomPatternFile.CreateFile(filName, patternJson);
             }
             manifestSongDatas[i] = new();
             manifestSongDatas[i].FileName = new string[] { filName };

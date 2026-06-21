@@ -91,4 +91,53 @@ public static class CustomPatternFile
 
 #endif
     }
+    public static async UniTask<bool> UpdateFile(string fileName, string text)
+    {
+        string path = GetPath(fileName);
+
+        if (!File.Exists(path))
+        {
+            return false;
+        }
+
+        await File.WriteAllTextAsync(
+            path,
+            text
+        );
+
+        return true;
+    }
+
+    public static async UniTask<bool> RenameFile(string oldFileName, string newFileName)
+    {
+        string oldPath = GetPath(oldFileName);
+        string newPath = GetPath(newFileName);
+
+        if (!File.Exists(oldPath))
+        {
+            return false;
+        }
+
+        if (File.Exists(newPath))
+        {
+            return false;
+        }
+
+        string directory = Path.GetDirectoryName(newPath);
+
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        await UniTask.RunOnThreadPool(() =>
+        {
+            File.Move(
+                oldPath,
+                newPath
+            );
+        });
+
+        return true;
+    }
 }
