@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
@@ -71,10 +72,12 @@ namespace Title.SongSelect
             _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
                 .OnComplete(() => _panelControl.OnHidden());
         }
-        public void OnPlay()
+        public async void OnPlay()
         {
             if (!_currentData.HasValue) return;
-            _playLoader.OnLoad(_currentData.Value);
+            var patterns = await CustomManifestLoader.I.GetCustomPattern(_currentData.Value.SongData.SongID);
+            var usePattern = patterns.Where(x => x.IsSelect).First();
+            _playLoader.OnLoad(_currentData.Value, usePattern);
             _sceneLoad.ChangeScene("InGame");
         }
     }

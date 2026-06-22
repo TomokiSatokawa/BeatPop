@@ -8,6 +8,7 @@ public class PatternUIControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _patternName;
     [SerializeField] private Image _selectLine;
     [SerializeField] private Button _selectButton;
+    [SerializeField] private GameObject _setPattern;
     private PatternJsonData _patternData;
     public PatternJsonData patternData => _patternData;
     public void SetData(PatternJsonData pattern,Action<PatternUIControl> onSelect)
@@ -27,5 +28,9 @@ public class PatternUIControl : MonoBehaviour
     public void OnDeselect()
     {
         _selectLine.gameObject.SetActive(false);
+    }
+    public void ShowSetPattern(bool active)
+    {
+        _setPattern.SetActive(active);
     }
 }

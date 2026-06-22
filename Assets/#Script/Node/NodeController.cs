@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Common.PlaySystem;
 using Input;
 using R3;
 using Sound;
@@ -9,6 +10,7 @@ namespace InGame.Node
 {
     public class NodeController : MonoBehaviour
     {
+        [SerializeField] private CustomSoundData _soundData;
         [SerializeField] private float _nodeSpeed;
         [SerializeField] private float _goalPos;
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
@@ -23,15 +25,22 @@ namespace InGame.Node
 
         public void Start()
         {
-            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, SESoundType.Tap1)).AddTo(this);
-            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, SESoundType.Tap1)).AddTo(this);
-            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, SESoundType.Tap3)).AddTo(this);
-            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, SESoundType.Tap3)).AddTo(this);
-            InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, SESoundType.Tap4)).AddTo(this);
-            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, SESoundType.Tap4)).AddTo(this);
+            CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
+            var normalSE = _soundData.TapSE[soundPattern.NormalSE].Value;
+            var flickSE = _soundData.TapSE[soundPattern.FlickSE].Value;
+            var holdStart = _soundData.TapSE[soundPattern.HoldStart].Value;
+            var holdFill = _soundData.TapSE[soundPattern.HoldFill].Value;
+            var holdEnd = _soundData.TapSE[soundPattern.HoldEnd].Value;
 
-            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, SESoundType.Tap2)).AddTo(this);
-            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, SESoundType.Tap2)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.NormalNote, normalSE)).AddTo(this);
+            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.NormalNote, normalSE)).AddTo(this);
+            InputManager.LeftLane.Where(b => b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart)).AddTo(this);
+            InputManager.RightLane.Where(b => b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart)).AddTo(this);
+            InputManager.LeftLane.Where(b => !b).Subscribe(_ => ClickLane(0, PoolPrefabType.HoldNoteEnd, holdEnd)).AddTo(this);
+            InputManager.RightLane.Where(b => !b).Subscribe(_ => ClickLane(1, PoolPrefabType.HoldNoteEnd, holdEnd)).AddTo(this);
+
+            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ => ClickLane(0, PoolPrefabType.FlickNote, flickSE)).AddTo(this);
+            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => ClickLane(1, PoolPrefabType.FlickNote, flickSE)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)

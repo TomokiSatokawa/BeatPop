@@ -71,7 +71,7 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
         await UpdateManifestFill();
     }
 
-    public async void SavePattern(PatternJsonData patternData)
+    public async UniTask SavePattern(PatternJsonData patternData)
     {
         string patternJson = JsonUtility.ToJson(patternData, true);
         if (!await CustomPatternFile.UpdateFile(patternData.FillName, patternJson))

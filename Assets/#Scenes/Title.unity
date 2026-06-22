@@ -4382,7 +4382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 526561218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: SetPattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &526561218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17931,7 +17943,19 @@ MonoBehaviour:
         m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: SavePattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &1909526571
 CanvasGroup:
   m_ObjectHideFlags: 0

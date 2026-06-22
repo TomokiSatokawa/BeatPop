@@ -11,6 +11,7 @@ namespace Title.Custom
         [SerializeField] private CustomSound _sound;
 
         private PatternUIControl _currentSelect;
+        private PatternUIControl _usePattern;
         public async void ShowList()
         {
             if (!SongInfoControl.I.CurrentData.HasValue) return;
@@ -43,7 +44,9 @@ namespace Title.Custom
             if (pattern.IsSelect)
             {
                 SelectPattern(patternUI);
+                _usePattern = patternUI;         
             }
+            patternUI.ShowSetPattern(pattern.IsSelect);
         }
 
         public void SelectPattern(PatternUIControl patternUI)
@@ -58,10 +61,25 @@ namespace Title.Custom
 
             _sound.SetCustom(patternUI.patternData.SoundPattern);
         }
-        private void SavePattern()
+
+        public async void SetPattern()
         {
+            if (_usePattern == _currentSelect) return;
+            _usePattern?.ShowSetPattern(false);
+            _usePattern.patternData.IsSelect = false;
+            await CustomManifestLoader.I.SavePattern(_usePattern.patternData);
+
+            _usePattern = _currentSelect;
+            _usePattern.patternData.IsSelect = true;
+            await CustomManifestLoader.I.SavePattern(_usePattern.patternData);
+            _usePattern.ShowSetPattern(true);
+        }
+
+        public async void SavePattern()
+        {
+            if (_currentSelect == null) return;
             _currentSelect.patternData.SoundPattern = _sound.GetCustom();
-            CustomManifestLoader.I.SavePattern(_currentSelect.patternData);
+            await CustomManifestLoader.I.SavePattern(_currentSelect.patternData);
         }
     }
 }

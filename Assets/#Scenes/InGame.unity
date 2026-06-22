@@ -1672,6 +1672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e89c500cce62d4db704a93fedd32c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
+  _soundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
   _nodeSpeed: 1
   _goalPos: -10
   _nodeFillManager: {fileID: 1252056267}

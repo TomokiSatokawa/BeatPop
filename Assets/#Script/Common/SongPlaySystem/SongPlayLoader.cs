@@ -5,7 +5,7 @@ namespace Common.PlaySystem
     {
         [SerializeField] private SongPlayManager _managerPrefab;
 
-        public void OnLoad(SongSelectData songData)
+        public void OnLoad(SongSelectData songData,PatternJsonData patternJsonData)
         {
             if(SongPlayManager.I != null)
             {
@@ -14,7 +14,7 @@ namespace Common.PlaySystem
             }
 
             var playManager = Instantiate(_managerPrefab);
-            playManager.SetData(songData);
+            playManager.SetData(songData,patternJsonData);
             DontDestroyOnLoad(playManager);
         }
     }
