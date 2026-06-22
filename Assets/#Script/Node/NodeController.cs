@@ -25,6 +25,7 @@ namespace InGame.Node
 
         public void Start()
         {
+            Debug.Log("Start");
             CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
             var normalSE = _soundData.TapSE[soundPattern.NormalSE].Value;
             var flickSE = _soundData.TapSE[soundPattern.FlickSE].Value;
