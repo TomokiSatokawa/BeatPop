@@ -16,11 +16,13 @@ public class QuickPlay : EditorWindow
     private bool foldout = false;
 
     private string _previousScenePath;
+
     [MenuItem("BeatPop/QuickPlay")]
     static void OpenedWindows()
     {
         GetWindow<QuickPlay>("QuickPlay");
     }
+
     private void OnGUI()
     {
         EditorGUILayout.Space(10);
@@ -50,6 +52,7 @@ public class QuickPlay : EditorWindow
             EditorGUILayout.HelpBox(_errorMessage, MessageType.Error);
         }
     }
+
     private void OnEnable()
     {
         EditorApplication.playModeStateChanged += OnPlayModeChanged;
@@ -59,6 +62,7 @@ public class QuickPlay : EditorWindow
     {
         EditorApplication.playModeStateChanged -= OnPlayModeChanged;
     }
+
     public void OnStart()
     {
         if (_songData == null)
@@ -86,9 +90,8 @@ public class QuickPlay : EditorWindow
 
         //çƒê∂
         EditorApplication.isPlaying = true;
-
-
     }
+
     private void OnPlayModeChanged(PlayModeStateChange state)
     {
         if (state == PlayModeStateChange.EnteredPlayMode)
@@ -101,6 +104,7 @@ public class QuickPlay : EditorWindow
             EditorSceneManager.OpenScene(_previousScenePath);
         }
     }
+
     public async void CreatePlayData()
     {
         Debug.Log("CreatePlay");
