@@ -17,6 +17,9 @@ namespace Input
         public static ReadOnlyReactiveProperty<bool> FlickLeftLane => _flickLeftLane;
         private static ReactiveProperty<bool> _flickRightLane = new();
         public static ReadOnlyReactiveProperty<bool> FlickRightLane => _flickRightLane;
+
+        private static ReactiveProperty<bool> _pauseButton = new();
+        public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
         private void Awake()
         {
             GameInputs = new();
@@ -32,6 +35,10 @@ namespace Input
 
             GameInputs.Player.LeftFlick.performed += OnFlickLeftKey;
             GameInputs.Player.LeftFlick.canceled += OnFlickLeftKey;
+
+            GameInputs.Player.Pause.performed += OnPauseKey;
+            GameInputs.Player.Pause.canceled += OnPauseKey;
+
             GameInputs.Enable();
         }
 
@@ -51,6 +58,11 @@ namespace Input
         public void OnFlickLeftKey(InputAction.CallbackContext context)
         {
             _flickLeftLane.Value = context.started || context.performed;
+        }
+
+        public void OnPauseKey(InputAction.CallbackContext context)
+        {
+            _pauseButton.Value = context.started || context.performed;
         }
 
     }

@@ -8,6 +8,8 @@ namespace Common.UI
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private UnityEvent _activeAction;
         [SerializeField] private UnityEvent _hiddenAction;
+
+        public bool IsActive => _canvasGroup.alpha == 1.0f;
         private void Awake()
         {
             if (_canvasGroup == null) 

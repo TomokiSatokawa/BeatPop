@@ -34,27 +34,40 @@ namespace InGame.Node
             var holdFill = _soundData.TapSE[soundPattern.HoldFill].Value;
             var holdEnd = _soundData.TapSE[soundPattern.HoldEnd].Value;
 
-            InputManager.LeftLane.Where(b => b).Subscribe(_ =>
+            InputManager.LeftLane.Subscribe(b =>
             {
-                ClickLane(0, PoolPrefabType.NormalNote, normalSE);
-                ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart);
-                ClickLane(0, PoolPrefabType.HoldNoteEnd, holdEnd);
-                if (InputManager.FlickLeftLane.CurrentValue)
+                if (b)
                 {
-                    ClickLane(0, PoolPrefabType.FlickNote, flickSE);
+                    ClickLane(0, PoolPrefabType.NormalNote, normalSE);
+                    ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart);
+                    if (InputManager.FlickLeftLane.CurrentValue)
+                    {
+                        ClickLane(0, PoolPrefabType.FlickNote, flickSE);
+                    }
                 }
+                else
+                {
+                    ClickLane(0, PoolPrefabType.HoldNoteEnd, holdEnd);
+                }
+
             }).AddTo(this);
 
-            InputManager.RightLane.Where(b => b).Subscribe(_ =>
+            InputManager.RightLane.Subscribe(b =>
             {
-                ClickLane(1, PoolPrefabType.NormalNote, normalSE);
-                ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart);
-                ClickLane(1, PoolPrefabType.HoldNoteEnd, holdEnd);
-                if (InputManager.FlickLeftLane.CurrentValue)
+                if (b)
                 {
-                    ClickLane(1, PoolPrefabType.FlickNote, flickSE);
+                    ClickLane(1, PoolPrefabType.NormalNote, normalSE);
+                    ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart);
+                    if (InputManager.FlickLeftLane.CurrentValue)
+                    {
+                        ClickLane(1, PoolPrefabType.FlickNote, flickSE);
+                    }
                 }
-            
+                else
+                {
+                    ClickLane(1, PoolPrefabType.HoldNoteEnd, holdEnd);
+                }
+
             }).AddTo(this);
 
             InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ =>
@@ -62,7 +75,7 @@ namespace InGame.Node
                 ClickLane(0, PoolPrefabType.FlickNote, flickSE);
             }).AddTo(this);
 
-            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ => 
+            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ =>
             {
                 ClickLane(1, PoolPrefabType.FlickNote, flickSE);
             }).AddTo(this);
@@ -84,9 +97,15 @@ namespace InGame.Node
                 {
                     removeNode.Add(node);
                 }
-                Vector3 position = node.transform.position;
-                position.z -= node.MoveAmount * Time.deltaTime;
-                node.transform.position = position;
+                float startTime = node.NodeData.Time - NodeGenerator.I.ArrivalSeconds;
+
+                float progress = (GameManager.I.StageTime - startTime) / (node.NodeData.Time - startTime);
+
+                Vector3 startPosition = node.StartPosition;
+                Vector3 endPosition = startPosition;
+                endPosition.z = node.GoalPos;
+
+                node.transform.position =  Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
 
             foreach (NodeObject node in removeNode)

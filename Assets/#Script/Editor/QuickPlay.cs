@@ -17,6 +17,8 @@ public class QuickPlay : EditorWindow
 
     private string _previousScenePath;
 
+    private bool _isQuickPlay = false;
+
     [MenuItem("BeatPop/QuickPlay")]
     static void OpenedWindows()
     {
@@ -44,6 +46,7 @@ public class QuickPlay : EditorWindow
         EditorGUILayout.Space(10);
         if (GUILayout.Button("プレイ開始"))
         {
+            _isQuickPlay = true;
             OnStart();
         }
 
@@ -94,6 +97,8 @@ public class QuickPlay : EditorWindow
 
     private void OnPlayModeChanged(PlayModeStateChange state)
     {
+        if (!_isQuickPlay) return;
+
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
             CreatePlayData();
@@ -101,6 +106,7 @@ public class QuickPlay : EditorWindow
 
         if (state == PlayModeStateChange.EnteredEditMode)
         {
+            _isQuickPlay = false;
             EditorSceneManager.OpenScene(_previousScenePath);
         }
     }

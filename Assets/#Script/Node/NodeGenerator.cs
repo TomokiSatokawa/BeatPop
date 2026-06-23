@@ -92,10 +92,11 @@ namespace InGame.Node
         private T GenerateNode<T>(NodeData nodeData) where T : NodeObject
         {
             var newObject = PoolManager.I.Get<T>(nodeData.PrefabType);
-            newObject.transform.position = _clonePosition[nodeData.Lane].position;
+            Vector3 startPosition = _clonePosition[nodeData.Lane].position;
+            newObject.transform.position = startPosition;
             newObject.transform.rotation = Quaternion.identity;
 
-            newObject.SetMoveData(nodeData);
+            newObject.SetMoveData(nodeData, startPosition);
             newObject.SetGoal(_goalZ);
             _nodeController.AddNode(newObject);
             return newObject;

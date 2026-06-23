@@ -5,9 +5,8 @@ using R3;
 using Sound;
 using TMPro;
 using UnityEngine;
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    public static GameManager I;
     [HideInInspector] public float StageTime = -1;
     [SerializeField] private SongListDataBase _songData;
     [SerializeField] private float _waitSeconds;
@@ -23,11 +22,7 @@ public class GameManager : MonoBehaviour
 
     private Subject<Unit> _onGameClear = new();
     public Observable<Unit> OnGameClear => _onGameClear;
-    public void Awake()
-    {
-        if (I == null) I = this;
 
-    }
     public void Start()
     {
         NodeGenerator.I?.OnFileLoaded.Subscribe(_ =>
@@ -71,5 +66,18 @@ public class GameManager : MonoBehaviour
             _isPlaying = false;
             _onGameClear.OnNext(Unit.Default);
         }
+    }
+
+    public void OnPause()
+    {
+        _isPlaying = false;
+        SoundManager.I.IsPause(true);
+    }
+
+    public void ReStart()
+    {
+        _startDspTime = AudioSettings.dspTime - (StageTime - SongPlayManager.I.SongData.SongData.StageTimeOffSet);
+        _isPlaying = true;
+        SoundManager.I.IsPause(false);
     }
 }

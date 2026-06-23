@@ -7,15 +7,16 @@ public class NodeObject : PoolObject
     public Vector3 StartPosition;
 
     public float MoveAmount;
-
+    
+    public float GoalPos => _goalZ;
     private float _goalZ;
     /// <summary>
     /// arrivalSeconds•bŒã‚ÉtargetZ‚Ö“ž’B‚·‚é‘¬“x‚ðŒvŽZ
     /// </summary>
-    public void SetMoveData(NodeData data)
+    public void SetMoveData(NodeData data,Vector3 startPosition)
     {
         NodeData = data;
-        StartPosition = this.transform.position;
+        StartPosition = startPosition;
     }
 
     public virtual  void Update()

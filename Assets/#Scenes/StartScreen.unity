@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab3a5cf1e36ba84bb5d9823f983345d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
-  _manifestLoader: {fileID: 0}
+  _manifestLoader: {fileID: 1012845166}
   _onClickAction:
     m_PersistentCalls:
       m_Calls:
