@@ -88,6 +88,8 @@ namespace InGame.Node
 
         public void Update()
         {
+            if (!GameManager.I.IsPlaying) return;
+
             List<NodeObject> removeNode = new();
             foreach (NodeObject node in _nodes)
             {
@@ -144,6 +146,8 @@ namespace InGame.Node
 
         public void ClickLane(int lane, PoolPrefabType type, SESoundType se)
         {
+            if (!GameManager.I.IsPlaying) return;
+
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;
             float nodeTime = 0;

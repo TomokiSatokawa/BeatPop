@@ -4,9 +4,8 @@ using UnityEngine.InputSystem;
 
 namespace Input
 {
-    public class InputManager : MonoBehaviour
+    public class InputManager : SingletonMonoBehaviour<InputManager>
     {
-        public static InputManager I;
         public static GameInputs GameInputs;
 
         private static ReactiveProperty<bool> _rightLane = new();
@@ -20,7 +19,7 @@ namespace Input
 
         private static ReactiveProperty<bool> _pauseButton = new();
         public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
-        private void Awake()
+        public override void Awake()
         {
             GameInputs = new();
 
@@ -65,6 +64,23 @@ namespace Input
             _pauseButton.Value = context.started || context.performed;
         }
 
+        public static void SetInputEnabled(bool enabled)
+        {
+            if(enabled)
+            {
+                GameInputs.Player.RightKey.Enable();
+                GameInputs.Player.LeftKey.Enable();
+                GameInputs.Player.RightFlick.Enable();
+                GameInputs.Player.LeftFlick.Enable();
+            }
+            else
+            {
+                GameInputs.Player.RightKey.Disable();
+                GameInputs.Player.LeftKey.Disable();
+                GameInputs.Player.RightFlick.Disable();
+                GameInputs.Player.LeftFlick.Disable();
+            }
+        }
     }
 
 }

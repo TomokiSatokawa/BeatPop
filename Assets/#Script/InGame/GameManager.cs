@@ -1,6 +1,7 @@
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame.Node;
+using Input;
 using R3;
 using Sound;
 using TMPro;
@@ -8,6 +9,7 @@ using UnityEngine;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [HideInInspector] public float StageTime = -1;
+    [SerializeField] private SceneLoad _sceneLoad;
     [SerializeField] private SongListDataBase _songData;
     [SerializeField] private float _waitSeconds;
     [SerializeField] private AudioClip _songClip;
@@ -15,6 +17,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private float _timeOffset;
     private bool _isPlaying = false;
+    public bool IsPlaying => _isPlaying;
     private double _startDspTime;
     private float _endTime = float.MaxValue;
     public float BPM => _bpm;
@@ -71,13 +74,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void OnPause()
     {
         _isPlaying = false;
+        InputManager.SetInputEnabled(false);
         SoundManager.I.IsPause(true);
     }
 
-    public void ReStart()
+    public void ReStartStage()
     {
         _startDspTime = AudioSettings.dspTime - (StageTime - SongPlayManager.I.SongData.SongData.StageTimeOffSet);
         _isPlaying = true;
         SoundManager.I.IsPause(false);
+    }
+
+    public void ReStartCountDown()
+    {
+        InputManager.SetInputEnabled(true);
+    }
+
+    public void Retry()
+    {
+        _sceneLoad.ChangeScene("InGame");
+    }
+
+    public void ReturnTitle()
+    {
+        _sceneLoad.ChangeScene("Title");
     }
 }

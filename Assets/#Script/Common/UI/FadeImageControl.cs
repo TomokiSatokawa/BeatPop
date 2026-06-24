@@ -45,7 +45,7 @@ namespace Common.UI
             _fadeImage.gameObject.SetActive(false);
         }
 
-        public async Task FadeOut(FadeType fadeType, Action callback = null)
+        public async UniTask FadeOut(FadeType fadeType, Action callback = null)
         {
             _fadeImage.gameObject.SetActive(true);
             Color endColor = new Color();
