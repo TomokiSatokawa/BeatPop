@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Common.PlaySystem;
 using Input;
 using R3;
@@ -23,77 +24,26 @@ namespace InGame.Node
         private float _nextFillJudge;
         private float _fillJudgeIndex = 0;
 
+
+        private SESoundType NormalSE;
+        private SESoundType FlickSE;
+        private SESoundType HoldStart;
+        private SESoundType HoldFill;
+        private SESoundType HoldEnd;
         public void Start()
         {
             Debug.Log("Start");
             CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
 
-            var normalSE = _soundData.TapSE[soundPattern.NormalSE].Value;
-            var flickSE = _soundData.TapSE[soundPattern.FlickSE].Value;
-            var holdStart = _soundData.TapSE[soundPattern.HoldStart].Value;
-            var holdFill = _soundData.TapSE[soundPattern.HoldFill].Value;
-            var holdEnd = _soundData.TapSE[soundPattern.HoldEnd].Value;
+            NormalSE = _soundData.TapSE[soundPattern.NormalSE].Value;
+            FlickSE = _soundData.TapSE[soundPattern.FlickSE].Value;
+            HoldStart = _soundData.TapSE[soundPattern.HoldStart].Value;
+            HoldFill = _soundData.TapSE[soundPattern.HoldFill].Value;
+            HoldEnd = _soundData.TapSE[soundPattern.HoldEnd].Value;
 
-            InputManager.LeftLane.Subscribe(b =>
-            {
-                bool isClicked = false;
-
-                if (b)
-                {
-                    isClicked |= ClickLane(0, PoolPrefabType.NormalNote, normalSE);
-                    isClicked |= ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart);
-
-                    if (InputManager.FlickLeftLane.CurrentValue)
-                    {
-                        isClicked |= ClickLane(0, PoolPrefabType.FlickNote, flickSE);
-                    }
-                    if (!isClicked)
-                    {
-                        SoundManager.I.PlaySESound(SESoundType.EmptyHit);
-                    }
-                }
-                else
-                {
-                    ClickLane(0, PoolPrefabType.HoldNoteEnd, holdEnd);
-                }
-
-
-
-            }).AddTo(this);
-
-            InputManager.RightLane.Subscribe(b =>
-            {
-                bool isClicked = false;
-                if (b)
-                {
-                    isClicked |= ClickLane(1, PoolPrefabType.NormalNote, normalSE);
-                    isClicked |= ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart);
-                    if (InputManager.FlickLeftLane.CurrentValue)
-                    {
-                        isClicked |= ClickLane(1, PoolPrefabType.FlickNote, flickSE);
-                    }
-
-                    if (!isClicked)
-                    {
-                        SoundManager.I.PlaySESound(SESoundType.EmptyHit);
-                    }
-                }
-                else
-                {
-                    ClickLane(1, PoolPrefabType.HoldNoteEnd, holdEnd);
-                }
-
-            }).AddTo(this);
-
-            InputManager.FlickLeftLane.Where(b => b && InputManager.LeftLane.CurrentValue).Subscribe(_ =>
-            {
-                ClickLane(0, PoolPrefabType.FlickNote, flickSE);
-            }).AddTo(this);
-
-            InputManager.FlickRightLane.Where(b => b && InputManager.RightLane.CurrentValue).Subscribe(_ =>
-            {
-                ClickLane(1, PoolPrefabType.FlickNote, flickSE);
-            }).AddTo(this);
+            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => ClickLane(0, b, false)).AddTo(this);
+            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => ClickLane(1, b, false)).AddTo(this);
+            InputManager.OnFlick.Subscribe(x => ClickLane(x, false,true)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)
@@ -158,10 +108,38 @@ namespace InGame.Node
                 _showJudge.OnNext((judgeData, lane));
             }
         }
-
-        public bool ClickLane(int lane, PoolPrefabType type, SESoundType se)
+        public void ClickLane(int lane, bool isClick, bool isFlick)
         {
-            if (!GameManager.I.IsPlaying) return false;
+            var node = GetClickNode(lane);
+
+            bool isNodeClick = false;
+
+            if (node != null)
+            {
+                if (isFlick)
+                {
+                    isNodeClick |= ClickNode(PoolPrefabType.FlickNote, FlickSE, node);
+                }
+                else if (isClick)
+                {
+                    isNodeClick |= ClickNode(PoolPrefabType.NormalNote, NormalSE, node);
+                    isNodeClick |= ClickNode(PoolPrefabType.HoldNoteStart, HoldStart, node);
+                }
+                else
+                {
+                    isNodeClick |= ClickNode(PoolPrefabType.HoldNoteEnd, HoldEnd, node);
+                }
+            }
+
+            if (!isNodeClick && isClick && !isFlick && (node == null || node.NodeData.PrefabType != PoolPrefabType.FlickNote))
+            {
+                SoundManager.I.PlaySESound(SESoundType.EmptyHit);
+            }
+        }
+
+        private NodeObject GetClickNode(int lane)
+        {
+            if (!GameManager.I.IsPlaying) return null;
 
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;
@@ -170,7 +148,6 @@ namespace InGame.Node
             foreach (var node in _nodes)
             {
                 if (node.NodeData.Lane != lane) continue;
-                if (node.Type != type) continue;
 
                 float difference =
                     Mathf.Abs(node.NodeData.Time - GameManager.I.StageTime);
@@ -183,30 +160,41 @@ namespace InGame.Node
                 }
             }
 
-            if (targetNode == null) return false;
+            if (targetNode == null) return null;
 
             if (bestDifference <= JudgementManager.I.ToleranceValue)
             {
-                SoundManager.I.PlaySESound(se);
-
-                _nodes.Remove(targetNode);
-                if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
-                {
-                    _nodeFillManager.DeleteFill(targetNode.NodeData);
-                }
-                PoolManager.I.Release(targetNode);
-                var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.TapEffect);
-                Vector3 pos = targetNode.transform.position;
-                pos.z = _goalPos;
-                effect.transform.position = pos;
-
-                float difference = nodeTime - GameManager.I.StageTime;
-                var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
-                _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
-                return true;
+                return targetNode;
             }
-            return false;
+            return null;
         }
+
+        private bool ClickNode(PoolPrefabType nodeType , SESoundType se, NodeObject targetNode)
+        {
+            if(targetNode.NodeData.PrefabType != nodeType) return false;
+
+            float nodeTime = targetNode.NodeData.Time;
+
+            SoundManager.I.PlaySESound(se);
+
+            _nodes.Remove(targetNode);
+            if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
+            {
+                _nodeFillManager.DeleteFill(targetNode.NodeData);
+            }
+            PoolManager.I.Release(targetNode);
+            var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.TapEffect);
+            Vector3 pos = targetNode.transform.position;
+            pos.z = _goalPos;
+            effect.transform.position = pos;
+
+            float difference = nodeTime - GameManager.I.StageTime;
+            var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
+            _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
+
+            return true;
+        }
+
         public NodeObject GetClonedNode(int nodeID)
         {
             return _nodes.Where(x => x.NodeData.NodeID == nodeID).FirstOrDefault();

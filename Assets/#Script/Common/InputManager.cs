@@ -19,6 +19,9 @@ namespace Input
 
         private static ReactiveProperty<bool> _pauseButton = new();
         public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
+        private static Subject<int> _onFlick = new();
+        public static Observable<int> OnFlick => _onFlick;
+
         public override void Awake()
         {
             GameInputs = new();
@@ -44,19 +47,35 @@ namespace Input
         public void OnRightKey(InputAction.CallbackContext context)
         {
             _rightLane.Value = context.started || context.performed;
+            if(_rightLane.Value)
+            {
+                FlickCheck(1);
+            }
         }
 
         public void OnLeftKey(InputAction.CallbackContext context)
         {
             _leftLane.Value = context.started || context.performed;
+            if (_leftLane.Value)
+            {
+                FlickCheck(0);
+            }
         }
         public void OnFlickRightKey(InputAction.CallbackContext context)
         {
             _flickRightLane.Value = context.started || context.performed;
+            if (_flickRightLane.Value)
+            {
+                FlickCheck(1);
+            }
         }
         public void OnFlickLeftKey(InputAction.CallbackContext context)
         {
             _flickLeftLane.Value = context.started || context.performed;
+            if (_flickLeftLane.Value)
+            {
+                FlickCheck(0);
+            }
         }
 
         public void OnPauseKey(InputAction.CallbackContext context)
@@ -79,6 +98,19 @@ namespace Input
                 GameInputs.Player.LeftKey.Disable();
                 GameInputs.Player.RightFlick.Disable();
                 GameInputs.Player.LeftFlick.Disable();
+            }
+        }
+
+        private void FlickCheck(int i)
+        {
+            if(i == 1 && RightLane.CurrentValue && FlickRightLane.CurrentValue)
+            {
+                _onFlick.OnNext(i);
+            }
+
+            if(i == 0 && LeftLane.CurrentValue && FlickLeftLane.CurrentValue)
+            {
+                _onFlick.OnNext(i);
             }
         }
     }

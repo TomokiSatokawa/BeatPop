@@ -1,7 +1,7 @@
 {
     "PatternName": "テスト",
     "FillName": "song_0001_0001.json",
-    "IsSelect": true,
+    "IsSelect": false,
     "SoundPattern": {
         "NormalSE": 0,
         "FlickSE": 0,
