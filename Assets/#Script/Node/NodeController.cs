@@ -36,13 +36,20 @@ namespace InGame.Node
 
             InputManager.LeftLane.Subscribe(b =>
             {
+                bool isClicked = false;
+
                 if (b)
                 {
-                    ClickLane(0, PoolPrefabType.NormalNote, normalSE);
-                    ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart);
+                    isClicked |= ClickLane(0, PoolPrefabType.NormalNote, normalSE);
+                    isClicked |= ClickLane(0, PoolPrefabType.HoldNoteStart, holdStart);
+
                     if (InputManager.FlickLeftLane.CurrentValue)
                     {
-                        ClickLane(0, PoolPrefabType.FlickNote, flickSE);
+                        isClicked |= ClickLane(0, PoolPrefabType.FlickNote, flickSE);
+                    }
+                    if (!isClicked)
+                    {
+                        SoundManager.I.PlaySESound(SESoundType.EmptyHit);
                     }
                 }
                 else
@@ -50,17 +57,25 @@ namespace InGame.Node
                     ClickLane(0, PoolPrefabType.HoldNoteEnd, holdEnd);
                 }
 
+
+
             }).AddTo(this);
 
             InputManager.RightLane.Subscribe(b =>
             {
+                bool isClicked = false;
                 if (b)
                 {
-                    ClickLane(1, PoolPrefabType.NormalNote, normalSE);
-                    ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart);
+                    isClicked |= ClickLane(1, PoolPrefabType.NormalNote, normalSE);
+                    isClicked |= ClickLane(1, PoolPrefabType.HoldNoteStart, holdStart);
                     if (InputManager.FlickLeftLane.CurrentValue)
                     {
-                        ClickLane(1, PoolPrefabType.FlickNote, flickSE);
+                        isClicked |= ClickLane(1, PoolPrefabType.FlickNote, flickSE);
+                    }
+
+                    if (!isClicked)
+                    {
+                        SoundManager.I.PlaySESound(SESoundType.EmptyHit);
                     }
                 }
                 else
@@ -107,7 +122,7 @@ namespace InGame.Node
                 Vector3 endPosition = startPosition;
                 endPosition.z = node.GoalPos;
 
-                node.transform.position =  Vector3.LerpUnclamped(startPosition, endPosition, progress);
+                node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
 
             foreach (NodeObject node in removeNode)
@@ -144,9 +159,9 @@ namespace InGame.Node
             }
         }
 
-        public void ClickLane(int lane, PoolPrefabType type, SESoundType se)
+        public bool ClickLane(int lane, PoolPrefabType type, SESoundType se)
         {
-            if (!GameManager.I.IsPlaying) return;
+            if (!GameManager.I.IsPlaying) return false;
 
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;
@@ -168,7 +183,7 @@ namespace InGame.Node
                 }
             }
 
-            if (targetNode == null) return;
+            if (targetNode == null) return false;
 
             if (bestDifference <= JudgementManager.I.ToleranceValue)
             {
@@ -188,7 +203,9 @@ namespace InGame.Node
                 float difference = nodeTime - GameManager.I.StageTime;
                 var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
                 _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
+                return true;
             }
+            return false;
         }
         public NodeObject GetClonedNode(int nodeID)
         {
