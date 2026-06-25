@@ -20,6 +20,23 @@ public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
         return result;
     }
 
+    public IReadOnlyList<SongSelectData> GetKeywordSong(string keyword)
+    {
+        var result = new List<SongSelectData>();
+
+        foreach (var songData in _songListData.SongDates)
+        {
+            if(!songData.SongName.Contains(keyword)) continue;
+            foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+            {
+                if (songData.Charts.GetChart(difficulty) == null) continue;
+
+                result.Add(new SongSelectData(songData, difficulty));
+            }
+        }
+
+        return result;
+    }
 }
 public struct SongSelectData
 {

@@ -15,7 +15,24 @@ namespace Title.SongSelect
         {
             DeleteChild();
             AddTitle("‚¨‚·‚·‚ß");
-            AddContentsList(SongRecommender.I.GetRecommendation());
+             AddContentsList(SongRecommender.I.GetRecommendation());
+        }
+        public void KeywordView(string keyword)
+        {
+            DeleteChild();
+            AddContentsList(SongRecommender.I.GetKeywordSong(keyword));
+        }
+
+        public void OnChangeSearchField(string text)
+        {
+            if (text == "")
+            {
+                InitialView();
+            }
+            else
+            {
+                KeywordView(text);
+            }
         }
         private void AddTitle(string text)
         {

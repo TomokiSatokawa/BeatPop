@@ -50,6 +50,12 @@ public class QuickPlay : EditorWindow
             OnStart();
         }
 
+        if (GUILayout.Button("最初から開始"))
+        {
+            _isQuickPlay = true;
+            OnTitleStart();
+        }
+
         if (_errorMessage != "")
         {
             EditorGUILayout.HelpBox(_errorMessage, MessageType.Error);
@@ -86,6 +92,22 @@ public class QuickPlay : EditorWindow
         //再生準備用シーンに移動
         EditorSceneManager.SaveOpenScenes();
         string scenePath = SceneUtility.GetScenePathByBuildIndex(5);
+        if (!string.IsNullOrEmpty(scenePath))
+        {
+            EditorSceneManager.OpenScene(scenePath);
+        }
+
+        //再生
+        EditorApplication.isPlaying = true;
+    }
+
+    public void OnTitleStart()
+    {
+        _previousScenePath = EditorSceneManager.GetActiveScene().path;
+
+        //再生準備用シーンに移動
+        EditorSceneManager.SaveOpenScenes();
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(0);
         if (!string.IsNullOrEmpty(scenePath))
         {
             EditorSceneManager.OpenScene(scenePath);
