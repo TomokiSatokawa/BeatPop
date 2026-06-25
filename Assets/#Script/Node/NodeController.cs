@@ -131,6 +131,11 @@ namespace InGame.Node
                 }
             }
 
+            if (!isNodeClick)
+            {
+                isNodeClick |= _nodeFillManager.HasFill(lane);
+            }
+
             if (!isNodeClick && isClick && !isFlick && (node == null || node.NodeData.PrefabType != PoolPrefabType.FlickNote))
             {
                 SoundManager.I.PlaySESound(SESoundType.EmptyHit);
