@@ -17,8 +17,28 @@ public class RangeUIControl : MonoBehaviour
     [SerializeField] private int _rangeValueMin;
     [SerializeField] private int _rangeValueMax;
     [SerializeField] private int _minRange;
-    public int RangeValueMin => _rangeValueMin;
-    public int RangeValueMax => _rangeValueMax;
+    public int RangeValueMin
+    {
+        get
+        {
+            if(_rangeValueMin <= _minValue)
+            {
+                return int.MinValue;
+            }
+            return _rangeValueMin;
+        }
+    }
+    public int RangeValueMax
+    {
+        get
+        {
+            if (_rangeValueMax >= _maxValue)
+            {
+                return int.MaxValue;
+            }
+            return _rangeValueMax;
+        }
+    }
     // Update is called once per frame  
     void Start()
     {

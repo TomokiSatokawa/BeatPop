@@ -11,16 +11,22 @@ namespace Title.SongSelect
         [SerializeField] private SongUIControl _listSongPrefab;
 
         private List<GameObject> _clonedObject = new();
+        private string _keyword = "";
         public void InitialView()
         {
             DeleteChild();
             AddTitle("‚¨‚·‚·‚ß");
-             AddContentsList(SongRecommender.I.GetRecommendation());
+            AddContentsList(SongRecommender.I.GetRecommendation());
         }
         public void KeywordView(string keyword)
         {
             DeleteChild();
             AddContentsList(SongRecommender.I.GetKeywordSong(keyword));
+        }
+
+        public void UpdateSelect()
+        {
+            OnChangeSearchField(_keyword);
         }
 
         public void OnChangeSearchField(string text)
@@ -33,6 +39,8 @@ namespace Title.SongSelect
             {
                 KeywordView(text);
             }
+
+            _keyword = text;
         }
         private void AddTitle(string text)
         {

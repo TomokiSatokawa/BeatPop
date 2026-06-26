@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongData
   _songName: "\u98A8\u3068\u753A"
   _songID: 0
+  _bpm: 104
   _charts:
-    EasyLevel: 0
+    EasyLevel: 3
     EasyJson: {fileID: 4900000, guid: 372d8c9eba0409248a3d08e119238bd0, type: 3}
     NormalLevel: 0
     NormalJson: {fileID: 0}
-    HardLevel: 0
+    HardLevel: 14
     HardJson: {fileID: 4900000, guid: a49d524ffbe6e6c4abb14e2f37496f47, type: 3}
     ExpertLevel: 0
     ExpertJson: {fileID: 0}

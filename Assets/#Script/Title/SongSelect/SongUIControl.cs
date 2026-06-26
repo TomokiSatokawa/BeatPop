@@ -9,6 +9,9 @@ namespace Title.SongSelect
     {
         [SerializeField] private Button _selectButton;
         [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private Image _levelImage;
+        [SerializeField] private DifficultyColor _difficultyColor;
 
         private SongSelectData _songData;
         private void Start()
@@ -19,6 +22,9 @@ namespace Title.SongSelect
         {
             _songData = data;
             _nameText.text = data.SongData.SongName;
+            _levelImage.color = _difficultyColor.GetDifficultyColor(data.Difficulty);
+            _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
+            
         }
         public void OnSelect()
         {

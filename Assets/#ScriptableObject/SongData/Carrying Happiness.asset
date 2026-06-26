@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongData
   _songName: Carrying Happiness
   _songID: 1
+  _bpm: 160
   _charts:
     EasyLevel: 0
     EasyJson: {fileID: 0}
     NormalLevel: 0
     NormalJson: {fileID: 0}
-    HardLevel: 0
+    HardLevel: 16
     HardJson: {fileID: 4900000, guid: 9345ad85d14d4b04baddbc0bb6e140a4, type: 3}
     ExpertLevel: 0
     ExpertJson: {fileID: 0}

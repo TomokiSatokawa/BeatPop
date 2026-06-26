@@ -21,6 +21,10 @@ namespace Title.SongSelect
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private Button _clauseButton;
         [SerializeField] private Button _backGroundArea;
+        [SerializeField] private TextMeshProUGUI _bpmInfo;
+        [SerializeField] private TextMeshProUGUI _secondInfo;
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [Header("Other")]
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private SceneLoad _sceneLoad;//TODO:‰¼
         [SerializeField] private SegmentedControl _segmentControl;
@@ -36,7 +40,12 @@ namespace Title.SongSelect
         public void ShowInfo(SongSelectData data)
         {
             _currentData = data;
+
             _nameText.text = data.SongData.SongName;
+            _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
+            _bpmInfo.text = data.SongData.BPM.ToString();
+            _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
+
             OnActiveAnimation();
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
             {

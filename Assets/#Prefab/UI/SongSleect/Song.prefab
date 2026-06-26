@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7714371162245063288}
   - component: {fileID: 2638105141653340208}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SongName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,6 +426,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongUIControl
   _selectButton: {fileID: 8342128079153671363}
   _nameText: {fileID: 2638105141653340208}
+  _levelText: {fileID: 5917732332361981312}
+  _levelImage: {fileID: 5023758322971426000}
+  _difficultyColor: {fileID: 11400000, guid: 90575bdb9c762c04aabc1ce0862ca638, type: 2}
 --- !u!1 &5492008963789595376
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +517,7 @@ GameObject:
   - component: {fileID: 2308362097315095440}
   - component: {fileID: 5917732332361981312}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

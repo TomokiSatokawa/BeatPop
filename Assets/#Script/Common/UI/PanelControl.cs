@@ -6,8 +6,8 @@ namespace Common.UI
     public class PanelControl : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private UnityEvent _activeAction;
-        [SerializeField] private UnityEvent _hiddenAction;
+        [SerializeField] private UnityEvent _activeAction = new();
+        [SerializeField] private UnityEvent _hiddenAction = new();
 
         public bool IsActive => _canvasGroup.alpha == 1.0f;
         private void Awake()
