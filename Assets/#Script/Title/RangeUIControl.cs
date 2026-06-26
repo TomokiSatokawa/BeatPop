@@ -16,10 +16,11 @@ public class RangeUIControl : MonoBehaviour
     [SerializeField] private int _maxValue;
     [SerializeField] private int _rangeValueMin;
     [SerializeField] private int _rangeValueMax;
+    [SerializeField] private int _minRange;
     public int RangeValueMin => _rangeValueMin;
     public int RangeValueMax => _rangeValueMax;
     // Update is called once per frame  
-    void Update()
+    void Start()
     {
         if (_minSlider != null)
         {
@@ -49,9 +50,9 @@ public class RangeUIControl : MonoBehaviour
     {
         int minValue = ClampRangeValue(value);
 
-        if (minValue >= RangeValueMax)
+        if (minValue > RangeValueMax - _minRange)
         {
-            ChangeMinValue(RangeValueMax - 1);
+            ChangeMinValue(RangeValueMax - _minRange);
             return;
         }
 
@@ -74,9 +75,9 @@ public class RangeUIControl : MonoBehaviour
     {
         int maxValue = ClampRangeValue(value);
 
-        if (maxValue <= RangeValueMin)
+        if (maxValue < RangeValueMin + _minRange)
         {
-            ChangeMaxValue(RangeValueMin + 1);
+            ChangeMaxValue(RangeValueMin + _minRange);
             return;
         }
 
