@@ -4,7 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
+public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
 {
     [SerializeField] private CustomPatternLoader _patternLoader;
     [SerializeField] private SongListDataBase _songData;
@@ -15,6 +15,8 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
     public async UniTask LoadManifest(CancellationToken cancellationToken)
     {
         string manifestJson = "";
+
+        //manifestÇçÏÇÈ
         if (!await CustomPatternFile.TryGetText(MANIFEST_FILE_NAME, t => manifestJson = t))
         {
             manifestJson = await CreateDefaultManifest();
@@ -22,6 +24,9 @@ public class CustomManifestLoader : SingletonMonoBehaviour<CustomManifestLoader>
         }
 
         _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
+
+        //SongData=>manifestÇÃè∆çá
+
         foreach (var manifestSongData in _manifestData.Datas)
         {
             foreach (var fillPath in manifestSongData.FileName)

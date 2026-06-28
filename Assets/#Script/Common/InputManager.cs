@@ -1,12 +1,12 @@
+using System;
 using R3;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Input
 {
     public class InputManager : SingletonMonoBehaviour<InputManager>
     {
-        public static GameInputs GameInputs;
+        private static GameInputs GameInputs;
 
         private static ReactiveProperty<bool> _rightLane = new();
         public static ReadOnlyReactiveProperty<bool> RightLane => _rightLane;
@@ -19,6 +19,7 @@ namespace Input
 
         private static ReactiveProperty<bool> _pauseButton = new();
         public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
+
         private static Subject<int> _onFlick = new();
         public static Observable<int> OnFlick => _onFlick;
 
@@ -40,6 +41,9 @@ namespace Input
 
             GameInputs.Player.Pause.performed += OnPauseKey;
             GameInputs.Player.Pause.canceled += OnPauseKey;
+
+            GameInputs.Player.Tap.performed += OnTap;
+            GameInputs.Player.Tap.canceled += OnTap;
 
             GameInputs.Enable();
         }
@@ -83,6 +87,11 @@ namespace Input
             _pauseButton.Value = context.started || context.performed;
         }
 
+        public void OnTap(InputAction.CallbackContext context)
+        {
+
+        }
+
         public static void SetInputEnabled(bool enabled)
         {
             if(enabled)
@@ -113,6 +122,10 @@ namespace Input
                 _onFlick.OnNext(i);
             }
         }
-    }
 
+        private void SetInputAction(GameInputs.PlayerActions input,Action<InputAction.CallbackContext> action)
+        {
+            //input.Pause
+        }
+    }
 }

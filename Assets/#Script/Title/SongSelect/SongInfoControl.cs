@@ -84,7 +84,7 @@ namespace Title.SongSelect
         public async void OnPlay()
         {
             if (!_currentData.HasValue) return;
-            var patterns = await CustomManifestLoader.I.GetCustomPattern(_currentData.Value.SongData.SongID);
+            var patterns = await CustomDataLoader.I.GetCustomPattern(_currentData.Value.SongData.SongID);
             var usePattern = patterns.Where(x => x.IsSelect).First();
             _playLoader.OnLoad(_currentData.Value, usePattern);
             _sceneLoad.ChangeScene("InGame");

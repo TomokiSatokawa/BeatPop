@@ -1,6 +1,5 @@
 using Input;
 using R3;
-using Sound;
 using UnityEngine;
 
 namespace InGame.Node
@@ -15,11 +14,6 @@ namespace InGame.Node
         }
         public void Click(bool value, int lane)
         {
-            if (value)
-            {
-                //SoundManager.I.PlaySESound(SESoundType.NormalTap);
-            }
-
             _laneHighlight[lane].SetActive(value);
         }
     }

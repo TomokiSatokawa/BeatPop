@@ -166,8 +166,6 @@ public static class NodeDataSerializer
     public static async UniTask<NodeSaveData> AutoDeserialize(string text)
     {
         return await DesrializeJson(text);
-        //string path = Path.Combine(Application.streamingAssetsPath, textAsset.name);
-        //return await AutoDeserialize(textAsset.text, path);
     }
 }
 

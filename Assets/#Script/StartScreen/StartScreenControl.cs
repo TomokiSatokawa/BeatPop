@@ -8,8 +8,9 @@ namespace StartScreen
 {
     public class StartScreenControl : MonoBehaviour
     {
-        [SerializeField] private CustomManifestLoader _manifestLoader;
+        [SerializeField] private CustomDataLoader _manifestLoader;
         [SerializeField] private UnityEvent _onClickAction;
+        [SerializeField] private GameObject _loadText;
 
         private bool _isLoaded;
         private void Start()
@@ -19,10 +20,12 @@ namespace StartScreen
         }
         private async void Initialize()
         {
+            _loadText.gameObject.SetActive(true);
             var ct = this.GetCancellationTokenOnDestroy();
             await _manifestLoader.LoadManifest(ct);
 
             _isLoaded = true;
+            _loadText.gameObject.SetActive(false);
         }
         void Update()
         {

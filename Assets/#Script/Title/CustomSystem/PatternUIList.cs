@@ -17,7 +17,7 @@ namespace Title.Custom
             if (!SongInfoControl.I.CurrentData.HasValue) return;
             int songID = SongInfoControl.I.CurrentData.Value.SongData.SongID;
             DeleteChild();
-            var patternData = await CustomManifestLoader.I.GetCustomPattern(songID);
+            var patternData = await CustomDataLoader.I.GetCustomPattern(songID);
             if (patternData == null)
             {
                 Debug.LogError($"SongID{songID} Ç™ñ≥å¯Ç‹ÇΩÇÕ PatternÇ™ë∂ç›ÇµÇ‹ÇπÇÒ");
@@ -33,7 +33,7 @@ namespace Title.Custom
         {
             var newPattern = _patternLoader.GetDefaultPattern();
             AddPatternUI(newPattern);
-            CustomManifestLoader.I.AddPattern(SongInfoControl.I.CurrentData.Value.SongData.SongID, newPattern);
+            CustomDataLoader.I.AddPattern(SongInfoControl.I.CurrentData.Value.SongData.SongID, newPattern);
         }
 
         private void AddPatternUI(PatternJsonData pattern)
@@ -67,11 +67,11 @@ namespace Title.Custom
             if (_usePattern == _currentSelect) return;
             _usePattern?.ShowSetPattern(false);
             _usePattern.patternData.IsSelect = false;
-            await CustomManifestLoader.I.SavePattern(_usePattern.patternData);
+            await CustomDataLoader.I.SavePattern(_usePattern.patternData);
 
             _usePattern = _currentSelect;
             _usePattern.patternData.IsSelect = true;
-            await CustomManifestLoader.I.SavePattern(_usePattern.patternData);
+            await CustomDataLoader.I.SavePattern(_usePattern.patternData);
             _usePattern.ShowSetPattern(true);
         }
 
@@ -79,7 +79,7 @@ namespace Title.Custom
         {
             if (_currentSelect == null) return;
             _currentSelect.patternData.SoundPattern = _sound.GetCustom();
-            await CustomManifestLoader.I.SavePattern(_currentSelect.patternData);
+            await CustomDataLoader.I.SavePattern(_currentSelect.patternData);
         }
     }
 }

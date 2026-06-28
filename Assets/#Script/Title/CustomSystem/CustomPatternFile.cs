@@ -1,60 +1,75 @@
+using System;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 public static class CustomPatternFile
 {
     private const string FolderName = "CustomPattern";
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+
+    [DllImport("__Internal")]
+    private static extern void FS_WriteFile(string path, string text);
+
+    [DllImport("__Internal")]
+    private static extern IntPtr FS_ReadFile(string path);
+
+    [DllImport("__Internal")]
+    private static extern int FS_FileExists(string path);
+
+    [DllImport("__Internal")]
+    private static extern void FS_DeleteFile(string path);
+
+    [DllImport("__Internal")]
+    private static extern void FS_RenameFile(string oldPath, string newPath);
+
+    [DllImport("__Internal")]
+    private static extern void FS_Sync();
+
+#endif
+
     public static string GetPath(string fileName)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
+        return $"{Application.persistentDataPath}/{FolderName}/{fileName}";
+#else
         return Path.Combine(
-            Application.persistentDataPath,
+            Directory.GetParent(Application.dataPath)!.FullName,
             FolderName,
             fileName
         );
-#else
-        return Path.Combine(Directory.GetParent(Application.dataPath)!.FullName, FolderName, fileName);
 #endif
     }
 
-    public static async UniTask<bool> TryGetText(string fileName, System.Action<string> onSuccess)
+    public static async UniTask<bool> TryGetText(string fileName, Action<string> onSuccess)
     {
         string path = GetPath(fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
-        using var request = UnityWebRequest.Get(path);
-
-        var operation = request.SendWebRequest();
-
-        while (!operation.isDone)
-        {
-            await UniTask.Yield();
-        }
-
-        if (request.result != UnityWebRequest.Result.Success)
-        {
+        if (FS_FileExists(path) == 0)
             return false;
-        }
 
-        onSuccess?.Invoke(
-            request.downloadHandler.text
-        );
+        IntPtr ptr = FS_ReadFile(path);
 
+        if (ptr == IntPtr.Zero)
+            return false;
+
+        string text = Marshal.PtrToStringAuto(ptr);
+
+        onSuccess?.Invoke(text);
+
+        await UniTask.CompletedTask;
         return true;
 
 #else
 
         if (!File.Exists(path))
-        {
             return false;
-        }
 
-        onSuccess?.Invoke(
-            File.ReadAllText(path)
-        );
+        onSuccess?.Invoke(File.ReadAllText(path));
 
         return true;
 
@@ -67,45 +82,48 @@ public static class CustomPatternFile
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
-        // WebGLÇÕpersistentDataPathÇ÷ï€ë∂
-        // ïKóvÇ»ÇÁéñëOÇ…JSë§ÇÃìØä˙èàóùÇí«â¡Ç∑ÇÈ
+        FS_WriteFile(path, text);
+        FS_Sync();
 
-        await File.WriteAllTextAsync(
-            path,
-            text
-        );
+        await UniTask.CompletedTask;
 
 #else
 
-        string directory = Path.GetDirectoryName(path);
+        string dir = Path.GetDirectoryName(path);
 
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
 
-        await File.WriteAllTextAsync(
-            path,
-            text
-        );
+        await File.WriteAllTextAsync(path, text);
 
 #endif
     }
+
     public static async UniTask<bool> UpdateFile(string fileName, string text)
     {
         string path = GetPath(fileName);
 
-        if (!File.Exists(path))
-        {
-            return false;
-        }
+#if UNITY_WEBGL && !UNITY_EDITOR
 
-        await File.WriteAllTextAsync(
-            path,
-            text
-        );
+        if (FS_FileExists(path) == 0)
+            return false;
+
+        FS_WriteFile(path, text);
+        FS_Sync();
+
+        await UniTask.CompletedTask;
+        return true;
+
+#else
+
+        if (!File.Exists(path))
+            return false;
+
+        await File.WriteAllTextAsync(path, text);
 
         return true;
+
+#endif
     }
 
     public static async UniTask<bool> RenameFile(string oldFileName, string newFileName)
@@ -113,31 +131,64 @@ public static class CustomPatternFile
         string oldPath = GetPath(oldFileName);
         string newPath = GetPath(newFileName);
 
-        if (!File.Exists(oldPath))
-        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+
+        if (FS_FileExists(oldPath) == 0)
             return false;
-        }
+
+        if (FS_FileExists(newPath) == 1)
+            return false;
+
+        FS_RenameFile(oldPath, newPath);
+        FS_Sync();
+
+        await UniTask.CompletedTask;
+        return true;
+
+#else
+
+        if (!File.Exists(oldPath))
+            return false;
 
         if (File.Exists(newPath))
-        {
             return false;
-        }
 
-        string directory = Path.GetDirectoryName(newPath);
+        string dir = Path.GetDirectoryName(newPath);
 
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
 
-        await UniTask.RunOnThreadPool(() =>
-        {
-            File.Move(
-                oldPath,
-                newPath
-            );
-        });
+        File.Move(oldPath, newPath);
 
         return true;
+
+#endif
+    }
+
+    public static async UniTask<bool> DeleteFile(string fileName)
+    {
+        string path = GetPath(fileName);
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+
+        if (FS_FileExists(path) == 0)
+            return false;
+
+        FS_DeleteFile(path);
+        FS_Sync();
+
+        await UniTask.CompletedTask;
+        return true;
+
+#else
+
+        if (!File.Exists(path))
+            return false;
+
+        File.Delete(path);
+
+        return true;
+
+#endif
     }
 }

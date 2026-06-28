@@ -55,19 +55,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Update()
     {
-        if (_timeText != null)
-        {
-            _timeText.text = StageTime.ToString("N2");
-        }
+        UpdateDebugText();
 
         if (!_isPlaying) return;
 
+        UpdateStageTime();
+    }
+
+    private void UpdateStageTime()
+    {
         StageTime = (float)(AudioSettings.dspTime - _startDspTime) + SongPlayManager.I.SongData.SongData.StageTimeOffSet;
 
         if (StageTime >= _endTime + 2f)
         {
             _isPlaying = false;
             _onGameClear.OnNext(Unit.Default);
+        }
+    }
+
+    private void UpdateDebugText()
+    {
+        if (_timeText != null)
+        {
+            _timeText.text = StageTime.ToString("N2");
         }
     }
 
