@@ -612,27 +612,6 @@
             "Time": 23.625,
             "PrefabType": 5,
             "Connect": 83
-        },
-        {
-            "NodeID": 87,
-            "Lane": 0,
-            "Time": 36.0,
-            "PrefabType": 1,
-            "Connect": 0
-        },
-        {
-            "NodeID": 88,
-            "Lane": 0,
-            "Time": 39.0,
-            "PrefabType": 1,
-            "Connect": 0
-        },
-        {
-            "NodeID": 89,
-            "Lane": 0,
-            "Time": 193.5,
-            "PrefabType": 1,
-            "Connect": 0
         }
     ]
 }

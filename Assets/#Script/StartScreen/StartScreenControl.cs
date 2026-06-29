@@ -30,7 +30,11 @@ namespace StartScreen
         void Update()
         {
             if (!_isLoaded) return;
-            if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+            if (
+      (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) ||
+      (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
+      (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+  )
             {
                 _onClickAction?.Invoke();
                 this.enabled = false;

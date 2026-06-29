@@ -140,13 +140,40 @@ namespace Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Tap"",
-                    ""type"": ""Button"",
-                    ""id"": ""49e54358-52eb-47cb-a11d-d5b6ddc2e128"",
-                    ""expectedControlType"": """",
+                    ""name"": ""Touch_0"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2e393e5d-f695-4766-9518-9162a1b5c55b"",
+                    ""expectedControlType"": ""Touch"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch_1"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""87041915-bbc5-4676-91a5-ee74dd8144d2"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch_2"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""38095180-28ca-42d6-9e95-56dab6320fca"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch_3"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6ace24af-f01a-4549-b0ee-e7ccd7fc7657"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -207,12 +234,45 @@ namespace Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bae53df2-1cf9-408b-8d14-038249eaa16a"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": ""Tap"",
+                    ""id"": ""517e1946-e24e-4823-9384-ded2f8c6b3d4"",
+                    ""path"": ""<Touchscreen>/touch0"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
-                    ""action"": ""Tap"",
+                    ""action"": ""Touch_0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b27ece25-632e-43e3-a827-f9b0d2d453ad"",
+                    ""path"": ""<Touchscreen>/touch1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d9f3f89-e14d-4dfd-a9e0-d43a6d022f67"",
+                    ""path"": ""<Touchscreen>/touch2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e3418df-659d-4628-b151-5d2db2bf2c3d"",
+                    ""path"": ""<Touchscreen>/touch3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch_3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -289,7 +349,10 @@ namespace Input
             m_Player_RightFlick = m_Player.FindAction("RightFlick", throwIfNotFound: true);
             m_Player_LeftFlick = m_Player.FindAction("LeftFlick", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-            m_Player_Tap = m_Player.FindAction("Tap", throwIfNotFound: true);
+            m_Player_Touch_0 = m_Player.FindAction("Touch_0", throwIfNotFound: true);
+            m_Player_Touch_1 = m_Player.FindAction("Touch_1", throwIfNotFound: true);
+            m_Player_Touch_2 = m_Player.FindAction("Touch_2", throwIfNotFound: true);
+            m_Player_Touch_3 = m_Player.FindAction("Touch_3", throwIfNotFound: true);
         }
 
         ~@GameInputs()
@@ -375,7 +438,10 @@ namespace Input
         private readonly InputAction m_Player_RightFlick;
         private readonly InputAction m_Player_LeftFlick;
         private readonly InputAction m_Player_Pause;
-        private readonly InputAction m_Player_Tap;
+        private readonly InputAction m_Player_Touch_0;
+        private readonly InputAction m_Player_Touch_1;
+        private readonly InputAction m_Player_Touch_2;
+        private readonly InputAction m_Player_Touch_3;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -408,9 +474,21 @@ namespace Input
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_Player_Pause;
             /// <summary>
-            /// Provides access to the underlying input action "Player/Tap".
+            /// Provides access to the underlying input action "Player/Touch_0".
             /// </summary>
-            public InputAction @Tap => m_Wrapper.m_Player_Tap;
+            public InputAction @Touch_0 => m_Wrapper.m_Player_Touch_0;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Touch_1".
+            /// </summary>
+            public InputAction @Touch_1 => m_Wrapper.m_Player_Touch_1;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Touch_2".
+            /// </summary>
+            public InputAction @Touch_2 => m_Wrapper.m_Player_Touch_2;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Touch_3".
+            /// </summary>
+            public InputAction @Touch_3 => m_Wrapper.m_Player_Touch_3;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -452,9 +530,18 @@ namespace Input
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @Tap.started += instance.OnTap;
-                @Tap.performed += instance.OnTap;
-                @Tap.canceled += instance.OnTap;
+                @Touch_0.started += instance.OnTouch_0;
+                @Touch_0.performed += instance.OnTouch_0;
+                @Touch_0.canceled += instance.OnTouch_0;
+                @Touch_1.started += instance.OnTouch_1;
+                @Touch_1.performed += instance.OnTouch_1;
+                @Touch_1.canceled += instance.OnTouch_1;
+                @Touch_2.started += instance.OnTouch_2;
+                @Touch_2.performed += instance.OnTouch_2;
+                @Touch_2.canceled += instance.OnTouch_2;
+                @Touch_3.started += instance.OnTouch_3;
+                @Touch_3.performed += instance.OnTouch_3;
+                @Touch_3.canceled += instance.OnTouch_3;
             }
 
             /// <summary>
@@ -481,9 +568,18 @@ namespace Input
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
-                @Tap.started -= instance.OnTap;
-                @Tap.performed -= instance.OnTap;
-                @Tap.canceled -= instance.OnTap;
+                @Touch_0.started -= instance.OnTouch_0;
+                @Touch_0.performed -= instance.OnTouch_0;
+                @Touch_0.canceled -= instance.OnTouch_0;
+                @Touch_1.started -= instance.OnTouch_1;
+                @Touch_1.performed -= instance.OnTouch_1;
+                @Touch_1.canceled -= instance.OnTouch_1;
+                @Touch_2.started -= instance.OnTouch_2;
+                @Touch_2.performed -= instance.OnTouch_2;
+                @Touch_2.canceled -= instance.OnTouch_2;
+                @Touch_3.started -= instance.OnTouch_3;
+                @Touch_3.performed -= instance.OnTouch_3;
+                @Touch_3.canceled -= instance.OnTouch_3;
             }
 
             /// <summary>
@@ -625,12 +721,33 @@ namespace Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Tap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Touch_0" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnTap(InputAction.CallbackContext context);
+            void OnTouch_0(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Touch_1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTouch_1(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Touch_2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTouch_2(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Touch_3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTouch_3(InputAction.CallbackContext context);
         }
     }
 }

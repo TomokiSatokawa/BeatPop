@@ -1,17 +1,20 @@
-using System;
 using R3;
+using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.InputSystem.LowLevel;
 namespace Input
 {
     public class InputManager : SingletonMonoBehaviour<InputManager>
     {
+        public TextMeshProUGUI _text;
+        [SerializeField] private TouchManager _touchManager;
         private static GameInputs GameInputs;
 
         private static ReactiveProperty<bool> _rightLane = new();
         public static ReadOnlyReactiveProperty<bool> RightLane => _rightLane;
         private static ReactiveProperty<bool> _leftLane = new();
-        public static ReadOnlyReactiveProperty<bool> LeftLane => _leftLane; 
+        public static ReadOnlyReactiveProperty<bool> LeftLane => _leftLane;
         private static ReactiveProperty<bool> _flickLeftLane = new();
         public static ReadOnlyReactiveProperty<bool> FlickLeftLane => _flickLeftLane;
         private static ReactiveProperty<bool> _flickRightLane = new();
@@ -22,6 +25,8 @@ namespace Input
 
         private static Subject<int> _onFlick = new();
         public static Observable<int> OnFlick => _onFlick;
+
+        private static TouchState[] _touchState;
 
         public override void Awake()
         {
@@ -42,8 +47,12 @@ namespace Input
             GameInputs.Player.Pause.performed += OnPauseKey;
             GameInputs.Player.Pause.canceled += OnPauseKey;
 
-            GameInputs.Player.Tap.performed += OnTap;
-            GameInputs.Player.Tap.canceled += OnTap;
+            _touchState = new TouchState[4];
+
+            GameInputs.Player.Touch_0.performed += c => OnTouch(c, ref _touchState[0]);
+            GameInputs.Player.Touch_1.performed += c => OnTouch(c, ref _touchState[1]);
+            GameInputs.Player.Touch_2.performed += c => OnTouch(c, ref _touchState[2]);
+            GameInputs.Player.Touch_3.performed += c => OnTouch(c, ref _touchState[3]);
 
             GameInputs.Enable();
         }
@@ -51,7 +60,7 @@ namespace Input
         public void OnRightKey(InputAction.CallbackContext context)
         {
             _rightLane.Value = context.started || context.performed;
-            if(_rightLane.Value)
+            if (_rightLane.Value)
             {
                 FlickCheck(1);
             }
@@ -87,14 +96,32 @@ namespace Input
             _pauseButton.Value = context.started || context.performed;
         }
 
-        public void OnTap(InputAction.CallbackContext context)
+        public void OnTouch(InputAction.CallbackContext context, ref TouchState touchState)
         {
+            touchState = context.ReadValue<TouchState>();
+            switch (touchState.phase)
+            {
+                case UnityEngine.InputSystem.TouchPhase.Began:
+                case UnityEngine.InputSystem.TouchPhase.Ended:
 
+                    _text.text = touchState.startPosition.ToString();
+                    int lane = _touchManager.TapLane(touchState.startPosition);
+
+                    if(lane == 0)
+                    {
+                        _leftLane.OnNext(touchState.phase == UnityEngine.InputSystem.TouchPhase.Began);
+                    }
+                    else if(lane == 1)
+                    {
+                        _rightLane.OnNext(touchState.phase == UnityEngine.InputSystem.TouchPhase.Began);
+                    }
+                    break;
+            }
         }
 
         public static void SetInputEnabled(bool enabled)
         {
-            if(enabled)
+            if (enabled)
             {
                 GameInputs.Player.RightKey.Enable();
                 GameInputs.Player.LeftKey.Enable();
@@ -112,20 +139,15 @@ namespace Input
 
         private void FlickCheck(int i)
         {
-            if(i == 1 && RightLane.CurrentValue && FlickRightLane.CurrentValue)
+            if (i == 1 && RightLane.CurrentValue && FlickRightLane.CurrentValue)
             {
                 _onFlick.OnNext(i);
             }
 
-            if(i == 0 && LeftLane.CurrentValue && FlickLeftLane.CurrentValue)
+            if (i == 0 && LeftLane.CurrentValue && FlickLeftLane.CurrentValue)
             {
                 _onFlick.OnNext(i);
             }
-        }
-
-        private void SetInputAction(GameInputs.PlayerActions input,Action<InputAction.CallbackContext> action)
-        {
-            //input.Pause
         }
     }
 }

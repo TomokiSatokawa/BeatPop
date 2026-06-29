@@ -52,13 +52,40 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Tap",
-                    "type": "Button",
-                    "id": "49e54358-52eb-47cb-a11d-d5b6ddc2e128",
-                    "expectedControlType": "",
+                    "name": "Touch_0",
+                    "type": "PassThrough",
+                    "id": "2e393e5d-f695-4766-9518-9162a1b5c55b",
+                    "expectedControlType": "Touch",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch_1",
+                    "type": "PassThrough",
+                    "id": "87041915-bbc5-4676-91a5-ee74dd8144d2",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch_2",
+                    "type": "PassThrough",
+                    "id": "38095180-28ca-42d6-9e95-56dab6320fca",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch_3",
+                    "type": "PassThrough",
+                    "id": "6ace24af-f01a-4549-b0ee-e7ccd7fc7657",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -119,12 +146,45 @@
                 },
                 {
                     "name": "",
-                    "id": "bae53df2-1cf9-408b-8d14-038249eaa16a",
-                    "path": "<Pointer>/press",
-                    "interactions": "Tap",
+                    "id": "517e1946-e24e-4823-9384-ded2f8c6b3d4",
+                    "path": "<Touchscreen>/touch0",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Tap",
+                    "action": "Touch_0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b27ece25-632e-43e3-a827-f9b0d2d453ad",
+                    "path": "<Touchscreen>/touch1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Touch_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d9f3f89-e14d-4dfd-a9e0-d43a6d022f67",
+                    "path": "<Touchscreen>/touch2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Touch_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e3418df-659d-4628-b151-5d2db2bf2c3d",
+                    "path": "<Touchscreen>/touch3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Touch_3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
