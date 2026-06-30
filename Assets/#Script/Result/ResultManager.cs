@@ -6,7 +6,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private SceneLoad _sceneLoad;
     public void ReturnTitle()
     {
-        ScoreManager.I.Delete();
+        ScoreManager.I.Release();
         JudgementManager.I.Delete();
         SongPlayManager.I.Delete();
 

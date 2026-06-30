@@ -22,8 +22,8 @@ namespace InGame.Node
         public float ArrivalSeconds => _arrivalSeconds; 
         private int _lineIndex =0;
 
-        private Subject<Unit> _onFileLoaded = new();
-        public Observable<Unit> OnFileLoaded => _onFileLoaded;
+        private Subject<NodeSaveData> _onFileLoaded = new();
+        public Observable<NodeSaveData> OnFileLoaded => _onFileLoaded;
         void Start()
         {
             LoadFile();
@@ -34,8 +34,7 @@ namespace InGame.Node
             await UniTask.Yield();
             var data = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.GetNodeJson().text);
             NodeDates = data.Nodes;
-            GameManager.I.SetData(data.BPM);
-            _onFileLoaded.OnNext(Unit.Default);
+            _onFileLoaded.OnNext(data);
         }
 
         // Update is called once per frame

@@ -8,9 +8,9 @@ public class ResultUIPresenter : MonoBehaviour
     [SerializeField] private RankUIControl _rankUIControl;
     public void Start()
     {
-        _judgementCount.OnAnimation(ScoreManager.I.JudgeData);
+        _judgementCount.OnAnimation(ScoreManager.I.JudgeDataCount);
         ScoreManager.I.GetSumScore(out int score);
-        _scoreUIControl.OnAnimation(score, ScoreManager.I.MaxScore);
-        _rankUIControl.OnAnimation(score / (float)ScoreManager.I.MaxScore);
+        _scoreUIControl.OnAnimation(score, ScoreManager.I.MaxPossibleScore);
+        _rankUIControl.OnAnimation(score / (float)ScoreManager.I.MaxPossibleScore);
     }
 }

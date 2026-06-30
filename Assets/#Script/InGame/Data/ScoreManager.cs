@@ -4,101 +4,158 @@ using R3;
 
 public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
-    private ReactiveProperty<int> _combo = new();
-    public ReadOnlyReactiveProperty<int> Combo => _combo;
+    /// <summary>オールパーフェクトが続いているか</summary>
     public bool IsAllPerfect { get; private set; }
-    private Dictionary<IReadOnlyJudgementData, int> _judgeCount = new();
-    public IReadOnlyDictionary<IReadOnlyJudgementData,int> JudgeData => _judgeCount;
-    public Dictionary<PoolPrefabType, AverageData> _nodeAverage = new();
-    public int MaxScore { get; private set; } 
-    private float _sumDifference = 0;
+    /// <summary>最高スコア</summary>
+    public int MaxPossibleScore { get; private set; }
+
+    private ReactiveProperty<int> _combo = new();
+
+    /// <summary>コンボ数</summary>
+    public ReadOnlyReactiveProperty<int> Combo => _combo;
+
+    private Dictionary<IReadOnlyJudgementData, int> _judgeDataCount = new();
+
+    /// <summary>判定別個数</summary>
+    public IReadOnlyDictionary<IReadOnlyJudgementData, int> JudgeDataCount => _judgeDataCount;
+
+    /// <summary>ノード別ヒット数（打率）</summary>
+    private Dictionary<PoolPrefabType, HitData> _nodeHitCount = new();
+
+    /// <summary>Fast / Late の数値の合計</summary>
+    private float _sumTimingOffset = 0;
+
     private void Start()
     {
-        _sumDifference = 0;
-        IsAllPerfect = true;
+        Initialize();
         DontDestroyOnLoad(this.gameObject);
     }
-    public IReadOnlyJudgementData AddScore(PoolPrefabType type, float difference, NodeData nodeData)
+
+    private void Initialize()
     {
-        var judgement = JudgementManager.I.JudgementDifference(type, difference);
-        MaxScore += JudgementManager.I.JudgementDifference(type, 0).Score;
+        _combo.Value = 0;
+        _sumTimingOffset = 0;
+        MaxPossibleScore = 0;
+        IsAllPerfect = true;
+
+        _judgeDataCount.Clear();
+        _nodeHitCount.Clear();
+    }
+
+    /// <summary>
+    /// スコアを加算する
+    /// </summary>
+    public IReadOnlyJudgementData AddScore(PoolPrefabType type, float timing, NodeData nodeData)
+    {
+        var judgement = GetJudgement(type, timing);
+
+        if (judgement.IsComboContinued)
+            _sumTimingOffset += timing;
+
+        UpdateJudgeState(judgement);
+        AddJudgeCount(judgement);
+        AddNodeHitCount(nodeData.PrefabType, judgement.IsComboContinued);
+        return judgement;
+    }
+
+    /// <summary>
+    /// ホールドノード専用スコア加算
+    /// </summary>
+    public IReadOnlyJudgementData AddHoldScore(PoolPrefabType type, float timing)
+    {
+        var judgement = GetJudgement(type, timing);
+
+        UpdateJudgeState(judgement);
+        AddJudgeCount(judgement);
+        AddNodeHitCount(PoolPrefabType.HoldNoteFill, judgement.IsComboContinued);
+        return judgement;
+    }
+
+    public void GetSumScore(out int score)
+    {
+        score = 0;
+        foreach (var kv in _judgeDataCount)
+        {
+            score += kv.Key.Score * kv.Value;
+        }
+    }
+
+    public void Release()
+    {
+        Destroy(gameObject);
+    }
+
+    private void UpdateJudgeState(IReadOnlyJudgementData judgement)
+    {
         if (!judgement.IsAllPerfectContinued)
             IsAllPerfect = false;
 
         if (judgement.IsComboContinued)
         {
-            _sumDifference += difference;         
             _combo.Value++;
         }
         else
         {
             _combo.Value = 0;
         }
-        AddJudgeCount(judgement);
-        AddNodeCount(nodeData.PrefabType, judgement.IsComboContinued);
+    }
+
+    private IReadOnlyJudgementData GetJudgement(PoolPrefabType type, float timing)
+    {
+        var judgement = JudgementManager.I.JudgementDifference(type, timing);
+        MaxPossibleScore += JudgementManager.I.JudgementDifference(type, 0).Score;
         return judgement;
     }
-    public IReadOnlyJudgementData AddHoldScore(PoolPrefabType type, float difference)
-    {
-        var judgementData = JudgementManager.I.JudgementDifference(type, difference);
-        MaxScore += JudgementManager.I.JudgementDifference(type, 0).Score;
-        AddJudgeCount(judgementData);
 
-        AddNodeCount(PoolPrefabType.HoldNoteFill, judgementData.IsComboContinued);
-        if (judgementData.IsComboContinued)
+
+    private void AddJudgeCount(IReadOnlyJudgementData judgement)
+    {
+        if (!_judgeDataCount.TryGetValue(judgement, out var count))
         {
-            _combo.Value++;
+            count = 0;
+        }
+
+        _judgeDataCount[judgement] = count + 1;
+    }
+
+    private void AddNodeHitCount(PoolPrefabType type, bool isHit)
+    {
+        if (!_nodeHitCount.ContainsKey(type))
+        {
+            _nodeHitCount.Add(type, new());
+        }
+
+        if (isHit)
+        {
+            _nodeHitCount[type].AddHit();
         }
         else
         {
-            _combo.Value = 0;
-            IsAllPerfect = false;
-        }
-        return judgementData;
-    }
-    public void GetSumScore(out int score)
-    {
-        score = 0;
-        foreach(var kv in _judgeCount)
-        {
-            score += kv.Key.Score * kv.Value;
+            _nodeHitCount[type].AddMiss();
         }
     }
-    private void AddJudgeCount(IReadOnlyJudgementData judgement)
-    {
-        if (!_judgeCount.ContainsKey(judgement))
-        {
-            _judgeCount.Add(judgement, 0);
-        }
-        _judgeCount[judgement]++;
-    }
-    private void AddNodeCount(PoolPrefabType type,bool isHit)
-    {
-        if (!_nodeAverage.ContainsKey(type))
-        {
-            _nodeAverage.Add(type, new());
-        }
 
-        if(isHit)
-        {
-            _nodeAverage[type].SuccessCount++;
-        }
 
-        _nodeAverage[type].TotalCount++;
+    public class HitData
+    {
+        public int TotalCount { get; private set; }
+        public int HitCount { get; private set; }
 
-    }
-    public void Delete()
-    {
-        Destroy(gameObject);
-    }
-    public class AverageData
-    {
-        public int TotalCount;
-        public int SuccessCount;
-        public AverageData()
+        public HitData()
         {
+            HitCount = 0;
             TotalCount = 0;
-            SuccessCount = 0;
+        }
+
+        public void AddHit()
+        {
+            HitCount++;
+            TotalCount++;
+        }
+
+        public void AddMiss()
+        {
+            TotalCount++;
         }
     }
 }

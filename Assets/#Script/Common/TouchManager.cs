@@ -4,18 +4,18 @@ namespace Input
 {
     public class TouchManager : MonoBehaviour
     {
-        [SerializeField] private FloatRange _laneY;
-        [SerializeField] private FloatRange _lane0;
-        [SerializeField] private FloatRange _lane1;
-        [SerializeField] private FloatRange _lane2;
-        [SerializeField] private FloatRange _lane3;
+        private FloatRange _laneY;
+        private FloatRange _lane0;
+        private FloatRange _lane1;
+        private FloatRange _lane2;
+        private FloatRange _lane3;
 
         private void Start()
         {
             int width = Screen.width;
             int height = Screen.height;
 
-            _laneY .Min= 0;
+            _laneY.Min = 0;
             _laneY.Max = height / 2;
 
             _lane0.Min = 0;
@@ -41,7 +41,7 @@ namespace Input
     public struct FloatRange
     {
         public float Min;
-        public float Max; 
+        public float Max;
         public bool Contains(float value)
         {
             return value >= Min && value <= Max;
