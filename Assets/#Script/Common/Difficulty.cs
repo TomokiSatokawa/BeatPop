@@ -4,4 +4,4 @@ public enum Difficulty
    Normal,
    Hard,
    Expert
-}
+}   

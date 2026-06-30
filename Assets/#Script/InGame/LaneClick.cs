@@ -1,20 +1,29 @@
-using Input;
-using R3;
+using DG.Tweening;
 using UnityEngine;
 
 namespace InGame.Node
 {
     public class LaneClick : MonoBehaviour
     {
-        [SerializeField] private GameObject[] _laneHighlight; 
-        private void Start()
+        [SerializeField] private SpriteRenderer[] _laneHighlight;
+        [SerializeField] private Vector3[] _effectPos;
+        [SerializeField] private float _startAlpha;
+        [SerializeField] private float _duration;
+
+        public void EmptyClick(int lane,float alphaMultiplier = 1)
         {
-            InputManager.LeftLane.Subscribe(v => Click(v, 0)).AddTo(this);
-            InputManager.RightLane.Subscribe(v => Click(v, 1)).AddTo(this);
+            Debug.Log(_laneHighlight[lane]);
+            Color color = Color.white;
+            color.a = _startAlpha * alphaMultiplier;
+            _laneHighlight[lane].DOKill();
+            _laneHighlight[lane].color = color;
+            _laneHighlight[lane].DOFade(0, _duration);
         }
-        public void Click(bool value, int lane)
+        public void NodeClick(int lane)
         {
-            _laneHighlight[lane].SetActive(value);
+            var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.LaneEffect);
+            effect.transform.position = _effectPos[lane];
+            EmptyClick(lane, 0.5f);
         }
     }
 

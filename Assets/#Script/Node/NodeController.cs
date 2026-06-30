@@ -15,6 +15,7 @@ namespace InGame.Node
         [SerializeField] private float _nodeSpeed;
         [SerializeField] private float _goalPos;
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
+        [SerializeField] private LaneClick _laneClick;
 
         private List<NodeObject> _nodes = new();
 
@@ -139,6 +140,7 @@ namespace InGame.Node
             if (!isNodeClick && isClick && !isFlick && (node == null || node.NodeData.PrefabType != PoolPrefabType.FlickNote))
             {
                 SoundManager.I.PlaySESound(SESoundType.EmptyHit);
+                _laneClick.EmptyClick(lane);
             }
         }
 
@@ -188,7 +190,9 @@ namespace InGame.Node
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
             PoolManager.I.Release(targetNode);
-            var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.TapEffect);
+
+            PoolPrefabType effectType = nodeType == PoolPrefabType.FlickNote ? PoolPrefabType.FlickEffect : PoolPrefabType.TapEffect;
+            var effect = PoolManager.I.Get<PoolObject>(effectType);
             Vector3 pos = targetNode.transform.position;
             pos.z = _goalPos;
             effect.transform.position = pos;
@@ -196,6 +200,8 @@ namespace InGame.Node
             float difference = nodeTime - GameManager.I.StageTime;
             var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
             _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
+
+            _laneClick.NodeClick(targetNode.NodeData.Lane);
 
             return true;
         }
