@@ -5,6 +5,8 @@ public class NodeObject : PoolObject
 {
     [SerializeField] private PoolPrefabType _tapEffect;
     public PoolPrefabType TapEffect => _tapEffect;
+    [SerializeField] private Color _nodeColor;
+    public Color NodeColor => _nodeColor;
     public NodeData NodeData;
     public Vector3 StartPosition;
 

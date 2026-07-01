@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeObject
   _tapEffect: 13
+  _nodeColor: {r: 0, g: 0.80784315, b: 0.81960785, a: 1}
   NodeData:
     NodeID: 0
     Lane: 0

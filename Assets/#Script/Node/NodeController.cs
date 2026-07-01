@@ -190,10 +190,15 @@ namespace InGame.Node
             }
             targetNode.Release();
 
-            var effect = PoolManager.I.Get<PoolObject>(targetNode.TapEffect);
+            var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.TapEffect);
             Vector3 pos = targetNode.transform.position;
             pos.z = _goalPos;
-            effect.transform.position = pos;
+            tapEffect.transform.position = pos;
+
+            //var flash = PoolManager.I.Get<FlashEffect>(PoolPrefabType.FlashEffect);
+            //flash.SetColor(targetNode.NodeColor);
+            //flash.PlayFlash();
+            //flash.transform.position = pos;
 
             float difference = nodeTime - GameManager.I.StageTime;
             var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
