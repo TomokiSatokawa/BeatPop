@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Common.PlaySystem;
 using Input;
 using R3;
@@ -191,8 +190,7 @@ namespace InGame.Node
             }
             targetNode.Release();
 
-            PoolPrefabType effectType = nodeType == PoolPrefabType.FlickNote ? PoolPrefabType.FlickEffect : PoolPrefabType.TapEffect;
-            var effect = PoolManager.I.Get<PoolObject>(effectType);
+            var effect = PoolManager.I.Get<PoolObject>(targetNode.TapEffect);
             Vector3 pos = targetNode.transform.position;
             pos.z = _goalPos;
             effect.transform.position = pos;

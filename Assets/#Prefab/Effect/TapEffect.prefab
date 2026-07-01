@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3527910910746709604}
-  - component: {fileID: 6611520334225763886}
+  - component: {fileID: 4553982415208714060}
   m_Layer: 0
   m_Name: TapEffect
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 874449110438490585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6611520334225763886
+--- !u!114 &4553982415208714060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,7 +272,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8715686, b: 0.48627448, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5192,7 +5192,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8421569, b: 0.36862743, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.21568628}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10098,7 +10098,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8834782, b: 0.531, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.21568628}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.88235295, b: 0.5294118, a: 1}
@@ -15106,7 +15106,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8715686, b: 0.48627448, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

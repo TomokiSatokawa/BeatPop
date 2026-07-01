@@ -2,5 +2,5 @@ public enum PoolPrefabType
 {
     None, NormalNote, FlickNote, HoldNoteStart, HoldNoteFill, HoldNoteEnd, Line,
     EditorNote, EditorLine,
-    TapEffect,LaneEffect,FlickEffect,HoldEffect
+    TapEffect,LaneEffect,FlickEffect,HoldFillEffect, HoldStartEffect, HoldEndEffect
 }

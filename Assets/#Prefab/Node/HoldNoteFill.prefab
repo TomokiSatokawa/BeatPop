@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da41d6257ea43a419080383d7e3a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldNode
+  _tapEffect: 12
   NodeData:
     NodeID: 0
     Lane: 0
@@ -133,3 +134,4 @@ MonoBehaviour:
     Connect: 0
   StartPosition: {x: 0, y: 0, z: 0}
   MoveAmount: 0
+  _fillObject: {fileID: 0}

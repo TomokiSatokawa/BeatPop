@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0aa1440404d82944afb0653818f8267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeObject
+  _tapEffect: 13
   NodeData:
     NodeID: 0
     Lane: 0

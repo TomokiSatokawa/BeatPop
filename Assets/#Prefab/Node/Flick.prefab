@@ -127,12 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0aa1440404d82944afb0653818f8267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeObject
-  NodeType: 0
+  _tapEffect: 11
   NodeData:
     NodeID: 0
     Lane: 0
     Time: 0
     PrefabType: 0
+    Connect: 0
   StartPosition: {x: 0, y: 0, z: 0}
   MoveAmount: 0
 --- !u!1 &7528229947894701925

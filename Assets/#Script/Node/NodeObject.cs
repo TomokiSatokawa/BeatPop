@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NodeObject : PoolObject
 {
+    [SerializeField] private PoolPrefabType _tapEffect;
+    public PoolPrefabType TapEffect => _tapEffect;
     public NodeData NodeData;
     public Vector3 StartPosition;
 
@@ -21,16 +23,7 @@ public class NodeObject : PoolObject
 
     public virtual  void Update()
     {
-        //if(NodeData.Time <= GameManager.I.StageTime + NodeGenerator.I.ArraivalSeconds)
-        //{
-        //    float distance = StartPosition.z - _goalZ;
-        //    float remainTime = NodeData.Time - GameManager.I.StageTime;
-        //    MoveAmount = distance / remainTime;
-        //}
-        //else
-        //{
-        //    MoveAmount = 0;
-        //}
+       
     }
     public void SetGoal(float goalZ)
     {

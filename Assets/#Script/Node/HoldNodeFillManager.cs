@@ -64,7 +64,7 @@ public class HoldNodeFillManager : MonoBehaviour
         public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float deleteZ,float tapZ)
         {
             _fillObject = PoolManager.I.Get<PoolObject>(PoolPrefabType.HoldNoteFill);
-            _effect = PoolManager.I.Get<HoldEffect>(PoolPrefabType.HoldEffect);
+            _effect = PoolManager.I.Get<HoldEffect>(PoolPrefabType.HoldFillEffect);
             StartNode = start;
             _endNode = end;
             _lane = lane;
