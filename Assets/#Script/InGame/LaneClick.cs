@@ -5,25 +5,44 @@ namespace InGame.Node
 {
     public class LaneClick : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer[] _laneHighlight;
-        [SerializeField] private Vector3[] _effectPos;
-        [SerializeField] private float _startAlpha;
-        [SerializeField] private float _duration;
-
-        public void EmptyClick(int lane,float alphaMultiplier = 1)
+        [System.Serializable]
+        public class LaneView
         {
-            Debug.Log(_laneHighlight[lane]);
+            public SpriteRenderer Highlight;
+            public Vector3 EffectPosition;
+        }
+
+        [SerializeField] private LaneView[] _laneHighlight;
+        [SerializeField] private float _startAlpha;
+        [SerializeField] private float _emptyClickDuration;
+        [SerializeField] private float _nodeClickAlphaMultiplier = 0.5f;
+
+        public void PlayLaneHighlight(int lane,float alphaMultiplier = 1)
+        {
+            if ((uint)lane >= (uint)_laneHighlight.Length)
+            {
+                Debug.LogError($"Invalid lane : {lane}");
+                return;
+            }
+
             Color color = Color.white;
             color.a = _startAlpha * alphaMultiplier;
-            _laneHighlight[lane].DOKill();
-            _laneHighlight[lane].color = color;
-            _laneHighlight[lane].DOFade(0, _duration);
+
+            _laneHighlight[lane].Highlight.DOKill();
+            _laneHighlight[lane].Highlight.color = color;
+            _laneHighlight[lane].Highlight.DOFade(0, _emptyClickDuration);
         }
-        public void NodeClick(int lane)
+        public void PlayNodeClickEffect(int lane)
         {
+            if ((uint)lane >= (uint)_laneHighlight.Length)
+            {
+                Debug.LogError($"Invalid lane : {lane}");
+                return;
+            }
+
             var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.LaneEffect);
-            effect.transform.position = _effectPos[lane];
-            EmptyClick(lane, 0.5f);
+            effect.transform.position = _laneHighlight[lane].EffectPosition;
+            PlayLaneHighlight(lane, _nodeClickAlphaMultiplier);
         }
     }
 

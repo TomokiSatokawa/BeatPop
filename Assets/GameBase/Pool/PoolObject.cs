@@ -17,4 +17,9 @@ public class PoolObject : MonoBehaviour
     {
         IsPoolActive = false;
     }
+
+    public void Release()
+    {
+        PoolManager.I.Release(this);
+    }
 }

@@ -32,7 +32,7 @@ public class EditorNodeGenerator : MonoBehaviour
         {
             if (node.Time < minTime || node.Time > maxTime)
             {
-                PoolManager.I.Release(_clonedNode[node]);
+                _clonedNode[node].Release();
                 removeNode.Add(node);
             }
         }
@@ -82,7 +82,7 @@ public class EditorNodeGenerator : MonoBehaviour
     {
         Debug.Log(node + "Remove");
         FollowTime poolObject = _clonedNode[node];
-        PoolManager.I.Release(poolObject);
+        poolObject.Release();
         _clonedNode.Remove(node);
 
     }

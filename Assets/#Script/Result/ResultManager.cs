@@ -7,7 +7,7 @@ public class ResultManager : MonoBehaviour
     public void ReturnTitle()
     {
         ScoreManager.I.Release();
-        JudgementManager.I.Delete();
+        JudgementManager.I.Release();
         SongPlayManager.I.Delete();
 
         _sceneLoad.ChangeScene("Title");

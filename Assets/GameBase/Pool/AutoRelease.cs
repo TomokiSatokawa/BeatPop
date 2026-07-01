@@ -17,7 +17,7 @@ public class AutoRelease : PoolObject
         
         if( _timer <= 0)
         {
-            PoolManager.I.Release(this);
+            Release();
         }
     }
 }

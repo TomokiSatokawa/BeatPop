@@ -7,11 +7,13 @@ public class JudgementManager : SingletonMonoBehaviour<JudgementManager>
     [SerializeField] private SerializableDictionary<PoolPrefabType, NodeJudgement> _nodeTypeJudge;
     public float DeleteTime => _deleteTime;
     public float ToleranceValue => _toleranceValue;
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this.gameObject);
     }
-    public IReadOnlyJudgementData JudgementDifference(PoolPrefabType type,float difference)
+
+    public IReadOnlyJudgementData GetJudgement(PoolPrefabType type,float difference)
     {
         if(!_nodeTypeJudge.TryGetValue(type, out var judgementData))
         {
@@ -20,7 +22,7 @@ public class JudgementManager : SingletonMonoBehaviour<JudgementManager>
         }
         return judgementData.JudgementDifference(difference);
     }
-    public void Delete()
+    public void Release()
     {
         Destroy(this.gameObject);
     }

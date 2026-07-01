@@ -3718,13 +3718,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneClick
   _laneHighlight:
-  - {fileID: 1276317407}
-  - {fileID: 883645677}
-  _effectPos:
-  - {x: -1.14755, y: 0.06, z: -5}
-  - {x: 1.147549, y: 0.06, z: -5}
+  - Highlight: {fileID: 1276317407}
+    EffectPosition: {x: -1.14755, y: 0.13, z: 5.55}
+  - Highlight: {fileID: 883645677}
+    EffectPosition: {x: 1.14755, y: 0.13, z: 5.55}
   _startAlpha: 0.5
-  _duration: 0.3
+  _emptyClickDuration: 0.3
+  _nodeClickAlphaMultiplier: 0.5
 --- !u!114 &1946836280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3751,14 +3751,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e65ee6a493543442806234e753c6e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  StageTime: 0
   _sceneLoad: {fileID: 2101936842}
-  _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _waitSeconds: 5
   _songClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
   _bpm: 160.15
   _timeText: {fileID: 1463515347}
   _timeOffset: 0
+  _resultDelay: 2
 --- !u!114 &1946836282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3784,21 +3783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d8e2c40b944a14fa15c9e399ef60ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.TouchManager
-  _laneY:
-    Min: 0
-    Max: 0
-  _lane0:
-    Min: 0
-    Max: 0
-  _lane1:
-    Min: 0
-    Max: 0
-  _lane2:
-    Min: 0
-    Max: 0
-  _lane3:
-    Min: 0
-    Max: 0
 --- !u!1 &1950628530
 GameObject:
   m_ObjectHideFlags: 0

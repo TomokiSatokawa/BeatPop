@@ -88,7 +88,7 @@ namespace InGame.Node
                         _nodeFillManager.DeleteFill(node.NodeData);
                     }
                 }
-                PoolManager.I.Release(node);
+                node.Release();
                 _nodes.Remove(node);
             }
             if (_nextFillJudge <= GameManager.I.StageTime)
@@ -140,7 +140,7 @@ namespace InGame.Node
             if (!isNodeClick && isClick && !isFlick && (node == null || node.NodeData.PrefabType != PoolPrefabType.FlickNote))
             {
                 SoundManager.I.PlaySESound(SESoundType.EmptyHit);
-                _laneClick.EmptyClick(lane);
+                _laneClick.PlayLaneHighlight(lane);
             }
         }
 
@@ -189,7 +189,7 @@ namespace InGame.Node
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
-            PoolManager.I.Release(targetNode);
+            targetNode.Release();
 
             PoolPrefabType effectType = nodeType == PoolPrefabType.FlickNote ? PoolPrefabType.FlickEffect : PoolPrefabType.TapEffect;
             var effect = PoolManager.I.Get<PoolObject>(effectType);
@@ -201,7 +201,7 @@ namespace InGame.Node
             var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
             _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
 
-            _laneClick.NodeClick(targetNode.NodeData.Lane);
+            _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
 
             return true;
         }

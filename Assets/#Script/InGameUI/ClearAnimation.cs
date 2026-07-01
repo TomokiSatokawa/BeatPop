@@ -12,13 +12,16 @@ public class ClearAnimation : MonoBehaviour
     {
         _mainVisualMask.gameObject.SetActive(false);
     }
-    public void OnAnimation()
+    public void PlayClearAnimation()
     {
+        RectTransform rectTransform = _mainVisualMask.rectTransform;
+        rectTransform.DOKill();
+
         _sceneLoad.ChangeScene(3);
-        _mainVisualMask.rectTransform.sizeDelta = new Vector2(0, _mainVisualMask.rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = new Vector2(0, rectTransform.sizeDelta.y);
         _mainVisualMask.gameObject.SetActive(true);
-        _mainVisualMask.rectTransform
-            .DOSizeDelta(new Vector2(_maxWith, _mainVisualMask.rectTransform.sizeDelta.y), _animationDuration)
+        rectTransform
+            .DOSizeDelta(new Vector2(_maxWith, rectTransform.sizeDelta.y), _animationDuration)
             .SetEase(Ease.InOutCubic);
             //TODO: ‰¼
             //.OnComplete(() => );

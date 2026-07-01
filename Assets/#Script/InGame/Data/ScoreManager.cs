@@ -102,8 +102,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 
     private IReadOnlyJudgementData GetJudgement(PoolPrefabType type, float timing)
     {
-        var judgement = JudgementManager.I.JudgementDifference(type, timing);
-        MaxPossibleScore += JudgementManager.I.JudgementDifference(type, 0).Score;
+        var judgement = JudgementManager.I.GetJudgement(type, timing);
+        MaxPossibleScore += JudgementManager.I.GetJudgement(type, 0).Score;
         return judgement;
     }
 

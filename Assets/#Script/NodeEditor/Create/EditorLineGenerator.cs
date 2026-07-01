@@ -43,7 +43,7 @@ public class EditorLineGenerator : MonoBehaviour
             if (outOfRange || tooDense)
             {
                 _clonedLine.RemoveAt(i);
-                PoolManager.I.Release(line);
+                line.Release();
             }
         }
 
@@ -127,7 +127,7 @@ public class EditorLineGenerator : MonoBehaviour
     {
         foreach(var line in _clonedLine)
         {
-            PoolManager.I.Release(line);
+            line.Release();
         }
         _clonedLine.Clear();
         EditorManager.I.ReloadTime();

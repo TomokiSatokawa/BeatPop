@@ -139,8 +139,8 @@ public class HoldNodeFillManager : MonoBehaviour
         }
         public void Remove()
         {
-            PoolManager.I.Release(_fillObject);
-            PoolManager.I.Release(_effect);
+            _fillObject.Release();
+            _effect.Release();
         }
     }
 }
