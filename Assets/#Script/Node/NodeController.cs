@@ -32,7 +32,6 @@ namespace InGame.Node
         private SESoundType HoldEnd;
         public void Start()
         {
-            Debug.Log("Start");
             CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
 
             NormalSE = _soundData.TapSE[soundPattern.NormalSE].Value;

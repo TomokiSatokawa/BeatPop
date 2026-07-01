@@ -14,10 +14,4 @@ public class JudgeUIControl : MonoBehaviour
         _text.DOFade(0, _duration / 2).SetLink(this.gameObject);
         Destroy(this.gameObject, _duration + 0.01f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

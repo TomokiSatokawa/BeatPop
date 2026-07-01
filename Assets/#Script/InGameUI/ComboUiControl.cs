@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ComboUIControl : MonoBehaviour
 {
-    [SerializeField] private Transform _paretObject;
+    [SerializeField] private Transform _parentObject;
     [SerializeField] private TextMeshProUGUI _comboText;
     [SerializeField] private TextMeshProUGUI _afterText;
     [SerializeField] private float _maxSize;
@@ -13,34 +13,50 @@ public class ComboUIControl : MonoBehaviour
     [SerializeField] private float _animationDuration;
 
     private Sequence _sequence;
-
-    public float _defaultSize;
-    public void Start()
+    private float _defaultSize;
+    private void Start()
     {
-        _defaultSize = _paretObject.transform.localScale.x;
+        _defaultSize = _parentObject.transform.localScale.x;
+
+        CreateAnimation();
     }
-    public void UpdateCombo(int count)
+
+    private void CreateAnimation()
     {
-        _paretObject.gameObject.SetActive(true);
-        _sequence.Kill(true);
+        _sequence = DOTween.Sequence()
+            .SetAutoKill(false)
+            .Pause();
 
-        _sequence = DOTween.Sequence();
-        _paretObject.transform.localScale = Vector3.one * _minSize;
-        _afterText.transform.localScale = Vector3.one * _minSize;
-        _afterText.color = Color.black;
-        _afterText.text = count.ToString();
-        _comboText.text = count.ToString();
-        _sequence.Append(_paretObject.DOScale(_maxSize, _animationDuration * 0.7f));
+        _sequence.AppendCallback(() =>
+        {
+            _parentObject.gameObject.SetActive(true);
+            _parentObject.localScale = Vector3.one * _minSize;
+            _afterText.transform.localScale = Vector3.one * _minSize;
+            _afterText.color = Color.black;
 
-        _sequence.Join(_afterText.transform.DOScale(_afterMaxSize, _animationDuration/2));
+        });
+
+        _sequence.Append(_parentObject.DOScale(_maxSize, _animationDuration * 0.7f).From(_minSize));
+
+        _sequence.Join(_afterText.transform.DOScale(_afterMaxSize, _animationDuration / 2).From(_minSize));
+
         _sequence.Join(_afterText.DOFade(0, _animationDuration));
 
-        _sequence.Append(_paretObject.DOScale(_defaultSize, _animationDuration * 0.3f));
+        _sequence.Append(_parentObject.DOScale(_defaultSize, _animationDuration * 0.3f));
 
-        _sequence.Play();
+        _sequence.ForceInit();
+
+    }
+
+    public void UpdateCombo(int count)
+    {
+        _comboText.text = count.ToString();
+        _afterText.text = count.ToString();
+
+        _sequence.Restart(true);
     }
     public void HiddenUI()
     {
-        _paretObject.gameObject.SetActive(false);
+        _parentObject.gameObject.SetActive(false);
     }
 }

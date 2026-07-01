@@ -8,6 +8,7 @@ public class JudgementView : MonoBehaviour
 
     public void ViewPrefab(IReadOnlyJudgementData judgeData, int lane)
     {
+        //TODO:ObjectPool�ɕύX
         GameObject obj = Instantiate(judgeData.Prefab, _canvas.transform);
 
         RectTransform rect = obj.GetComponent<RectTransform>();

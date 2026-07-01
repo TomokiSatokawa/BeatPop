@@ -2379,7 +2379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47eba05e2a49794ca5bacae57ce54ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComboUIControl
-  _paretObject: {fileID: 954025799}
+  _parentObject: {fileID: 954025799}
   _comboText: {fileID: 1010737817}
   _afterText: {fileID: 1025286289}
   _maxSize: 1.27732
