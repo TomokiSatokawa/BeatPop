@@ -1,6 +1,7 @@
 using Common.UI;
 using UnityEngine;
 using Title.SongSelect;
+using UnityEngine.Events;
 
 namespace Title.Custom
 {
@@ -9,9 +10,13 @@ namespace Title.Custom
         [SerializeField] private PatternUIControl _prefab;
         [SerializeField] private CustomPatternLoader _patternLoader;
         [SerializeField] private CustomSound _sound;
+        [SerializeField] private UnityEvent _onPatternSelect;
 
         private PatternUIControl _currentSelect;
         private PatternUIControl _usePattern;
+
+        public PatternJsonData CurrentSelectData => _currentSelect.PatternData;
+        public PatternJsonData UsePattern => _usePattern.PatternData;
         public async void ShowList()
         {
             if (!SongInfoControl.I.CurrentData.HasValue) return;
@@ -40,7 +45,10 @@ namespace Title.Custom
         {
             var patternUI = InstantiateContent(_prefab);
 
-            patternUI.SetData(pattern, SelectPattern);
+            patternUI.SetData(pattern,uiData => {
+                SelectPattern(uiData);
+                _onPatternSelect?.Invoke();
+            });
             if (pattern.IsSelect)
             {
                 SelectPattern(patternUI);
@@ -59,27 +67,28 @@ namespace Title.Custom
             patternUI.OnSelect();
             _currentSelect = patternUI;
 
-            _sound.SetCustom(patternUI.patternData.SoundPattern);
+            //カスタムの値を変更
+            _sound.SetCustom(patternUI.PatternData.SoundPattern);
         }
 
         public async void SetPattern()
         {
             if (_usePattern == _currentSelect) return;
             _usePattern?.ShowSetPattern(false);
-            _usePattern.patternData.IsSelect = false;
-            await CustomDataLoader.I.SavePattern(_usePattern.patternData);
+            _usePattern.PatternData.IsSelect = false;
+            await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
 
             _usePattern = _currentSelect;
-            _usePattern.patternData.IsSelect = true;
-            await CustomDataLoader.I.SavePattern(_usePattern.patternData);
+            _usePattern.PatternData.IsSelect = true;
+            await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
             _usePattern.ShowSetPattern(true);
         }
 
         public async void SavePattern()
         {
             if (_currentSelect == null) return;
-            _currentSelect.patternData.SoundPattern = _sound.GetCustom();
-            await CustomDataLoader.I.SavePattern(_currentSelect.patternData);
+            _currentSelect.PatternData.SoundPattern = _sound.GetCustom();
+            await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
     }
 }

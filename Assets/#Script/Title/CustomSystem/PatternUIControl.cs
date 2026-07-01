@@ -10,7 +10,7 @@ public class PatternUIControl : MonoBehaviour
     [SerializeField] private Button _selectButton;
     [SerializeField] private GameObject _setPattern;
     private PatternJsonData _patternData;
-    public PatternJsonData patternData => _patternData;
+    public PatternJsonData PatternData => _patternData;
     public void SetData(PatternJsonData pattern,Action<PatternUIControl> onSelect)
     {
         _patternData = pattern;

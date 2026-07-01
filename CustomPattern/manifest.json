@@ -2,7 +2,9 @@
     "Datas": [
         {
             "FileName": [
-                "song_0003_0000.json"
+                "song_0003_0000.json",
+                "song_0003_0001.json",
+                "song_0003_0002.json"
             ],
             "SongID": 3
         }
