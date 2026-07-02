@@ -15,6 +15,7 @@ MonoBehaviour:
   _songName: "\u98A8\u3068\u753A"
   _songID: 0
   _bpm: 104
+  _maxScore: 4920
   _charts:
     EasyLevel: 3
     EasyJson: {fileID: 4900000, guid: 372d8c9eba0409248a3d08e119238bd0, type: 3}

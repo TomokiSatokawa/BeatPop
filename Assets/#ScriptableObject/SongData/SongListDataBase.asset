@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongListDataBase
   _songDates:
   - {fileID: 11400000, guid: 357cbd0568b50a44a8afe6f25f8e3cb2, type: 2}
+  - {fileID: 11400000, guid: 4e04a322f7b161445ad3dc63d518ea96, type: 2}
+  - {fileID: 11400000, guid: a9767a3b8e894f34ab511f3ae50ffa44, type: 2}
