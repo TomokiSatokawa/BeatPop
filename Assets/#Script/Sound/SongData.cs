@@ -6,6 +6,7 @@ public class SongData : ScriptableObject, IReadOnlySongData
     [SerializeField] private string _songName;
     [SerializeField] private int _songID;
     [SerializeField] private float _bpm;
+    [SerializeField] private int _maxScore;
     [Space(10)]
     [SerializeField] private SongChartSet _charts;
     [Space(10)]
@@ -16,6 +17,7 @@ public class SongData : ScriptableObject, IReadOnlySongData
     public string SongName => _songName;
     public int SongID => _songID;
     public float BPM => _bpm;
+    public int MaxScore => _maxScore;
     public SongChartSet Charts => _charts;
     public AudioClip Audio => _audioClip;
     public float StageTimeOffSet => _stageTimeOffSet;
@@ -26,6 +28,7 @@ public interface IReadOnlySongData
     public string SongName { get; }
     public int SongID { get; }
     public float BPM { get; }
+    public int MaxScore { get; }    
     public SongChartSet Charts { get; }
     public AudioClip Audio { get; }
     public float StageTimeOffSet { get; }

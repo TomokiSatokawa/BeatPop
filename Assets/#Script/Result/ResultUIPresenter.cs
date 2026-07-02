@@ -12,5 +12,6 @@ public class ResultUIPresenter : MonoBehaviour
         ScoreManager.I.GetSumScore(out int score);
         _scoreUIControl.OnAnimation(score, ScoreManager.I.MaxPossibleScore);
         _rankUIControl.OnAnimation(score / (float)ScoreManager.I.MaxPossibleScore);
+        Debug.Log("maxScore" + ScoreManager.I.MaxPossibleScore);
     }
 }

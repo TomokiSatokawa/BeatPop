@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using InGame.Node;
 using R3;
+using UnityEngine;
 
 public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
@@ -13,6 +15,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 
     /// <summary>コンボ数</summary>
     public ReadOnlyReactiveProperty<int> Combo => _combo;
+    private ReactiveProperty<int> _score = new();
+
+    /// <summary>コンボ数</summary>
+    public ReadOnlyReactiveProperty<int> Score => _score;
 
     private Dictionary<IReadOnlyJudgementData, int> _judgeDataCount = new();
 
@@ -116,6 +122,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         }
 
         _judgeDataCount[judgement] = count + 1;
+
+        _score.Value += judgement.Score;
     }
 
     private void AddNodeHitCount(PoolPrefabType type, bool isHit)

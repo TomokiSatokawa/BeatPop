@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 public class RankData : ScriptableObject
 {
     [SerializeField] private SerializableDictionary<Sprite, float> _rankValue;
+    public IReadOnlyList<SerializableDictionary<Sprite,float>.KeyPair> RankValue => _rankValue.Items;
     public Sprite GetRank(float rate)
     {
         foreach(var kv in _rankValue.Items)
