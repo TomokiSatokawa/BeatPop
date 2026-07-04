@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class SnapNode : MonoBehaviour
 {
     [SerializeField] private RectTransform _snapObjectParent;
-    [SerializeField] private RectTransform _deletePointer;
+    [SerializeField] private RectTransform _sectionPointer;
     [SerializeField] private RectTransform _createPointer;
     [SerializeField] private RectTransform _pointerRect;
     [SerializeField] private RectTransform[] _laneRect;
@@ -23,9 +23,9 @@ public class SnapNode : MonoBehaviour
     }
 
 
-    public void OnDelete()
+    public void OnSection()
     {
-        _editMode = EditMode.Delete;
+        _editMode = EditMode.Section;
     }
     public void Update()
     {
@@ -41,7 +41,7 @@ public class SnapNode : MonoBehaviour
             out Vector2 localMousePos);
 
         _createPointer.gameObject.SetActive(_editMode == EditMode.Create);
-        _deletePointer.gameObject.SetActive(_editMode == EditMode.Delete);
+        _sectionPointer.gameObject.SetActive(_editMode == EditMode.Section);
 
         Vector2 pos = localMousePos;
 
@@ -69,7 +69,7 @@ public class SnapNode : MonoBehaviour
         float beatInterval = 60f / EditorManager.I.BPM;
 
         float barInterval = beatInterval * 4f;
-        float divisionInterval = barInterval / EditorManager.I.Divition;
+        float divisionInterval = barInterval / EditorManager.I.Division;
 
         // X Å® Time
         double noteTime =
@@ -85,23 +85,39 @@ public class SnapNode : MonoBehaviour
         pos.x = (float)(noteTime - EditorManager.I.EditorTime.CurrentValue)
             * EditorManager.I.Magnification;
 
-        _deletePointer.anchoredPosition = pos;
+        _sectionPointer.anchoredPosition = pos;
         _createPointer.anchoredPosition = pos;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (_editMode == EditMode.Create)
+            switch (_editMode)
             {
-                EditorNodeData.I.AddNode(_prefabType,noteTime, laneIndex);
+                case EditMode.Create:
+                    EditorNodeData.I.AddNode(_prefabType, noteTime, laneIndex);
+                    break;
+
+                case EditMode.Section:
+                    EditorNodeData.I.AddSection((float)noteTime);
+                    break;
             }
-            else if (_editMode == EditMode.Delete)
+        }
+
+        if(Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            switch (_editMode)
             {
-                EditorNodeData.I.DeleteNode(noteTime, laneIndex);
+                case EditMode.Create:
+                    EditorNodeData.I.DeleteNode(noteTime, laneIndex);
+                    break;
+
+                case EditMode.Section:
+                    EditorNodeData.I.RemoveSection((float)noteTime);
+                    break;
             }
         }
     }
     public enum EditMode
     {
-        None, Create, Delete
+        None, Create, Section,
     }
 }

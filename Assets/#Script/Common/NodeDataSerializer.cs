@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class NodeDataSerializer
 {
-    public const string Version = "1.0";
+    public const string Version = "2.0";
     public static string SerializeCSV(List<NodeData> nodeDatas)
     {
         float bpmInterval = 60f / GameManager.I.BPM;
@@ -103,6 +103,7 @@ public static class NodeDataSerializer
                 Debug.LogWarning("データのバージョンが違います");
             }
             data.Nodes = data.Nodes.OrderBy(x => x.Time).ToList();
+            data.Section.Sort();
             return data;
         }
         catch
@@ -110,7 +111,7 @@ public static class NodeDataSerializer
             return null;
         }
     }
-    public static string SerializeJson(List<NodeData> nodes, float bpm, int songIndex, string songName = "null")
+    public static string SerializeJson(List<NodeData> nodes, List<float> sectionTime ,float bpm, int songIndex, string songName = "null")
     {
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -126,6 +127,7 @@ public static class NodeDataSerializer
         data.SoundIndex = songIndex;
         data.SongName = songName;
         data.Nodes = nodes;
+        data.Section = sectionTime;
 
         if (data == null)
             return null;
@@ -177,4 +179,5 @@ public class NodeSaveData
     public string SongName = "Null";
 
     public List<NodeData> Nodes;
+    public List<float> Section;
 }

@@ -44,21 +44,38 @@ public class EditorNodeGenerator : MonoBehaviour
 
         foreach (var node in EditorNodeData.I.Nodes)
         {
-            if (node.Time < minTime || node.Time > maxTime)
-                continue;
-            if (_clonedNode.ContainsKey(node)) continue;
+            NodeRendering(node, PoolPrefabType.EditorNote);
+        }
 
-            var newNode = PoolManager.I.Get<EditorNode>(PoolPrefabType.EditorNote, _content);
+        foreach (var section in EditorNodeData.I.SectionTime)
+        {
+            var node = new NodeData()
+            {
+                Time = section,
+                Lane = 0,
+                PrefabType = PoolPrefabType.SectionNode
+            };
+
+            NodeRendering(node, PoolPrefabType.SectionNode);
+        }
+
+        void NodeRendering(NodeData node, PoolPrefabType editorNote)
+        {
+            if (node.Time < minTime || node.Time > maxTime)
+                return;
+            if (_clonedNode.ContainsKey(node)) return;
+
+            var newNode = PoolManager.I.Get<EditorNode>(editorNote, _content);
 
             newNode.LeanY = _lean[node.Lane].anchoredPosition.y;
             newNode.Time = node.Time;
             newNode.Data = node;
-            newNode.gameObject.name = $"NomalNode {node.NodeID}";
+            newNode.gameObject.name = $"NormalNode {node.NodeID}";
 
             switch (node.PrefabType)
             {
                 case PoolPrefabType.NormalNote:
-                    newNode.ChangeColor(Color.white); 
+                    newNode.ChangeColor(Color.white);
                     break;
                 case PoolPrefabType.FlickNote:
                     newNode.ChangeColor(Color.yellow);
@@ -71,6 +88,9 @@ public class EditorNodeGenerator : MonoBehaviour
                     break;
                 case PoolPrefabType.HoldNoteEnd:
                     newNode.ChangeColor(Color.darkGreen);
+                    break;
+                case PoolPrefabType.SectionNode:
+                    newNode.ChangeColor(Color.gray);
                     break;
             }
 

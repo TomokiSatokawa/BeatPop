@@ -12,18 +12,20 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 {
     [SerializeField] private TextAsset _editFile;
     [SerializeField] private Button _exportButton;
-    [SerializeField] private Button _importButon;
+    [SerializeField] private Button _importButton;
     public List<NodeData> Nodes => _nodes;
     private List<NodeData> _nodes = new();
+    private List<float> _sectionTime = new();
+    public IReadOnlyList<float> SectionTime => _sectionTime;
     private Subject<NodeData> _onRemove = new();
     public Observable<NodeData> OnRemove => _onRemove;
     private readonly double _epsilon = 0.0001;
+
+
     public void Start()
     {
-        if(_editFile != null)
-        {
-        FileLoad(_editFile.text);
-        }
+        _importButton.onClick.AddListener(OnImport);
+        _exportButton.onClick.AddListener(OnExport);
     }
 
     private async void FileLoad(string file)
@@ -34,11 +36,9 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
             _nodes = data.Nodes;
             EditorManager.I.SetData(data.BPM, data.SoundIndex);
         }
-        _importButon.onClick.AddListener(OnImport);
-        _exportButton.onClick.AddListener(OnExport);
     }
 
-    public void AddNode(PoolPrefabType prefab,double time,int lean)
+    public void AddNode(PoolPrefabType prefab, double time, int lean)
     {
         if (_nodes.Exists(x => Math.Abs(x.Time - time) < _epsilon && x.Lane == lean)) return;
 
@@ -49,16 +49,39 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
             PrefabType = prefab
         });
     }
-    public void DeleteNode(double time , int lean)
+    public void DeleteNode(double time, int lean)
     {
         var targetNode = _nodes.FindIndex(x => Math.Abs(x.Time - time) < _epsilon && x.Lane == lean);
-        if(targetNode == -1) return;
+        if (targetNode == -1) return;
 
         _onRemove.OnNext(_nodes[targetNode]);
         _nodes.RemoveAt(targetNode);
     }
+
+    public void AddSection(float time)
+    {
+        float tolerance = 0.0001f;
+        if (_sectionTime.Exists(t => Mathf.Abs(t - time) < tolerance))
+            return;
+
+        _sectionTime.Add(time);
+    }
+
+    public void RemoveSection(float time)
+    {
+        float tolerance = 0.0001f;
+        int index = _sectionTime.FindIndex(t => Mathf.Abs(t - time) < tolerance);
+        Debug.Log("Re");
+        if (index == -1)
+            return;
+
+        Debug.Log("Remove");
+        _sectionTime.RemoveAt(index);
+    }
+
     public void OnImport()
     {
+        Debug.Log("a");
 #if UNITY_EDITOR
         string path = EditorUtility.OpenFilePanel(
            "Open Save Data",
@@ -84,10 +107,10 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 
         if (string.IsNullOrEmpty(path))
             return;
-        File.WriteAllText(path, NodeDataSerializer.SerializeJson(FinalizeNodes(_nodes),EditorManager.I.BPM,EditorManager.I.SongIndex));
+        File.WriteAllText(path, NodeDataSerializer.SerializeJson(FinalizeNodes(_nodes), FinalizeSection(_sectionTime), EditorManager.I.BPM, EditorManager.I.SongIndex));
 #endif
     }
-    public List<NodeData> FinalizeNodes(List<NodeData> nodes)
+    private List<NodeData> FinalizeNodes(List<NodeData> nodes)
     {
         List<NodeData> result = nodes.OrderBy(x => x.Time).ToList();
 
@@ -134,5 +157,15 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
         }
 
         return result;
+    }
+
+    private List<float> FinalizeSection(List<float> section)
+    {
+        if (!section.Contains(0f))
+        {
+            section.Add(0f);
+        }
+
+        return section.OrderBy(x => x).ToList();
     }
 }

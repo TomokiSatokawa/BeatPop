@@ -8,9 +8,16 @@ using UnityEngine.SceneManagement;
 
 public class QuickPlay : EditorWindow
 {
+    private const string SongDataKey = "QuickPlay_SongData";
+    private const string LevelKey = "QuickPlay_Level";
+    private const string SoundDataKey = "QuickPlay_SoundData";
+    private const string FoldoutKey = "QuickPlay_Foldout";
+
     private SongData _songData;
     private int _levelIndex;
     private string _errorMessage;
+
+    private int _startSection;
 
     private CustomSoundData _soundData;
     private bool foldout = false;
@@ -25,12 +32,27 @@ public class QuickPlay : EditorWindow
         GetWindow<QuickPlay>("QuickPlay");
     }
 
+    private void OnEnable()
+    {
+        EditorApplication.playModeStateChanged += OnPlayModeChanged;
+        Load();
+    }
+
+    private void OnDisable()
+    {
+        Save();
+        EditorApplication.playModeStateChanged -= OnPlayModeChanged;
+    }
+
     private void OnGUI()
     {
         EditorGUILayout.Space(10);
+
         EditorGUI.BeginChangeCheck();
+
         _songData = (SongData)EditorGUILayout.ObjectField("曲データ", _songData, typeof(SongData), true);
         _levelIndex = EditorGUILayout.Popup("難易度", _levelIndex, new[] { "Easy", "Normal", "Hard", "Expert" });
+        _startSection = EditorGUILayout.IntField(_startSection, "開始セクション");
 
         foldout = EditorGUILayout.Foldout(foldout, "カスタムデータ");
         if (foldout)
@@ -41,35 +63,48 @@ public class QuickPlay : EditorWindow
         if (EditorGUI.EndChangeCheck())
         {
             _errorMessage = "";
+            Save();
         }
 
         EditorGUILayout.Space(10);
+
         if (GUILayout.Button("プレイ開始"))
         {
             _isQuickPlay = true;
             OnStart();
         }
 
-        if (GUILayout.Button("最初から開始"))
-        {
-            _isQuickPlay = true;
-            OnTitleStart();
-        }
-
-        if (_errorMessage != "")
+        if (!string.IsNullOrEmpty(_errorMessage))
         {
             EditorGUILayout.HelpBox(_errorMessage, MessageType.Error);
         }
     }
 
-    private void OnEnable()
+    private void Save()
     {
-        EditorApplication.playModeStateChanged += OnPlayModeChanged;
+        EditorPrefs.SetString(SongDataKey, AssetDatabase.GetAssetPath(_songData));
+        EditorPrefs.SetInt(LevelKey, _levelIndex);
+        EditorPrefs.SetString(SoundDataKey, AssetDatabase.GetAssetPath(_soundData));
+        EditorPrefs.SetBool(FoldoutKey, foldout);
     }
 
-    private void OnDisable()
+    private void Load()
     {
-        EditorApplication.playModeStateChanged -= OnPlayModeChanged;
+        string songPath = EditorPrefs.GetString(SongDataKey, "");
+        if (!string.IsNullOrEmpty(songPath))
+        {
+            _songData = AssetDatabase.LoadAssetAtPath<SongData>(songPath);
+        }
+
+        _levelIndex = EditorPrefs.GetInt(LevelKey, 0);
+
+        string soundPath = EditorPrefs.GetString(SoundDataKey, "");
+        if (!string.IsNullOrEmpty(soundPath))
+        {
+            _soundData = AssetDatabase.LoadAssetAtPath<CustomSoundData>(soundPath);
+        }
+
+        foldout = EditorPrefs.GetBool(FoldoutKey, false);
     }
 
     public void OnStart()
@@ -89,31 +124,14 @@ public class QuickPlay : EditorWindow
 
         _previousScenePath = EditorSceneManager.GetActiveScene().path;
 
-        //再生準備用シーンに移動
         EditorSceneManager.SaveOpenScenes();
+
         string scenePath = SceneUtility.GetScenePathByBuildIndex(5);
         if (!string.IsNullOrEmpty(scenePath))
         {
             EditorSceneManager.OpenScene(scenePath);
         }
 
-        //再生
-        EditorApplication.isPlaying = true;
-    }
-
-    public void OnTitleStart()
-    {
-        _previousScenePath = EditorSceneManager.GetActiveScene().path;
-
-        //再生準備用シーンに移動
-        EditorSceneManager.SaveOpenScenes();
-        string scenePath = SceneUtility.GetScenePathByBuildIndex(0);
-        if (!string.IsNullOrEmpty(scenePath))
-        {
-            EditorSceneManager.OpenScene(scenePath);
-        }
-
-        //再生
         EditorApplication.isPlaying = true;
     }
 
@@ -129,24 +147,32 @@ public class QuickPlay : EditorWindow
         if (state == PlayModeStateChange.EnteredEditMode)
         {
             _isQuickPlay = false;
-            EditorSceneManager.OpenScene(_previousScenePath);
+
+            if (!string.IsNullOrEmpty(_previousScenePath))
+            {
+                EditorSceneManager.OpenScene(_previousScenePath);
+            }
         }
     }
 
     public async void CreatePlayData()
     {
         Debug.Log("CreatePlay");
-        var playData = Instantiate(new GameObject());
+
+        var playData = new GameObject("QuickPlayData");
         var songPlayData = playData.AddComponent<SongPlayManager>();
 
         DontDestroyOnLoad(playData);
 
         var songSelectData = new SongSelectData(_songData, (Difficulty)_levelIndex);
-        var pattern = new PatternJsonData();
-        pattern.PatternName = "QuickPlay";
-        pattern.SoundPattern = _soundData.GetDefaultCustom();
+        if (_songData == null) return;
+        var pattern = new PatternJsonData
+        {
+            PatternName = "QuickPlay",
+            SoundPattern = _soundData.GetDefaultCustom()
+        };
 
-        songPlayData.SetData(songSelectData, pattern);
+        songPlayData.SetData(songSelectData, pattern, _startSection);
 
         await UniTask.DelayFrame(3);
 

@@ -12,12 +12,13 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     [SerializeField] private Scrollbar _scrollBar;
     [SerializeField] private float _magnification;
     [SerializeField] private RectTransform _displayRange;
-    [SerializeField ] private int _divition;
+    [SerializeField ] private int _division;
     [SerializeField] private float _timeOffSet;
+    [SerializeField] private float _keyMoveAmount;
     public float DisplayRange => _displayRange.sizeDelta.x;
     public float Magnification => _magnification;
     public float BPM => _bpm;
-    public int Divition => _divition;
+    public int Division => _division;
     public AudioClip AudioClip => _audioClip;
     public int SongIndex { get; private set; } = -1;
 
@@ -26,7 +27,7 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
 
     private readonly ReactiveProperty<double> _editorTime = new();
     public ReadOnlyReactiveProperty<double> EditorTime => _editorTime;
-    public double StartDsp;
+    private double StartDsp;
 
     private void Start()
     {
@@ -74,6 +75,16 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
         {
             _editorTime.Value = AudioSettings.dspTime - StartDsp + _timeOffSet;
         }
+
+        if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        {
+            _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue + _keyMoveAmount ,0, _audioClip.length);
+        }
+
+        if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue - _keyMoveAmount ,0, _audioClip.length);
+        }
     }
 
     public void OnBarChangeValue(float value)
@@ -88,6 +99,6 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     }
     public void ChangeDivisionCount(int count)
     {
-        _divition = count;
+        _division = count;
     }
 }

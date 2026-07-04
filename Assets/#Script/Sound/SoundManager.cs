@@ -19,13 +19,14 @@ namespace Sound
             _seAudio.PlayOneShot(seData.Clip, seData.Volume);
         }
 
-        public double PlayBGMSound(AudioClip clip, float dray)
+        public double PlayBGMSound(AudioClip clip, float dray, float time)
         {
             double startDspTime;
 
             startDspTime = AudioSettings.dspTime + dray;
 
             _seBGM.clip = clip;
+            _seBGM.time = time;
             _seBGM.PlayScheduled(startDspTime);
 
             return startDspTime;

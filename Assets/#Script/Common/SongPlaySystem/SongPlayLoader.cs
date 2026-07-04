@@ -14,7 +14,7 @@ namespace Common.PlaySystem
             }
 
             var playManager = Instantiate(_managerPrefab);
-            playManager.SetData(songData,patternJsonData);
+            playManager.SetData(songData,patternJsonData,0);
             DontDestroyOnLoad(playManager);
         }
     }

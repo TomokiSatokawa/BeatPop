@@ -25,6 +25,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Observable<Unit> OnGameClear => _onGameClear;
 
     private double _startDspTime;
+    private float _startSectionTime;
     private float _endTime = float.MaxValue;
 
     private void Start()
@@ -33,6 +34,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             InitializeSong(fileData.BPM);
             _endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
+            _startSectionTime = fileData.Section[SongPlayManager.I.StartSection];
             await LoadPlayAsync();
         }).AddTo(this);
     }
@@ -51,7 +53,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _songClip.LoadAudioData();
 
         await UniTask.WaitUntil(() => _songClip.loadState == AudioDataLoadState.Loaded);
-        _startDspTime = SoundManager.I.PlayBGMSound(_songClip, _waitSeconds);
+        _startDspTime = SoundManager.I.PlayBGMSound(_songClip, _waitSeconds,_startSectionTime);
         StageTime = -_waitSeconds;
         _isPlaying = true;
 
