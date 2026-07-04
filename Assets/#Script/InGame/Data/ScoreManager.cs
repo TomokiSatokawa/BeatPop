@@ -102,7 +102,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         }
         else
         {
-            _combo.Value = 0;
+            _combo.OnNext(0);
         }
     }
 
