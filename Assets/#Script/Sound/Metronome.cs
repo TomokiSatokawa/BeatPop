@@ -1,3 +1,4 @@
+using InGame.UI;
 using Unity.Content;
 using UnityEditor.Experimental;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace InGame.Sound
             float stageTime;
             if (EditorManager.I == null)
             {
-                stageTime = GameManager.I.StageTime;
+                stageTime = StageTimeController.StageTime;
             }
             else
             {
@@ -42,7 +43,7 @@ namespace InGame.Sound
         [ContextMenu("BPMを変更")]
         public void ChangeBPM()
         {
-            _bpmInterval = 60f / GameManager.I.BPM;
+            _bpmInterval = 60f / StageTimeController.I.BPM;
         }
     }
 }

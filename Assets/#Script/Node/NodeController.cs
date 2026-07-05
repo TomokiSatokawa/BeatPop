@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.PlaySystem;
+using InGame.UI;
 using Input;
 using R3;
 using Sound;
@@ -42,7 +43,7 @@ namespace InGame.Node
 
             InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => ClickLane(0, b, false)).AddTo(this);
             InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => ClickLane(1, b, false)).AddTo(this);
-            InputManager.OnFlick.Subscribe(x => ClickLane(x, false,true)).AddTo(this);
+            InputManager.OnFlick.Subscribe(x => ClickLane(x, false, true)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)
@@ -52,12 +53,12 @@ namespace InGame.Node
 
         public void Update()
         {
-            if (!GameManager.I.IsPlaying) return;
+            if (!StageTimeController.IsPlaying) return;
 
             List<NodeObject> removeNode = new();
             foreach (NodeObject node in _nodes)
             {
-                float deleteTime = GameManager.I.StageTime - JudgementManager.I.DeleteTime;
+                float deleteTime = StageTimeController.StageTime - JudgementManager.I.DeleteTime;
 
                 if (node.NodeData.Time <= deleteTime)
                 {
@@ -65,7 +66,7 @@ namespace InGame.Node
                 }
                 float startTime = node.NodeData.Time - NodeGenerator.I.ArrivalSeconds;
 
-                float progress = (GameManager.I.StageTime - startTime) / (node.NodeData.Time - startTime);
+                float progress = (StageTimeController.StageTime - startTime) / (node.NodeData.Time - startTime);
 
                 Vector3 startPosition = node.StartPosition;
                 Vector3 endPosition = startPosition;
@@ -78,7 +79,7 @@ namespace InGame.Node
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                    float difference = node.NodeData.Time - GameManager.I.StageTime;
+                    float difference = node.NodeData.Time - StageTimeController.StageTime;
                     var judgeData = ScoreManager.I.AddScore(node.Type, difference, node.NodeData);
                     _showJudge.OnNext((judgeData, node.NodeData.Lane));
                     if (node.Type == PoolPrefabType.HoldNoteEnd)
@@ -89,13 +90,13 @@ namespace InGame.Node
                 node.Release();
                 _nodes.Remove(node);
             }
-            if (_nextFillJudge <= GameManager.I.StageTime)
+            if (_nextFillJudge <= StageTimeController.StageTime)
             {
                 HoldLane(0, InputManager.LeftLane.CurrentValue);
                 HoldLane(1, InputManager.RightLane.CurrentValue);
 
                 _fillJudgeIndex++;
-                _nextFillJudge = _fillJudgeIndex * 30f / GameManager.I.BPM;
+                _nextFillJudge = _fillJudgeIndex * 30f / StageTimeController.I.BPM;
             }
         }
         public void HoldLane(int lane, bool isHold)
@@ -144,7 +145,7 @@ namespace InGame.Node
 
         private NodeObject GetClickNode(int lane)
         {
-            if (!GameManager.I.IsPlaying) return null;
+            if (!StageTimeController.IsPlaying) return null;
 
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;
@@ -155,7 +156,7 @@ namespace InGame.Node
                 if (node.NodeData.Lane != lane) continue;
 
                 float difference =
-                    Mathf.Abs(node.NodeData.Time - GameManager.I.StageTime);
+                    Mathf.Abs(node.NodeData.Time - StageTimeController.StageTime);
 
                 if (difference < bestDifference)
                 {
@@ -174,9 +175,9 @@ namespace InGame.Node
             return null;
         }
 
-        private bool ClickNode(PoolPrefabType nodeType , SESoundType se, NodeObject targetNode)
+        private bool ClickNode(PoolPrefabType nodeType, SESoundType se, NodeObject targetNode)
         {
-            if(targetNode.NodeData.PrefabType != nodeType) return false;
+            if (targetNode.NodeData.PrefabType != nodeType) return false;
 
             float nodeTime = targetNode.NodeData.Time;
 
@@ -199,7 +200,7 @@ namespace InGame.Node
             //flash.PlayFlash();
             //flash.transform.position = pos;
 
-            float difference = nodeTime - GameManager.I.StageTime;
+            float difference = nodeTime - StageTimeController.StageTime;
             var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
             _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
 

@@ -1,4 +1,5 @@
 using InGame.Node;
+using InGame.UI;
 using UnityEngine;
 
 public class NodeObject : PoolObject
@@ -30,7 +31,7 @@ public class NodeObject : PoolObject
     public void SetGoal(float goalZ)
     {
         _goalZ = goalZ; float distance = StartPosition.z - _goalZ;
-        float remainTime = NodeData.Time - GameManager.I.StageTime;
+        float remainTime = NodeData.Time - StageTimeController.StageTime;
         MoveAmount = distance / remainTime;
     }
 }

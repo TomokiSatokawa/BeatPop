@@ -27,6 +27,6 @@ public class InGameUIPresenter : MonoBehaviour
         }).AddTo(this);
         ScoreManager.I.Score.Subscribe(x => _scoreUIView.UpdateScore(x)).AddTo(this);
 
-        GameManager.I.OnGameClear.Subscribe(_ => _clearAnimation.PlayClearAnimation()).AddTo(this);
+        StageTimeController.I.OnGameClear.Subscribe(_ => _clearAnimation.PlayClearAnimation()).AddTo(this);
     }
 }

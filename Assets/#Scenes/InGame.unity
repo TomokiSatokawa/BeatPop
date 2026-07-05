@@ -6299,6 +6299,7 @@ GameObject:
   - component: {fileID: 1946836281}
   - component: {fileID: 1946836282}
   - component: {fileID: 1946836283}
+  - component: {fileID: 1946836284}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6368,6 +6369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _sceneLoad: {fileID: 2101936842}
+  _stageTimeController: {fileID: 1946836284}
   _waitSeconds: 5
   _songClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
   _bpm: 160.15
@@ -6399,6 +6401,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d8e2c40b944a14fa15c9e399ef60ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.TouchManager
+--- !u!114 &1946836284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946836277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29e27a550015f44a9fbdd2f9d8614e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.UI.StageTimeController
+  _waitSeconds: 5
 --- !u!1 &1950628530
 GameObject:
   m_ObjectHideFlags: 0

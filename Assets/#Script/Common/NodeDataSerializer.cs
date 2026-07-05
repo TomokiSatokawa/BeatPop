@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using InGame.Node;
+using InGame.UI;
 using UnityEngine;
 
 public static class NodeDataSerializer
@@ -10,7 +11,7 @@ public static class NodeDataSerializer
     public const string Version = "2.0";
     public static string SerializeCSV(List<NodeData> nodeDatas)
     {
-        float bpmInterval = 60f / GameManager.I.BPM;
+        float bpmInterval = 60f / StageTimeController.I.BPM;
 
         List<string> lines = new() { "NodeID,Lane,MeasureNumber,Beat,Type" };
 
@@ -44,7 +45,7 @@ public static class NodeDataSerializer
         var _nodeDatas = new List<NodeData>();
         _nodeDatas.Clear();
 
-        float bpmInterval = 60f / GameManager.I.BPM;
+        float bpmInterval = 60f / StageTimeController.I.BPM;
 
         string[] lines = csvData.Split('\n');
 

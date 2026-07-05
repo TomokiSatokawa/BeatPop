@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using InGame.Node;
+using InGame.UI;
 using Input;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ public class HoldNodeFillManager : MonoBehaviour
     {
         foreach (var fillData in _activeFillData.Values)
         {
-            if (fillData.StartNode.Lane == lane && fillData.StartNode.Time <= GameManager.I.StageTime)
+            if (fillData.StartNode.Lane == lane && fillData.StartNode.Time <= StageTimeController.StageTime)
             {
                 return true;
             }

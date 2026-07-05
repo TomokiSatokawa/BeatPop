@@ -1,85 +1,54 @@
-using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame.Node;
+using InGame.UI;
 using Input;
 using R3;
 using Sound;
 using TMPro;
 using UnityEngine;
+
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private SceneLoad _sceneLoad;
-    [SerializeField] private float _waitSeconds;
-    [SerializeField] private AudioClip _songClip;
-    [SerializeField] private float _bpm;
+    [SerializeField] private StageTimeController _stageTimeController;
     [SerializeField] private TextMeshProUGUI _timeText;
-    [SerializeField] private float _timeOffset;
-    [SerializeField] private float _resultDelay = 2f;
-    public float StageTime { get; private set; } = -1;
-    private bool _isPlaying = false;
-    public bool IsPlaying => _isPlaying;
-    public float BPM => _bpm;
-    public AudioClip SongClip => _songClip;
-
-    private Subject<Unit> _onGameClear = new();
-    public Observable<Unit> OnGameClear => _onGameClear;
-
-    private double _startDspTime;
-    private float _startSectionTime;
-    private float _endTime = float.MaxValue;
 
     private void Start()
     {
         NodeGenerator.I?.OnFileLoaded.Subscribe(async fileData =>
         {
-            InitializeSong(fileData.BPM);
-            _endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
-            _startSectionTime = fileData.Section[SongPlayManager.I.StartSection];
-            await LoadPlayAsync();
+            await LoadPlayAsync(fileData);
         }).AddTo(this);
     }
 
-    private void InitializeSong(float bpm)
-    {
-        _bpm = bpm;
-        _songClip = SongPlayManager.I.SongData.SongData.Audio;
-
-    }
-
-    private async UniTask LoadPlayAsync()
+    private async UniTask LoadPlayAsync(NodeSaveData fileData)
     {
         if (SoundManager.I == null) return;
-        StageTime = float.MinValue;
-        _songClip.LoadAudioData();
 
-        await UniTask.WaitUntil(() => _songClip.loadState == AudioDataLoadState.Loaded);
-        _startDspTime = SoundManager.I.PlayBGMSound(_songClip, _waitSeconds,_startSectionTime);
-        StageTime = -_waitSeconds;
-        _isPlaying = true;
+        _stageTimeController.SetPlayData(fileData);
 
+        await _stageTimeController.SongLoadAsync();
+
+        _stageTimeController.StartSongPlay();
     }
 
     private void Update()
     {
         UpdateDebugText();
 
-        if (!_isPlaying) return;
-
-        UpdateStageTime();
+        _stageTimeController.UpdateStageTime();
     }
 
     public void OnPause()
     {
-        _isPlaying = false;
+        _stageTimeController.Pause();
         InputManager.SetInputEnabled(false);
         SoundManager.I.IsPause(true);
     }
 
     public void ReStartStage()
     {
-        float offset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
-        _startDspTime = AudioSettings.dspTime - (StageTime - offset);
-        _isPlaying = true;
+        _stageTimeController.ReStart();
         SoundManager.I.IsPause(false);
     }
 
@@ -98,23 +67,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _sceneLoad.ChangeScene("Title");
     }
 
-    private void UpdateStageTime()
-    {
-        float offset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
-        StageTime = (float)(AudioSettings.dspTime - _startDspTime) + offset;
-
-        if (StageTime >= _endTime + _resultDelay)
-        {
-            _isPlaying = false;
-            _onGameClear.OnNext(Unit.Default);
-        }
-    }
-
     private void UpdateDebugText()
     {
         if (_timeText != null)
         {
-            _timeText.text = StageTime.ToString("N2");
+            _timeText.text = StageTimeController.StageTime.ToString("N2");
         }
     }
 }

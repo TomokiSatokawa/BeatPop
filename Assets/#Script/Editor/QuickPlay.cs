@@ -12,6 +12,7 @@ public class QuickPlay : EditorWindow
     private const string LevelKey = "QuickPlay_Level";
     private const string SoundDataKey = "QuickPlay_SoundData";
     private const string FoldoutKey = "QuickPlay_Foldout";
+    private const string SectionKey = "QuickPlay_Section";
 
     private SongData _songData;
     private int _levelIndex;
@@ -52,8 +53,7 @@ public class QuickPlay : EditorWindow
 
         _songData = (SongData)EditorGUILayout.ObjectField("曲データ", _songData, typeof(SongData), true);
         _levelIndex = EditorGUILayout.Popup("難易度", _levelIndex, new[] { "Easy", "Normal", "Hard", "Expert" });
-        _startSection = EditorGUILayout.IntField(_startSection, "開始セクション");
-
+        _startSection = EditorGUILayout.DelayedIntField("開始セクション", _startSection);
         foldout = EditorGUILayout.Foldout(foldout, "カスタムデータ");
         if (foldout)
         {
@@ -86,6 +86,7 @@ public class QuickPlay : EditorWindow
         EditorPrefs.SetInt(LevelKey, _levelIndex);
         EditorPrefs.SetString(SoundDataKey, AssetDatabase.GetAssetPath(_soundData));
         EditorPrefs.SetBool(FoldoutKey, foldout);
+        EditorPrefs.SetInt(SectionKey, _startSection);
     }
 
     private void Load()
@@ -105,6 +106,7 @@ public class QuickPlay : EditorWindow
         }
 
         foldout = EditorPrefs.GetBool(FoldoutKey, false);
+        _startSection = EditorPrefs.GetInt(SectionKey, 0);
     }
 
     public void OnStart()
@@ -172,7 +174,7 @@ public class QuickPlay : EditorWindow
             SoundPattern = _soundData.GetDefaultCustom()
         };
 
-        songPlayData.SetData(songSelectData, pattern, _startSection);
+        songPlayData.SetData(songSelectData, pattern,_startSection);
 
         await UniTask.DelayFrame(3);
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
+using InGame.UI;
 using R3;
 using UnityEngine;
 
@@ -50,15 +51,17 @@ namespace InGame.Node
             }
 
             // “¯Žž‰Ÿ‚µ‘Î‰ž‚Ì‚½‚ß while
-            while (_nextNode < NodeDates.Count && NodeDates[_nextNode].Time <= GameManager.I.StageTime + _arrivalSeconds)
+            while (_nextNode < NodeDates.Count && NodeDates[_nextNode].Time <= StageTimeController.StageTime + _arrivalSeconds)
             {
                 NodeData nodeData = NodeDates[_nextNode];
-
-                CreateNode(nodeData);
+                if (nodeData.Time >= StageTimeController.I.StartSectionTime)
+                {
+                    CreateNode(nodeData);
+                }
                 _nextNode++;
             }
 
-            if (_nextLine <= GameManager.I.StageTime + _arrivalSeconds)
+            if (_nextLine <= StageTimeController.StageTime + _arrivalSeconds)
             {
                 var nodeData1 = new NodeData();
                 nodeData1.Time = _nextLine;
@@ -73,7 +76,7 @@ namespace InGame.Node
                 CreateNode(nodeData2);
 
                 _lineIndex++;
-                _nextLine = _lineIndex * 60f / GameManager.I.BPM; 
+                _nextLine = _lineIndex * 60f / StageTimeController.I.BPM; 
             }
         }
 
