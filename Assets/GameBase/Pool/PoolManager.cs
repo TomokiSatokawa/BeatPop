@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class PoolManager : SingletonMonoBehaviour<PoolManager>
@@ -7,17 +8,52 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
 
     private readonly Dictionary<PoolPrefabType, Queue<PoolObject>> _pool = new();
 
-    private PoolObject CreatePoolObject(PoolPrefabType type,Transform parent)
+    public async UniTask ClonePoolObject()
+    {
+        List<UniTask> tasks = new();
+
+        int maxTaskSpawnCount = _poolPrefabData.MaxTaskSpawnCount;
+
+        foreach (var poolData in _poolPrefabData.PrefabDatas)
+        {
+            int remain = poolData.StartCloneCount;
+
+            while (remain > 0)
+            {
+                int spawnCount = Mathf.Min(remain, maxTaskSpawnCount);
+
+                int count = spawnCount;
+                PoolObject prefab = poolData.Prefab;
+
+                tasks.Add(CloneAndRelease(prefab, count));
+
+                remain -= spawnCount;
+            }
+        }
+
+        await UniTask.WhenAll(tasks);
+    }
+
+    private async UniTask CloneAndRelease(PoolObject prefab, int count)
+    {
+        var poolObjects = await InstantiateAsync(prefab, count);
+
+        foreach (var poolObject in poolObjects)
+        {
+            Release(poolObject);
+        }
+    }
+    private PoolObject CreatePoolObject(PoolPrefabType type, Transform parent)
     {
         PoolObject prefab = _poolPrefabData.GetPrefab(type);
 
-        PoolObject instance = Instantiate(prefab, transform,parent);
+        PoolObject instance = Instantiate(prefab, transform, parent);
         instance.SetData(type);
 
         return instance;
     }
 
-    public T Get<T>(PoolPrefabType type,Transform parent = null) where T : PoolObject
+    public T Get<T>(PoolPrefabType type, Transform parent = null) where T : PoolObject
     {
         if (!_pool.TryGetValue(type, out Queue<PoolObject> queue))
         {
@@ -33,7 +69,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         }
         else
         {
-            poolObject = CreatePoolObject(type,parent);
+            poolObject = CreatePoolObject(type, parent);
         }
         if (poolObject is not T result)
         {

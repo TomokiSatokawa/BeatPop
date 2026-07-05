@@ -27,7 +27,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         _stageTimeController.SetPlayData(fileData);
 
-        await _stageTimeController.SongLoadAsync();
+        UniTask songLoad = _stageTimeController.SongLoadAsync();
+        UniTask poolClone = PoolManager.I.ClonePoolObject();
+
+        await UniTask.WhenAll(songLoad, poolClone);
 
         _stageTimeController.StartSongPlay();
     }

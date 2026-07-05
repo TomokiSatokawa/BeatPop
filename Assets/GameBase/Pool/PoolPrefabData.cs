@@ -5,6 +5,9 @@ using UnityEngine;
 public class PoolPrefabData : ScriptableObject
 {
     [SerializeField] private PrefabData[] _prefabDatas;
+    [SerializeField] private int _maxTaskSpawnCount = 50;
+    public IReadOnlyList<PrefabData> PrefabDatas => _prefabDatas;
+    public int MaxTaskSpawnCount => _maxTaskSpawnCount;
 
     public Dictionary<PoolPrefabType, PoolObject> _prefabDic;
     [System.Serializable]
@@ -12,6 +15,7 @@ public class PoolPrefabData : ScriptableObject
     {
         public PoolPrefabType Type;
         public PoolObject Prefab;
+        public int StartCloneCount = 5;
     }
 
     private void SetPrefabDic()
