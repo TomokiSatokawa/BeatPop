@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: Carrying Happiness
   _songID: 1
   _bpm: 160
-  _maxScore: 10180
+  _maxScore: 10060
   _charts:
     EasyLevel: 0
     EasyJson: {fileID: 0}

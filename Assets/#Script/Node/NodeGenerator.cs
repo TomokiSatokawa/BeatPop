@@ -29,7 +29,7 @@ namespace InGame.Node
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
                 BeatUpdateManager.I.Register(new BeatUpdateHandle(16, -_arrivalSeconds, _ => GenerateNodes()));
-                BeatUpdateManager.I.Register(new BeatUpdateHandle(1, -_arrivalSeconds, GenerateLines));
+                BeatUpdateManager.I.Register(new BeatUpdateHandle(4, -_arrivalSeconds, GenerateLines));
             }).AddTo(this);
         }
 
