@@ -21,12 +21,16 @@ namespace InGame.Node
 
         public List<NodeData> NodeDates { get; private set; }
         private int _nextNode = 0;
-        private float _nextLineTime = 0;
         public float ArrivalSeconds => _arrivalSeconds;
-        private int _nextLineIndex = 0;
         void Start()
         {
             InGameFileLoad.I.OnFileLoaded.Subscribe(x => NodeDates = x.Nodes).AddTo(this);
+
+            StageTimeController.I.OnInitialized.Subscribe(_ =>
+            {
+                BeatUpdateManager.I.Register(new BeatUpdateHandle(16, -_arrivalSeconds, _ => GenerateNodes()));
+                BeatUpdateManager.I.Register(new BeatUpdateHandle(1, -_arrivalSeconds, GenerateLines));
+            }).AddTo(this);
         }
 
         void Update()
@@ -39,42 +43,39 @@ namespace InGame.Node
                 _isGenerating = false;
                 return;
             }
-
-
-            GenerateNodes();
-
-            GenerateLines();
         }
 
-        private void GenerateLines()
+        private void GenerateLines(float time)
         {
-            if (_nextLineTime <= StageTimeController.StageTime + _arrivalSeconds)
+            float lineTime = time + _arrivalSeconds;
+            for (int lane = 0; lane < _clonePosition.Length; lane++)
             {
-                for (int lane = 0; lane < _clonePosition.Length; lane++)
+                CreateNode(new NodeData
                 {
-                    CreateNode(new NodeData
-                    {
-                        Time = _nextLineTime,
-                        PrefabType = PoolPrefabType.Line,
-                        Lane = lane
-                    });
-                }
-
-                _nextLineIndex++;
-                _nextLineTime = _nextLineIndex * 60f / StageTimeController.I.BPM;
+                    Time = lineTime,
+                    PrefabType = PoolPrefabType.Line,
+                    Lane = lane
+                });
             }
         }
 
         private void GenerateNodes()
         {
-            // “¯Žž‰Ÿ‚µ‘Î‰ž‚Ì‚½‚ß while
-            while (_nextNode < NodeDates.Count && NodeDates[_nextNode].Time <= StageTimeController.StageTime + _arrivalSeconds)
+            double generateTime = StageTimeController.StageTime + _arrivalSeconds;
+            double startSectionTime = StageTimeController.I.StartSectionTime;
+
+            while (_nextNode < NodeDates.Count)
             {
                 NodeData nodeData = NodeDates[_nextNode];
-                if (nodeData.Time >= StageTimeController.I.StartSectionTime)
+
+                if (nodeData.Time > generateTime)
+                    return;
+
+                if (nodeData.Time >= startSectionTime)
                 {
                     CreateNode(nodeData);
                 }
+
                 _nextNode++;
             }
         }

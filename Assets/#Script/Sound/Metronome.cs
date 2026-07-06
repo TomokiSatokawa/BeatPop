@@ -1,6 +1,5 @@
 using InGame.UI;
-using Unity.Content;
-using UnityEditor.Experimental;
+using R3;
 using UnityEngine;
 
 namespace InGame.Sound
@@ -16,28 +15,34 @@ namespace InGame.Sound
         void Start()
         {
             ChangeBPM();
+            StageTimeController.I.OnInitialized.Subscribe(_ =>
+            {
+                BeatUpdateManager.I.Register(new BeatUpdateHandle(4, 0, _ => _audioSource.PlayOneShot(_clip)));
+            }).AddTo(this);
         }
+
+
 
         void FixedUpdate()
         {
-            ChangeBPM();
-            float stageTime;
-            if (EditorManager.I == null)
-            {
-                stageTime = StageTimeController.StageTime;
-            }
-            else
-            {
-                stageTime = (float)EditorManager.I.EditorTime.CurrentValue;
-            }
+            //ChangeBPM();
+            //float stageTime;
+            //if (EditorManager.I == null)
+            //{
+            //    stageTime = StageTimeController.StageTime;
+            //}
+            //else
+            //{
+            //    stageTime = (float)EditorManager.I.EditorTime.CurrentValue;
+            //}
 
-            int beat = Mathf.FloorToInt(stageTime / _bpmInterval);
+            //int beat = Mathf.FloorToInt(stageTime / _bpmInterval);
 
-            if (beat > _currentBeat)
-            {
-                _currentBeat = beat;
-                _audioSource.PlayOneShot(_clip);
-            }
+            //if (beat > _currentBeat)
+            //{
+            //    _currentBeat = beat;
+            //    _audioSource.PlayOneShot(_clip);
+            //}
         }
 
         [ContextMenu("BPMを変更")]

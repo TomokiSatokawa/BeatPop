@@ -23,7 +23,6 @@ namespace InGame.Node
         public void ClickLane(int lane, bool isClick, bool isFlick)
         {
             var node = _nodeController.GetClickNode(lane);
-
             if (node != null)
             {
                 InputType inputType = GetInputType(isClick, isFlick);

@@ -24,10 +24,22 @@ namespace InGame.Node
         private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
 
         public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
-        private float _nextFillJudge;
-        private float _fillJudgeIndex = 0;
 
         private readonly List<NodeObject> _removeNodes = new();
+        private void Start()
+        {
+           StageTimeController.I.OnInitialized.Subscribe(_ => InitializeBeat()).AddTo(this);
+        }
+
+        private void InitializeBeat()
+        {
+            BeatUpdateManager.I.Register(new BeatUpdateHandle(8, 0, _ =>
+            {
+                HoldLane(0, InputManager.LeftLane.CurrentValue);
+                HoldLane(1, InputManager.RightLane.CurrentValue);
+            }));
+        }
+
         public void AddNode(NodeObject node)
         {
             _nodes.Add(node);
@@ -53,7 +65,6 @@ namespace InGame.Node
                 Vector3 startPosition = node.StartPosition;
                 Vector3 endPosition = startPosition;
                 endPosition.z = node.GoalPos;
-
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
 
@@ -72,17 +83,8 @@ namespace InGame.Node
                 node.Release();
                 _nodes.Remove(node);
             }
-
-            if (_nextFillJudge <= StageTimeController.StageTime)
-            {
-                HoldLane(0, InputManager.LeftLane.CurrentValue);
-                HoldLane(1, InputManager.RightLane.CurrentValue);
-
-                _fillJudgeIndex++;
-                _nextFillJudge = _fillJudgeIndex * 30f / StageTimeController.I.BPM;
-            }
         }
-        public void HoldLane(int lane, bool isHold)
+        private void HoldLane(int lane, bool isHold)
         {
             if (_nodeFillManager.HasFill(lane))
             {
@@ -101,7 +103,8 @@ namespace InGame.Node
 
             foreach (var node in _nodes)
             {
-                if (node.NodeData.Lane != lane) continue;
+                if (node.Type == PoolPrefabType.Line
+                    || node.NodeData.Lane != lane) continue;
 
                 float difference =
                     Mathf.Abs(node.NodeData.Time - StageTimeController.StageTime);

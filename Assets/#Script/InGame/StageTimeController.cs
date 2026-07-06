@@ -6,23 +6,26 @@ using UnityEngine;
 
 namespace InGame.UI
 {
-
-    public class StageTimeController:SingletonMonoBehaviour<StageTimeController>
+    /// <summary>
+    /// StageTimeを管理する
+    /// </summary>
+    public class StageTimeController : SingletonMonoBehaviour<StageTimeController>
     {
         [SerializeField] private float _waitSeconds;
         [SerializeField] private float _resultDelay;
-
+        [SerializeField] private float _timeOffset;
+        
         public float BPM { get; private set; }
-        public float StartSectionTime { get;private set; }
+        public float StartSectionTime { get; private set; }
         public float EndTime { get; private set; }
         public AudioClip SongClip { get; private set; }
         public static float StageTime { get; private set; } = float.MinValue;
         public static bool IsPlaying { get; private set; } = false;
-
+        private Subject<Unit> _onInitialized = new();
+        public Observable<Unit> OnInitialized => _onInitialized;
 
         private Subject<Unit> _onGameClear = new();
         public Observable<Unit> OnGameClear => _onGameClear;
-
 
         private double _startDspTime;
 
@@ -31,7 +34,7 @@ namespace InGame.UI
             BPM = fileData.BPM;
             EndTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
             SongClip = SongPlayManager.I.SongData.SongData.Audio;
-
+            _timeOffset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
             int sectionIndex = Mathf.Clamp(SongPlayManager.I.StartSection, 0, fileData.Section.Count) - 1;
             if (sectionIndex == -1)
             {
@@ -58,14 +61,14 @@ namespace InGame.UI
             _startDspTime = AudioSettings.dspTime + _waitSeconds - StartSectionTime;
             StageTime = -_waitSeconds;
             IsPlaying = true;
+            _onInitialized.OnNext(Unit.Default);
         }
 
         public void UpdateStageTime()
         {
             if (!IsPlaying) return;
-
-            float offset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
-            StageTime = (float)(AudioSettings.dspTime - _startDspTime) + offset;
+            
+            StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
 
             if (StageTime >= EndTime + _resultDelay)
             {
@@ -76,8 +79,7 @@ namespace InGame.UI
 
         public void ReStart()
         {
-            float offset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
-            _startDspTime = AudioSettings.dspTime - (StageTime - offset);
+            _startDspTime = AudioSettings.dspTime - (StageTime - _timeOffset);
             IsPlaying = true;
         }
 

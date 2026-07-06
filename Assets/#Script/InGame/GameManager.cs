@@ -16,10 +16,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Start()
     {
         InputManager.SetInputEnabled(true);
-        initialize();
+        Initialize();
     }
 
-    private async void initialize()
+    private async void Initialize()
     {
         InGameFileLoad.I?.OnFileLoaded.Subscribe(async fileData =>
         {
@@ -41,6 +41,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         UniTask poolClone = PoolManager.I.ClonePoolObject();
 
         await UniTask.WhenAll(songLoad, poolClone);
+        await UniTask.WaitForSeconds(1);
 
         _stageTimeController.StartSongPlay();
     }
@@ -90,7 +91,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (_timeText != null)
         {
-            //_timeText.text = StageTimeController.StageTime.ToString("N2");
+            _timeText.text = StageTimeController.StageTime.ToString("N2");
         }
     }
 }
