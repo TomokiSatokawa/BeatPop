@@ -49,6 +49,15 @@ public class HoldNodeFillManager : MonoBehaviour
             fillDataPir.Value.Tick(Time.deltaTime);
         }
     }
+
+    public void OnDestroy()
+    {
+        foreach(var  fillData in _activeFillData.Values)
+        {
+            fillData.Remove();
+        }
+        _activeFillData.Clear();
+    }
     public class FillData
     {
         private PoolObject _fillObject;
@@ -85,7 +94,7 @@ public class HoldNodeFillManager : MonoBehaviour
             }
             else
             {
-                start.z = _deletePosZ;
+                start.z = _tapPosZ;
                 _startObject = null;
             }
 
@@ -131,7 +140,7 @@ public class HoldNodeFillManager : MonoBehaviour
         public void SetNodeObject(PoolObject start = null, PoolObject end = null)
         {
             if (start != null)
-                _startObject = start;
+                _startObject = start;   
 
             if (end != null)
                 EndObject = end;

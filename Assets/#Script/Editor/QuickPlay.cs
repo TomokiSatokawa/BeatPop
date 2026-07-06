@@ -159,8 +159,6 @@ public class QuickPlay : EditorWindow
 
     public async void CreatePlayData()
     {
-        Debug.Log("CreatePlay");
-
         var playData = new GameObject("QuickPlayData");
         var songPlayData = playData.AddComponent<SongPlayManager>();
 

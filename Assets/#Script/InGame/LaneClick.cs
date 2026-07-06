@@ -17,6 +17,13 @@ namespace InGame.Node
         [SerializeField] private float _emptyClickDuration;
         [SerializeField] private float _nodeClickAlphaMultiplier = 0.5f;
 
+        private void Start()
+        {
+            foreach(var lane in _laneHighlight)
+            {
+                lane.Highlight.DOFade(0, 0);
+            }
+        }
         public void PlayLaneHighlight(int lane,float alphaMultiplier = 1)
         {
             if ((uint)lane >= (uint)_laneHighlight.Length)

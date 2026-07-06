@@ -27,6 +27,7 @@ namespace InGame.Node
         private float _nextFillJudge;
         private float _fillJudgeIndex = 0;
 
+        private readonly List<NodeObject> _removeNodes = new();
         public void AddNode(NodeObject node)
         {
             _nodes.Add(node);
@@ -36,14 +37,14 @@ namespace InGame.Node
         {
             if (!StageTimeController.IsPlaying) return;
 
-            List<NodeObject> removeNode = new();
+            _removeNodes.Clear();
             foreach (NodeObject node in _nodes)
             {
                 float deleteTime = StageTimeController.StageTime - JudgementManager.I.DeleteTime;
 
                 if (node.NodeData.Time <= deleteTime)
                 {
-                    removeNode.Add(node);
+                    _removeNodes.Add(node);
                 }
                 float startTime = node.NodeData.Time - NodeGenerator.I.ArrivalSeconds;
 
@@ -56,7 +57,7 @@ namespace InGame.Node
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
 
-            foreach (NodeObject node in removeNode)
+            foreach (NodeObject node in _removeNodes)
             {
                 if (node.Type != PoolPrefabType.Line)
                 {

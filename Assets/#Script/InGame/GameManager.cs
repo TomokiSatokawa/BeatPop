@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using InGame;
-using InGame.Node;
 using InGame.UI;
 using Input;
 using R3;
@@ -17,6 +15,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
+        InputManager.SetInputEnabled(true);
         initialize();
     }
 
@@ -73,9 +72,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void Retry()
     {
+        DontDestroyRelease();
         _sceneLoad.ChangeScene("InGame");
     }
 
+    private void DontDestroyRelease()
+    {
+        ScoreManager.I.Release();
+        JudgementManager.I.Release();
+    }
     public void ReturnTitle()
     {
         _sceneLoad.ChangeScene("Title");
@@ -85,7 +90,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (_timeText != null)
         {
-            _timeText.text = StageTimeController.StageTime.ToString("N2");
+            //_timeText.text = StageTimeController.StageTime.ToString("N2");
         }
     }
 }

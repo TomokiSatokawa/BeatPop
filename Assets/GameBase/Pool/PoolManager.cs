@@ -8,6 +8,14 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
 
     private readonly Dictionary<PoolPrefabType, Queue<PoolObject>> _pool = new();
 
+    public override void Awake()
+    {
+        base.Awake();
+        foreach(var poolData in _poolPrefabData.PrefabDatas)
+        {
+            _pool.Add(poolData.Type, new());
+        }
+    }
     public async UniTask ClonePoolObject()
     {
         List<UniTask> tasks = new();
@@ -23,9 +31,9 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
                 int spawnCount = Mathf.Min(remain, maxTaskSpawnCount);
 
                 int count = spawnCount;
-                PoolObject prefab = poolData.Prefab;
+                var data = poolData;
 
-                tasks.Add(CloneAndRelease(prefab, count));
+                tasks.Add(CloneAndRelease(data, count));
 
                 remain -= spawnCount;
             }
@@ -34,12 +42,13 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         await UniTask.WhenAll(tasks);
     }
 
-    private async UniTask CloneAndRelease(PoolObject prefab, int count)
+    private async UniTask CloneAndRelease(PoolPrefabData.PrefabData poolData, int count)
     {
-        var poolObjects = await InstantiateAsync(prefab, count);
+        var poolObjects = await InstantiateAsync(poolData.Prefab, count);
 
         foreach (var poolObject in poolObjects)
         {
+            poolObject.SetData(poolData.Type);
             Release(poolObject);
         }
     }
@@ -77,7 +86,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
             return null;
         }
 
-        result.transform.parent = parent;
+        result.transform.SetParent(parent);
         result.gameObject.SetActive(true);
         result.OnPoolActive();
 

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Windows;
 namespace Input
 {
     public class InputManager : SingletonMonoBehaviour<InputManager>
@@ -127,6 +128,10 @@ namespace Input
                 GameInputs.Player.LeftKey.Enable();
                 GameInputs.Player.RightFlick.Enable();
                 GameInputs.Player.LeftFlick.Enable();
+                GameInputs.Player.Touch_0.Enable();
+                GameInputs.Player.Touch_1.Enable();
+                GameInputs.Player.Touch_2.Enable();
+                GameInputs.Player.Touch_3.Enable();
             }
             else
             {
@@ -134,6 +139,10 @@ namespace Input
                 GameInputs.Player.LeftKey.Disable();
                 GameInputs.Player.RightFlick.Disable();
                 GameInputs.Player.LeftFlick.Disable();
+                GameInputs.Player.Touch_0.Disable();
+                GameInputs.Player.Touch_1.Disable();
+                GameInputs.Player.Touch_2.Disable();
+                GameInputs.Player.Touch_3.Disable();
             }
         }
 
@@ -148,6 +157,10 @@ namespace Input
             {
                 _onFlick.OnNext(i);
             }
+        }
+        private void OnDisable()
+        {
+            GameInputs.Disable();
         }
     }
 }

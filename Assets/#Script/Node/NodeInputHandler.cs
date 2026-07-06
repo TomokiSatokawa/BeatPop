@@ -13,7 +13,7 @@ namespace InGame.Node
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private HoldNodeFillManager _holdNodeFillManager;
         [SerializeField] private LaneClick _laneClick;
-       
+
         void Start()
         {
             InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => ClickLane(0, b, false)).AddTo(this);
@@ -37,7 +37,9 @@ namespace InGame.Node
             }
             if (_holdNodeFillManager.HasFill(lane)) return;
 
-            if (isClick && node.NodeObjData.InputType != InputType.Flick)
+            bool nextFlick = node == null || node.NodeObjData.InputType != InputType.Flick;
+
+            if (isClick && nextFlick)
                 EmptyClick(lane);
         }
 
