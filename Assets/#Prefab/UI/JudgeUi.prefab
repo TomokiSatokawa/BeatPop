@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7830307794548018142}
   - component: {fileID: 6728495030861461048}
   - component: {fileID: 7048471429675768756}
-  - component: {fileID: 1176178525409276459}
+  - component: {fileID: -7886157771580841754}
   m_Layer: 5
-  m_Name: Miss
+  m_Name: JudgeUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Miss
+  m_text: 'Bad
 
 '
   m_isRightToLeft: 0
@@ -77,8 +77,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278254591
-  m_fontColor: {r: 0.6679245, g: 0.6679245, b: 0.6679245, a: 1}
+    rgba: 4294901872
+  m_fontColor: {r: 0.44029665, g: 0, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1176178525409276459
+--- !u!114 &-7886157771580841754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,5 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JudgeUIControl
   _moveAmount: 100
-  _duration: 1
+  _duration: 0.5
   _text: {fileID: 7048471429675768756}

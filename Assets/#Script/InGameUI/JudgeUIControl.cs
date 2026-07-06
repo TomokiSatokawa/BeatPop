@@ -2,16 +2,26 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class JudgeUIControl : MonoBehaviour
+public class JudgeUIControl : PoolObject
 {
     [SerializeField] private float _moveAmount;
     [SerializeField] private float _duration;
     [SerializeField] private TextMeshProUGUI _text;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public TextMeshProUGUI Text => _text;
+
+    private Sequence _sequence;
+    private void Awake()
     {
-        _text.rectTransform.DOAnchorPosY(_text.rectTransform.anchoredPosition.y + _moveAmount, _duration).SetLink(this.gameObject); ;
-        _text.DOFade(0, _duration / 2).SetLink(this.gameObject);
-        Destroy(this.gameObject, _duration + 0.01f);
+        _sequence = DOTween.Sequence()
+            .Append(_text.rectTransform.DOAnchorPosY(_moveAmount, _duration).SetRelative())
+            .Append(_text.DOFade(0, _duration / 2))
+            .AppendCallback(() => Release())
+            .SetAutoKill(false)
+            .Pause();
+    }
+
+    private void OnEnable()
+    {
+        _sequence.Restart(true);
     }
 }

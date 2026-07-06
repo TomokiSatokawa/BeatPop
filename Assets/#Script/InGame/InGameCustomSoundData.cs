@@ -11,6 +11,7 @@ public class InGameCustomSoundData : SingletonMonoBehaviour<InGameCustomSoundDat
     [SerializeField] private CustomSoundData _soundData;
     private Dictionary<PoolPrefabType, SESoundType> _nodeSE = new();
     public IReadOnlyDictionary<PoolPrefabType, SESoundType> NodeSE => _nodeSE;
+
     void Start()
     {
         CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;

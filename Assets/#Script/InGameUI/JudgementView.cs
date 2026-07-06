@@ -8,10 +8,10 @@ public class JudgementView : MonoBehaviour
 
     public void ViewPrefab(IReadOnlyJudgementData judgeData, int lane)
     {
-        //TODO:ObjectPool�ɕύX
-        GameObject obj = Instantiate(judgeData.Prefab, _canvas.transform);
+       var judgeUI = PoolManager.I.Get<JudgeUIControl>(PoolPrefabType.JudgeUI,_canvas.transform);
 
-        RectTransform rect = obj.GetComponent<RectTransform>();
-        rect.anchoredPosition = _pos[lane].anchoredPosition;
+        judgeUI.Text.text = judgeData.Name.ToString();
+        judgeUI.Text.color = judgeData.TextColor;
+        judgeUI.Text.rectTransform.anchoredPosition = _pos[lane].anchoredPosition;
     }
 }

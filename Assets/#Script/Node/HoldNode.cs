@@ -12,6 +12,5 @@ public class HoldNode : NodeObject
     public override void Update()
     {
         base.Update();
-
     }
 }

@@ -26,10 +26,6 @@ namespace InGame.Node
         public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
         private float _nextFillJudge;
         private float _fillJudgeIndex = 0;
-        public void Start()
-        {
-
-        }
 
         public void AddNode(NodeObject node)
         {
@@ -75,6 +71,7 @@ namespace InGame.Node
                 node.Release();
                 _nodes.Remove(node);
             }
+
             if (_nextFillJudge <= StageTimeController.StageTime)
             {
                 HoldLane(0, InputManager.LeftLane.CurrentValue);
@@ -150,10 +147,10 @@ namespace InGame.Node
 
             _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
         }
+
         public NodeObject GetClonedNode(int nodeID)
         {
             return _nodes.Where(x => x.NodeData.NodeID == nodeID).FirstOrDefault();
         }
-        
     }
 }

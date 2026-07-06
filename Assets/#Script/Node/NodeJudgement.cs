@@ -30,7 +30,7 @@ public interface IReadOnlyJudgementData
 
     bool ShowEarlyLateText { get; }
 
-    GameObject Prefab { get; }
+   Color TextColor { get; }
 
     bool IsComboContinued { get; }
 
@@ -45,7 +45,7 @@ public class JudgementData : IReadOnlyJudgementData
     public JudgementType Name;
     public float Value;
     public bool ShowEarlyLateText;
-    public GameObject Prefab;
+    public Color TextColor;
 
     public bool IsComboContinued;
     public bool IsAllPerfectContinued;
@@ -55,7 +55,7 @@ public class JudgementData : IReadOnlyJudgementData
 
     bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
 
-    GameObject IReadOnlyJudgementData.Prefab => Prefab;
+    Color IReadOnlyJudgementData.TextColor => TextColor;
 
     bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
 
