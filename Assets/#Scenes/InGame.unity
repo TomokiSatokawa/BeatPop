@@ -4425,6 +4425,7 @@ GameObject:
   - component: {fileID: 1252056263}
   - component: {fileID: 1252056266}
   - component: {fileID: 1252056267}
+  - component: {fileID: 1252056268}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -4503,6 +4504,21 @@ MonoBehaviour:
   _cloneZ: 65.901
   _tapZ: -10
   _deleteZ: -15
+--- !u!114 &1252056268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252056262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2898fc19ad98f3346a6a0d0d0cd4be81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeInputHandler
+  _nodeController: {fileID: 1252056266}
+  _holdNodeFillManager: {fileID: 1252056267}
+  _laneClick: {fileID: 1946836279}
 --- !u!1 &1258396494
 GameObject:
   m_ObjectHideFlags: 0
@@ -6300,6 +6316,7 @@ GameObject:
   - component: {fileID: 1946836282}
   - component: {fileID: 1946836283}
   - component: {fileID: 1946836284}
+  - component: {fileID: 1946836285}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6370,12 +6387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _sceneLoad: {fileID: 2101936842}
   _stageTimeController: {fileID: 1946836284}
-  _waitSeconds: 5
-  _songClip: {fileID: 8300000, guid: 52962e2d596590c459c4add9129195e8, type: 3}
-  _bpm: 160.15
   _timeText: {fileID: 1463515347}
-  _timeOffset: 0
-  _resultDelay: 2
 --- !u!114 &1946836282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6414,6 +6426,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.UI.StageTimeController
   _waitSeconds: 5
+  _resultDelay: 0
+--- !u!114 &1946836285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946836277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5bad15e0aba7f6478a9b8812d6c0630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.InGameFileLoad
 --- !u!1 &1950628530
 GameObject:
   m_ObjectHideFlags: 0
@@ -7085,8 +7110,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6214516737644960656}
   m_SourcePrefab: {fileID: 100100000, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
+--- !u!1 &6214516737644960655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
+  m_PrefabInstance: {fileID: 6214516737644960654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6214516737644960656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214516737644960655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb74efff05f96774dbb8f8999e22ce99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGameCustomSoundData
+  _soundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

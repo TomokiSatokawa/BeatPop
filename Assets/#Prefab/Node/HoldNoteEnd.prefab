@@ -125,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0aa1440404d82944afb0653818f8267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeObject
-  _tapEffect: 13
-  _nodeColor: {r: 0, g: 0.80784315, b: 0.81960785, a: 1}
+  _objectData:
+    _tapEffect: 14
+    _nodeColor: {r: 0, g: 0, b: 0, a: 0}
+    _inputType: 2
   NodeData:
     NodeID: 0
     Lane: 0

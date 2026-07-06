@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using InGame;
 using InGame.Node;
 using InGame.UI;
 using Input;
@@ -15,10 +17,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
-        NodeGenerator.I?.OnFileLoaded.Subscribe(async fileData =>
+        initialize();
+    }
+
+    private async void initialize()
+    {
+        InGameFileLoad.I?.OnFileLoaded.Subscribe(async fileData =>
         {
             await LoadPlayAsync(fileData);
         }).AddTo(this);
+
+        await UniTask.Yield();
+
+        await InGameFileLoad.I.FileLoad();
     }
 
     private async UniTask LoadPlayAsync(NodeSaveData fileData)

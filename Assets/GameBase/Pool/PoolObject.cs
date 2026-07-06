@@ -20,6 +20,10 @@ public class PoolObject : MonoBehaviour
 
     public void Release()
     {
+        if(Type == PoolPrefabType.NormalNote)
+        {
+            Debug.Log("release");
+        }
         PoolManager.I.Release(this);
     }
 }

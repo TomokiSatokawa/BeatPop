@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame.UI;
 using R3;
@@ -7,6 +6,9 @@ using UnityEngine;
 
 namespace InGame.Node
 {
+    /// <summary>
+    /// ノーツの生成
+    /// </summary>
     public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>
     {
         [SerializeField] private NodeController _nodeController;
@@ -14,34 +16,22 @@ namespace InGame.Node
         [SerializeField] private Transform[] _clonePosition;
         [SerializeField] private float _goalZ;
         [SerializeField] private float _arrivalSeconds;
-        [SerializeField] private bool _isGenerating;
+        [SerializeField] private bool _isGenerating = true;
         [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
 
         public List<NodeData> NodeDates { get; private set; }
         private int _nextNode = 0;
-        private float _nextLine = 0;
-        public float ArrivalSeconds => _arrivalSeconds; 
-        private int _lineIndex =0;
-
-        private Subject<NodeSaveData> _onFileLoaded = new();
-        public Observable<NodeSaveData> OnFileLoaded => _onFileLoaded;
+        private float _nextLineTime = 0;
+        public float ArrivalSeconds => _arrivalSeconds;
+        private int _nextLineIndex = 0;
         void Start()
         {
-            LoadFile();
+            InGameFileLoad.I.OnFileLoaded.Subscribe(x => NodeDates = x.Nodes).AddTo(this);
         }
 
-        private async void LoadFile()
-        {
-            await UniTask.Yield();
-            var data = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.GetNodeJson().text);
-            NodeDates = data.Nodes;
-            _onFileLoaded.OnNext(data);
-        }
-
-        // Update is called once per frame
         void Update()
         {
-            if (NodeDates == null) return;
+            if (NodeDates == null || !_isGenerating) return;
 
             // 全ノード生成済みなら終了
             if (_nextNode >= NodeDates.Count)
@@ -50,6 +40,33 @@ namespace InGame.Node
                 return;
             }
 
+
+            GenerateNodes();
+
+            GenerateLines();
+        }
+
+        private void GenerateLines()
+        {
+            if (_nextLineTime <= StageTimeController.StageTime + _arrivalSeconds)
+            {
+                for (int lane = 0; lane < _clonePosition.Length; lane++)
+                {
+                    CreateNode(new NodeData
+                    {
+                        Time = _nextLineTime,
+                        PrefabType = PoolPrefabType.Line,
+                        Lane = lane
+                    });
+                }
+
+                _nextLineIndex++;
+                _nextLineTime = _nextLineIndex * 60f / StageTimeController.I.BPM;
+            }
+        }
+
+        private void GenerateNodes()
+        {
             // 同時押し対応のため while
             while (_nextNode < NodeDates.Count && NodeDates[_nextNode].Time <= StageTimeController.StageTime + _arrivalSeconds)
             {
@@ -60,35 +77,32 @@ namespace InGame.Node
                 }
                 _nextNode++;
             }
-
-            if (_nextLine <= StageTimeController.StageTime + _arrivalSeconds)
-            {
-                var nodeData1 = new NodeData();
-                nodeData1.Time = _nextLine;
-                nodeData1.PrefabType = PoolPrefabType.Line;
-                nodeData1.Lane = 0;
-                CreateNode(nodeData1);
-
-                var nodeData2 = new NodeData();
-                nodeData2.Time = _nextLine;
-                nodeData2.PrefabType = PoolPrefabType.Line;
-                nodeData2.Lane = 1;
-                CreateNode(nodeData2);
-
-                _lineIndex++;
-                _nextLine = _lineIndex * 60f / StageTimeController.I.BPM; 
-            }
         }
 
         private void CreateNode(NodeData nodeData)
         {
             PoolPrefabType prefabType = nodeData.PrefabType;
-            if (prefabType == PoolPrefabType.HoldNoteStart || prefabType == PoolPrefabType.HoldNoteEnd)
+
+            switch (prefabType)
             {
-                CreateHoldNode(nodeData);
-                return;
+                case PoolPrefabType.HoldNoteStart:
+                    CreateHoldStartNode(nodeData);
+                    return;
+
+                case PoolPrefabType.HoldNoteEnd:
+                    CreateHoldEndNode(nodeData);
+                    return;
+
+                case PoolPrefabType.NormalNote:
+                case PoolPrefabType.FlickNote:
+                case PoolPrefabType.Line:
+                    GenerateNode<NodeObject>(nodeData);
+                    return;
+
+                default:
+                    Debug.LogError($"Unsupported PoolPrefabType: {prefabType}");
+                    return;
             }
-            GenerateNode<NodeObject>(nodeData);
         }
 
         private T GenerateNode<T>(NodeData nodeData) where T : NodeObject
@@ -104,40 +118,40 @@ namespace InGame.Node
             return newObject;
         }
 
-        private void CreateHoldNode(NodeData holdNode)
+        private void CreateHoldStartNode(NodeData nodeData)
         {
-            var holdObject = GenerateNode<NodeObject>(holdNode);
+            var holdObject = GenerateNode<NodeObject>(nodeData);
 
-            if (holdNode.PrefabType == PoolPrefabType.HoldNoteStart)
+            //終了ノーツを探す
+            int endIndex = -1;
+
+            for (int j = nodeData.NodeID + 1; j < NodeDates.Count; j++)
             {
-                int endIndex = -1;
+                var node = NodeDates[j];
 
-                for (int j = holdNode.NodeID + 1; j < NodeDates.Count; j++)
+                if (node.Lane != nodeData.Lane)
+                    continue;
+
+                if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
                 {
-                    var node = NodeDates[j];
-
-                    if (node.Lane != holdNode.Lane)
-                        continue;
-
-                    if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
-                    {
-                        endIndex = j;
-                        break;
-                    }
+                    endIndex = j;
+                    break;
                 }
-
-                if (endIndex < 0)
-                {
-                    Debug.LogError($"HoldEnd is not found. StartNodeID:{holdNode.NodeID}");
-                    return;
-                }
-
-                _nodeFillRenderer.AddClone(holdNode, NodeDates[endIndex], holdObject);
             }
-            else if (holdNode.PrefabType == PoolPrefabType.HoldNoteEnd)
+
+            if (endIndex < 0)
             {
-                _nodeFillRenderer.SetEndObject(holdNode, holdObject);
+                Debug.LogError($"HoldEnd is not found. StartNodeID:{nodeData.NodeID}");
+                return;
             }
+
+            _nodeFillRenderer.AddClone(nodeData, NodeDates[endIndex], holdObject);
+        }
+
+        private void CreateHoldEndNode(NodeData nodeData)
+        {
+            var holdObject = GenerateNode<NodeObject>(nodeData);
+            _nodeFillRenderer.SetEndObject(nodeData, holdObject);
         }
     }
 

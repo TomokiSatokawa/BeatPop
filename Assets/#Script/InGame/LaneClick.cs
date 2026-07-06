@@ -28,8 +28,6 @@ namespace InGame.Node
             Color color = Color.white;
             color.a = _startAlpha * alphaMultiplier;
 
-            Debug.Log(color.a);
-
             //_laneHighlight[lane].Highlight.DOKill();
             _laneHighlight[lane].Highlight.color = color;
             _laneHighlight[lane].Highlight.DOFade(0, _emptyClickDuration);

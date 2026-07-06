@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Common.PlaySystem;
 using InGame.UI;
 using Input;
 using R3;
@@ -9,6 +8,9 @@ using UnityEngine;
 
 namespace InGame.Node
 {
+    /// <summary>
+    /// NodeGeneratorÇ≈ê∂ê¨ÇµÇΩÉmÅ[ÉcÇìÆÇ©Ç∑
+    /// </summary>
     public class NodeController : MonoBehaviour
     {
         [SerializeField] private CustomSoundData _soundData;
@@ -24,26 +26,9 @@ namespace InGame.Node
         public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
         private float _nextFillJudge;
         private float _fillJudgeIndex = 0;
-
-
-        private SESoundType NormalSE;
-        private SESoundType FlickSE;
-        private SESoundType HoldStart;
-        private SESoundType HoldFill;
-        private SESoundType HoldEnd;
         public void Start()
         {
-            CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
 
-            NormalSE = _soundData.TapSE[soundPattern.NormalSE].Value;
-            FlickSE = _soundData.TapSE[soundPattern.FlickSE].Value;
-            HoldStart = _soundData.TapSE[soundPattern.HoldStart].Value;
-            HoldFill = _soundData.TapSE[soundPattern.HoldFill].Value;
-            HoldEnd = _soundData.TapSE[soundPattern.HoldEnd].Value;
-
-            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => ClickLane(0, b, false)).AddTo(this);
-            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => ClickLane(1, b, false)).AddTo(this);
-            InputManager.OnFlick.Subscribe(x => ClickLane(x, false, true)).AddTo(this);
         }
 
         public void AddNode(NodeObject node)
@@ -108,42 +93,7 @@ namespace InGame.Node
                 _showJudge.OnNext((judgeData, lane));
             }
         }
-        public void ClickLane(int lane, bool isClick, bool isFlick)
-        {
-            var node = GetClickNode(lane);
-
-            bool isNodeClick = false;
-
-            if (node != null)
-            {
-                if (isFlick)
-                {
-                    isNodeClick |= ClickNode(PoolPrefabType.FlickNote, FlickSE, node);
-                }
-                else if (isClick)
-                {
-                    isNodeClick |= ClickNode(PoolPrefabType.NormalNote, NormalSE, node);
-                    isNodeClick |= ClickNode(PoolPrefabType.HoldNoteStart, HoldStart, node);
-                }
-                else
-                {
-                    isNodeClick |= ClickNode(PoolPrefabType.HoldNoteEnd, HoldEnd, node);
-                }
-            }
-
-            if (!isNodeClick)
-            {
-                isNodeClick |= _nodeFillManager.HasFill(lane);
-            }
-
-            if (!isNodeClick && isClick && !isFlick && (node == null || node.NodeData.PrefabType != PoolPrefabType.FlickNote))
-            {
-                SoundManager.I.PlaySESound(SESoundType.EmptyHit);
-                _laneClick.PlayLaneHighlight(lane);
-            }
-        }
-
-        private NodeObject GetClickNode(int lane)
+        public NodeObject GetClickNode(int lane)
         {
             if (!StageTimeController.IsPlaying) return null;
 
@@ -175,43 +125,35 @@ namespace InGame.Node
             return null;
         }
 
-        private bool ClickNode(PoolPrefabType nodeType, SESoundType se, NodeObject targetNode)
+        public void ClickNode(SESoundType se, NodeObject targetNode)
         {
-            if (targetNode.NodeData.PrefabType != nodeType) return false;
-
             float nodeTime = targetNode.NodeData.Time;
 
             SoundManager.I.PlaySESound(se);
 
             _nodes.Remove(targetNode);
+
             if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
             targetNode.Release();
 
-            var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.TapEffect);
+            var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.NodeObjData.TapEffect);
             Vector3 pos = targetNode.transform.position;
             pos.z = _goalPos;
             tapEffect.transform.position = pos;
-
-            //var flash = PoolManager.I.Get<FlashEffect>(PoolPrefabType.FlashEffect);
-            //flash.SetColor(targetNode.NodeColor);
-            //flash.PlayFlash();
-            //flash.transform.position = pos;
 
             float difference = nodeTime - StageTimeController.StageTime;
             var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
             _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
 
             _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
-
-            return true;
         }
-
         public NodeObject GetClonedNode(int nodeID)
         {
             return _nodes.Where(x => x.NodeData.NodeID == nodeID).FirstOrDefault();
         }
+        
     }
 }
