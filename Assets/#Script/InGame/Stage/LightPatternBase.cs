@@ -1,5 +1,5 @@
 using UnityEngine;
-
+namespace InGame.Stage { 
 public abstract class LightPatternBase<T> where T : LightPatternBaseData
 {
     protected T _data;

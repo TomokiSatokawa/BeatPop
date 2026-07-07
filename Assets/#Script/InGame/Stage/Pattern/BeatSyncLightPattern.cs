@@ -1,14 +1,17 @@
-public class BeatSyncLightPattern : LightPatternBase<LightPatternBaseData>
+namespace InGame.Stage
 {
-    public BeatSyncLightPattern(LightPatternBaseData data, LightControlBase[] lights)
-        : base(data, lights) { }
-
-    public override void BeatUpdate(int division)
+    public class BeatSyncLightPattern : LightPatternBase<LightPatternBaseData>
     {
-        if (division > _data.Division) return;
-        foreach (var light in _lights)
+        public BeatSyncLightPattern(LightPatternBaseData data, LightControlBase[] lights)
+            : base(data, lights) { }
+
+        public override void BeatUpdate(int division)
         {
-            light.Flash(_data.Duration, _data.Power);
+            if (division > _data.Division) return;
+            foreach (var light in _lights)
+            {
+                light.Flash(_data.Duration, _data.Power);
+            }
         }
     }
 }

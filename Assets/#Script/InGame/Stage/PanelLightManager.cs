@@ -1,4 +1,3 @@
-using DG.Tweening;
 using InGame.UI;
 using R3;
 using UnityEngine;
