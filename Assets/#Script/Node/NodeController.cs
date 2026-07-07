@@ -33,7 +33,7 @@ namespace InGame.Node
 
         private void InitializeBeat()
         {
-            BeatUpdateManager.I.Register(new BeatUpdateHandle(8, 0, _ =>
+            BeatUpdateManager.I.Register(new BeatUpdateHandle(8, 0, (_, _) =>
             {
                 HoldLane(0, InputManager.LeftLane.CurrentValue);
                 HoldLane(1, InputManager.RightLane.CurrentValue);

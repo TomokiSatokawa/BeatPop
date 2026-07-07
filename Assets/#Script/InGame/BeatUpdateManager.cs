@@ -26,15 +26,18 @@ namespace InGame
     {
         public int Division { get; }
         public float SecondOffset { get; }
-        public Action<float> Callback { get; }
+        public Action<float,int> Callback { get; }
 
         public float NextTime { get;private set; }
-        public BeatUpdateHandle(int division, float offset, Action<float> callback)
+
+        private float _sixtyFourthInterval;
+        public BeatUpdateHandle(int division, float offset, Action<float,int> callback)
         {
             Division = division;
             SecondOffset = offset;
             Callback = callback;
             NextTime = 0;
+            _sixtyFourthInterval = (60f / StageTimeController.I.BPM) / 16f;
             UpdateNextTime();
         }
 
@@ -50,9 +53,26 @@ namespace InGame
         {
             if (NextTime <= StageTimeController.StageTime)
             {
-                Callback?.Invoke(NextTime);
+                int sixteenthIndex = Mathf.RoundToInt((NextTime - SecondOffset) / _sixtyFourthInterval);
+                Callback?.Invoke(NextTime,GetBeatDivision(sixteenthIndex));
                 UpdateNextTime();
             }
+        }
+        public static int GetBeatDivision(int sixtyFourthIndex)
+        {
+            if (sixtyFourthIndex % 16 == 0)
+                return 4;
+
+            if (sixtyFourthIndex % 8 == 0)
+                return 8;
+
+            if (sixtyFourthIndex % 4 == 0)
+                return 16;
+
+            if (sixtyFourthIndex % 2 == 0)
+                return 32;
+
+            return 64;
         }
     }
 }

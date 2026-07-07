@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6772499
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.UI.MissAnimation
   _image: {fileID: 38819840}
-  _maxAlpha: 0.5
+  _maxAlpha: 0.3
   _duration: 0.2
 --- !u!1 &44687048
 GameObject:
@@ -368,7 +368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &44687049
 Transform:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &144183996
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,7 +1867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &355826852
 LineRenderer:
   serializedVersion: 3
@@ -2085,7 +2085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &359370599
 LineRenderer:
   serializedVersion: 3
@@ -2247,8 +2247,8 @@ Camera:
   m_GameObject: {fileID: 366909090}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7056604, g: 0.7056604, b: 0.7056604, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2360,6 +2360,7 @@ GameObject:
   - component: {fileID: 369856224}
   - component: {fileID: 369856223}
   - component: {fileID: 369856222}
+  - component: {fileID: 369856225}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -2414,7 +2415,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2460,6 +2461,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369856220}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &369856225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369856220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 369856223}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &370158875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,6 +2743,7 @@ GameObject:
   - component: {fileID: 419435808}
   - component: {fileID: 419435807}
   - component: {fileID: 419435806}
+  - component: {fileID: 419435809}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -2779,7 +2798,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2825,6 +2844,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419435804}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &419435809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419435804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 419435807}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &428935716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,6 +2873,7 @@ GameObject:
   - component: {fileID: 428935720}
   - component: {fileID: 428935719}
   - component: {fileID: 428935718}
+  - component: {fileID: 428935721}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -2891,7 +2928,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2937,6 +2974,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428935716}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &428935721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428935716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 428935719}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &453104327
 GameObject:
   m_ObjectHideFlags: 0
@@ -3354,7 +3408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &508947144
 Transform:
   m_ObjectHideFlags: 0
@@ -4219,6 +4273,7 @@ GameObject:
   - component: {fileID: 611332205}
   - component: {fileID: 611332204}
   - component: {fileID: 611332203}
+  - component: {fileID: 611332206}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -4273,7 +4328,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4319,6 +4374,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611332201}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &611332206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611332201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 611332204}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &644539285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,6 +4662,7 @@ GameObject:
   - component: {fileID: 711740562}
   - component: {fileID: 711740561}
   - component: {fileID: 711740560}
+  - component: {fileID: 711740563}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -4644,7 +4717,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4690,6 +4763,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711740558}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &711740563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711740558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 711740561}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &715951229
 GameObject:
   m_ObjectHideFlags: 0
@@ -4868,6 +4958,7 @@ GameObject:
   - component: {fileID: 760330768}
   - component: {fileID: 760330767}
   - component: {fileID: 760330766}
+  - component: {fileID: 760330769}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -4922,7 +5013,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4968,6 +5059,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760330764}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &760330769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760330764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 760330767}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &803289132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4984,7 +5092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &803289133
 Transform:
   m_ObjectHideFlags: 0
@@ -5238,7 +5346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &840500897
 Transform:
   m_ObjectHideFlags: 0
@@ -5376,6 +5484,7 @@ GameObject:
   - component: {fileID: 861734672}
   - component: {fileID: 861734671}
   - component: {fileID: 861734670}
+  - component: {fileID: 861734673}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -5430,7 +5539,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5476,6 +5585,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861734668}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &861734673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861734668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 861734671}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &878060364
 GameObject:
   m_ObjectHideFlags: 0
@@ -6127,6 +6253,7 @@ GameObject:
   - component: {fileID: 966876654}
   - component: {fileID: 966876653}
   - component: {fileID: 966876652}
+  - component: {fileID: 966876655}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -6181,7 +6308,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6227,6 +6354,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966876650}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &966876655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966876650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 966876653}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &1010737815
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,7 +6801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1087911707
 Transform:
   m_ObjectHideFlags: 0
@@ -6799,7 +6943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1161154217
 Transform:
   m_ObjectHideFlags: 0
@@ -7491,7 +7635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1359594768
 Transform:
   m_ObjectHideFlags: 0
@@ -7708,7 +7852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1403390629
 Transform:
   m_ObjectHideFlags: 0
@@ -8359,6 +8503,7 @@ GameObject:
   - component: {fileID: 1466782747}
   - component: {fileID: 1466782746}
   - component: {fileID: 1466782745}
+  - component: {fileID: 1466782748}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -8468,6 +8613,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466782743}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1466782748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466782743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f28f61cd8f3ea4caac373c2db91697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightManager
+  _baseData:
+    Division: 4
+    Duration: 0.5
+    Power: 1
+    Color: {r: 0, g: 1, b: 1, a: 1}
+  _duration: 8
+  _lights:
+  - {fileID: 428935721}
+  - {fileID: 711740563}
+  - {fileID: 861734673}
+  - {fileID: 369856225}
+  - {fileID: 966876655}
+  - {fileID: 419435809}
+  - {fileID: 611332206}
+  - {fileID: 1909184968}
+  - {fileID: 760330769}
 --- !u!1 &1469794266
 GameObject:
   m_ObjectHideFlags: 0
@@ -9236,7 +9409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &1595150675
 LineRenderer:
   serializedVersion: 3
@@ -9378,7 +9551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &1635434104
 LineRenderer:
   serializedVersion: 3
@@ -9520,7 +9693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1672723115
 Transform:
   m_ObjectHideFlags: 0
@@ -9662,7 +9835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1686363378
 Transform:
   m_ObjectHideFlags: 0
@@ -10187,6 +10360,7 @@ GameObject:
   - component: {fileID: 1909184967}
   - component: {fileID: 1909184966}
   - component: {fileID: 1909184965}
+  - component: {fileID: 1909184968}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -10241,7 +10415,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10287,6 +10461,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909184963}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1909184968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909184963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 1909184966}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &1931139026
 GameObject:
   m_ObjectHideFlags: 0
@@ -10627,6 +10818,118 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
   m_ShowMaskGraphic: 1
+--- !u!1 &1971735687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1971735691}
+  - component: {fileID: 1971735690}
+  - component: {fileID: 1971735689}
+  - component: {fileID: 1971735688}
+  m_Layer: 0
+  m_Name: Cube (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1971735688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971735687}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1971735689
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971735687}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d0f0c018ca258414bab7bb84f00dfff6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1971735690
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971735687}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1971735691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971735687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -30.2, z: 80.2}
+  m_LocalScale: {x: 279.67, y: 701.8879, z: 4.9324517}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2017863710
 GameObject:
   m_ObjectHideFlags: 0
@@ -10643,7 +10946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2017863711
 Transform:
   m_ObjectHideFlags: 0
@@ -10860,7 +11163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2052900755
 Transform:
   m_ObjectHideFlags: 0
@@ -11002,7 +11305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2067615525
 Transform:
   m_ObjectHideFlags: 0
@@ -11281,7 +11584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &2089010042
 LineRenderer:
   serializedVersion: 3
@@ -11663,3 +11966,4 @@ SceneRoots:
   - {fileID: 56954443}
   - {fileID: 715951233}
   - {fileID: 1453108285}
+  - {fileID: 1971735691}
