@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using InGame.UI;
 using UnityEngine;
 
 public class EditorLineGenerator : MonoBehaviour
@@ -11,7 +12,10 @@ public class EditorLineGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (EditorManager.I.BPM <= 0f)
+        float bpm = StageTimeController.I.BPM;
+        float stageTime = StageTimeController.StageTime;
+
+        if (bpm <= 0f)
             return;
 
         if (EditorManager.I.Division <= 0)
@@ -23,10 +27,10 @@ public class EditorLineGenerator : MonoBehaviour
         double extraTime = _extraClone / EditorManager.I.Magnification;
         double displayTime = EditorManager.I.DisplayRange / EditorManager.I.Magnification;
 
-        double minTime = EditorManager.I.EditorTime.CurrentValue - extraTime;
-        double maxTime = EditorManager.I.EditorTime.CurrentValue + displayTime + extraTime;
+        double minTime = stageTime - extraTime;
+        double maxTime = stageTime + displayTime + extraTime;
 
-        float beatInterval = 60f / EditorManager.I.BPM;
+        float beatInterval = 60f / bpm;
         float barInterval = beatInterval * 4f;
         float divisionInterval = barInterval / EditorManager.I.Division;
 
@@ -121,7 +125,7 @@ public class EditorLineGenerator : MonoBehaviour
                     }
                 }
 
-                lineData.Setwidth(width);
+                lineData.SetWidth(width);
                 _clonedLine.Add(lineData);
             }
         }
@@ -135,6 +139,5 @@ public class EditorLineGenerator : MonoBehaviour
         }
 
         _clonedLine.Clear();
-        EditorManager.I.ReloadTime();
     }
 }

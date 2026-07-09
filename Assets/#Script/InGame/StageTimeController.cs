@@ -20,7 +20,10 @@ namespace InGame.UI
         public float EndTime { get; private set; }
         public AudioClip SongClip { get; private set; }
         public static float StageTime { get; private set; } = float.MinValue;
-        public static bool IsPlaying { get; private set; } = false;
+
+        private readonly ReactiveProperty<bool> _isPlaying = new();
+        public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
+
         private Subject<Unit> _onInitialized = new();
         public Observable<Unit> OnInitialized => _onInitialized;
 
@@ -60,19 +63,19 @@ namespace InGame.UI
             SoundManager.I.PlayBGMSound(SongClip, dray, time);
             _startDspTime = AudioSettings.dspTime + _waitSeconds - StartSectionTime;
             StageTime = -_waitSeconds;
-            IsPlaying = true;
+            _isPlaying.Value = true;
             _onInitialized.OnNext(Unit.Default);
         }
 
         public void UpdateStageTime()
         {
-            if (!IsPlaying) return;
+            if (!_isPlaying.CurrentValue) return;
             
             StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
 
             if (StageTime >= EndTime + _resultDelay)
             {
-                IsPlaying = false;
+                _isPlaying.Value = false;
                 _onGameClear.OnNext(Unit.Default);
             }
         }
@@ -80,12 +83,17 @@ namespace InGame.UI
         public void ReStart()
         {
             _startDspTime = AudioSettings.dspTime - (StageTime - _timeOffset);
-            IsPlaying = true;
+            _isPlaying.Value = true;
         }
 
         public void Pause()
         {
-            IsPlaying = false;
+            _isPlaying.Value = false;
+        }
+
+        public void MoveStageTime(float amount)
+        {
+            _startDspTime += amount;
         }
     }
 }

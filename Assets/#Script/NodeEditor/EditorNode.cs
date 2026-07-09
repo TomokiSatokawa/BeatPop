@@ -1,4 +1,5 @@
 using InGame.Node;
+using InGame.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,15 +13,14 @@ public class EditorNode : FollowTime
         set 
         {
             _data = value;
-            ChangePos(EditorManager.I.EditorTime.CurrentValue);
         }
     } 
     public float LeanY { get; set; }
     
-    public override void ChangePos(double time)
+    public override void ChangePos()
     {
         var pos = _rect.anchoredPosition;
-        pos.x = (float)(Time - time) * EditorManager.I.Magnification;
+        pos.x = (float)(Time - StageTimeController.StageTime) * EditorManager.I.Magnification;
         pos.y = LeanY;
         _rect.anchoredPosition = pos;
     }

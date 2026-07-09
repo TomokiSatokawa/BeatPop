@@ -155,7 +155,7 @@ public static class NodeDataSerializer
             var saveData = new NodeSaveData();
             saveData.Nodes = DeserializeCSV(text).OrderBy(x => x.Time).ToList();
             saveData.DataVersion = Version;
-            saveData.BPM = EditorManager.I.BPM;
+            saveData.BPM = StageTimeController.I.BPM;
             saveData.SoundIndex = -1;
             return saveData;
         }

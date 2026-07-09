@@ -1,3 +1,4 @@
+using InGame.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -66,14 +67,14 @@ public class SnapNode : MonoBehaviour
         }
 
 
-        float beatInterval = 60f / EditorManager.I.BPM;
+        float beatInterval = 60f / StageTimeController.I.BPM;
 
         float barInterval = beatInterval * 4f;
         float divisionInterval = barInterval / EditorManager.I.Division;
 
         // X → Time
         double noteTime =
-            EditorManager.I.EditorTime.CurrentValue +
+            StageTimeController.StageTime +
             (localMousePos.x / EditorManager.I.Magnification);
 
         // Timeをスナップ
@@ -82,7 +83,7 @@ public class SnapNode : MonoBehaviour
             * divisionInterval;
 
         // Time → X
-        pos.x = (float)(noteTime - EditorManager.I.EditorTime.CurrentValue)
+        pos.x = (float)(noteTime - StageTimeController.StageTime)
             * EditorManager.I.Magnification;
 
         _sectionPointer.anchoredPosition = pos;

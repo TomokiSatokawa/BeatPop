@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using InGame.Node;
+using InGame.UI;
 using R3;
 using UnityEditor;
 using UnityEngine;
@@ -19,6 +20,10 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     public IReadOnlyList<float> SectionTime => _sectionTime;
     private Subject<NodeData> _onRemove = new();
     public Observable<NodeData> OnRemove => _onRemove;
+
+    private ReactiveProperty<NodeSaveData> _loadedFile = new();
+    public ReadOnlyReactiveProperty<NodeSaveData> LoadedFile => _loadedFile;
+
     private readonly double _epsilon = 0.0001;
 
 
@@ -34,7 +39,7 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
         if (data != null)
         {
             _nodes = data.Nodes;
-            EditorManager.I.SetData(data.BPM, data.SoundIndex);
+            _loadedFile.OnNext(data);
         }
     }
 
@@ -107,7 +112,10 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
 
         if (string.IsNullOrEmpty(path))
             return;
-        File.WriteAllText(path, NodeDataSerializer.SerializeJson(FinalizeNodes(_nodes), FinalizeSection(_sectionTime), EditorManager.I.BPM, EditorManager.I.SongIndex));
+
+        File.WriteAllText(path, NodeDataSerializer.SerializeJson(
+            FinalizeNodes(_nodes), FinalizeSection(_sectionTime),
+            StageTimeController.I.BPM, LoadedFile.CurrentValue.SoundIndex));
 #endif
     }
     private List<NodeData> FinalizeNodes(List<NodeData> nodes)

@@ -47,7 +47,7 @@ namespace InGame.Node
 
         public void Update()
         {
-            if (!StageTimeController.IsPlaying) return;
+            if (!StageTimeController.I.IsPlaying.CurrentValue) return;
 
             _removeNodes.Clear();
             foreach (NodeObject node in _nodes)
@@ -95,7 +95,7 @@ namespace InGame.Node
         }
         public NodeObject GetClickNode(int lane)
         {
-            if (!StageTimeController.IsPlaying) return null;
+            if (!StageTimeController.I.IsPlaying.CurrentValue) return null;
 
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;

@@ -1,4 +1,4 @@
-using System;
+using InGame.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,95 +7,60 @@ using UnityEngine.UI;
 public class EditorManager : SingletonMonoBehaviour<EditorManager>
 {
     [SerializeField] private SongListDataBase _songData;
-    [SerializeField] private AudioClip _audioClip;
-    [SerializeField] private float _bpm;
     [SerializeField] private Scrollbar _scrollBar;
-    [SerializeField] private float _magnification;
     [SerializeField] private RectTransform _displayRange;
-    [SerializeField ] private int _division;
-    [SerializeField] private float _timeOffSet;
     [SerializeField] private float _keyMoveAmount;
+    [SerializeField] private int _division;
     public float DisplayRange => _displayRange.sizeDelta.x;
+    [SerializeField] private float _magnification;
     public float Magnification => _magnification;
-    public float BPM => _bpm;
     public int Division => _division;
-    public AudioClip AudioClip => _audioClip;
-    public int SongIndex { get; private set; } = -1;
 
-    private readonly ReactiveProperty<bool> _isPlaying = new();
-    public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
-
-    private readonly ReactiveProperty<double> _editorTime = new();
-    public ReadOnlyReactiveProperty<double> EditorTime => _editorTime;
-    private double StartDsp;
-
+    private AudioClip _audio;
+    public AudioClip Audio => _audio;
     private void Start()
     {
-        _editorTime.Value = 0;
-        _isPlaying.Value = false;
-
-        EditorTime
-            .Subscribe(time =>
-            {
-                _scrollBar.SetValueWithoutNotify(
-                    (float)(time / _audioClip.length));
-            })
-            .AddTo(this);
+        EditorNodeData.I.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
     }
-    public void SetData(float bpm,int soundIndex)
+    public void Initialize(NodeSaveData saveData)
     {
-        _bpm = bpm;
-        var song = _songData.GetSongData(soundIndex);
-        if (song != null)
-        {
-            _audioClip = song.Audio;
-            _timeOffSet = song.EditorTimeOffSet;
-        }
-    }
-    public void ReloadTime()
-    {
-        _editorTime.Value = _editorTime.Value;
-    }
+        StageTimeController.I.SetPlayData(saveData);
+        _audio = _songData.GetSongData(saveData.SoundIndex).Audio;
 
+    }
     private void Update()
     {
+        _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / _audio.length));
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            _isPlaying.Value = !_isPlaying.Value;
-            _scrollBar.interactable = !IsPlaying.CurrentValue;
-
-            if (_isPlaying.CurrentValue)
+            if (StageTimeController.I.IsPlaying.CurrentValue)
             {
-                StartDsp = AudioSettings.dspTime - _editorTime.Value;
+                StageTimeController.I.Pause();
             }
-
+            else
+            {
+                StageTimeController.I.ReStart();
+            }
         }
 
-        if (_isPlaying.CurrentValue)
-        {
-            _editorTime.Value = AudioSettings.dspTime - StartDsp + _timeOffSet;
-        }
+        //if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        //{
+        //    _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue + _keyMoveAmount ,0, _audioClip.length);
+        //}
 
-        if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
-        {
-            _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue + _keyMoveAmount ,0, _audioClip.length);
-        }
-
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-        {
-            _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue - _keyMoveAmount ,0, _audioClip.length);
-        }
+        //if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        //{
+        //    _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue - _keyMoveAmount ,0, _audioClip.length);
+        //}
     }
 
     public void OnBarChangeValue(float value)
     {
-        _editorTime.Value = _audioClip.length * value;
+        float time = _audio.length * value;
+        float moveAmount = time - StageTimeController.StageTime;
 
-        // çƒê∂íÜÇ…ÉVÅ[ÉNÇµÇΩèÍçáÇ‡ìØä˙
-        if (_isPlaying.CurrentValue)
-        {
-            StartDsp = AudioSettings.dspTime - _editorTime.Value;
-        }
+        StageTimeController.I.MoveStageTime(moveAmount);
     }
     public void ChangeDivisionCount(int count)
     {

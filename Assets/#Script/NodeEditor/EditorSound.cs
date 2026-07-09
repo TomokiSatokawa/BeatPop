@@ -1,3 +1,4 @@
+using InGame.UI;
 using R3;
 using UnityEngine;
 
@@ -7,13 +8,13 @@ public class EditorSound : MonoBehaviour
     [SerializeField] private AudioSource _se;
     void Start()
     {
-        EditorManager.I.IsPlaying.Where(b => b).Subscribe(_ => OnPlay()).AddTo(this);  
-        EditorManager.I.IsPlaying.Where(b => !b).Subscribe(_ => OnStop()).AddTo(this);  
+        StageTimeController.I.IsPlaying.Where(b => b).Subscribe(_ => OnPlay()).AddTo(this);
+        StageTimeController.I.IsPlaying.Where(b => !b).Subscribe(_ => OnStop()).AddTo(this);  
     }
     public void OnPlay()
     {
-        _bgm.time = (float)EditorManager.I.EditorTime.CurrentValue;
-        _bgm.clip = EditorManager.I.AudioClip;
+        _bgm.time = (float)StageTimeController.StageTime;
+        _bgm.clip = EditorManager.I.Audio;
         _bgm.PlayScheduled(AudioSettings.dspTime);
     }
     public void OnStop()

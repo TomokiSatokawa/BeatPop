@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using InGame.Node;
+using InGame.UI;
 using R3;
 using UnityEngine;
 
@@ -21,9 +22,9 @@ public class EditorNodeGenerator : MonoBehaviour
         double displayTime =
             EditorManager.I.DisplayRange / EditorManager.I.Magnification;
 
-        double minTime = EditorManager.I.EditorTime.CurrentValue - extraTime;
+        double minTime = StageTimeController.StageTime- extraTime;
 
-        double maxTime = EditorManager.I.EditorTime.CurrentValue + displayTime + extraTime;
+        double maxTime = StageTimeController.StageTime + displayTime + extraTime;
 
 
         List<NodeData> removeNode = new();
@@ -95,7 +96,6 @@ public class EditorNodeGenerator : MonoBehaviour
             }
 
             _clonedNode.Add(node, newNode);
-            EditorManager.I.ReloadTime();
         }
     }
     public void RemoveNode(NodeData node)
