@@ -1,10 +1,11 @@
+using System.Linq;
 using InGame.Stage;
 using UnityEngine;
 
 namespace Common
 {
 
-    public class StageDataSerializer : MonoBehaviour
+    public static class StageDataSerializer
     {
         public const string Version = "2.0";
         public static StageSaveData DeserializeJson(string json)
@@ -26,8 +27,13 @@ namespace Common
                 return null;
             }
         }
-        public static string SerializeJson(StageSaveData saveData)
+        public static string SerializeJson(LightPatternBaseData[] patternBaseDatas)
         {
+            StageSaveData saveData = new();
+            patternBaseDatas = patternBaseDatas.OrderBy(x => x.Time).ToArray();
+
+            saveData.Version =  Version;
+            saveData.LightData  = patternBaseDatas;
             if (saveData == null)
                 return null;
 
@@ -45,7 +51,7 @@ namespace Common
     public class StageSaveData
     {
         public string Version;
-        public LightPatternBaseData[] FrontUpperPanelLight;
-        public LightPatternBaseData[] RearUpperPanelLight;
+        public int SongDataIndex;
+        public LightPatternBaseData[] LightData;
     }
 }

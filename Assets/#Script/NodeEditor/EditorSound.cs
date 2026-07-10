@@ -13,8 +13,8 @@ public class EditorSound : MonoBehaviour
     }
     public void OnPlay()
     {
-        _bgm.time = (float)StageTimeController.StageTime;
         _bgm.clip = EditorManager.I.Audio;
+        _bgm.time = (float)StageTimeController.StageTime;
         _bgm.PlayScheduled(AudioSettings.dspTime);
     }
     public void OnStop()

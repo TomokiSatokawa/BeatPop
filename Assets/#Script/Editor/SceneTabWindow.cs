@@ -34,11 +34,17 @@ public static class SceneTabWindow
         OpenScene(3);
     }
 
-    [MenuItem("Scene/4 Editor")]
+    [MenuItem("Scene/4 NodeEditor")]
     public static void Scene04()
     {
         EditorSceneManager.SaveOpenScenes();
         OpenScene(4);
+    }
+    [MenuItem("Scene/5 LightEditor")]
+    public static void Scene05()
+    {
+        EditorSceneManager.SaveOpenScenes();
+        OpenScene(5);
     }
     private static void OpenScene(int sceneIndex)
     {

@@ -128,7 +128,7 @@ public class QuickPlay : EditorWindow
 
         EditorSceneManager.SaveOpenScenes();
 
-        string scenePath = SceneUtility.GetScenePathByBuildIndex(5);
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(6);
         if (!string.IsNullOrEmpty(scenePath))
         {
             EditorSceneManager.OpenScene(scenePath);

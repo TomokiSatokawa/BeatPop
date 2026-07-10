@@ -21,6 +21,7 @@ namespace InGame.Stage
     public class LightPatternBaseData
     {
         public float Time;
+        public int Channel;
         public int Division;
         public float Duration;
         public float Power;

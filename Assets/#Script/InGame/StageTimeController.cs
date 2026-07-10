@@ -34,19 +34,27 @@ namespace InGame.UI
 
         public void SetPlayData(NodeSaveData fileData)
         {
-            BPM = fileData.BPM;
-            EndTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
+            float bpm  = fileData.BPM;
+            float endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
+            int sectionIndex = Mathf.Clamp(SongPlayManager.I.StartSection, 0, fileData.Section.Count) - 1;
+            float sectionTime = 0;
+
+            if (sectionIndex != -1)
+            {
+                sectionTime = fileData.Section[SongPlayManager.I.StartSection];
+            }
+
+            SetPlayData(bpm, endTime, sectionTime);
+        }
+
+        public void SetPlayData(float bpm,float endTime,float startSection)
+        {
+            BPM = bpm;
+            EndTime = endTime;
             SongClip = SongPlayManager.I.SongData.SongData.Audio;
             _timeOffset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
-            int sectionIndex = Mathf.Clamp(SongPlayManager.I.StartSection, 0, fileData.Section.Count) - 1;
-            if (sectionIndex == -1)
-            {
-                StartSectionTime = 0;
-            }
-            else
-            {
-                StartSectionTime = fileData.Section[SongPlayManager.I.StartSection];
-            }
+
+            StartSectionTime = startSection;
         }
 
         public async UniTask SongLoadAsync()
@@ -69,13 +77,15 @@ namespace InGame.UI
 
         public void UpdateStageTime()
         {
+            Debug.Log($"IsPlaying {_isPlaying.CurrentValue}");
+
             if (!_isPlaying.CurrentValue) return;
             
             StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
 
             if (StageTime >= EndTime + _resultDelay)
             {
-                _isPlaying.Value = false;
+                //_isPlaying.Value = false;
                 _onGameClear.OnNext(Unit.Default);
             }
         }
@@ -93,7 +103,7 @@ namespace InGame.UI
 
         public void MoveStageTime(float amount)
         {
-            _startDspTime += amount;
+            StageTime += amount;
         }
     }
 }

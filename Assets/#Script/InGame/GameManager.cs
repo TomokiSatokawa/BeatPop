@@ -16,6 +16,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Start()
     {
         InputManager.SetInputEnabled(true);
+        StageTimeController.I.OnGameClear.Subscribe(_ =>
+        {
+            StageTimeController.I.Pause();
+            InputManager.SetInputEnabled(false);
+        });
         Initialize();
     }
 

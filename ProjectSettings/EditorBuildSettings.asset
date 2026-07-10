@@ -18,8 +18,11 @@ EditorBuildSettings:
     path: Assets/#Scenes/Result.unity
     guid: e21d4c4fe41691d4086ebeae5120a13a
   - enabled: 1
-    path: Assets/#Scenes/Editor.unity
+    path: Assets/#Scenes/NodeEditor.unity
     guid: 5e0417ccef630f149ab4a418cc07d1e0
+  - enabled: 1
+    path: Assets/#Scenes/LightEditor.unity
+    guid: 7b90abdd3a0161e429d4599343aee01b
   - enabled: 1
     path: Assets/#Scenes/QuickPlay.unity
     guid: 80a693b173eea094e9228a37ca2647df

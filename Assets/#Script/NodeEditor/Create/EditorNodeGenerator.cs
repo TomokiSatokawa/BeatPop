@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using InGame.Node;
-using InGame.UI;
 using R3;
 using UnityEngine;
 
-public class EditorNodeGenerator : MonoBehaviour
+public class EditorNodeGenerator : EditorGeneratorBase
 {
     [SerializeField] private RectTransform _content;
-    [SerializeField] private float _extraClone;
     [SerializeField] private RectTransform[] _lean;
 
     private readonly Dictionary<NodeData, FollowTime> _clonedNode = new();
@@ -15,18 +13,9 @@ public class EditorNodeGenerator : MonoBehaviour
     {
         EditorNodeData.I.OnRemove.Subscribe(x => RemoveNode(x)).AddTo(this);
     }
-    private void Update()
+
+    protected override void UpdateInRange(double minTime, double maxTime)
     {
-        double extraTime = _extraClone / EditorManager.I.Magnification;
-
-        double displayTime =
-            EditorManager.I.DisplayRange / EditorManager.I.Magnification;
-
-        double minTime = StageTimeController.StageTime- extraTime;
-
-        double maxTime = StageTimeController.StageTime + displayTime + extraTime;
-
-
         List<NodeData> removeNode = new();
 
         foreach (var node in _clonedNode.Keys)
@@ -98,12 +87,12 @@ public class EditorNodeGenerator : MonoBehaviour
             _clonedNode.Add(node, newNode);
         }
     }
+
     public void RemoveNode(NodeData node)
     {
         Debug.Log(node + "Remove");
         FollowTime poolObject = _clonedNode[node];
         poolObject.Release();
         _clonedNode.Remove(node);
-
     }
 }

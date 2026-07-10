@@ -1,5 +1,8 @@
+using Common;
+using Common.PlaySystem;
 using InGame.UI;
 using R3;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,6 +14,8 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     [SerializeField] private RectTransform _displayRange;
     [SerializeField] private float _keyMoveAmount;
     [SerializeField] private int _division;
+    [SerializeField] private Difficulty _difficulty;
+    public TextMeshProUGUI _te;
     public float DisplayRange => _displayRange.sizeDelta.x;
     [SerializeField] private float _magnification;
     public float Magnification => _magnification;
@@ -20,17 +25,43 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     public AudioClip Audio => _audio;
     private void Start()
     {
-        EditorNodeData.I.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
+        EditorNodeData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
+        EditorLightData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
+        StageTimeController.I.IsPlaying.Subscribe(x => _scrollBar.interactable = !x).AddTo(this);
     }
-    public void Initialize(NodeSaveData saveData)
+    public async void Initialize(NodeSaveData saveData)
     {
+        if (saveData == null) return;
+        GenerateSongPlayManager(saveData.SoundIndex);
         StageTimeController.I.SetPlayData(saveData);
+        await StageTimeController.I.SongLoadAsync();
+        StageTimeController.I.StartSongPlay();
+        StageTimeController.I.Pause();
         _audio = _songData.GetSongData(saveData.SoundIndex).Audio;
 
     }
+    public async void Initialize(StageSaveData saveData)
+    {
+        if (saveData == null) return;
+       var data=  GenerateSongPlayManager(saveData.SongDataIndex);
+        StageTimeController.I.SetPlayData(data.BPM,0,0);
+        await StageTimeController.I.SongLoadAsync();
+        StageTimeController.I.StartSongPlay();
+        StageTimeController.I.Pause();
+        _audio = _songData.GetSongData(saveData.SongDataIndex).Audio;
+    }
     private void Update()
     {
-        _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / _audio.length));
+        _te.text = StageTimeController.StageTime.ToString("N2");
+
+        StageTimeController.I.UpdateStageTime();
+        if (EditorNodeData.I != null && EditorNodeData.I.LoadedFile.CurrentValue == null) return;
+        if (EditorLightData.I != null && EditorLightData.I.LoadedFile.CurrentValue == null) return;
+
+        if (StageTimeController.I.IsPlaying.CurrentValue)
+        {
+            _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / _audio.length));
+        }
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -59,11 +90,24 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     {
         float time = _audio.length * value;
         float moveAmount = time - StageTimeController.StageTime;
-
+        Debug.Log(moveAmount);
         StageTimeController.I.MoveStageTime(moveAmount);
     }
     public void ChangeDivisionCount(int count)
     {
         _division = count;
+    }
+    public IReadOnlySongData GenerateSongPlayManager(int index)
+    {
+        if(SongPlayManager.I == null)
+        {
+            Debug.LogError("SongPlayManagerがありません");
+            return null;
+        }
+
+        var songData = _songData.GetSongData(index);
+        SongPlayManager.I.SetData(new SongSelectData(songData, _difficulty), null,0);
+
+        return songData;
     }
 }

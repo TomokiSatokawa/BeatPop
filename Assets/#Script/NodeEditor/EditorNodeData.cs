@@ -36,11 +36,13 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     private async void FileLoad(string file)
     {
         var data = await NodeDataSerializer.AutoDeserialize(file);
-        if (data != null)
+        if (data == null)
         {
-            _nodes = data.Nodes;
-            _loadedFile.OnNext(data);
+            Debug.LogError("ファイル読み込みエラー");
+            return;
         }
+        _nodes = data.Nodes;
+        _loadedFile.OnNext(data);
     }
 
     public void AddNode(PoolPrefabType prefab, double time, int lean)
@@ -76,17 +78,14 @@ public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
     {
         float tolerance = 0.0001f;
         int index = _sectionTime.FindIndex(t => Mathf.Abs(t - time) < tolerance);
-        Debug.Log("Re");
         if (index == -1)
             return;
 
-        Debug.Log("Remove");
         _sectionTime.RemoveAt(index);
     }
 
     public void OnImport()
     {
-        Debug.Log("a");
 #if UNITY_EDITOR
         string path = EditorUtility.OpenFilePanel(
            "Open Save Data",

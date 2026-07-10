@@ -6,6 +6,7 @@ public class SnapNode : MonoBehaviour
 {
     [SerializeField] private RectTransform _snapObjectParent;
     [SerializeField] private RectTransform _sectionPointer;
+    [SerializeField] private RectTransform _lightPointer;
     [SerializeField] private RectTransform _createPointer;
     [SerializeField] private RectTransform _pointerRect;
     [SerializeField] private RectTransform[] _laneRect;
@@ -43,6 +44,7 @@ public class SnapNode : MonoBehaviour
 
         _createPointer.gameObject.SetActive(_editMode == EditMode.Create);
         _sectionPointer.gameObject.SetActive(_editMode == EditMode.Section);
+        _lightPointer.gameObject.SetActive(_editMode == EditMode.Light);
 
         Vector2 pos = localMousePos;
 
@@ -119,6 +121,6 @@ public class SnapNode : MonoBehaviour
     }
     public enum EditMode
     {
-        None, Create, Section,
+        None, Create, Section,Light
     }
 }
