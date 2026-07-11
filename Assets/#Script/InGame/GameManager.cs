@@ -21,6 +21,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             StageTimeController.I.Pause();
             InputManager.SetInputEnabled(false);
         });
+
         Initialize();
     }
 

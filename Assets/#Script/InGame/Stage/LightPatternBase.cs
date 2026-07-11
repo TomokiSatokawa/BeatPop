@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 namespace InGame.Stage
 {
     public abstract class LightPatternBase<T> where T : LightPatternBaseData
     {
+        public bool IsEnabled { get;private set;  }
         protected T _data;
         protected LightControlBase[] _lights;
-        public LightPatternBase(T data, LightControlBase[] lights)
+        public virtual void Initialize(T data, LightControlBase[] lights)
         {
             _data = data;
             _lights = lights;
@@ -16,10 +18,24 @@ namespace InGame.Stage
             }
         }
         public abstract void BeatUpdate(int division);
+
+        public void ChangeEnabled(bool enabled)
+        {
+            IsEnabled = enabled;
+        }
+
+        public void Test()
+        {
+            foreach(var light in _lights)
+            {
+                light.Refresh();
+            }
+        }
     }
     [System.Serializable]
     public class LightPatternBaseData
     {
+        public string PatternType = typeof(AlternateLightPattern).FullName;
         public float Time;
         public int Channel;
         public int Division;

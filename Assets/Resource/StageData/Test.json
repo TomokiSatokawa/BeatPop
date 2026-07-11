@@ -1,5 +1,48 @@
 {
     "Version": "2.0",
-    "SongDataIndex": 1,
-    "LightData": []
+    "SongDataIndex": 0,
+    "LightData": [
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 0.0,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 0.10000000149011612,
+            "Color": {
+                "r": 1.0,
+                "g": 0.9599999785423279,
+                "b": 0.8799999952316284,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 2.307692289352417,
+            "Channel": 0,
+            "Division": 8,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.9599999785423279,
+                "b": 0.8799999952316284,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 4.615384578704834,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.30000001192092898,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        }
+    ]
 }

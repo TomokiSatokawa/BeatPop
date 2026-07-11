@@ -5,10 +5,6 @@ namespace InGame.Stage
     {
         private int count = 0;
 
-        public AlternateLightPattern(LightPatternBaseData data, LightControlBase[] lights)
-            : base(data, lights) { }
-
-
         public override void BeatUpdate(int division)
         {
             if (division > _data.Division) return;

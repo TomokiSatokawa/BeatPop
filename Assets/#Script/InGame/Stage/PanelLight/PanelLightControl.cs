@@ -54,5 +54,10 @@ namespace InGame.Stage
                 UpdatePower(x);
             });
         }
+
+        public override void Refresh()
+        {
+            _flash?.Kill(true);
+        }
     }
 }

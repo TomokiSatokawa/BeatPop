@@ -4,10 +4,10 @@ using InGame.UI;
 using UnityEngine;
 namespace InGame
 {
-
     public class BeatUpdateManager : SingletonMonoBehaviour<BeatUpdateManager>
     {
         private readonly List<BeatUpdateHandle> _activeBeatUpdate = new();
+        private float _previousTime;
         public void Register(BeatUpdateHandle handle)
         {
             handle.UpdateNextTime();
@@ -16,10 +16,22 @@ namespace InGame
 
         private void Update()
         {
-            foreach(var handle in _activeBeatUpdate)
+            float current = StageTimeController.StageTime;
+
+            if (current < _previousTime)
+            {
+                foreach (var handle in _activeBeatUpdate)
+                {
+                    handle.UpdateNextTime();
+                }
+            }
+
+            foreach (var handle in _activeBeatUpdate)
             {
                 handle.Tick();
             }
+
+            _previousTime = current;
         }
     }
     public class BeatUpdateHandle

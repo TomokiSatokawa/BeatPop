@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SnapNode
   _snapObjectParent: {fileID: 564475092}
   _sectionPointer: {fileID: 1404647199}
+  _lightPointer: {fileID: 1404647199}
   _createPointer: {fileID: 1946211082}
   _pointerRect: {fileID: 429637544}
   _laneRect:
@@ -1883,8 +1884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350ab84c6f45d45449dacad27487eeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorNodeGenerator
-  _content: {fileID: 564475092}
   _extraClone: 10
+  _content: {fileID: 564475092}
   _lean:
   - {fileID: 1404520832}
   - {fileID: 960626810}

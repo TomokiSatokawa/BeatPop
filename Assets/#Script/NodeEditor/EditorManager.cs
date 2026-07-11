@@ -90,7 +90,6 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     {
         float time = _audio.length * value;
         float moveAmount = time - StageTimeController.StageTime;
-        Debug.Log(moveAmount);
         StageTimeController.I.MoveStageTime(moveAmount);
     }
     public void ChangeDivisionCount(int count)

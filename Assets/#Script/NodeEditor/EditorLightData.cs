@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Common;
+using InGame.Node;
 using InGame.Stage;
 using R3;
 using UnityEditor;
@@ -19,6 +20,8 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
 
     private readonly ReactiveProperty<StageSaveData> _loadedFile = new();
     public ReadOnlyReactiveProperty<StageSaveData> LoadedFile => _loadedFile;
+    private Subject<(float time,int channel)> _onRemove = new();
+    public Observable<(float time, int channel)> OnRemove => _onRemove;
     private readonly double _epsilon = 0.0001;
 
     public void Start()
@@ -40,9 +43,9 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         _loadedFile.OnNext(data);
     }
 
-    public void AddNode(LightPatternBaseData lightData, float time, int channel)
+    public void AddNode(LightPatternBaseData lightData)
     {
-        if (_lightData.Exists(x => Mathf.Abs(x.Time - time) < _epsilon && x.Channel == channel)) return;
+        if (_lightData.Exists(x => Mathf.Abs(x.Time - lightData.Time) < _epsilon && x.Channel == lightData.Channel)) return;
 
         _lightData.Add(lightData);
     }
@@ -51,7 +54,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         var targetNode = _lightData.FindIndex(x => Mathf.Abs(x.Time - time) < _epsilon && x.Channel == channel);
         if (targetNode == -1) return;
 
-        //_onRemove.OnNext(_nodes[targetNode]);
+        _onRemove.OnNext((time, channel));
         _lightData.RemoveAt(targetNode);
     }
     public void OnImport()

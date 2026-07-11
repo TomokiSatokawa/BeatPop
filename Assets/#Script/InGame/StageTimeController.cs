@@ -77,8 +77,6 @@ namespace InGame.UI
 
         public void UpdateStageTime()
         {
-            Debug.Log($"IsPlaying {_isPlaying.CurrentValue}");
-
             if (!_isPlaying.CurrentValue) return;
             
             StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;

@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using InGame.Stage;
 using InGame.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class SnapNode : MonoBehaviour
@@ -29,6 +32,10 @@ public class SnapNode : MonoBehaviour
     {
         _editMode = EditMode.Section;
     }
+    public void OnLight()
+    {
+        _editMode = EditMode.Light;
+    }
     public void Update()
     {
         if (_editMode == EditMode.None) return;
@@ -48,26 +55,19 @@ public class SnapNode : MonoBehaviour
 
         Vector2 pos = localMousePos;
 
-        int laneIndex = 0;
-        foreach (var lane in _laneRect)
-        {
-            float minY = lane.anchoredPosition.y + lane.rect.yMin;
-            float maxY = lane.anchoredPosition.y + lane.rect.yMax;
 
-            if (localMousePos.y >= minY && localMousePos.y <= maxY)
-            {
-                pos.y = lane.anchoredPosition.y;
-                break;
-            }
-            laneIndex++;
-        }
 
-        if (laneIndex == _laneRect.Length)
+        int laneIndex = GetLaneIndex();
+
+        if (laneIndex == -1)
         {
             _createPointer.gameObject.SetActive(false);
             return;
         }
+        Vector3 worldPos = _laneRect[laneIndex].TransformPoint(_laneRect[laneIndex].rect.center);
+        Vector3 localPos = _snapObjectParent.InverseTransformPoint(worldPos);
 
+        pos.y = localPos.y;
 
         float beatInterval = 60f / StageTimeController.I.BPM;
 
@@ -90,6 +90,7 @@ public class SnapNode : MonoBehaviour
 
         _sectionPointer.anchoredPosition = pos;
         _createPointer.anchoredPosition = pos;
+        _lightPointer   .anchoredPosition = pos;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -101,6 +102,12 @@ public class SnapNode : MonoBehaviour
 
                 case EditMode.Section:
                     EditorNodeData.I.AddSection((float)noteTime);
+                    break;
+                case EditMode.Light:
+                    var data = new LightPatternBaseData();
+                    data.Time = (float)noteTime;
+                    data.Channel = laneIndex;
+                    EditorLightData.I.AddNode(data);
                     break;
             }
         }
@@ -116,8 +123,45 @@ public class SnapNode : MonoBehaviour
                 case EditMode.Section:
                     EditorNodeData.I.RemoveSection((float)noteTime);
                     break;
+                case EditMode.Light:
+                    EditorLightData.I.DeleteNode((float)noteTime, laneIndex);
+                    break;
             }
         }
+    }
+    private int GetLaneIndex(Vector2 localMousePos)
+    {
+        for (int i = 0; i < _laneRect.Length; i++)
+        {
+            RectTransform lane = _laneRect[i];
+
+            // laneのローカル矩形を親(Content)座標へ変換
+            Rect rect = lane.rect;
+            rect.x += lane.anchoredPosition.x;
+            rect.y += lane.anchoredPosition.y;
+
+            if (rect.Contains(localMousePos))
+                return i;
+        }
+
+        return -1;
+    }
+    private int GetLaneIndex()
+    {
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+
+        for (int i = 0; i < _laneRect.Length; i++)
+        {
+            if (RectTransformUtility.RectangleContainsScreenPoint(
+                    _laneRect[i],
+                    mousePos,
+                    null)) // Screen Space Overlayならnull
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
     public enum EditMode
     {
