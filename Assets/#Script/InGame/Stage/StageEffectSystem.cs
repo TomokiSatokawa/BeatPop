@@ -20,6 +20,14 @@ namespace InGame.Stage
                 _patternList = EditorLightData.I.LightData;
             }
 
+            if(InGameFileLoad.I != null)
+            {
+                InGameFileLoad.I.OnStageFileLoaded.Subscribe(x =>
+                {
+                    _patternList = x.LightData;
+                }).AddTo(this);
+            }
+
             StageTimeController.I.IsPlaying
                 .Where(x => x)
                 .Subscribe(_ => UpdateNextPattern())

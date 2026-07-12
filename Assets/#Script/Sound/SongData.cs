@@ -13,6 +13,8 @@ public class SongData : ScriptableObject, IReadOnlySongData
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private float _stageTimeOffSet;
     [SerializeField] private float _editorTimeOffSet;
+    [Space(10)]
+    [SerializeField] private TextAsset _stageEffectData;
 
     public string SongName => _songName;
     public int SongID => _songID;
@@ -22,6 +24,7 @@ public class SongData : ScriptableObject, IReadOnlySongData
     public AudioClip Audio => _audioClip;
     public float StageTimeOffSet => _stageTimeOffSet;
     public float EditorTimeOffSet => _editorTimeOffSet;
+    public TextAsset StageEffectData => _stageEffectData;
 }
 public interface IReadOnlySongData
 {
@@ -32,7 +35,8 @@ public interface IReadOnlySongData
     public SongChartSet Charts { get; }
     public AudioClip Audio { get; }
     public float StageTimeOffSet { get; }
-    public float EditorTimeOffSet { get; }  
+    public float EditorTimeOffSet { get; }
+    public TextAsset StageEffectData { get; }
 }
 
 [System.Serializable]

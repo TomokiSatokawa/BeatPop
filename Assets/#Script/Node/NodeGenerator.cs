@@ -24,7 +24,7 @@ namespace InGame.Node
         public float ArrivalSeconds => _arrivalSeconds;
         void Start()
         {
-            InGameFileLoad.I.OnFileLoaded.Subscribe(x => NodeDates = x.Nodes).AddTo(this);
+            InGameFileLoad.I.OnNodeFileLoaded.Subscribe(x => NodeDates = x.Nodes).AddTo(this);
 
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {

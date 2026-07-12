@@ -27,7 +27,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private async void Initialize()
     {
-        InGameFileLoad.I?.OnFileLoaded.Subscribe(async fileData =>
+        InGameFileLoad.I?.OnNodeFileLoaded.Subscribe(async fileData =>
         {
             await LoadPlayAsync(fileData);
         }).AddTo(this);
