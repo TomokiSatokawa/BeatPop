@@ -2661,6 +2661,7 @@ GameObject:
   - component: {fileID: 564475094}
   - component: {fileID: 564475093}
   - component: {fileID: 564475095}
+  - component: {fileID: 564475096}
   m_Layer: 5
   m_Name: Node
   m_TagString: Untagged
@@ -2741,6 +2742,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
   m_ShowMaskGraphic: 1
+--- !u!114 &564475096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564475091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
 --- !u!1 &567384263
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,6 +3703,7 @@ MonoBehaviour:
   - {fileID: 584447426}
   - {fileID: 800789971}
   - {fileID: 119610698}
+  _fieldHover: {fileID: 564475096}
 --- !u!114 &781383613
 MonoBehaviour:
   m_ObjectHideFlags: 0

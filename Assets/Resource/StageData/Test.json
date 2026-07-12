@@ -8,12 +8,26 @@
             "Channel": 0,
             "Division": 4,
             "Duration": 0.5,
-            "Power": 1.0,
+            "Power": 0.5,
             "Color": {
                 "r": 1.0,
                 "g": 0.9599999785423279,
                 "b": 0.8799999952316284,
                 "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 0.0,
+            "Channel": 1,
+            "Division": 4,
+            "Duration": 0.0,
+            "Power": 0.0,
+            "Color": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
             }
         },
         {
@@ -50,7 +64,7 @@
             "Channel": 1,
             "Division": 4,
             "Duration": 0.5,
-            "Power": 1.0,
+            "Power": 2.0,
             "Color": {
                 "r": 1.0,
                 "g": 0.44999998807907107,

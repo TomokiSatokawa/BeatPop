@@ -13,6 +13,7 @@ public class SnapNode : MonoBehaviour
     [SerializeField] private RectTransform _createPointer;
     [SerializeField] private RectTransform _pointerRect;
     [SerializeField] private RectTransform[] _laneRect;
+    [SerializeField] private UIPointerHover _fieldHover;
 
     private EditMode _editMode = EditMode.None;
     private PoolPrefabType _prefabType;
@@ -39,6 +40,7 @@ public class SnapNode : MonoBehaviour
     public void Update()
     {
         if (_editMode == EditMode.None) return;
+        if (!_fieldHover.IsPointerOver) return;
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
         RectTransform parent = _snapObjectParent;
