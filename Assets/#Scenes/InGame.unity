@@ -5397,6 +5397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d8e2c40b944a14fa15c9e399ef60ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.TouchManager
+  _flickMoveAmount: 5
 --- !u!114 &1946836284
 MonoBehaviour:
   m_ObjectHideFlags: 0

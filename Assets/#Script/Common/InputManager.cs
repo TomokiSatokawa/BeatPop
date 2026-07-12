@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.Windows;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 namespace Input
 {
     public class InputManager : SingletonMonoBehaviour<InputManager>
@@ -102,20 +102,32 @@ namespace Input
             touchState = context.ReadValue<TouchState>();
             switch (touchState.phase)
             {
-                case UnityEngine.InputSystem.TouchPhase.Began:
-                case UnityEngine.InputSystem.TouchPhase.Ended:
+                case TouchPhase.Began:
+                case TouchPhase.Ended:
 
                     _text.text = touchState.startPosition.ToString();
                     int lane = _touchManager.TapLane(touchState.startPosition);
 
-                    if(lane == 0)
+                    if (lane == 0)
                     {
-                        _leftLane.OnNext(touchState.phase == UnityEngine.InputSystem.TouchPhase.Began);
+                        _leftLane.OnNext(touchState.phase == TouchPhase.Began);
                     }
-                    else if(lane == 1)
+                    else if (lane == 1)
                     {
-                        _rightLane.OnNext(touchState.phase == UnityEngine.InputSystem.TouchPhase.Began);
+                        _rightLane.OnNext(touchState.phase == TouchPhase.Began);
                     }
+                    break;
+                case TouchPhase.Moved:
+
+                    //ƒtƒŠƒbƒN—Ê
+                    if (!_touchManager.IsFlick(touchState.startPosition, touchState.position))
+                        break;
+
+                    lane = _touchManager.TapLane(touchState.startPosition);
+                    if (lane == -1)
+                        break;
+
+                    _onFlick.OnNext(lane);
                     break;
             }
         }

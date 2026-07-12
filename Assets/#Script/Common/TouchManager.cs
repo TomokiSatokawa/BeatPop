@@ -4,6 +4,7 @@ namespace Input
 {
     public class TouchManager : MonoBehaviour
     {
+        [SerializeField] private float _flickMoveAmount;
         private FloatRange _laneY;
         private FloatRange _lane0;
         private FloatRange _lane1;
@@ -31,10 +32,12 @@ namespace Input
 
             if (_lane0.Contains(pos.x)) return 0;
             if (_lane1.Contains(pos.x)) return 1;
-            //if (_lane2.Contains(pos.x)) return 2;
-            //if (_lane3.Contains(pos.x)) return 3;
 
             return -1;
+        }
+        public bool IsFlick(Vector2 start,Vector3 end)
+        {
+            return end.y - start.y > _flickMoveAmount;
         }
     }
     [System.Serializable]
