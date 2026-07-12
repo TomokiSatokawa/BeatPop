@@ -21,7 +21,7 @@ namespace InGame.Stage
                 _patternList = EditorLightData.I.LightData;
             }
 
-            if(InGameFileLoad.I != null)
+            if (InGameFileLoad.I != null)
             {
                 InGameFileLoad.I.OnStageFileLoaded.Subscribe(x =>
                 {
@@ -33,13 +33,20 @@ namespace InGame.Stage
                 .Where(x => x)
                 .Subscribe(_ => UpdateNextPattern())
                 .AddTo(this);
+
+            BeatUpdateManager.I.AddFastBeatUpdate(new BeatUpdateHandle(32, 0
+                , (_, _) => NextPattern()));
         }
 
-        private void Update()
+        private void NextPattern()
         {
             if (EditorLightData.I != null)
             {
                 _patternList = EditorLightData.I.LightData;
+            }
+            if (InGameFileLoad.I != null)
+            {
+                _patternList = InGameFileLoad.I.OnStageFileLoaded.CurrentValue.LightData;
             }
 
             if (_patternList == null || _patternList.Count == 0)

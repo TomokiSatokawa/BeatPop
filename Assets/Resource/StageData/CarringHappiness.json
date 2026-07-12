@@ -1,0 +1,76 @@
+{
+    "Version": "2.0",
+    "SongDataIndex": 1,
+    "LightData": [
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 0.0,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 0.0,
+            "Channel": 1,
+            "Division": 4,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 1.5,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 1.5,
+            "Channel": 1,
+            "Division": 8,
+            "Duration": 0.4000000059604645,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 7.5,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.699999988079071,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        }
+    ]
+}

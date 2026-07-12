@@ -10,10 +10,10 @@ namespace InGame
     /// </summary>
     public class InGameFileLoad : SingletonMonoBehaviour<InGameFileLoad>
     {
-        private Subject<NodeSaveData> _onNodeFileLoaded = new();
-        public Observable<NodeSaveData> OnNodeFileLoaded => _onNodeFileLoaded;
-        private Subject<StageSaveData> _onStageFileLoaded = new();
-        public Observable<StageSaveData> OnStageFileLoaded => _onStageFileLoaded;
+        private ReactiveProperty<NodeSaveData> _onNodeFileLoaded = new();
+        public ReadOnlyReactiveProperty<NodeSaveData> OnNodeFileLoaded => _onNodeFileLoaded;
+        private ReactiveProperty<StageSaveData> _onStageFileLoaded = new();
+        public ReadOnlyReactiveProperty<StageSaveData> OnStageFileLoaded => _onStageFileLoaded;
 
         public async UniTask FileLoad()
         {

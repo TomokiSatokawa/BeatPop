@@ -20,7 +20,7 @@ namespace InGame.Stage
         {
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
-                BeatUpdateManager.I.Register(new BeatUpdateHandle(64, 0, (_,division) => BeatUpdate(division)));
+                BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(64, 0, (_,division) => BeatUpdate(division)));
             }).AddTo(this);
 
         }

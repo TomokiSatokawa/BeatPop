@@ -6,27 +6,56 @@ namespace InGame
 {
     public class BeatUpdateManager : SingletonMonoBehaviour<BeatUpdateManager>
     {
+        private readonly List<BeatUpdateHandle> _activeFastBeatUpdate = new();
         private readonly List<BeatUpdateHandle> _activeBeatUpdate = new();
+        private readonly List<BeatUpdateHandle> _activeLateBeatUpdate = new();
         private float _previousTime;
-        public void Register(BeatUpdateHandle handle)
+        public void AddFastBeatUpdate(BeatUpdateHandle handle)
+        {
+            handle.UpdateNextTime();
+            _activeFastBeatUpdate.Add(handle);
+        }
+
+        public void AddBeatUpdate(BeatUpdateHandle handle)
         {
             handle.UpdateNextTime();
             _activeBeatUpdate.Add(handle);
         }
 
+        public void AddLateBeatUpdate(BeatUpdateHandle handle)
+        {
+            handle.UpdateNextTime();
+            _activeLateBeatUpdate.Add(handle);
+        }
         private void Update()
         {
             float current = StageTimeController.StageTime;
 
             if (current < _previousTime)
             {
+                foreach (var handle in _activeFastBeatUpdate)
+                {
+                    handle.UpdateNextTime();
+                }
                 foreach (var handle in _activeBeatUpdate)
+                {
+                    handle.UpdateNextTime();
+                }
+                foreach (var handle in _activeLateBeatUpdate)
                 {
                     handle.UpdateNextTime();
                 }
             }
 
+            foreach (var handle in _activeFastBeatUpdate)
+            {
+                handle.Tick();
+            }
             foreach (var handle in _activeBeatUpdate)
+            {
+                handle.Tick();
+            }
+            foreach (var handle in _activeLateBeatUpdate)
             {
                 handle.Tick();
             }

@@ -17,7 +17,7 @@ namespace InGame.Sound
             ChangeBPM();
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
-                BeatUpdateManager.I.Register(new BeatUpdateHandle(4, 0, (_, _) => _audioSource.PlayOneShot(_clip)));
+                BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(4, 0, (_, _) => _audioSource.PlayOneShot(_clip)));
             }).AddTo(this);
         }
 
