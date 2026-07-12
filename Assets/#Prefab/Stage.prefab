@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 8250648864355869332}
   - component: {fileID: 1829420680850613913}
   - component: {fileID: 5846482616612705668}
+  - component: {fileID: 7458910588344044884}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -384,6 +385,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7458910588344044884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744838247904917593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 1829420680850613913}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &1001212723227926524
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +556,7 @@ GameObject:
   - component: {fileID: 4592074029950320183}
   - component: {fileID: 3289291422162133957}
   - component: {fileID: 1259262974620386462}
+  - component: {fileID: 1009671538598377316}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -638,6 +657,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1009671538598377316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058790715086264906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 3289291422162133957}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &1090739459847336920
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +970,7 @@ GameObject:
   - component: {fileID: 4577677808194732774}
   - component: {fileID: 8642112392097655011}
   - component: {fileID: 4726254270288054289}
+  - component: {fileID: 768542099750344118}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -1034,6 +1071,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &768542099750344118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172301806146281287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 8642112392097655011}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &1205122824999493184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,8 +1242,9 @@ GameObject:
   - component: {fileID: 1805053928301934818}
   - component: {fileID: 1666236879095571830}
   - component: {fileID: 8458061125340052641}
+  - component: {fileID: 5132542139638096024}
   m_Layer: 6
-  m_Name: Cube (1)
+  m_Name: BackUpperPanelLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1217,7 +1272,6 @@ Transform:
   - {fileID: 7049457220768926077}
   - {fileID: 4562969738064793361}
   - {fileID: 1361425466873716194}
-  - {fileID: 9064860977168369684}
   m_Father: {fileID: 7957129529170220345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1805053928301934818
@@ -1298,6 +1352,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5132542139638096024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844678431757729912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f28f61cd8f3ea4caac373c2db91697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightManager
+  _lights:
+  - {fileID: 7458910588344044884}
+  - {fileID: 2960083738251783968}
+  - {fileID: 8532922594409970519}
+  - {fileID: 7821015733001791361}
+  - {fileID: 768542099750344118}
+  - {fileID: 6954765725245183274}
+  - {fileID: 2051706994878969464}
+  - {fileID: 8566913674049647915}
+  - {fileID: 1009671538598377316}
 --- !u!1 &1851955660450410696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,6 +1954,7 @@ GameObject:
   - component: {fileID: 7261271455342423172}
   - component: {fileID: 2582760260736408445}
   - component: {fileID: 2632173483630471566}
+  - component: {fileID: 8532922594409970519}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -1978,6 +2055,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8532922594409970519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922426205653528959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 2582760260736408445}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &3704287281869252616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,6 +3024,7 @@ GameObject:
   - component: {fileID: 2135928672446665595}
   - component: {fileID: 4647174337685369386}
   - component: {fileID: 624031307971936718}
+  - component: {fileID: 2960083738251783968}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -3030,6 +3125,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2960083738251783968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472173662137081205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 4647174337685369386}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &4540286892630044792
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,6 +3347,7 @@ GameObject:
   - component: {fileID: 3999858288905333656}
   - component: {fileID: 3068568619413385128}
   - component: {fileID: 7233901832850819612}
+  - component: {fileID: 2051706994878969464}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -3335,6 +3448,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2051706994878969464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129027364518888758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 3068568619413385128}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &5139835248984415666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,6 +3749,7 @@ GameObject:
   - component: {fileID: 1768883034449693621}
   - component: {fileID: 6474053589929509252}
   - component: {fileID: 2183332143856646683}
+  - component: {fileID: 6954765725245183274}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -3719,6 +3850,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6954765725245183274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964072860059464289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 6474053589929509252}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &6034687870891402641
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,6 +4163,7 @@ GameObject:
   - component: {fileID: 1703240018778502441}
   - component: {fileID: 8509866715594512997}
   - component: {fileID: 4844792425037951161}
+  - component: {fileID: 8566913674049647915}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -4115,6 +4264,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8566913674049647915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411786216530882511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 8509866715594512997}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &6689889616046472610
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,149 +5197,6 @@ MonoBehaviour:
   _minPower: 5
   _outThreshold: 7
   _outPower: -10
---- !u!1 &7774107652786885514
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9064860977168369684}
-  - component: {fileID: 6672990598817991}
-  - component: {fileID: 2969149117029408574}
-  - component: {fileID: 4085245700016017360}
-  m_Layer: 6
-  m_Name: Spot Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9064860977168369684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7774107652786885514}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.8584482, y: -0, z: -0, w: 0.5129003}
-  m_LocalPosition: {x: 0, y: -0.094, z: -5.982}
-  m_LocalScale: {x: 0.009891197, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1161497471095550385}
-  m_LocalEulerAnglesHint: {x: 118.285995, y: 0, z: 0}
---- !u!108 &6672990598817991
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7774107652786885514}
-  m_Enabled: 1
-  serializedVersion: 12
-  m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 208.51
-  m_Range: 115.5
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 30
-  m_CookieSize2D: {x: 0.5, y: 0.5}
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 1
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ForceVisible: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_LightUnit: 1
-  m_LuxAtDistance: 1
-  m_EnableSpotReflector: 1
---- !u!114 &2969149117029408574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7774107652786885514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_CustomShadowLayers: 0
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
-  m_RenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_ShadowRenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_Version: 4
-  m_LightLayerMask: 1
-  m_ShadowLayerMask: 1
-  m_RenderingLayers: 1
-  m_ShadowRenderingLayers: 1
---- !u!114 &4085245700016017360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7774107652786885514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 1.87
-  radius: 0.2
 --- !u!1 &8212164777572144605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5438,13 +5461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f28f61cd8f3ea4caac373c2db91697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightManager
-  data:
-    Time: 0
-    Channel: 0
-    Division: 4
-    Duration: 0.5
-    Power: 1
-    Color: {r: 1, g: 0, b: 0, a: 1}
   _lights:
   - {fileID: 4938174658606307721}
   - {fileID: 4160136308679731414}
@@ -5467,6 +5483,7 @@ GameObject:
   - component: {fileID: 8149367169612523681}
   - component: {fileID: 5943908468341639845}
   - component: {fileID: 3686537960356428122}
+  - component: {fileID: 7821015733001791361}
   m_Layer: 6
   m_Name: PointLight1
   m_TagString: Untagged
@@ -5567,6 +5584,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7821015733001791361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918079931309827524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e1558c03c14be4ca86a04f4d0e037e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.PanelLightControl
+  _renderer: {fileID: 5943908468341639845}
+  _maxPower: 20
+  _minPower: 5
+  _outThreshold: 7
+  _outPower: -10
 --- !u!1 &8975621932052743828
 GameObject:
   m_ObjectHideFlags: 0
@@ -5760,6 +5794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.StageEffectSystem
   _frontUpperPanelLight: {fileID: 5472403229305462159}
+  _backUpperPanelLight: {fileID: 5132542139638096024}
+  _startOffset: 0.03
 --- !u!1 &9181069362673421029
 GameObject:
   m_ObjectHideFlags: 0

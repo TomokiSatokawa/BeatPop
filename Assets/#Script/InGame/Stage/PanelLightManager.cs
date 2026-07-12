@@ -12,7 +12,6 @@ namespace InGame.Stage
     /// </summary>
     public class PanelLightManager : MonoBehaviour
     {
-        [SerializeField] public LightPatternBaseData data;
         [SerializeField] private LightControlBase[] _lights;
 
         private Dictionary<Type, LightPatternBase<LightPatternBaseData>> _instancePattern = new();
@@ -34,7 +33,6 @@ namespace InGame.Stage
         public void ChangePattern(LightPatternBaseData data)
         {
             Type type = Assembly.GetExecutingAssembly().GetType(data.PatternType);
-            Debug.Log(type);
             ChangePattern(type, data);
         }
 
@@ -45,7 +43,6 @@ namespace InGame.Stage
                 pattern = (LightPatternBase<LightPatternBaseData>)Activator.CreateInstance(type);
             }
 
-            Debug.Log("ChangePattern");
             _instancePattern[type] = pattern;
             _currentPattern?.Test();
             _currentPattern = pattern;

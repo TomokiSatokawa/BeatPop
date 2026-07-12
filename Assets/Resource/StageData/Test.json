@@ -43,6 +43,20 @@
                 "b": 0.0,
                 "a": 1.0
             }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 4.615384578704834,
+            "Channel": 1,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
         }
     ]
 }

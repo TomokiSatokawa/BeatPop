@@ -8,6 +8,7 @@ namespace InGame.Stage
     public class StageEffectSystem : MonoBehaviour
     {
         [SerializeField] private PanelLightManager _frontUpperPanelLight;
+        [SerializeField] private PanelLightManager _backUpperPanelLight;
         [SerializeField] private float _startOffset;
 
         private IReadOnlyList<LightPatternBaseData> _patternList;
@@ -64,6 +65,9 @@ namespace InGame.Stage
             {
                 case 0:
                     _frontUpperPanelLight.ChangePattern(data);
+                    break;
+                case 1:
+                    _backUpperPanelLight.ChangePattern(data);
                     break;
             }
         }
