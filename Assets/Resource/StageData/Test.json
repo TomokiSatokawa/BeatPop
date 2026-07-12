@@ -3,12 +3,12 @@
     "SongDataIndex": 0,
     "LightData": [
         {
-            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "PatternType": "ManualLightPattern",
             "Time": 0.0,
             "Channel": 0,
             "Division": 4,
             "Duration": 0.5,
-            "Power": 0.10000000149011612,
+            "Power": 1.0,
             "Color": {
                 "r": 1.0,
                 "g": 0.9599999785423279,

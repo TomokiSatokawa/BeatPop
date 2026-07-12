@@ -49,7 +49,7 @@ namespace InGame.Stage
         public override void Flash(float duration, float power)
         {
             _flash?.Kill(true);
-            _flash = DOVirtual.Float(_maxPower, _minPower, duration, x =>
+            _flash = DOVirtual.Float(_maxPower * power, _minPower, duration, x =>
             {
                 UpdatePower(x);
             });
@@ -58,6 +58,11 @@ namespace InGame.Stage
         public override void Refresh()
         {
             _flash?.Kill(true);
+        }
+
+        public override void SetPower(float power)
+        {
+            UpdatePower(_maxPower * power);
         }
     }
 }
