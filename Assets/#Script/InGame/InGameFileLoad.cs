@@ -2,6 +2,7 @@ using Common;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using R3;
+using Debug = UnityEngine.Debug;
 
 namespace InGame
 {
@@ -19,6 +20,13 @@ namespace InGame
         {
             var nodeData = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.GetNodeJson().text);
             var stageData = StageDataSerializer.DeserializeJson(SongPlayManager.I.SongData.SongData.StageEffectData.text);
+
+            if (nodeData == null)
+                Debug.LogError("NodeData‚ª‚ ‚è‚Ü‚¹‚ñ");
+
+            if (stageData == null)
+                Debug.LogError("StageData‚ª‚ ‚è‚Ü‚¹‚ñ");
+
             _onNodeFileLoaded.OnNext(nodeData);
             _onStageFileLoaded.OnNext(stageData);
         }

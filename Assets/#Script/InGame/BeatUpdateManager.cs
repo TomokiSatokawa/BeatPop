@@ -94,6 +94,7 @@ namespace InGame
         {
             if (NextTime <= StageTimeController.StageTime)
             {
+                Debug.Log("aaa");
                 int sixteenthIndex = Mathf.RoundToInt((NextTime - SecondOffset) / _sixtyFourthInterval);
                 Callback?.Invoke(NextTime,GetBeatDivision(sixteenthIndex));
                 UpdateNextTime();
