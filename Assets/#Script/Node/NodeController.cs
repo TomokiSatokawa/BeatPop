@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Common.BeatUpdate;
 using InGame.UI;
 using Input;
 using R3;
@@ -28,16 +29,16 @@ namespace InGame.Node
         private readonly List<NodeObject> _removeNodes = new();
         private void Start()
         {
-           StageTimeController.I.OnInitialized.Subscribe(_ => InitializeBeat()).AddTo(this);
+            StageTimeController.I.OnInitialized.Subscribe(_ => InitializeBeat()).AddTo(this);
         }
 
         private void InitializeBeat()
         {
-            BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(8, 0, (_, _) =>
+            BeatUpdateManager.BeatUpdate.Subscribe(8, 0, _ =>
             {
                 HoldLane(0, InputManager.LeftLane.CurrentValue);
                 HoldLane(1, InputManager.RightLane.CurrentValue);
-            }));
+            });
         }
 
         public void AddNode(NodeObject node)

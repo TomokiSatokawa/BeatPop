@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Common.BeatUpdate;
 using Cysharp.Threading.Tasks;
 using InGame.UI;
 using R3;
@@ -26,11 +27,8 @@ namespace InGame.Node
         {
             InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => NodeDates = x.Nodes).AddTo(this);
 
-            StageTimeController.I.OnInitialized.Subscribe(_ =>
-            {
-                BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(16, -_arrivalSeconds, (_,_) => GenerateNodes()));
-                BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(4, -_arrivalSeconds, (time, _)=> GenerateLines(time)));
-            }).AddTo(this);
+            BeatUpdateManager.BeatUpdate.Subscribe(16, -_arrivalSeconds, _ => GenerateNodes());
+            BeatUpdateManager.BeatUpdate.Subscribe(4, -_arrivalSeconds, x => GenerateLines(x.Time));
         }
 
         void Update()

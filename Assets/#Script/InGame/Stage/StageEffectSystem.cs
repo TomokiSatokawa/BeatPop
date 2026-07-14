@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Common.BeatUpdate;
 using InGame.UI;
 using R3;
 using UnityEngine;
@@ -35,8 +36,8 @@ namespace InGame.Stage
                 .Subscribe(_ => UpdateNextPattern())
                 .AddTo(this);
 
-            BeatUpdateManager.I.AddFastBeatUpdate(new BeatUpdateHandle(64, _startOffset
-                   , (_, _) => NextPattern()));
+
+            BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
         }
 
         public void NextPattern()

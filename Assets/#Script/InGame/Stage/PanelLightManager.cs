@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using InGame.UI;
-using R3;
+using Common.BeatUpdate;
 using UnityEngine;
 
 namespace InGame.Stage
@@ -18,15 +17,12 @@ namespace InGame.Stage
         private LightPatternBase<LightPatternBaseData> _currentPattern;
         private void Start ()
         {
-            StageTimeController.I.OnInitialized.Subscribe(_ =>
-            {
-                BeatUpdateManager.I.AddBeatUpdate(new BeatUpdateHandle(64, 0, (_,division) => BeatUpdate(division)));
-            }).AddTo(this);
-
+            BeatUpdateManager.BeatUpdate.Subscribe(16, 0, x => BeatUpdate(x.Division));
         }
 
         public void BeatUpdate(int division)
         {
+            Debug.Log(division);
             _currentPattern?.BeatUpdate(division);
         }
 
