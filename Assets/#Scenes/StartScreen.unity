@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.FadeImageControl
   _fadeImage: {fileID: 67526972}
   _fadeDuration: 1
-  _isStartFadeIn: 1
+  _isStartFadeIn: 0
   _fadeInType: 1
 --- !u!1 &200224911
 GameObject:

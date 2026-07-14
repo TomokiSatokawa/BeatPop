@@ -3432,7 +3432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690617257747734380, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -359.00003
+      value: -464
       objectReference: {fileID: 0}
     - target: {fileID: 8690617257747734380, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3451,6 +3451,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+--- !u!114 &303579402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+  m_PrefabInstance: {fileID: 303579401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &306475969
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,6 +3603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _fastActive: {fileID: 125775975}
+  _fadeDuration: 0
 --- !u!114 &326236073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8338,6 +8350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783213276}
+  - component: {fileID: 783213277}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -8367,6 +8380,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 305}
   m_SizeDelta: {x: 1514.9797, y: 1192.3685}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &783213277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783213275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6956f2bee55bf7846a2fce31ea3132db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonSlideInAnimation
+  _buttons:
+  - {fileID: 6672054654781378036}
+  - {fileID: 1295043334}
+  - {fileID: 303579402}
+  _startPos: 1994
+  _duration: 0.3
+  _interval: 0.3
+  _moveStartDirection: 2
+  _startScale: 0.9
+  _useFade: 1
+  _ease: 27
+  _usePunch: 1
+  _punchPower: 0.05
+  _punchDuration: 0.2
 --- !u!1 &789402640
 GameObject:
   m_ObjectHideFlags: 0
@@ -9148,7 +9187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00015258789}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -9205,7 +9244,19 @@ MonoBehaviour:
   _canvasGroup: {fileID: 884756576}
   _activeAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 783213277}
+        m_TargetAssemblyTypeName: ButtonSlideInAnimation, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
       m_Calls: []
@@ -9217,7 +9268,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884756573}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -12319,6 +12370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _fastActive: {fileID: 884756575}
+  _fadeDuration: 0.5
 --- !u!1 &1156228241
 GameObject:
   m_ObjectHideFlags: 0
@@ -14769,7 +14821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690617257747734380, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 15.499908
+      value: -37.00003
       objectReference: {fileID: 0}
     - target: {fileID: 8690617257747734380, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14788,6 +14840,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+--- !u!114 &1295043334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+  m_PrefabInstance: {fileID: 1295043333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1296237655
 GameObject:
   m_ObjectHideFlags: 0
@@ -15510,7 +15573,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337337626}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -20697,7 +20760,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8927673
+  m_Size: 0.89276725
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21955,7 +22018,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909526568}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -24476,6 +24539,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+--- !u!114 &6672054654781378036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+  m_PrefabInstance: {fileID: 6672054654781378035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

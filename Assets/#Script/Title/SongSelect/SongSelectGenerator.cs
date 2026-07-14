@@ -12,12 +12,14 @@ namespace Title.SongSelect
 
         private List<GameObject> _clonedObject = new();
         private string _keyword = "";
+
         public void InitialView()
         {
             DeleteChild();
             AddTitle("‚¨‚·‚·‚ß");
             AddContentsList(SongRecommender.I.GetRecommendation());
         }
+
         public void KeywordView(string keyword)
         {
             DeleteChild();
@@ -42,18 +44,21 @@ namespace Title.SongSelect
 
             _keyword = text;
         }
+
         private void AddTitle(string text)
         {
             var title = InstantiateContent(_titlePrefab);
             title.text = text;
             _clonedObject.Add(title.gameObject);
         }
+
         private void AddContentsList(IReadOnlyList<SongSelectData> datas)
         {
             var list = InstantiateContent(_contentsListPrefab);
             list.ViewList(datas, _listSongPrefab);
             _clonedObject.Add(list.gameObject);
         }
+
         protected override void DeleteChild()
         {
             base.DeleteChild();

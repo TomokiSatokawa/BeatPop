@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 3502102657005500669}
   - component: {fileID: 7442347446706188712}
   - component: {fileID: 3507618112854934190}
+  - component: {fileID: 6952275758637220680}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -272,6 +273,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6952275758637220680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624142421138198103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1580494298875084497c95563d40c6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
+  _hoverScale: 1.1
+  _duration: 0.15
+  _ease: 27
 --- !u!1 &4821140975650114741
 GameObject:
   m_ObjectHideFlags: 0

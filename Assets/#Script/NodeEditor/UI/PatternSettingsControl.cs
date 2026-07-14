@@ -24,7 +24,7 @@ namespace Editor.UI
         private void Start()
         {
             _clauseButton.onClick.RemoveAllListeners();
-            _clauseButton.onClick.AddListener(_panelControl.OnHidden);
+            _clauseButton.onClick.AddListener(() => _panelControl.OnHidden());
 
             var baseType = typeof(LightPatternBase<LightPatternBaseData>);
 
