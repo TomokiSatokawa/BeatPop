@@ -21,6 +21,11 @@ namespace InGame.Stage
         {
             _mpb = new MaterialPropertyBlock();
         }
+        public void Start()
+        {
+            SetColor(Color.black);
+            UpdatePower(_minPower);
+        }
         public override void SetColor(Color color)
         {
             _renderer.material.color = color;
