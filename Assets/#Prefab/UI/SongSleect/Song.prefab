@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 9046416880429378607}
   - component: {fileID: 4141949604591186639}
   - component: {fileID: 4724775528831732003}
+  - component: {fileID: 3789498535891021714}
   m_Layer: 5
   m_Name: Song
   m_TagString: Untagged
@@ -429,6 +430,21 @@ MonoBehaviour:
   _levelText: {fileID: 5917732332361981312}
   _levelImage: {fileID: 5023758322971426000}
   _difficultyColor: {fileID: 11400000, guid: 90575bdb9c762c04aabc1ce0862ca638, type: 2}
+--- !u!114 &3789498535891021714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656819440520287801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1580494298875084497c95563d40c6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
+  _hoverScale: 1.1
+  _duration: 0.15
+  _ease: 27
 --- !u!1 &5492008963789595376
 GameObject:
   m_ObjectHideFlags: 0

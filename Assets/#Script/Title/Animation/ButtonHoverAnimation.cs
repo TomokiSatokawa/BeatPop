@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +8,8 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _duration = 0.15f;
     [SerializeField] private Ease _ease = Ease.OutBack;
-
+    public Action OnEnter;
+    public Action OnExit;
     private Vector3 _defaultScale;
     private Tween _tween;
 
@@ -21,6 +23,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         _tween?.Kill();
         _tween = transform.DOScale(_defaultScale * _hoverScale, _duration)
             .SetEase(_ease);
+        OnEnter?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -28,6 +31,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         _tween?.Kill();
         _tween = transform.DOScale(_defaultScale, _duration)
             .SetEase(Ease.OutQuad);
+        OnExit?.Invoke();
     }
 
     private void OnDisable()

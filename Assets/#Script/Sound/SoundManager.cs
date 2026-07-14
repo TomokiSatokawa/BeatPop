@@ -32,6 +32,12 @@ namespace Sound
             return startDspTime;
         }
 
+        public void PlayBGMPreview(AudioClip clip,float fadeIn,float time)
+        {
+            _seBGM.clip = clip;
+            _seBGM.time = time;
+            _seBGM.Play();
+        }
         public void IsPause(bool stop)
         {
             if (stop)
