@@ -28,6 +28,8 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
         EditorNodeData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
         EditorLightData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
         StageTimeController.I.IsPlaying.Subscribe(x => _scrollBar.interactable = !x).AddTo(this);
+
+        ChangeDivisionCount(4);
     }
     public async void Initialize(NodeSaveData saveData)
     {

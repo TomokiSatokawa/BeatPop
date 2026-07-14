@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class JudgeUIControl : PoolObject
 {
-    [SerializeField] private float _moveAmount;
-    [SerializeField] private float _duration;
+    [Header("Animation")]
+    [SerializeField] private float _duration = 0.5f;
+    [SerializeField] private float _popScale = 1.2f;
+    [SerializeField] private float _popDuration = 0.08f;
+    [SerializeField] private float _returnDuration = 0.12f;
+    [SerializeField] private float _fadeDelay = 0.25f;
+    [SerializeField] private float _fadeDuration = 0.25f;
+    [SerializeField] private float _defaultSize = 1f;
+
     [SerializeField] private TextMeshProUGUI _text;
     public TextMeshProUGUI Text => _text;
 
@@ -13,15 +20,21 @@ public class JudgeUIControl : PoolObject
     private void Awake()
     {
         _sequence = DOTween.Sequence()
-            .Append(_text.rectTransform.DOAnchorPosY(_moveAmount, _duration).SetRelative())
-            .Append(_text.DOFade(0, _duration / 2))
-            .AppendCallback(() => Release())
+            .Append(_text.rectTransform.DOScale(_popScale, _popDuration).SetEase(Ease.OutBack))
+            .Append(_text.rectTransform.DOScale(_defaultSize, _returnDuration).SetEase(Ease.OutQuad))
+            .Join(_text.DOFade(0f, _fadeDuration).SetDelay(_fadeDelay))
             .SetAutoKill(false)
             .Pause();
     }
 
     private void OnEnable()
     {
-        _sequence.Restart(true);
+        _text.rectTransform.localScale = Vector3.one;
+        _text.alpha = 1f;
+    }
+
+    public void OnPlay()
+    {
+        _sequence.Restart();
     }
 }

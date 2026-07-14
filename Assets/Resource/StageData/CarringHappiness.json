@@ -88,6 +88,20 @@
         },
         {
             "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 12.0,
+            "Channel": 0,
+            "Division": 16,
+            "Duration": 0.25,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
             "Time": 12.75,
             "Channel": 1,
             "Division": 0,
@@ -98,6 +112,20 @@
                 "g": 0.0,
                 "b": 0.0,
                 "a": 0.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 12.75,
+            "Channel": 0,
+            "Division": 32,
+            "Duration": 1.0,
+            "Power": 0.5,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
             }
         },
         {
@@ -116,14 +144,294 @@
         },
         {
             "PatternType": "InGame.Stage.BeatSyncLightPattern",
-            "Time": 16.5,
+            "Time": 13.5,
             "Channel": 0,
             "Division": 4,
             "Duration": 0.5,
-            "Power": 0.10000000149011612,
+            "Power": 1.0,
             "Color": {
                 "r": 1.0,
                 "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 16.5,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 1.0,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.949999988079071,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 27.0,
+            "Channel": 0,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 27.0,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 28.5,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.800000011920929,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 28.5,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 28.875,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 1.0,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 29.25,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 29.625,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 30.0,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 30.375,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 30.75,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 31.125,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 31.5,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 31.875,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 32.25,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 32.625,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 33.0,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "ManualLightPattern",
+            "Time": 33.375,
+            "Channel": 1,
+            "Division": 32,
+            "Duration": 0.10000000149011612,
+            "Power": 0.5,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 33.75,
+            "Channel": 1,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.AlternateLightPattern",
+            "Time": 34.5,
+            "Channel": 1,
+            "Division": 8,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
                 "b": 0.0,
                 "a": 1.0
             }
@@ -209,6 +517,76 @@
                 "r": 1.0,
                 "g": 0.44999998807907107,
                 "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 45.0,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 46.5,
+            "Channel": 0,
+            "Division": 2,
+            "Duration": 0.5,
+            "Power": 1.2000000476837159,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 47.0625,
+            "Channel": 0,
+            "Division": 8,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 47.25,
+            "Channel": 0,
+            "Division": 1,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "PatternType": "InGame.Stage.BeatSyncLightPattern",
+            "Time": 47.625,
+            "Channel": 0,
+            "Division": 4,
+            "Duration": 0.5,
+            "Power": 1.0,
+            "Color": {
+                "r": 0.20000000298023225,
+                "g": 0.6000000238418579,
+                "b": 1.0,
                 "a": 1.0
             }
         }

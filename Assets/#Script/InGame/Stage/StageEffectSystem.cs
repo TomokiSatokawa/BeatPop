@@ -10,6 +10,7 @@ namespace InGame.Stage
         [SerializeField] private PanelLightManager _frontUpperPanelLight;
         [SerializeField] private PanelLightManager _backUpperPanelLight;
         [SerializeField] private float _startOffset;
+        [SerializeField] private bool _isAllCheckPattern;
 
         private IReadOnlyList<LightPatternBaseData> _patternList;
         private int _nextPatternIndex;
@@ -34,11 +35,8 @@ namespace InGame.Stage
                 .Subscribe(_ => UpdateNextPattern())
                 .AddTo(this);
 
-            StageTimeController.I.OnInitialized.Subscribe(_ =>
-            {
-                BeatUpdateManager.I.AddFastBeatUpdate(new BeatUpdateHandle(64, _startOffset
-                    , (_, _) => NextPattern()));
-            });
+            BeatUpdateManager.I.AddFastBeatUpdate(new BeatUpdateHandle(64, _startOffset
+                   , (_, _) => NextPattern()));
         }
 
         public void NextPattern()
@@ -63,7 +61,9 @@ namespace InGame.Stage
                 var data = _patternList[_nextPatternIndex];
 
                 if (data.Time > currentTime)
+                {
                     break;
+                }
 
                 StartPattern(data);
                 _nextPatternIndex++;

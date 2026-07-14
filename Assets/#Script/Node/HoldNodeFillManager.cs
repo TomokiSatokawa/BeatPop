@@ -111,13 +111,16 @@ public class HoldNodeFillManager : MonoBehaviour
             SetFill(_fillObject.transform, start, end);
 
             bool isInput = false;
-            if(StartNode.Lane == 0)
+            if (StartNode.Time <= StageTimeController.StageTime)
             {
-                isInput = InputManager.LeftLane.CurrentValue;
-            }
-            else
-            {
-                isInput = InputManager.RightLane.CurrentValue;
+                if (StartNode.Lane == 0)
+                {
+                    isInput = InputManager.LeftLane.CurrentValue;
+                }
+                else
+                {
+                    isInput = InputManager.RightLane.CurrentValue;
+                }
             }
 
             _effect.SetEmission(isInput);

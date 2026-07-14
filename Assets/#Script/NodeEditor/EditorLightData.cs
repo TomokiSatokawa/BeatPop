@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Common;
-using InGame.Node;
 using InGame.Stage;
 using R3;
 using UnityEditor;
@@ -48,6 +47,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         if (_lightData.Exists(x => Mathf.Abs(x.Time - lightData.Time) < _epsilon && x.Channel == lightData.Channel)) return;
 
         _lightData.Add(lightData);
+        _lightData = _lightData.OrderBy(x => x.Time).ToList();
     }
     public void DeleteNode(float time, int channel)
     {
@@ -56,6 +56,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
 
         _onRemove.OnNext((time, channel));
         _lightData.RemoveAt(targetNode);
+        _lightData = _lightData.OrderBy(x => x.Time).ToList();
     }
     public void OnImport()
     {
@@ -85,7 +86,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         if (string.IsNullOrEmpty(path))
             return;
 
-        string json = StageDataSerializer.SerializeJson(_lightData.ToArray());
+        string json = StageDataSerializer.SerializeJson(_lightData.ToArray(),LoadedFile.CurrentValue.SongDataIndex);
         File.WriteAllText(path, json);
 #endif
     }

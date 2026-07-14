@@ -27,13 +27,14 @@ namespace Common
                 return null;
             }
         }
-        public static string SerializeJson(LightPatternBaseData[] patternBaseDatas)
+        public static string SerializeJson(LightPatternBaseData[] patternBaseDatas,int songIndex)
         {
             StageSaveData saveData = new();
             patternBaseDatas = patternBaseDatas.OrderBy(x => x.Time).ToArray();
 
             saveData.Version =  Version;
             saveData.LightData  = patternBaseDatas;
+            saveData.SongDataIndex = songIndex;
             if (saveData == null)
                 return null;
 

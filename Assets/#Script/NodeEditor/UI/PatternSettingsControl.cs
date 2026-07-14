@@ -77,7 +77,7 @@ namespace Editor.UI
                         , x => targetField.SetValue(data, float.Parse(x)));
                         break;
                     case nameof(String):
-                        int selectType = _patternTypes.FindIndex(x => x.Name == targetField.GetValue(data).ToString());
+                        int selectType = _patternTypes.FindIndex(x => x.FullName == targetField.GetValue(data).ToString());
 
                         InstantiateContent(_selectPrefab)
                         .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget,"")).ToList(), targetField.Name, selectType
@@ -97,7 +97,7 @@ namespace Editor.UI
                             i++;
                         }
                         InstantiateContent(_selectPrefab)
-                      .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, selectIndex
+                      .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, i
                       , x => targetField.SetValue(data, _colorPallet.Items[x].Value));
                         break;
                 }

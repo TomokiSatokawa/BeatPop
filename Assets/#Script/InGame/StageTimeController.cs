@@ -26,12 +26,17 @@ namespace InGame.UI
 
         private Subject<Unit> _onInitialized = new();
         public Observable<Unit> OnInitialized => _onInitialized;
+        public bool IsInitialized { get; private set; } = false;
 
         private Subject<Unit> _onGameClear = new();
         public Observable<Unit> OnGameClear => _onGameClear;
 
         private double _startDspTime;
 
+        public void Start()
+        {
+            IsInitialized = false;
+        }
         public void SetPlayData(NodeSaveData fileData)
         {
             float bpm  = fileData.BPM;
@@ -73,6 +78,7 @@ namespace InGame.UI
             StageTime = -_waitSeconds;
             _isPlaying.Value = true;
             _onInitialized.OnNext(Unit.Default);
+            IsInitialized = true;
         }
 
         public void UpdateStageTime()

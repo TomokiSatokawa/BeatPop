@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using InGame.UI;
+using R3;
 using UnityEngine;
 namespace InGame
 {
@@ -10,6 +11,10 @@ namespace InGame
         private readonly List<BeatUpdateHandle> _activeBeatUpdate = new();
         private readonly List<BeatUpdateHandle> _activeLateBeatUpdate = new();
         private float _previousTime;
+        public void Start()
+        {
+            StageTimeController.I.OnInitialized.Subscribe(_ => UpdateAllNextTime());
+        }
         public void AddFastBeatUpdate(BeatUpdateHandle handle)
         {
             handle.UpdateNextTime();
@@ -33,18 +38,7 @@ namespace InGame
 
             if (current < _previousTime)
             {
-                foreach (var handle in _activeFastBeatUpdate)
-                {
-                    handle.UpdateNextTime();
-                }
-                foreach (var handle in _activeBeatUpdate)
-                {
-                    handle.UpdateNextTime();
-                }
-                foreach (var handle in _activeLateBeatUpdate)
-                {
-                    handle.UpdateNextTime();
-                }
+                UpdateAllNextTime();
             }
 
             foreach (var handle in _activeFastBeatUpdate)
@@ -61,6 +55,22 @@ namespace InGame
             }
 
             _previousTime = current;
+        }
+
+        private void UpdateAllNextTime()
+        {
+            foreach (var handle in _activeFastBeatUpdate)
+            {
+                handle.UpdateNextTime();
+            }
+            foreach (var handle in _activeBeatUpdate)
+            {
+                handle.UpdateNextTime();
+            }
+            foreach (var handle in _activeLateBeatUpdate)
+            {
+                handle.UpdateNextTime();
+            }
         }
     }
     public class BeatUpdateHandle
@@ -102,19 +112,25 @@ namespace InGame
         }
         public static int GetBeatDivision(int sixtyFourthIndex)
         {
+            if (sixtyFourthIndex % 64 == 0)
+                return 1;   // ‘S‰¹•„
+
+            if (sixtyFourthIndex % 32 == 0)
+                return 2;   // 2•ª‰¹•„
+
             if (sixtyFourthIndex % 16 == 0)
-                return 4;
+                return 4;   // 4•ª‰¹•„
 
             if (sixtyFourthIndex % 8 == 0)
-                return 8;
+                return 8;   // 8•ª‰¹•„
 
             if (sixtyFourthIndex % 4 == 0)
-                return 16;
+                return 16;  // 16•ª‰¹•„
 
             if (sixtyFourthIndex % 2 == 0)
-                return 32;
+                return 32;  // 32•ª‰¹•„
 
-            return 64;
+            return 64;      // 64•ª‰¹•„
         }
     }
 }

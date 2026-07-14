@@ -37,7 +37,7 @@ namespace InGame.Node
 
             _laneHighlight[lane].Highlight.DOKill();
             _laneHighlight[lane].Highlight.color = color;
-            _laneHighlight[lane].Highlight.DOFade(0, _emptyClickDuration);
+            _laneHighlight[lane].Highlight.DOFade(0, _emptyClickDuration).SetEase(Ease.OutQuad);
         }
         public void PlayNodeClickEffect(int lane)
         {
