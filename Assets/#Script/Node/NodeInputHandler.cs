@@ -29,8 +29,7 @@ namespace InGame.Node
 
                 if (node.NodeObjData.InputType == inputType)
                 {
-                    var se = InGameCustomSoundData.I.NodeSE[node.Type];
-                    _nodeController.ClickNode(se, node);
+                    _nodeController.ClickNode(node);
                     return;
                 }
             }

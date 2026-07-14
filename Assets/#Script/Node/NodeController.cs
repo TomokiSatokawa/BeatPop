@@ -14,32 +14,10 @@ namespace InGame.Node
     /// </summary>
     public class NodeController : MonoBehaviour
     {
-        [SerializeField] private CustomSoundData _soundData;
-        [SerializeField] private float _nodeSpeed;
-        [SerializeField] private float _goalPos;
-        [SerializeField] private HoldNodeFillManager _nodeFillManager;
-        [SerializeField] private LaneClick _laneClick;
-
+        [SerializeField] private NodeHitExecutor _nodeHitExecutor;
         private List<NodeObject> _nodes = new();
 
-        private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
-
-        public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
-
         private readonly List<NodeObject> _removeNodes = new();
-        private void Start()
-        {
-            StageTimeController.I.OnInitialized.Subscribe(_ => InitializeBeat()).AddTo(this);
-        }
-
-        private void InitializeBeat()
-        {
-            BeatUpdateManager.BeatUpdate.Subscribe(8, 0, _ =>
-            {
-                HoldLane(0, InputManager.LeftLane.CurrentValue);
-                HoldLane(1, InputManager.RightLane.CurrentValue);
-            });
-        }
 
         public void AddNode(NodeObject node)
         {
@@ -73,25 +51,10 @@ namespace InGame.Node
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                    float difference = node.NodeData.Time - StageTimeController.StageTime;
-                    var judgeData = ScoreManager.I.AddScore(node.Type, difference, node.NodeData);
-                    _showJudge.OnNext((judgeData, node.NodeData.Lane));
-                    if (node.Type == PoolPrefabType.HoldNoteEnd)
-                    {
-                        _nodeFillManager.DeleteFill(node.NodeData);
-                    }
+                 _nodeHitExecutor.RemoveAction(node);
                 }
                 node.Release();
                 _nodes.Remove(node);
-            }
-        }
-        private void HoldLane(int lane, bool isHold)
-        {
-            if (_nodeFillManager.HasFill(lane))
-            {
-                float difference = isHold ? 0 : JudgementManager.I.ToleranceValue * 2;
-                var judgeData = ScoreManager.I.AddHoldScore(PoolPrefabType.HoldNoteFill, difference);
-                _showJudge.OnNext((judgeData, lane));
             }
         }
         public NodeObject GetClickNode(int lane)
@@ -127,30 +90,11 @@ namespace InGame.Node
             return null;
         }
 
-        public void ClickNode(SESoundType se, NodeObject targetNode)
+        public void ClickNode(NodeObject targetNode)
         {
-            float nodeTime = targetNode.NodeData.Time;
-
-            _nodes.Remove(targetNode);
-
-            if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
-            {
-                _nodeFillManager.DeleteFill(targetNode.NodeData);
-            }
             targetNode.Release();
-
-            var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.NodeObjData.TapEffect);
-            Vector3 pos = targetNode.transform.position;
-            pos.z = _goalPos;
-            tapEffect.transform.position = pos;
-
-            float difference = nodeTime - StageTimeController.StageTime;
-            var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
-            _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
-
-            _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
-
-            SoundManager.I.PlaySESound(se,judgeData.TapSEVolume);
+            _nodes.Remove(targetNode);
+            _nodeHitExecutor.HitAction(targetNode);
         }
 
         public NodeObject GetClonedNode(int nodeID)
