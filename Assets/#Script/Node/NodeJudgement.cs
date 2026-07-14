@@ -25,18 +25,20 @@ public class NodeJudgement : ScriptableObject
 }
 public interface IReadOnlyJudgementData
 {
-    JudgementType Name { get; }
-    float Value { get; }
+  public   JudgementType Name { get; }
+    public float Value { get; }
 
-    bool ShowEarlyLateText { get; }
+    public bool ShowEarlyLateText { get; }
 
-   Color TextColor { get; }
+    public Color TextColor { get; }
 
-    bool IsComboContinued { get; }
+    public bool IsComboContinued { get; }
 
-    bool IsAllPerfectContinued { get; }
+    public bool IsAllPerfectContinued { get; }
 
-    int Score { get; }
+    public int Score { get; }
+
+    public float TapSEVolume { get; }
 }
 
 [System.Serializable]
@@ -50,17 +52,17 @@ public class JudgementData : IReadOnlyJudgementData
     public bool IsComboContinued;
     public bool IsAllPerfectContinued;
     public int Score;
+    public float TapSEVolume;
+
     JudgementType IReadOnlyJudgementData.Name => Name;
     float IReadOnlyJudgementData.Value => Value;
-
     bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
-
     Color IReadOnlyJudgementData.TextColor => TextColor;
-
     bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
-
     bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
     int IReadOnlyJudgementData.Score => Score;
+    float IReadOnlyJudgementData.TapSEVolume => TapSEVolume;
+
 }
 public enum JudgementType
 {

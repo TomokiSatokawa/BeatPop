@@ -13,10 +13,10 @@ namespace Sound
             I = this;
         }
 
-        public void PlaySESound(SESoundType type)
+        public void PlaySESound(SESoundType type,float volume = 1f)
         {
             var seData = _soundDataBase.GetSESound(type);
-            _seAudio.PlayOneShot(seData.Clip, seData.Volume);
+            _seAudio.PlayOneShot(seData.Clip, seData.Volume * volume);
         }
 
         public double PlayBGMSound(AudioClip clip, float dray, float time)

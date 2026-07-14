@@ -131,8 +131,6 @@ namespace InGame.Node
         {
             float nodeTime = targetNode.NodeData.Time;
 
-            SoundManager.I.PlaySESound(se);
-
             _nodes.Remove(targetNode);
 
             if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
@@ -151,6 +149,8 @@ namespace InGame.Node
             _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
 
             _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
+
+            SoundManager.I.PlaySESound(se,judgeData.TapSEVolume);
         }
 
         public NodeObject GetClonedNode(int nodeID)
