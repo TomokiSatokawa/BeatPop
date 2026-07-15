@@ -1,13 +1,16 @@
-using InGame.Stage;
-public class SingleLightPattern : LightPatternBase<LightPatternBaseData>
+namespace InGame.Stage
 {
-    public override void Initialize(LightPatternBaseData data, LightControlBase[] lights)
+
+    public class SingleLightPattern : LightPatternBase<LightPatternBaseData>
     {
-        base.Initialize(data, lights);
-        foreach(var light in lights)
+        public override void Initialize(LightPatternBaseData data, LightControlBase[] lights)
         {
-            light.Flash(data.Duration, data.Power);
+            base.Initialize(data, lights);
+            foreach (var light in lights)
+            {
+                light.Flash(data.Duration, data.Power);
+            }
         }
+        public override void BeatUpdate(int division) { }
     }
-    public override void BeatUpdate(int division) { }
 }
