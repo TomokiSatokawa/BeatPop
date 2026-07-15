@@ -1,16 +1,15 @@
-using UnityEngine;
-
-public class WaveLightPattern : MonoBehaviour
+namespace InGame.Stage
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class WaveLightPattern : LightPatternBase<WaveLightPatternData>
     {
-        
+        public override void BeatUpdate(int division)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+    public class WaveLightPatternData : LightPatternBaseData
+    {
+        public int A;
     }
 }

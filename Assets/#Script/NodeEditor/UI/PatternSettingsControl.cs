@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Common.UI;
 using InGame.Stage;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Editor.UI
@@ -55,6 +56,27 @@ namespace Editor.UI
 
             return false;
         }
+        public static Type GetParameterTypeFromPattern(Type patternType)
+        {
+            Type currentType = patternType;
+
+            // 親クラスを遡って BasePattern<T> を探す
+            while (currentType != null && currentType != typeof(object))
+            {
+                // ジェネリック型であり、かつそのジェネリックの定義元が BasePattern`1 であるか判定
+                if (currentType.IsGenericType &&
+                    currentType.GetGenericTypeDefinition() == typeof(LightPatternBase<>))
+                {
+                    // ジェネリック引数（Tの部分）の配列から、最初の型を返す
+                    return currentType.GetGenericArguments()[0];
+                }
+
+                // さらに親クラスへ遡る
+                currentType = currentType.BaseType;
+            }
+
+            return null; // 見つからなかった場合
+        }
         public void ShowSettings(LightPatternBaseData data)
         {
             _panelControl.OnActive();
@@ -93,7 +115,10 @@ namespace Editor.UI
 
                         InstantiateContent(_selectPrefab)
                         .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget, "")).ToList(), targetField.Name, selectType
-                        , x => targetField.SetValue(data, _patternTypes[x].FullName));
+                        , x => {
+                            targetField.SetValue(data, _patternTypes[x].FullName);
+                            Debug.Log(GetParameterTypeFromPattern(_patternTypes[x]));
+                        });
                         break;
                     case nameof(Color):
                         int selectIndex = -1;
