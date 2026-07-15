@@ -17,14 +17,14 @@ MonoBehaviour:
   _bpm: 80
   _maxScore: 10520
   _charts:
-    EasyLevel: 0
-    EasyJson: {fileID: 0}
+    EasyLevel: 1
+    EasyJson: {fileID: 4900000, guid: 2963bb232c6da5e4f994144c1d55dd7c, type: 3}
     NormalLevel: 8
-    NormalJson: {fileID: 4900000, guid: f4dc7fd10ea2c454d97d67d1282bed6b, type: 3}
-    HardLevel: 0
-    HardJson: {fileID: 0}
-    ExpertLevel: 19
-    ExpertJson: {fileID: 4900000, guid: 9315a79cbcd5c5b40bbd7695c10d7897, type: 3}
+    NormalJson: {fileID: 4900000, guid: 2573d4647932e6441aeb489fe5ecbc81, type: 3}
+    HardLevel: 10
+    HardJson: {fileID: 4900000, guid: 9315a79cbcd5c5b40bbd7695c10d7897, type: 3}
+    ExpertLevel: 21
+    ExpertJson: {fileID: 4900000, guid: cb5c974f39251fe4f806e6257956353e, type: 3}
   _audioClip: {fileID: 8300000, guid: b719294ad27a219478011b9dc5454998, type: 3}
   _stageTimeOffSet: 0
   _editorTimeOffSet: -0.2
