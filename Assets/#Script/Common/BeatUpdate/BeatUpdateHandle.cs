@@ -32,6 +32,7 @@ namespace Common.BeatUpdate
 
         public void UpdateNextTime()
         {
+            UpdateConstants();
             float beat = (StageTimeController.StageTime - SecondOffset) / _interval;
             NextTime = (Mathf.Floor(beat) + 1) * _interval + SecondOffset;
         }

@@ -28,25 +28,37 @@ namespace Editor.UI
 
             var baseType = typeof(LightPatternBase<LightPatternBaseData>);
 
-            foreach (Type type in Assembly.GetAssembly(baseType).GetTypes())
+            foreach (Type type in Assembly.GetAssembly(typeof(LightPatternBaseData)).GetTypes())
             {
-                if (!type.IsClass)
+                if (!type.IsClass || type.IsAbstract)
                     continue;
 
-                if (type.IsAbstract)
-                    continue;
-
-                if (!baseType.IsAssignableFrom(type))
+                if (!IsLightPatternType(type))
                     continue;
 
                 _patternTypes.Add(type);
             }
         }
+        private static bool IsLightPatternType(Type type)
+        {
+            while (type != null && type != typeof(object))
+            {
+                if (type.IsGenericType &&
+                    type.GetGenericTypeDefinition() == typeof(LightPatternBase<>))
+                {
+                    var dataType = type.GetGenericArguments()[0];
+                    return typeof(LightPatternBaseData).IsAssignableFrom(dataType);
+                }
 
+                type = type.BaseType;
+            }
+
+            return false;
+        }
         public void ShowSettings(LightPatternBaseData data)
         {
             _panelControl.OnActive();
-            if(data == _currentSettingData)
+            if (data == _currentSettingData)
             {
                 return;
             }
@@ -80,17 +92,17 @@ namespace Editor.UI
                         int selectType = _patternTypes.FindIndex(x => x.FullName == targetField.GetValue(data).ToString());
 
                         InstantiateContent(_selectPrefab)
-                        .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget,"")).ToList(), targetField.Name, selectType
+                        .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget, "")).ToList(), targetField.Name, selectType
                         , x => targetField.SetValue(data, _patternTypes[x].FullName));
                         break;
                     case nameof(Color):
                         int selectIndex = -1;
-                        Color selectColor =(Color)targetField.GetValue(data);
+                        Color selectColor = (Color)targetField.GetValue(data);
 
                         int i = 0;
-                        foreach(var kv in _colorPallet.Items)
+                        foreach (var kv in _colorPallet.Items)
                         {
-                            if(kv.Value == selectColor)
+                            if (kv.Value == selectColor)
                             {
                                 break;
                             }
@@ -99,6 +111,26 @@ namespace Editor.UI
                         InstantiateContent(_selectPrefab)
                       .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, i
                       , x => targetField.SetValue(data, _colorPallet.Items[x].Value));
+                        break;
+
+                    default:
+                        if (targetField.FieldType.IsEnum)
+                        {
+                            var enumNames = Enum.GetNames(targetField.FieldType).ToList();
+                            var currentValue = targetField.GetValue(data);
+                            int selectedIndex = Array.IndexOf(Enum.GetValues(targetField.FieldType), currentValue);
+
+                            InstantiateContent(_selectPrefab)
+                                .SetData(
+                                    enumNames,
+                                    targetField.Name,
+                                    selectedIndex,
+                                    x =>
+                                    {
+                                        var value = Enum.GetValues(targetField.FieldType).GetValue(x);
+                                        targetField.SetValue(data, value);
+                                    });
+                        }
                         break;
                 }
             }

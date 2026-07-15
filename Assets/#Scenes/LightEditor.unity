@@ -3635,6 +3635,7 @@ MonoBehaviour:
   _waitSeconds: 0
   _resultDelay: 0
   _timeOffset: 0
+  _bpm: 0
 --- !u!114 &781383609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6827,6 +6828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Sound.Metronome
   _audioSource: {fileID: 423568901}
   _clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
+  _headSE: {fileID: 8300000, guid: edea962c2b5a989418f618dfee03ec75, type: 3}
 --- !u!1 &1642403189
 GameObject:
   m_ObjectHideFlags: 0

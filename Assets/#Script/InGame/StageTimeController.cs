@@ -14,8 +14,9 @@ namespace InGame.UI
         [SerializeField] private float _waitSeconds;
         [SerializeField] private float _resultDelay;
         [SerializeField] private float _timeOffset;
-        
-        public float BPM { get; private set; }
+        [SerializeField] private float _bpm;
+
+        public float BPM => _bpm;
         public float StartSectionTime { get; private set; }
         public float EndTime { get; private set; }
         public AudioClip SongClip { get; private set; }
@@ -40,7 +41,13 @@ namespace InGame.UI
         public void SetPlayData(NodeSaveData fileData)
         {
             float bpm  = fileData.BPM;
-            float endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
+
+            float endTime = 0;
+            if (fileData.Nodes.Count > 0)
+            {
+                endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
+            }
+
             int sectionIndex = Mathf.Clamp(SongPlayManager.I.StartSection, 0, fileData.Section.Count) - 1;
             float sectionTime = 0;
 
@@ -54,7 +61,7 @@ namespace InGame.UI
 
         public void SetPlayData(float bpm,float endTime,float startSection)
         {
-            BPM = bpm;
+            _bpm = bpm;
             EndTime = endTime;
             SongClip = SongPlayManager.I.SongData.SongData.Audio;
             _timeOffset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;

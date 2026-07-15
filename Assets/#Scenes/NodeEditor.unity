@@ -1167,6 +1167,7 @@ GameObject:
   - component: {fileID: 564475092}
   - component: {fileID: 564475094}
   - component: {fileID: 564475093}
+  - component: {fileID: 564475095}
   m_Layer: 5
   m_Name: Node
   m_TagString: Untagged
@@ -1236,6 +1237,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564475091}
   m_CullTransparentMesh: 1
+--- !u!114 &564475095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564475091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
 --- !u!1 &567384263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1885,7 @@ MonoBehaviour:
   _laneRect:
   - {fileID: 1404520832}
   - {fileID: 960626810}
+  _fieldHover: {fileID: 564475095}
 --- !u!114 &781383605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,6 +1933,7 @@ MonoBehaviour:
   _waitSeconds: 0
   _resultDelay: 0
   _timeOffset: 0
+  _bpm: 0
 --- !u!114 &781383609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4127,6 +4142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Sound.Metronome
   _audioSource: {fileID: 423568901}
   _clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
+  _headSE: {fileID: 8300000, guid: edea962c2b5a989418f618dfee03ec75, type: 3}
 --- !u!1 &1644154912
 GameObject:
   m_ObjectHideFlags: 0

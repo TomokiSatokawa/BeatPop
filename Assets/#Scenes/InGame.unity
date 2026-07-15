@@ -3948,7 +3948,7 @@ MonoBehaviour:
   - {fileID: 840021716}
   - {fileID: 1032196361}
   _goalZ: -10
-  _arrivalSeconds: 1.2
+  _arrivalSeconds: 0.7
   _isGenerating: 1
   _nodeFillRenderer: {fileID: 1252056267}
 --- !u!4 &1252056264
@@ -5528,6 +5528,7 @@ MonoBehaviour:
   _waitSeconds: 5
   _resultDelay: 3
   _timeOffset: 0
+  _bpm: 0
 --- !u!114 &1946836285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6230,13 +6231,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6214516737644960655}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a84fe14076a21914f9d3b98a9feb1505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Sound.Metronome
   _audioSource: {fileID: 1411976232}
   _clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
+  _headSE: {fileID: 8300000, guid: edea962c2b5a989418f618dfee03ec75, type: 3}
 --- !u!1001 &9217099115157238770
 PrefabInstance:
   m_ObjectHideFlags: 0
