@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Sound
 {
-    public class SoundManager :MonoBehaviour
+    public class SoundManager : MonoBehaviour
     {
         public static SoundManager I;
         [SerializeField] private AudioSource _seAudio;
@@ -13,10 +13,22 @@ namespace Sound
             I = this;
         }
 
-        public void PlaySESound(SESoundType type,float volume = 1f)
+        public void PlaySESound(SESoundType type, float volume = 1f)
         {
             var seData = _soundDataBase.GetSESound(type);
             _seAudio.PlayOneShot(seData.Clip, seData.Volume * volume);
+        }
+        public void PlayLoopSE(SESoundType type, float volume = 1f)
+        {
+            var seData = _soundDataBase.GetSESound(type);
+            _seAudio.clip = seData.Clip;
+            _seAudio.loop = true;
+            _seAudio.volume = seData.Volume * volume;
+            _seAudio.Play();
+        }
+        public void StopLoopSE()
+        {
+            _seAudio.Stop();
         }
 
         public double PlayBGMSound(AudioClip clip, float dray, float time)
@@ -32,7 +44,7 @@ namespace Sound
             return startDspTime;
         }
 
-        public void PlayBGMPreview(AudioClip clip,float fadeIn,float time)
+        public void PlayBGMPreview(AudioClip clip, float fadeIn, float time)
         {
             _seBGM.clip = clip;
             _seBGM.time = time;

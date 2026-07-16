@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using InGame.Node;
 using InGame.UI;
 using Input;
+using Sound;
 using UnityEngine;
 
 public class HoldNodeFillManager : MonoBehaviour
@@ -66,6 +67,8 @@ public class HoldNodeFillManager : MonoBehaviour
         public PoolObject _startObject;
         public PoolObject EndObject { get; private set; }
 
+        private bool _isInput;
+
         private readonly Transform _lane;
         private readonly float _clonePosZ;
         private readonly float _tapPosZ;
@@ -123,6 +126,19 @@ public class HoldNodeFillManager : MonoBehaviour
                 }
             }
 
+            if(isInput != _isInput)
+            {
+                if (isInput)
+                {
+                    SoundManager.I.PlayLoopSE(SESoundType.Hold1);
+                }
+                else
+                {
+                    SoundManager.I.StopLoopSE();
+                }
+                _isInput = isInput;
+            }
+
             _effect.SetEmission(isInput);
         }
         private void SetFill(Transform fill, Vector3 startPos, Vector3 endPos)
@@ -154,6 +170,7 @@ public class HoldNodeFillManager : MonoBehaviour
         {
             _fillObject.Release();
             _effect.Release();
+            SoundManager.I.StopLoopSE();
         }
     }
 }

@@ -26,10 +26,10 @@ namespace InGame.Stage
                 .AddTo(this);
 
 
-            BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => BeatUpdate());
+            BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
         }
 
-        public void BeatUpdate()
+        public void NextPattern()
         {
             if (_patternList == null || _patternList.Count == 0)
                 return;
@@ -49,6 +49,7 @@ namespace InGame.Stage
                 _nextPatternIndex++;
             }
         }
+        
 
         public void StartPattern(LightPatternBaseData data)
         {
