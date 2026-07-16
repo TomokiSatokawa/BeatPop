@@ -42,7 +42,6 @@ namespace InGame.Stage
 
         public void NextPattern()
         {
-            Debug.Log("Pattern");
             if (EditorLightData.I != null)
             {
                 _patternList = EditorLightData.I.LightData;
@@ -76,6 +75,7 @@ namespace InGame.Stage
             switch (data.Channel)
             {
                 case 0:
+                    Debug.Log(data.GetType().ToString());
                     _frontUpperPanelLight.ChangePattern(data);
                     break;
                 case 1:

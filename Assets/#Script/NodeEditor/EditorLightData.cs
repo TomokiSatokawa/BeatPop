@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
 
     private readonly ReactiveProperty<StageSaveData> _loadedFile = new();
     public ReadOnlyReactiveProperty<StageSaveData> LoadedFile => _loadedFile;
-    private Subject<(float time,int channel)> _onRemove = new();
+    private Subject<(float time, int channel)> _onRemove = new();
     public Observable<(float time, int channel)> OnRemove => _onRemove;
     private readonly double _epsilon = 0.0001;
 
@@ -30,7 +31,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         _newFileButton.onClick.AddListener(CreateNewFile);
     }
 
-    private  void FileLoad(string file)
+    private void FileLoad(string file)
     {
         var data = StageDataSerializer.DeserializeJson(file);
         if (data == null)
@@ -57,6 +58,31 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         _onRemove.OnNext((time, channel));
         _lightData.RemoveAt(targetNode);
         _lightData = _lightData.OrderBy(x => x.Time).ToList();
+    }
+    public LightPatternBaseData ChangeType(LightPatternBaseData lightData, Type type)
+    {
+        if (lightData.GetType() == type) return lightData;
+
+        var targetIndex = _lightData.IndexOf(lightData);
+        if (targetIndex == -1) return null;
+
+        if (!typeof(LightPatternBaseData).IsAssignableFrom(type))
+        {
+            Debug.LogError($"{type.Name} は LightPatternBaseData を継承していません");
+            return null;
+        }
+
+        var newData = (LightPatternBaseData)Activator.CreateInstance(type);
+
+        newData.PatternType = lightData.PatternType;
+        newData.Time = lightData.Time;
+        newData.Channel = lightData.Channel;
+        newData.Duration = lightData.Duration;
+        newData.Power = lightData.Power;
+        newData.Color = lightData.Color;
+
+        _lightData[targetIndex] = newData;
+        return newData;
     }
     public void OnImport()
     {
@@ -86,7 +112,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         if (string.IsNullOrEmpty(path))
             return;
 
-        string json = StageDataSerializer.SerializeJson(_lightData.ToArray(),LoadedFile.CurrentValue.SongDataIndex);
+        string json = StageDataSerializer.SerializeJson(_lightData.ToArray(), LoadedFile.CurrentValue.SongDataIndex);
         File.WriteAllText(path, json);
 #endif
     }

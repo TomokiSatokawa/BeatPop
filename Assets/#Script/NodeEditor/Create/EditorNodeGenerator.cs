@@ -3,7 +3,7 @@ using InGame.Node;
 using R3;
 using UnityEngine;
 
-public class EditorNodeGenerator : EditorGeneratorBase
+public class EditorNodeGenerator : EditorGeneratorBase<EditorNodeGenerator>
 {
     [SerializeField] private RectTransform _content;
     [SerializeField] private RectTransform[] _lean;

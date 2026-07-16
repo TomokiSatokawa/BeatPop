@@ -12,11 +12,11 @@ public class ManualLightPattern : LightPatternBase<LightPatternBaseData>
     public override void BeatUpdate(int division)
     {
         if (_isSetPower) return;
-        if (division > _data.Division) return;
+        if (division > Data.Division) return;
 
         foreach (var light in _lights)
         {
-            light.SetPower(_data.Power);
+            light.SetPower(Data.Power);
         }
         _isSetPower = true;
     }

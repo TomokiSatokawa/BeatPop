@@ -22,8 +22,11 @@ namespace InGame.Stage
 
         public void BeatUpdate(int division)
         {
-            Debug.Log(division);
-            _currentPattern?.BeatUpdate(division);
+            if (_currentPattern != null)
+            {
+                Debug.Log($"{_currentPattern.Data.Channel}  {_currentPattern.GetType().ToString()}");
+                _currentPattern.BeatUpdate(division);
+            }
         }
 
         public void ChangePattern(LightPatternBaseData data)

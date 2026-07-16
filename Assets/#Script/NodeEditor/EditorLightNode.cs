@@ -12,15 +12,23 @@ public class EditorLightNode : FollowTime
     public RectTransform LeanRect { get; private set; }
     public RectTransform Content { get; private set; }
 
+    private Action<LightPatternBaseData> _onClickAction;
+
     public void SetData(LightPatternBaseData data, RectTransform lean,RectTransform content,Action<LightPatternBaseData> onClick)
     {
         PatternBaseData = data;
         LeanRect = lean;
         Content = content;
+        _onClickAction = onClick;
         _button.onClick.RemoveAllListeners();
-        _button.onClick.AddListener(() => onClick?.Invoke(data));
+        _button.onClick.AddListener(() => _onClickAction(PatternBaseData));
     }
 
+    public void ChangeData(LightPatternBaseData data)
+    {
+        PatternBaseData = data;
+        _onClickAction(PatternBaseData);
+    }
     public override void ChangePos()
     {
         var pos = _rect.anchoredPosition;

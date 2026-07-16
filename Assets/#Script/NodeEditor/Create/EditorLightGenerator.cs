@@ -5,7 +5,7 @@ using InGame.Stage;
 using R3;
 using UnityEngine;
 
-public class EditorLightGenerator : EditorGeneratorBase
+public class EditorLightGenerator : EditorGeneratorBase<EditorLightGenerator>
 {
     [SerializeField] private RectTransform _content;
     [SerializeField] private RectTransform[] _lean;
@@ -62,6 +62,13 @@ public class EditorLightGenerator : EditorGeneratorBase
 
             _clonedNode.Add(newNode);
         }
+    }
+    public void UpdateData(LightPatternBaseData old ,LightPatternBaseData newData)
+    {
+        var target = _clonedNode.Where(x => x.PatternBaseData == old).FirstOrDefault();
+        if (target == null) return;
+
+        target.ChangeData(newData);
     }
 
 

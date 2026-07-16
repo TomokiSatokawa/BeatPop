@@ -2,14 +2,13 @@ namespace InGame.Stage
 {
     public class BeatSyncLightPattern : LightPatternBase<LightPatternBaseData>
     {
-
         public override void BeatUpdate(int division)
         {
-            if (division > _data.Division) return;
+            if (division > Data.Division) return;
 
             foreach (var light in _lights)
             {
-                light.Flash(_data.Duration, _data.Power);
+                light.Flash(Data.Duration, Data.Power);
             }
         }
     }

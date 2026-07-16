@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Common.UI;
 using InGame.Stage;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Editor.UI
@@ -115,9 +114,11 @@ namespace Editor.UI
 
                         InstantiateContent(_selectPrefab)
                         .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget, "")).ToList(), targetField.Name, selectType
-                        , x => {
+                        , x =>
+                        {
                             targetField.SetValue(data, _patternTypes[x].FullName);
-                            Debug.Log(GetParameterTypeFromPattern(_patternTypes[x]));
+                            var newData = EditorLightData.I.ChangeType(data, GetParameterTypeFromPattern(_patternTypes[x]));
+                            EditorLightGenerator.I.UpdateData(data, newData);
                         });
                         break;
                     case nameof(Color):

@@ -5,11 +5,11 @@ namespace InGame.Stage
     public abstract class LightPatternBase<T> where T : LightPatternBaseData
     {
         public bool IsEnabled { get;private set;  }
-        protected T _data;
+        public T Data { get; private set; }
         protected LightControlBase[] _lights;
         public virtual void Initialize(T data, LightControlBase[] lights)
         {
-            _data = data;
+            Data = data;
             _lights = lights;
 
             foreach (var light in _lights)

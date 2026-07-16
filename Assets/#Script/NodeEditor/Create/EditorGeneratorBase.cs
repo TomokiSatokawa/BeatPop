@@ -1,6 +1,6 @@
 using InGame.UI;
 using UnityEngine;
-public abstract class EditorGeneratorBase : SingletonMonoBehaviour<EditorGeneratorBase>
+public abstract class EditorGeneratorBase<T> : SingletonMonoBehaviour<T> where T:MonoBehaviour
 {
     [SerializeField] private float _extraClone;
 
