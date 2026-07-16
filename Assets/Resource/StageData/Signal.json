@@ -157,6 +157,20 @@
             }
         },
         {
+            "PatternType": "InGame.Stage.WaveLightPattern",
+            "Time": 5.538461685180664,
+            "Channel": 0,
+            "Division": 2,
+            "Duration": 1.0,
+            "Power": 1.0,
+            "Color": {
+                "r": 1.0,
+                "g": 0.44999998807907107,
+                "b": 0.0,
+                "a": 1.0
+            }
+        },
+        {
             "PatternType": "InGame.Stage.AlternateLightPattern",
             "Time": 19.846153259277345,
             "Channel": 2,
