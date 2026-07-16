@@ -13,19 +13,27 @@ namespace InGame.Stage
 
         private float _power;
         private Color _color;
-        private Tween _flash;
+        private Sequence _flash;
+        private MaterialPropertyBlock _mpb;
 
         private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
-        private MaterialPropertyBlock _mpb;
+
         private void Awake()
         {
             _mpb = new MaterialPropertyBlock();
         }
+
         public void Start()
+        {
+            initialize();
+        }
+
+        private void initialize()
         {
             SetColor(Color.black);
             UpdatePower(_minPower);
         }
+
         public override void SetColor(Color color)
         {
             _renderer.material.color = color;
@@ -33,11 +41,11 @@ namespace InGame.Stage
             UpdatePower(_power);
         }
 
-        public void UpdatePower(float intensity)
+        public void UpdatePower(float power)
         {
-            if (intensity > _outThreshold)
+            if (power > _outThreshold)
             {
-                _power = intensity;
+                _power = power;
             }
             else
             {
@@ -54,29 +62,31 @@ namespace InGame.Stage
         public override void Flash(float duration, float power)
         {
             _flash?.Kill(true);
-            _flash = DOVirtual.Float(_maxPower * power, _minPower, duration, x =>
-            {
-                UpdatePower(x);
-            });
+            _flash = DOTween.Sequence()
+                .Append(DoLightPower(_maxPower * power, _minPower, duration));
         }
         public override void Wave(float duration, float power)
         {
             _flash?.Kill(true);
-            _flash = DOVirtual.Float(_minPower, _maxPower * power, duration / 2, x =>
+
+            _flash = DOTween.Sequence()
+                 .Append(DoLightPower(_minPower, _maxPower * power, duration))
+                 .Append(DoLightPower(_maxPower * power,_minPower, duration));
+        }
+
+        private Tweener DoLightPower(float start,float end ,float duration)
+        {
+            return DOVirtual.Float(start, end, duration, x =>
             {
                 UpdatePower(x);
-            }).OnComplete(() =>
-            {
-                _flash = DOVirtual.Float(_maxPower * power, _minPower, duration / 2, x =>
-                {
-                    UpdatePower(x);
-                });
             });
         }
 
         public override void Refresh()
         {
-            _flash?.Kill(true);
+            _flash?.Kill();
+            _flash = null;
+            UpdatePower(_minPower);
         }
 
         public override void SetPower(float power)

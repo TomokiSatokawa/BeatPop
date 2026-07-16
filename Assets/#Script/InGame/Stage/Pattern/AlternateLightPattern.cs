@@ -1,6 +1,5 @@
 namespace InGame.Stage
 {
-
     public class AlternateLightPattern : LightPatternBase<LightPatternBaseData>
     {
         private int count = 0;

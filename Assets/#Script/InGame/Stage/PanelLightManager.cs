@@ -22,11 +22,10 @@ namespace InGame.Stage
 
         public void BeatUpdate(int division)
         {
-            if (_currentPattern != null)
-            {
-                Debug.Log($"{_currentPattern.GetData().Channel}  {_currentPattern.GetType().ToString()}");
-                _currentPattern.BeatUpdate(division);
-            }
+            if (_currentPattern == null)
+                return;
+
+            _currentPattern.BeatUpdate(division);
         }
 
         public void ChangePattern(LightPatternBaseData data)
@@ -37,6 +36,7 @@ namespace InGame.Stage
 
         private void ChangePattern(Type type, LightPatternBaseData data)
         {
+            //なかったら生成
             if (!_instancePattern.TryGetValue(type, out var pattern))
             {
                 pattern = (LightPatternBase)Activator.CreateInstance(type);

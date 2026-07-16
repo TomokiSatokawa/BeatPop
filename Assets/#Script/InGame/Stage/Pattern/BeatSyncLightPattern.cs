@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace InGame.Stage
 {
     public class BeatSyncLightPattern : LightPatternBase<LightPatternBaseData>

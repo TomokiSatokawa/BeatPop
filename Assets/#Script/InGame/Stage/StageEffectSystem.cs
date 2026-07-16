@@ -18,18 +18,7 @@ namespace InGame.Stage
 
         private void Start()
         {
-            if (EditorLightData.I != null)
-            {
-                _patternList = EditorLightData.I.LightData;
-            }
-
-            if (InGameFileLoad.I != null)
-            {
-                InGameFileLoad.I.OnStageFileLoaded.Skip(1).Subscribe(x =>
-                {
-                    _patternList = x.LightData;
-                }).AddTo(this);
-            }
+            StageTimeController.I.OnInitialized.Subscribe(_ => SetPattern()).AddTo(this);
 
             StageTimeController.I.IsPlaying
                 .Where(x => x)
@@ -37,20 +26,11 @@ namespace InGame.Stage
                 .AddTo(this);
 
 
-            BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
+            BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => BeatUpdate());
         }
 
-        public void NextPattern()
+        public void BeatUpdate()
         {
-            if (EditorLightData.I != null)
-            {
-                _patternList = EditorLightData.I.LightData;
-            }
-            if (InGameFileLoad.I != null)
-            {
-                _patternList = InGameFileLoad.I.OnStageFileLoaded.CurrentValue.LightData;
-            }
-
             if (_patternList == null || _patternList.Count == 0)
                 return;
 
@@ -103,6 +83,17 @@ namespace InGame.Stage
             if (_nextPatternIndex > 0)
             {
                 StartPattern(_patternList[_nextPatternIndex - 1]);
+            }
+        }
+        private void SetPattern()
+        {
+            if (EditorLightData.I != null)
+            {
+                _patternList = EditorLightData.I.LightData;
+            }
+            if (InGameFileLoad.I != null)
+            {
+                _patternList = InGameFileLoad.I.OnStageFileLoaded.CurrentValue.LightData;
             }
         }
     }
