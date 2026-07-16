@@ -13,8 +13,8 @@ namespace InGame.Stage
     {
         [SerializeField] private LightControlBase[] _lights;
 
-        private Dictionary<Type, LightPatternBase<LightPatternBaseData>> _instancePattern = new();
-        private LightPatternBase<LightPatternBaseData> _currentPattern;
+        private Dictionary<Type, LightPatternBase> _instancePattern = new();
+        private LightPatternBase _currentPattern;
         private void Start ()
         {
             BeatUpdateManager.BeatUpdate.Subscribe(16, 0, x => BeatUpdate(x.Division));
@@ -24,7 +24,7 @@ namespace InGame.Stage
         {
             if (_currentPattern != null)
             {
-                Debug.Log($"{_currentPattern.Data.Channel}  {_currentPattern.GetType().ToString()}");
+                Debug.Log($"{_currentPattern.GetData().Channel}  {_currentPattern.GetType().ToString()}");
                 _currentPattern.BeatUpdate(division);
             }
         }
@@ -39,11 +39,11 @@ namespace InGame.Stage
         {
             if (!_instancePattern.TryGetValue(type, out var pattern))
             {
-                pattern = (LightPatternBase<LightPatternBaseData>)Activator.CreateInstance(type);
+                pattern = (LightPatternBase)Activator.CreateInstance(type);
             }
 
             _instancePattern[type] = pattern;
-            _currentPattern?.Test();
+            _currentPattern?.Refresh();
             _currentPattern = pattern;
             _currentPattern.Initialize(data, _lights);
         }

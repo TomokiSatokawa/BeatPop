@@ -5,7 +5,7 @@ namespace InGame.Stage
     {
         public override void Initialize(LightPatternBaseData data, LightControlBase[] lights)
         {
-            base.Initialize(data, lights);
+            base.InitializeCore(data, lights);
             foreach (var light in lights)
             {
                 light.Flash(data.Duration, data.Power);

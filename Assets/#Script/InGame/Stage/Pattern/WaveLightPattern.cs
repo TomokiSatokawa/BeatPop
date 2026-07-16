@@ -2,19 +2,19 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using DG.Tweening;
+using UnityEngine;
 
 namespace InGame.Stage
 {
     public class WaveLightPattern : LightPatternBase<WaveLightPatternData>
     {
         private Sequence _sequence;
-        public override void Initialize(WaveLightPatternData data, LightControlBase[] lights)
-        {
-            base.Initialize(data, lights);
 
-            _sequence = DOTween.Sequence()
-                .SetAutoKill(true)
-                .Pause();
+        public override void InitializeCore(WaveLightPatternData data, LightControlBase[] lights)
+        {
+            base.InitializeCore(data, lights);
+
+            CreateSequence();
 
             switch (data.Type)
             {
@@ -28,73 +28,121 @@ namespace InGame.Stage
                     SetMoveWave();
                     break;
             }
-
         }
+
+
+        private void CreateSequence()
+        {
+            _sequence?.Kill();
+
+            _sequence = DOTween.Sequence()
+                .SetAutoKill(false)
+                .Pause();
+        }
+
+
         private void SetSideWave()
         {
-            if (Data.Type != WaveType.InsideToOutside
-                && Data.Type != WaveType.OutsideToInside)
-                return;
+            var lights1 = _lights.Take(_lights.Length / 2).ToArray();
 
-            LightControlBase[] lights1 = _lights.Take(_lights.Length / 2).ToArray();
-            LightControlBase[] lights2 = _lights.Skip(_lights.Length / 2).ToArray();
+            var lights2 = _lights.Skip(_lights.Length / 2).ToArray();
 
-            if(Data.Type == WaveType.InsideToOutside)
+
+            // 内→外
+            if (Data.Type == WaveType.InsideToOutside)
             {
-                lights1.Reverse();
-                lights2.Reverse();
+                lights1 = lights1.Reverse().ToArray();
+                lights2 = lights2.ToArray();
+            }
+            // 外→内
+            else
+            {
+                lights1 = lights1.ToArray();
+                lights2 = lights2.Reverse().ToArray();
             }
 
-            float lightCount = MathF.Max(lights1.Length, lights2.Length);
-            float interval = Data.Division / lightCount;
+
+            int lightCount = Math.Max(
+                lights1.Length,
+                lights2.Length
+            );
+
+
+            float interval = (float)Data.Duration / lightCount;
 
             for (int i = 0; i < lightCount; i++)
             {
-                _sequence.AppendInterval(0);
-                if(i < lights1.Length)
+                int index = i;
+
+
+                if (index < lights1.Length)
                 {
-                    _sequence.JoinCallback(() => lights1[i].Flash(Data.FlashDivision, Data.Power));
+                    var light = lights1[index];
+
+                    _sequence.AppendCallback(() => light.Wave(Data.FlashDivision, Data.Power));
                 }
 
-                if(i < lights2.Length)
+
+                if (index < lights2.Length)
                 {
-                    _sequence.JoinCallback(() => lights2[i].Flash(Data.FlashDivision, Data.Power));
+                    var light = lights2[index];
+
+                    _sequence.AppendCallback(() => light.Wave(Data.FlashDivision, Data.Power));
                 }
 
                 _sequence.AppendInterval(interval);
             }
         }
+
 
         private void SetMoveWave()
         {
-            if (Data.Type != WaveType.RightToLeft
-             && Data.Type != WaveType.LeftToRight)
-                return;
+            var lights = _lights.ToArray();
 
-            LightControlBase[] lights = _lights;
 
-            if(Data.Type == WaveType.LeftToRight)
-                lights.Reverse();
-
-            float interval = Data.Division / lights.Length;
-
-            for (int i = 0;i < lights.Length;i++)
+            // 左→右
+            if (Data.Type == WaveType.LeftToRight)
             {
-                _sequence.AppendCallback(() => lights[i].Flash(Data.FlashDivision, Data.Power));
+                lights = lights.Reverse().ToArray();
+            }
+
+
+            float interval =    (float)Data.Duration / lights.Length;
+
+
+            foreach (var light in lights)
+            {
+                var target = light;
+
+                _sequence.AppendCallback(() => target.Wave(Data.FlashDivision, Data.Power));
+
                 _sequence.AppendInterval(interval);
             }
         }
+
+
         public override void BeatUpdate(int division)
         {
-            if (division > Data.Division) return;
-            _sequence.Restart(true);
+            if (division > Data.Division)
+                return;
+
+            if (_sequence == null)
+                return;
+
+            _sequence.Restart();
         }
     }
+
+
+    [Serializable]
     public class WaveLightPatternData : LightPatternBaseData
     {
         public WaveType Type;
         public float FlashDivision;
     }
+
+
+    [Serializable]
     public enum WaveType
     {
         [Description("内 → 外")]

@@ -97,6 +97,13 @@ namespace Editor.UI
             foreach (FieldInfo field in allFields)
             {
                 FieldInfo targetField = field;
+
+                if (field.Name == "R"
+                    || field.Name == "G"
+                    || field.Name == "B"
+                    || field.Name == "A")
+                    continue;
+
                 switch (field.FieldType.Name)
                 {
                     case nameof(Int32):

@@ -59,6 +59,20 @@ namespace InGame.Stage
                 UpdatePower(x);
             });
         }
+        public override void Wave(float duration, float power)
+        {
+            _flash?.Kill(true);
+            _flash = DOVirtual.Float(_minPower, _maxPower * power, duration / 2, x =>
+            {
+                UpdatePower(x);
+            }).OnComplete(() =>
+            {
+                _flash = DOVirtual.Float(_maxPower * power, _minPower, duration / 2, x =>
+                {
+                    UpdatePower(x);
+                });
+            });
+        }
 
         public override void Refresh()
         {
