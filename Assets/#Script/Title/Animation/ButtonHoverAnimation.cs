@@ -1,10 +1,13 @@
 using System;
 using DG.Tweening;
+using R3;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+[RequireComponent(typeof(UIPointerHover))]
+public class ButtonHoverAnimation : MonoBehaviour
 {
+    [SerializeField] private UIPointerHover _uIPointerHover;
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _duration = 0.15f;
     [SerializeField] private Ease _ease = Ease.OutBack;
@@ -16,9 +19,20 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Awake()
     {
         _defaultScale = transform.localScale;
+
+        if (_uIPointerHover == null)
+        {
+            if (!this.TryGetComponent(out _uIPointerHover))
+            {
+                _uIPointerHover = this.AddComponent<UIPointerHover>();
+            }
+        }
+
+        _uIPointerHover.IsPointerOver.Where(x => x).Subscribe(_ => OnPointerEnter()).AddTo(this);
+        _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => OnPointerExit()).AddTo(this);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter()
     {
         _tween?.Kill();
         _tween = transform.DOScale(_defaultScale * _hoverScale, _duration)
@@ -26,7 +40,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         OnEnter?.Invoke();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit()
     {
         _tween?.Kill();
         _tween = transform.DOScale(_defaultScale, _duration)

@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 4141949604591186639}
   - component: {fileID: 4724775528831732003}
   - component: {fileID: 3789498535891021714}
+  - component: {fileID: 4349503628775895649}
   m_Layer: 5
   m_Name: Song
   m_TagString: Untagged
@@ -425,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e1c362f7e8d84b9041908165dba1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongUIControl
+  _uIPointerHover: {fileID: 4349503628775895649}
   _selectButton: {fileID: 8342128079153671363}
   _nameText: {fileID: 2638105141653340208}
   _levelText: {fileID: 5917732332361981312}
@@ -443,9 +445,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1580494298875084497c95563d40c6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
+  _uIPointerHover: {fileID: 4349503628775895649}
   _hoverScale: 1.1
   _duration: 0.15
   _ease: 27
+--- !u!114 &4349503628775895649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656819440520287801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
 --- !u!1 &5492008963789595376
 GameObject:
   m_ObjectHideFlags: 0

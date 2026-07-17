@@ -9,11 +9,13 @@ namespace Sound
         public static SoundManager I;
         [SerializeField] private AudioSource _seSource;
         [SerializeField] private AudioSource _bgmSource;
+        [SerializeField] private AudioSource _bgmSubSource;
         [SerializeField] private AudioSource[] _laneSources;
         [SerializeField] private SoundDataBase _soundDataBase;
 
         public static SoundSection SE { get; private set; }
         public static SoundSection BGM { get; private set; }
+        public static SoundSection BGMSub { get; private set; }
         private readonly static List<SoundSection> _laneSE = new();
         public static IReadOnlyList<SoundSection> LaneSE => _laneSE;
         
@@ -23,6 +25,7 @@ namespace Sound
 
             SE = new(_seSource, _soundDataBase);
             BGM = new(_bgmSource, _soundDataBase);
+            BGMSub = new(_bgmSubSource, _soundDataBase);
 
             for(int i = 0; i < _laneSources.Length; i++)
             {
@@ -64,10 +67,10 @@ namespace Sound
             {
                 _volumeFade?.Kill();
 
-
                 _audioSource.clip = clip;
                 _audioSource.loop = isLoop;
                 _audioSource.volume = volume;
+                _audioSource.time = time;
                 _audioSource.Play();
             }
 
@@ -102,11 +105,25 @@ namespace Sound
                 return startDspTime;
             }
 
-            public void VolumeFade(float start, float end, float duration)
+            public void SetVolume(float volume)
+            {
+                _audioSource.volume = volume;
+            }
+
+            public void VolumeFade(float end, float duration)
             {
                 _volumeFade?.Kill();
-                _audioSource.volume = start;
                 _volumeFade = _audioSource.DOFade(end, duration);
+            }
+
+            public float GetTime()
+            {
+                return _audioSource.time;
+            }
+            
+            public float GetVolume()
+            {
+                return _audioSource.volume;
             }
         }
     }

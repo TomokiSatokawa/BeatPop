@@ -17556,9 +17556,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a117e91ad8ac5f449da8810a97552c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title.SongSelect.SongPreviewPlayer
-  _fadeInDuration: 1.5
-  _playWaitTime: 0.5
-  _stopWaitTime: 0.5
+  _fadeInDuration: 1
+  _playWaitTime: 1
+  _stopWaitTime: 1
 --- !u!1001 &1530591029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20875,7 +20875,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8927673
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -1,3 +1,4 @@
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ namespace Title.SongSelect
 {   
     public class SongUIControl : MonoBehaviour
     {
+        [SerializeField] private UIPointerHover _uIPointerHover;
         [SerializeField] private Button _selectButton;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
@@ -17,6 +19,9 @@ namespace Title.SongSelect
         private void Start()
         {
             _selectButton.onClick.AddListener(OnSelect);
+
+            _uIPointerHover.IsPointerOver.Where(x => x).Subscribe(_ => SongPreviewPlayer.I.PlayPreview(_songData.SongData));
+            _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => SongPreviewPlayer.I.StopPreview());
         }
         public void SetData(SongSelectData data)
         {

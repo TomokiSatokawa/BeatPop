@@ -44,7 +44,7 @@ public class SnapNode : MonoBehaviour
     public void Update()
     {
         if (_editMode == EditMode.None) return;
-        if (!_fieldHover.IsPointerOver) return;
+        if (!_fieldHover.IsPointerOver.CurrentValue) return;
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
         RectTransform parent = _snapObjectParent;
