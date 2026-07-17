@@ -51,14 +51,14 @@ public class HoldNodeFillManager : MonoBehaviour
         }
     }
 
-    public void OnDestroy()
-    {
-        foreach(var  fillData in _activeFillData.Values)
-        {
-            fillData.Remove();
-        }
-        _activeFillData.Clear();
-    }
+    //public void OnDestroy()
+    //{
+    //    foreach(var  fillData in _activeFillData.Values)
+    //    {
+    //        fillData.Remove();
+    //    }
+    //    _activeFillData.Clear();
+    //}
     public class FillData
     {
         private PoolObject _fillObject;

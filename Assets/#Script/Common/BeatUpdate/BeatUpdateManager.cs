@@ -36,5 +36,14 @@ namespace Common.BeatUpdate
 
             _previousTime = current;
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy(); 
+            
+            FastBeatUpdate.Clear();
+            BeatUpdate.Clear();
+            LateBeatUpdate.Clear();
+        }
     }
 }

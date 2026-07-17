@@ -4,7 +4,8 @@ using Cysharp.Threading.Tasks;
 using InGame.UI;
 using R3;
 using UnityEngine;
-    
+using UnityEngine.InputSystem;
+
 namespace InGame.Node
 {
     /// <summary>
@@ -106,6 +107,10 @@ namespace InGame.Node
 
         private T GenerateNode<T>(NodeData nodeData) where T : NodeObject
         {
+            if (Keyboard.current.yKey.wasPressedThisFrame)
+            {
+
+            }
             var newObject = PoolManager.I.Get<T>(nodeData.PrefabType);
             Vector3 startPosition = _clonePosition[nodeData.Lane].position;
             newObject.transform.position = startPosition;

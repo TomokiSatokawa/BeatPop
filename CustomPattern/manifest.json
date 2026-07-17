@@ -17,6 +17,18 @@
                 "song_0000_0000.json"
             ],
             "SongID": 0
+        },
+        {
+            "FileName": [
+                "song_0004_0000.json"
+            ],
+            "SongID": 4
+        },
+        {
+            "FileName": [
+                "song_0005_0000.json"
+            ],
+            "SongID": 5
         }
     ]
 }

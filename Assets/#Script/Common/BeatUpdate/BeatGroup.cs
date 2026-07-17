@@ -38,5 +38,10 @@ namespace Common.BeatUpdate
             handle.UpdateNextTime();
             _handles.Add(handle);
         }
+
+        public void Clear()
+        {
+            _handles.Clear();
+        }
     }
 }
