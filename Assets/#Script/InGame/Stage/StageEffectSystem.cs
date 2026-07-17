@@ -70,6 +70,11 @@ namespace InGame.Stage
             if (_patternList == null || _patternList.Count == 0)
                 return;
 
+            if (EditorLightData.I != null)
+            {
+                _patternList = EditorLightData.I.LightData;
+            }
+
             float currentTime = StageTimeController.StageTime + _startOffset;
 
             _nextPatternIndex = 0;

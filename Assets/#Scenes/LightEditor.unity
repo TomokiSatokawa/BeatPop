@@ -4206,6 +4206,7 @@ MonoBehaviour:
   - {fileID: 800789971}
   - {fileID: 119610698}
   _fieldHover: {fileID: 564475096}
+  _patternSettingsControl: {fileID: 877743773}
 --- !u!114 &781383613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4245,7 +4246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658cfc7ee5b6b8e4abff9f656d161b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorRecording
-  _channel: {fileID: 0}
+  _channel: {fileID: 513502724}
 --- !u!1 &799785091
 GameObject:
   m_ObjectHideFlags: 0
