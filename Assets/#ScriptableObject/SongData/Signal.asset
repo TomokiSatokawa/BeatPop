@@ -16,6 +16,7 @@ MonoBehaviour:
   _songID: 4
   _bpm: 130
   _maxScore: 10520
+  _jacket: {fileID: 21300000, guid: 9513ae17ce0776344956ba3fa32be689, type: 3}
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 4900000, guid: 2963bb232c6da5e4f994144c1d55dd7c, type: 3}

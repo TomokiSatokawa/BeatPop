@@ -428,6 +428,7 @@ MonoBehaviour:
   _selectButton: {fileID: 8342128079153671363}
   _nameText: {fileID: 2638105141653340208}
   _levelText: {fileID: 5917732332361981312}
+  _jacketImage: {fileID: 2394872064014423454}
   _levelImage: {fileID: 5023758322971426000}
   _difficultyColor: {fileID: 11400000, guid: 90575bdb9c762c04aabc1ce0862ca638, type: 2}
 --- !u!114 &3789498535891021714
