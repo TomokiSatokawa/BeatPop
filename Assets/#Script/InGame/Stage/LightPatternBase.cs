@@ -66,13 +66,28 @@ namespace InGame.Stage
         public string PatternType = typeof(AlternateLightPattern).FullName;
         public float Time;
         public int Channel;
-        public int Division;
-        public float Duration;
-        public float Power;
+        public int Division = 4;
+        public float Duration = 0.5f;
+        public float Power = 1f;
+
+        public virtual LightPatternBaseData Clone()
+        {
+            return new LightPatternBaseData()
+            {
+                PatternType = this.PatternType,
+                Time = this.Time,
+                Channel = this.Channel,
+                Division = this.Division,
+                Duration = this.Duration,
+                Power = this.Power,
+                Color = this.Color
+
+            };
+        }
 
 
         [JsonIgnore]
-        public Color Color;
+        public Color Color = Color.yellow;
 
         public float R;
         public float G;

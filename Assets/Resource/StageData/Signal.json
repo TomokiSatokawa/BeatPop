@@ -7,12 +7,12 @@
     "$values": [
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
-        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 0.0,
         "Channel": 1,
-        "Division": 0,
-        "Duration": 0.0,
-        "Power": 0.0,
+        "Division": 4,
+        "Duration": 0.5,
+        "Power": 1.0,
         "R": 1.0,
         "G": 0.08,
         "B": 0.08,
@@ -59,11 +59,11 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
-        "PatternType": "InGame.Stage.BeatSyncLightPattern",
-        "Time": 0.4615385,
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 0.346153855,
         "Channel": 1,
         "Division": 4,
-        "Duration": 0.5,
+        "Duration": 0.3,
         "Power": 1.0,
         "R": 1.0,
         "G": 0.08,
@@ -86,6 +86,19 @@
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 0.6923077,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 0.9230769,
         "Channel": 0,
         "Division": 4,
@@ -94,6 +107,19 @@
         "R": 1.0,
         "G": 0.95,
         "B": 0.0,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 0.9230769,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
         "A": 1.0
       },
       {
@@ -112,6 +138,19 @@
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 1.26923072,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 1.61538458,
         "Channel": 0,
         "Division": 4,
@@ -120,6 +159,19 @@
         "R": 1.0,
         "G": 0.95,
         "B": 0.0,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 1.61538458,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
         "A": 1.0
       },
       {
@@ -138,6 +190,19 @@
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 1.84615386,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 2.19230771,
         "Channel": 0,
         "Division": 4,
@@ -146,6 +211,19 @@
         "R": 1.0,
         "G": 0.95,
         "B": 0.0,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 2.19230771,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
         "A": 1.0
       },
       {
@@ -164,6 +242,19 @@
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 2.53846145,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 2.76923084,
         "Channel": 0,
         "Division": 4,
@@ -172,6 +263,19 @@
         "R": 1.0,
         "G": 0.95,
         "B": 0.0,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 2.76923084,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
         "A": 1.0
       },
       {
@@ -189,30 +293,43 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
-        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "PatternType": "InGame.Stage.SingleLightPattern",
+        "Time": 3.23076916,
+        "Channel": 1,
+        "Division": 4,
+        "Duration": 0.3,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
+        "A": 1.0
+      },
+      {
+        "$type": "InGame.Stage.WaveLightPatternData, Assembly-CSharp",
+        "Type": 0,
+        "FlashDivision": 0.25,
+        "PatternType": "InGame.Stage.WaveLightPattern",
         "Time": 3.69230771,
         "Channel": 0,
         "Division": 4,
-        "Duration": 0.5,
-        "Power": 1.0,
+        "Duration": 0.4,
+        "Power": 0.5,
         "R": 0.2,
         "G": 0.6,
         "B": 1.0,
         "A": 1.0
       },
       {
-        "$type": "InGame.Stage.WaveLightPatternData, Assembly-CSharp",
-        "Type": 1,
-        "FlashDivision": 0.5,
-        "PatternType": "InGame.Stage.WaveLightPattern",
-        "Time": 5.53846169,
-        "Channel": 0,
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.BeatSyncLightPattern",
+        "Time": 3.69230771,
+        "Channel": 1,
         "Division": 4,
-        "Duration": 0.3,
-        "Power": 0.8,
-        "R": 0.2,
-        "G": 0.6,
-        "B": 1.0,
+        "Duration": 0.5,
+        "Power": 1.0,
+        "R": 1.0,
+        "G": 0.08,
+        "B": 0.08,
         "A": 1.0
       }
     ]

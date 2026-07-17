@@ -107,7 +107,7 @@ namespace InGame.Stage
             }
 
 
-            float interval =    (float)Data.Duration / lights.Length;
+            float interval = (float)Data.Duration / lights.Length;
 
 
             foreach (var light in lights)
@@ -139,22 +139,39 @@ namespace InGame.Stage
     {
         public WaveType Type;
         public float FlashDivision;
+
+        public override LightPatternBaseData Clone()
+        {
+            return new WaveLightPatternData()
+            {
+                PatternType = this.PatternType,
+                Time = this.Time,
+                Channel = this.Channel,
+                Division = this.Division,
+                Duration = this.Duration,
+                Power = this.Power,
+                Color = this.Color,
+
+                Type = this.Type,
+                FlashDivision = this.FlashDivision
+
+            };
+        }
+
     }
+        [Serializable]
+        public enum WaveType
+        {
+            [Description("内 → 外")]
+            InsideToOutside,
 
+            [Description("外 → 内")]
+            OutsideToInside,
 
-    [Serializable]
-    public enum WaveType
-    {
-        [Description("内 → 外")]
-        InsideToOutside,
+            [Description("右 → 左")]
+            RightToLeft,
 
-        [Description("外 → 内")]
-        OutsideToInside,
-
-        [Description("右 → 左")]
-        RightToLeft,
-
-        [Description("左 → 右")]
-        LeftToRight
+            [Description("左 → 右")]
+            LeftToRight
+        }
     }
-}

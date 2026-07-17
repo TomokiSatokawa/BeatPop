@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Editor.UI;
 using InGame.Stage;
 using InGame.UI;
 using UnityEngine;
@@ -14,7 +15,9 @@ public class SnapNode : MonoBehaviour
     [SerializeField] private RectTransform _pointerRect;
     [SerializeField] private RectTransform[] _laneRect;
     [SerializeField] private UIPointerHover _fieldHover;
+    [SerializeField] private PatternSettingsControl _patternSettingsControl;
 
+    private LightPatternBaseData _snapPattern = new LightPatternBaseData();
     private EditMode _editMode = EditMode.None;
     private PoolPrefabType _prefabType;
     public void Start()
@@ -36,6 +39,7 @@ public class SnapNode : MonoBehaviour
     public void OnLight()
     {
         _editMode = EditMode.Light;
+        _patternSettingsControl.ShowSettings(_snapPattern);
     }
     public void Update()
     {
@@ -100,7 +104,7 @@ public class SnapNode : MonoBehaviour
                     EditorNodeData.I.AddSection((float)noteTime);
                     break;
                 case EditMode.Light:
-                    var data = new LightPatternBaseData();
+                    var data = _snapPattern.Clone();
                     data.Time = (float)noteTime;
                     data.Channel = laneIndex;
                     EditorLightData.I.AddNode(data);
@@ -140,23 +144,6 @@ public class SnapNode : MonoBehaviour
         return noteTime;
     }
 
-    private int GetLaneIndex(Vector2 localMousePos)
-    {
-        for (int i = 0; i < _laneRect.Length; i++)
-        {
-            RectTransform lane = _laneRect[i];
-
-            // laneのローカル矩形を親(Content)座標へ変換
-            Rect rect = lane.rect;
-            rect.x += lane.anchoredPosition.x;
-            rect.y += lane.anchoredPosition.y;
-
-            if (rect.Contains(localMousePos))
-                return i;
-        }
-
-        return -1;
-    }
     private int GetLaneIndex()
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -166,7 +153,7 @@ public class SnapNode : MonoBehaviour
             if (RectTransformUtility.RectangleContainsScreenPoint(
                     _laneRect[i],
                     mousePos,
-                    null)) // Screen Space Overlayならnull
+                    null))
             {
                 return i;
             }
