@@ -71,20 +71,14 @@ public class SnapNode : MonoBehaviour
 
         pos.y = localPos.y;
 
-        float beatInterval = 60f / StageTimeController.I.BPM;
 
-        float barInterval = beatInterval * 4f;
-        float divisionInterval = barInterval / EditorManager.I.Division;
 
         // X → Time
         double noteTime =
             StageTimeController.StageTime +
             (localMousePos.x / EditorManager.I.Magnification);
 
-        // Timeをスナップ
-        noteTime =
-            Mathf.Round((float)(noteTime / divisionInterval))
-            * divisionInterval;
+        noteTime = SnapNodeTime(noteTime);
 
         // Time → X
         pos.x = (float)(noteTime - StageTimeController.StageTime)
@@ -92,7 +86,7 @@ public class SnapNode : MonoBehaviour
 
         _sectionPointer.anchoredPosition = pos;
         _createPointer.anchoredPosition = pos;
-        _lightPointer   .anchoredPosition = pos;
+        _lightPointer.anchoredPosition = pos;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -114,7 +108,7 @@ public class SnapNode : MonoBehaviour
             }
         }
 
-        if(Mouse.current.rightButton.wasPressedThisFrame)
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             switch (_editMode)
             {
@@ -131,6 +125,21 @@ public class SnapNode : MonoBehaviour
             }
         }
     }
+
+    public static double SnapNodeTime(double noteTime)
+    {
+        float beatInterval = 60f / StageTimeController.I.BPM;
+
+        float barInterval = beatInterval * 4f;
+        float divisionInterval = barInterval / EditorManager.I.Division;
+
+
+        noteTime =
+            Mathf.Round((float)(noteTime / divisionInterval))
+            * divisionInterval;
+        return noteTime;
+    }
+
     private int GetLaneIndex(Vector2 localMousePos)
     {
         for (int i = 0; i < _laneRect.Length; i++)

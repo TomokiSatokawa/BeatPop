@@ -140,7 +140,7 @@ public class HoldNodeFillManager : MonoBehaviour
             }
 
             _effect.SetEmission(isInput);
-        }
+        }   
         private void SetFill(Transform fill, Vector3 startPos, Vector3 endPos)
         {
             float length = Mathf.Abs(endPos.z - startPos.z);
