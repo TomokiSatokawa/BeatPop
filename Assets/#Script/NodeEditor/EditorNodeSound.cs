@@ -38,7 +38,7 @@ public class EditorNodeSound : MonoBehaviour
         {
             if (nodeData.Time <= StageTimeController.StageTime)
             {
-                SoundManager.I.PlaySESound(SESoundType.Tap1);
+                SoundManager.SE.PlaySE(SESoundType.Tap1);
                 removeList.Add(nodeData);
                 continue;
             }

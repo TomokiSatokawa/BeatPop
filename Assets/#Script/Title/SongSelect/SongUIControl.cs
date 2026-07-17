@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Title.SongSelect
-{
-
+{   
     public class SongUIControl : MonoBehaviour
     {
         [SerializeField] private Button _selectButton;
@@ -26,8 +25,6 @@ namespace Title.SongSelect
             _levelImage.color = _difficultyColor.GetDifficultyColor(data.Difficulty);
             _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
             _jacketImage.sprite = data.SongData.Jacket;
-
-
         }
         public void OnSelect()
         {

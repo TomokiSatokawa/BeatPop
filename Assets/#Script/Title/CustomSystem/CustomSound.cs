@@ -46,7 +46,7 @@ namespace Title.Custom
         public void OnChangeValue(SESoundType seSound)
         {
             if (!_isReviewSound) return;
-            SoundManager.I.PlaySESound(seSound);
+            SoundManager.SE.PlaySE(seSound);
         }
         public void SetCustom(CustomSoundPattern customSound)
         {

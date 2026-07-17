@@ -63,13 +63,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         _stageTimeController.Pause();
         InputManager.SetInputEnabled(false);
-        SoundManager.I.IsPause(true);
+        SoundManager.BGM.IsPause(true);
     }
 
     public void ReStartStage()
     {
         _stageTimeController.ReStart();
-        SoundManager.I.IsPause(false);
+        SoundManager.BGM.IsPause(false);
     }
 
     public void ReStartCountDown()

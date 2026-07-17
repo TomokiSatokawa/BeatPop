@@ -80,7 +80,7 @@ namespace InGame.UI
             float dray = Mathf.Max(0, _waitSeconds - StartSectionTime);
             float time = StartSectionTime - (_waitSeconds - dray);
 
-            SoundManager.I.PlayBGMSound(SongClip, dray, time);
+            SoundManager.BGM.PlayDspBGM(SongClip, dray, time);
             _startDspTime = AudioSettings.dspTime + _waitSeconds - StartSectionTime;
             StageTime = -_waitSeconds;
             _isPlaying.Value = true;

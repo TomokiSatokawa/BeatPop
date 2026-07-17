@@ -130,11 +130,11 @@ public class HoldNodeFillManager : MonoBehaviour
             {
                 if (isInput)
                 {
-                    SoundManager.I.PlayLoopSE(SESoundType.Hold1);
+                    SoundManager.LaneSE[StartNode.Lane].PlayBGM(SESoundType.Hold1,isLoop: true);
                 }
                 else
                 {
-                    SoundManager.I.StopLoopSE();
+                    SoundManager.LaneSE[StartNode.Lane].StopBGM() ;
                 }
                 _isInput = isInput;
             }
@@ -170,7 +170,7 @@ public class HoldNodeFillManager : MonoBehaviour
         {
             _fillObject.Release();
             _effect.Release();
-            SoundManager.I.StopLoopSE();
+            SoundManager.LaneSE[StartNode.Lane].StopBGM();
         }
     }
 }

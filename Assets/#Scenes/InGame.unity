@@ -4312,11 +4312,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390119646}
   m_CullTransparentMesh: 1
---- !u!82 &1411976232 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1926607842076185705, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-  m_PrefabInstance: {fileID: 6214516737644960654}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445815579
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,10 +6142,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2264350786562623992, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
       propertyPath: m_Name
       value: Sound
@@ -6198,47 +6189,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6214516737644960656}
-    - targetCorrespondingSourceObject: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6214516737644960657}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
---- !u!1 &6214516737644960655 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-  m_PrefabInstance: {fileID: 6214516737644960654}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6214516737644960656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6214516737644960655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb74efff05f96774dbb8f8999e22ce99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InGameCustomSoundData
-  _soundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
---- !u!114 &6214516737644960657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6214516737644960655}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84fe14076a21914f9d3b98a9feb1505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InGame.Sound.Metronome
-  _audioSource: {fileID: 1411976232}
-  _clip: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
-  _headSE: {fileID: 8300000, guid: edea962c2b5a989418f618dfee03ec75, type: 3}
 --- !u!1001 &9217099115157238770
 PrefabInstance:
   m_ObjectHideFlags: 0

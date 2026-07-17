@@ -59,7 +59,7 @@ namespace InGame.Node
 
         private void EmptyClick(int lane)
         {
-            SoundManager.I.PlaySESound(SESoundType.EmptyHit);
+            SoundManager.SE.PlaySE(SESoundType.EmptyHit);
             _laneClick.PlayLaneHighlight(lane);
         }
     }

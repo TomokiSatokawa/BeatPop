@@ -46,7 +46,7 @@ public class NodeHitExecutor : MonoBehaviour
         _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
 
         var se = InGameCustomSoundData.I.NodeSE[targetNode.Type];
-        SoundManager.I.PlaySESound(se, judgeData.TapSEVolume);
+        SoundManager.SE.PlaySE(se, judgeData.TapSEVolume);
     }
 
     private static IReadOnlyJudgementData JudgeNode(NodeObject targetNode)
