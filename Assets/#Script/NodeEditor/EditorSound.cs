@@ -5,7 +5,6 @@ using UnityEngine;
 public class EditorSound : MonoBehaviour
 {
     [SerializeField] private AudioSource _bgm;
-    [SerializeField] private AudioSource _se;
     void Start()
     {
         StageTimeController.I.IsPlaying.Where(b => b).Subscribe(_ => OnPlay()).AddTo(this);

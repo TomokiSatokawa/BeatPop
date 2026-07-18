@@ -79,7 +79,7 @@ public class EditorLightData : SingletonMonoBehaviour<EditorLightData>
         newData.Channel = lightData.Channel;
         newData.Duration = lightData.Duration;
         newData.Power = lightData.Power;
-        newData.Color = lightData.Color;
+        newData.MainColor = lightData.MainColor;
 
         _lightData[targetIndex] = newData;
         return newData;

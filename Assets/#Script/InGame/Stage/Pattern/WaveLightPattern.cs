@@ -150,7 +150,7 @@ namespace InGame.Stage
                 Division = this.Division,
                 Duration = this.Duration,
                 Power = this.Power,
-                Color = this.Color,
+                MainColor = this.MainColor,
 
                 Type = this.Type,
                 FlashDivision = this.FlashDivision

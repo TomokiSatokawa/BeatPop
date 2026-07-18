@@ -9,7 +9,7 @@ namespace InGame.Stage
     /// <summary>
     /// パターンを動かす
     /// </summary>
-    public class PanelLightManager : MonoBehaviour
+    public class LightGroupManager : MonoBehaviour
     {
         [SerializeField] private LightControlBase[] _lights;
 

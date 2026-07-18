@@ -8,8 +8,10 @@ namespace InGame.Stage
 {
     public class StageEffectSystem : MonoBehaviour
     {
-        [SerializeField] private PanelLightManager _frontUpperPanelLight;
-        [SerializeField] private PanelLightManager _backUpperPanelLight;
+        [SerializeField] private LightGroupManager _frontUpperPanelLight;
+        [SerializeField] private LightGroupManager _backUpperPanelLight;
+        [SerializeField] private LightGroupManager _stageGradientLight;
+        [SerializeField] private LightGroupManager _laneGradientLight;
         [SerializeField] private float _startOffset;
         [SerializeField] private bool _isAllCheckPattern;
 
@@ -61,6 +63,10 @@ namespace InGame.Stage
                     break;
                 case 1:
                     _backUpperPanelLight.ChangePattern(data);
+                    break;
+                    case 2:
+                    _stageGradientLight.ChangePattern(data);
+                    _laneGradientLight.ChangePattern(data);
                     break;
             }
         }

@@ -8,7 +8,7 @@ namespace Common
 {
     public static class StageDataSerializer
     {
-        public const string Version = "2.1";
+        public const string Version = "2.2";
 
         public static readonly JsonSerializerSettings SerializerSettings = new()
         {
@@ -39,17 +39,6 @@ namespace Common
                     Debug.LogWarning("データのバージョンが違います");
                 }
 
-                // RGBA → Color 復元
-                foreach (var patternData in data.LightData)
-                {
-                    patternData.Color = new Color(
-                        patternData.R,
-                        patternData.G,
-                        patternData.B,
-                        patternData.A
-                    );
-                }
-
                 return data;
             }
             catch (Exception e)
@@ -73,17 +62,6 @@ namespace Common
                 patternBaseDatas = patternBaseDatas
                     .OrderBy(x => x.Time)
                     .ToArray();
-
-
-                // Color → RGBA 同期
-                foreach (var patternData in patternBaseDatas)
-                {
-                    patternData.R = patternData.Color.r;
-                    patternData.G = patternData.Color.g;
-                    patternData.B = patternData.Color.b;
-                    patternData.A = patternData.Color.a;
-                }
-
 
                 StageSaveData saveData = new()
                 {

@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using UnityEngine;
 namespace InGame.Stage
 {
@@ -10,9 +9,9 @@ namespace InGame.Stage
         public abstract void Refresh();
         public abstract LightPatternBaseData GetData();
     }
-    public abstract class LightPatternBase<T>: LightPatternBase where T : LightPatternBaseData
+    public abstract class LightPatternBase<T> : LightPatternBase where T : LightPatternBaseData
     {
-        public bool IsEnabled { get;private set;  }
+        public bool IsEnabled { get; private set; }
         public T Data { get; private set; }
         protected LightControlBase[] _lights;
 
@@ -27,7 +26,7 @@ namespace InGame.Stage
 
             foreach (var light in _lights)
             {
-                light.SetColor(data.Color);
+                light.SetColor(data.MainColor.GetColor());
             }
         }
 
@@ -38,7 +37,7 @@ namespace InGame.Stage
 
         public override void Refresh()
         {
-            foreach(var light in _lights)
+            foreach (var light in _lights)
             {
                 light.Refresh();
             }
@@ -56,10 +55,10 @@ namespace InGame.Stage
                 Debug.LogError($"{data.GetType()} は {typeof(T)} にキャストできません。");
                 return null;
             }
-                return tData;
+            return tData;
         }
     }
-    
+
     [Serializable]
     public class LightPatternBaseData
     {
@@ -80,18 +79,40 @@ namespace InGame.Stage
                 Division = this.Division,
                 Duration = this.Duration,
                 Power = this.Power,
-                Color = this.Color
+                MainColor = this.MainColor
 
             };
         }
 
-
-        [JsonIgnore]
-        public Color Color = Color.yellow;
-
+        public ColorData MainColor = new(Color.red);
+    }
+    [Serializable]
+    public struct ColorData
+    {
         public float R;
         public float G;
         public float B;
         public float A;
+
+        public ColorData(Color color)
+        {
+            this.R = color.r;
+            this.G = color.g;
+            this.B = color.b;
+            this.A = color.a;
+        }
+
+        public void SetColor(Color color)
+        {
+            this.R = color.r;
+            this.G = color.g;
+            this.B = color.b;
+            this.A = color.a;
+        }
+
+        public Color GetColor()
+        {
+            return new Color(R, G, B, A);
+        }
     }
-}   
+}

@@ -5,10 +5,9 @@ using InGame.UI;
 using R3;
 using Sound;
 using UnityEngine;
-
 public class EditorNodeSound : MonoBehaviour
 {
-    public List<NodeData> _soundTimeData;
+    private List<NodeData> _soundTimeData;
     public void Start()
     {
         StageTimeController.I.IsPlaying

@@ -98,12 +98,6 @@ namespace Editor.UI
             {
                 FieldInfo targetField = field;
 
-                if (field.Name == "R"
-                    || field.Name == "G"
-                    || field.Name == "B"
-                    || field.Name == "A")
-                    continue;
-
                 switch (field.FieldType.Name)
                 {
                     case nameof(Int32):
@@ -125,12 +119,12 @@ namespace Editor.UI
                         {
                             targetField.SetValue(data, _patternTypes[x].FullName);
                             var newData = EditorLightData.I.ChangeType(data, GetParameterTypeFromPattern(_patternTypes[x]));
-                            EditorLightGenerator.I.UpdateData(data, newData);
+                            EditorLightGenerator.I.UpdateData(data, newData);   
                         });
                         break;
-                    case nameof(Color):
+                    case nameof(ColorData):
                         int selectIndex = -1;
-                        Color selectColor = (Color)targetField.GetValue(data);
+                        Color selectColor = ((ColorData)targetField.GetValue(data)).GetColor();
 
                         int i = 0;
                         foreach (var kv in _colorPallet.Items)
@@ -143,7 +137,7 @@ namespace Editor.UI
                         }
                         InstantiateContent(_selectPrefab)
                       .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, i
-                      , x => targetField.SetValue(data, _colorPallet.Items[x].Value));
+                      , x => targetField.SetValue(data, new ColorData(_colorPallet.Items[x].Value)));
                         break;
 
                     default:
