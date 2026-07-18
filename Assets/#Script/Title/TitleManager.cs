@@ -13,7 +13,7 @@ namespace Title
 
         public async void StartPlay(SongSelectData songSelectData)
         {
-            var patterns = await CustomDataLoader.I.GetCustomPattern(songSelectData.SongData.SongID);
+            var patterns = await CustomDataLoader.I.GetCustomPattern();
             var usePattern = patterns.Where(x => x.IsSelect).First();
             _songPlayLoader.OnLoad(songSelectData, usePattern);
             _sceneLoad.ChangeScene("InGame");

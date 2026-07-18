@@ -27,33 +27,24 @@ public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
 
         //SongData=>manifestの照合
 
-        foreach (var manifestSongData in _manifestData.Datas)
+        foreach (var fillPath in _manifestData.FileName)
         {
-            foreach (var fillPath in manifestSongData.FileName)
+            if (!await CustomPatternFile.TryGetText(fillPath, null))
             {
-                if (!await CustomPatternFile.TryGetText(fillPath, null))
-                {
-                    Debug.LogError($"ファイル破損 {fillPath}");
-                }
+                Debug.LogError($"ファイル破損 {fillPath}");
             }
         }
+
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public async UniTask<PatternJsonData[]> GetCustomPattern(int songId)
+    public async UniTask<PatternJsonData[]> GetCustomPattern()
     {
-        var manifestSongData = _manifestData.Datas.Where(x => x.SongID == songId).FirstOrDefault();
-        if (manifestSongData == null)
-        {
-            Debug.LogError("Song Pattern not found");
-            return null;
-        }
-
-        var result = new PatternJsonData[manifestSongData.FileName.Length];
-        for (int i = 0; i < manifestSongData.FileName.Length; i++)
+        var result = new PatternJsonData[_manifestData.FileName.Length];
+        for (int i = 0; i < _manifestData.FileName.Length; i++)
         {
             string patternJson = "";
-            string fileName = manifestSongData.FileName[i];
+            string fileName = _manifestData.FileName[i];
             if (!await CustomPatternFile.TryGetText(fileName, t => patternJson = t))
             {
                 Debug.LogError($"{fileName}");
@@ -63,14 +54,14 @@ public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
         }
         return result;
     }
-    public async void AddPattern(int songId, PatternJsonData patternData)
+    public async void AddPattern(PatternJsonData patternData)
     {
-        var manifestSongData = _manifestData.Datas.Where(x => x.SongID == songId).FirstOrDefault();
-        Array.Resize(ref manifestSongData.FileName, manifestSongData.FileName.Length + 1);
+        Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
 
-        string filName = $"song_{songId:D4}_{(manifestSongData.FileName.Length - 1):D4}.json";
-        manifestSongData.FileName[manifestSongData.FileName.Length - 1] = filName;
+        string filName = $"song_{(_manifestData.FileName.Length - 1):D4}.json";
+        _manifestData.FileName[_manifestData.FileName.Length - 1] = filName;
         patternData.FillName = filName;
+
         string patternJson = JsonUtility.ToJson(patternData, true);
         await CustomPatternFile.CreateFile(filName, patternJson);
         await UpdateManifestFill();
@@ -97,41 +88,33 @@ public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
 
     private async UniTask<string> CreateDefaultManifest()
     {
-        var manifestSongDatas = new ManifestSongData[_songData.SongDates.Count];
-        for (int i = 0; i < _songData.SongDates.Count; i++)
-        {
-            int songID = _songData.SongDates[i].SongID;
-            string filName = $"song_{songID:D4}_{0:D4}.json";
+        var manifestData = new ManifestData();
 
-            if (!await CustomPatternFile.TryGetText(filName, null))
-            {
-                PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
-                patternJsonData.IsSelect = true;
-                patternJsonData.FillName = filName;
-                string patternJson = JsonUtility.ToJson(patternJsonData, true);
-                await CustomPatternFile.CreateFile(filName, patternJson);
-            }
-            manifestSongDatas[i] = new();
-            manifestSongDatas[i].FileName = new string[] { filName };
-            manifestSongDatas[i].SongID = _songData.SongDates[i].SongID;
+        string filName = $"song_{0:D4}.json";
+
+        if (!await CustomPatternFile.TryGetText(filName, null))
+        {
+            PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
+            patternJsonData.IsSelect = true;
+            patternJsonData.FillName = filName;
+            string patternJson = JsonUtility.ToJson(patternJsonData, true);
+            await CustomPatternFile.CreateFile(filName, patternJson);
         }
-        return GetManifestJson(manifestSongDatas);
+
+        manifestData.FileName = new string[1];
+        manifestData.FileName[0] = filName;
+
+        return GetManifestJson(manifestData);
     }
-    private string GetManifestJson(ManifestSongData[] songDatas)
+    private string GetManifestJson(ManifestData songDatas)
     {
-        string json = JsonUtility.ToJson(new ManifestData { Datas = songDatas }, true);
+        string json = JsonUtility.ToJson(songDatas, true);
         return json;
     }
 
     [System.Serializable]
     public class ManifestData
     {
-        public ManifestSongData[] Datas;
-    }
-    [System.Serializable]
-    public class ManifestSongData
-    {
         public string[] FileName;
-        public int SongID;
     }
 }

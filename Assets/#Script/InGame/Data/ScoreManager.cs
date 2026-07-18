@@ -4,7 +4,7 @@ using InGame.Node;
 using R3;
 using UnityEngine;
 
-public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
+public class ScoreManager : SingletonPersistent<ScoreManager>
 {
     /// <summary>オールパーフェクトが続いているか</summary>
     public bool IsAllPerfect { get; private set; }
@@ -84,11 +84,6 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         {
             score += kv.Key.Score * kv.Value;
         }
-    }
-
-    public void Release()
-    {
-        Destroy(gameObject);
     }
 
     private void UpdateJudgeState(IReadOnlyJudgementData judgement)

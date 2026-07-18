@@ -1,4 +1,3 @@
-using Common.PlaySystem;
 using UnityEngine;
 
 public class ResultManager : MonoBehaviour
@@ -6,10 +5,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private SceneLoad _sceneLoad;
     public void ReturnTitle()
     {
-        ScoreManager.I.Release();
-        JudgementManager.I.Release();
-        SongPlayManager.I.Delete();
-
+        GameManager.DontDestroyRelease();
         _sceneLoad.ChangeScene("Title");
     }
 }

@@ -78,6 +78,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 0.230769232,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 0.346153855,
         "Channel": 0,
@@ -206,6 +222,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 1.38461542,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 1.61538458,
         "Channel": 0,
@@ -302,6 +334,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 2.30769229,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 2.53846145,
         "Channel": 0,
@@ -355,6 +403,22 @@
         "Channel": 1,
         "Division": 4,
         "Duration": 0.3,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 3.0,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
         "Power": 1.0,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
@@ -710,8 +774,8 @@
         "Time": 48.0,
         "Channel": 2,
         "Division": 4,
-        "Duration": 2.0,
-        "Power": 2.0,
+        "Duration": 1.0,
+        "Power": 0.5,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 1.0,
@@ -748,6 +812,22 @@
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 0.88,
           "G": 0.95,
+          "B": 1.0,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.BeatSyncLightPattern",
+        "Time": 57.23077,
+        "Channel": 0,
+        "Division": 8,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 1.0,
           "B": 1.0,
           "A": 1.0
         }
@@ -820,9 +900,9 @@
         "$type": "GradationLightPatternData, Assembly-CSharp",
         "SubColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
-          "R": 1.0,
-          "G": 0.08,
-          "B": 0.08,
+          "R": 0.2,
+          "G": 0.6,
+          "B": 1.0,
           "A": 1.0
         },
         "PatternType": "GradationLightPattern",
@@ -833,9 +913,9 @@
         "Power": 0.5,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
-          "R": 0.2,
-          "G": 0.6,
-          "B": 1.0,
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
           "A": 1.0
         }
       },
@@ -939,6 +1019,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 81.46154,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 81.92308,
         "Channel": 0,
@@ -960,6 +1056,22 @@
         "Channel": 1,
         "Division": 4,
         "Duration": 0.5,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 82.15385,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
         "Power": 1.0,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
@@ -1003,6 +1115,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 82.84615,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 83.07693,
         "Channel": 0,
@@ -1024,6 +1152,22 @@
         "Channel": 1,
         "Division": 4,
         "Duration": 0.5,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 83.30769,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
         "Power": 1.0,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
@@ -1067,6 +1211,22 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 84.0,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
         "PatternType": "InGame.Stage.SingleLightPattern",
         "Time": 84.46154,
         "Channel": 0,
@@ -1088,6 +1248,22 @@
         "Channel": 1,
         "Division": 4,
         "Duration": 0.5,
+        "Power": 1.0,
+        "MainColor": {
+          "$type": "InGame.Stage.ColorData, Assembly-CSharp",
+          "R": 1.0,
+          "G": 0.08,
+          "B": 0.08,
+          "A": 1.0
+        }
+      },
+      {
+        "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
+        "PatternType": "InGame.Stage.AlternateLightPattern",
+        "Time": 84.69231,
+        "Channel": 1,
+        "Division": 16,
+        "Duration": 0.25,
         "Power": 1.0,
         "MainColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",

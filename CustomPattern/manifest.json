@@ -1,34 +1,6 @@
 {
-    "Datas": [
-        {
-            "FileName": [
-                "song_0003_0000.json"
-            ],
-            "SongID": 3
-        },
-        {
-            "FileName": [
-                "song_0001_0000.json"
-            ],
-            "SongID": 1
-        },
-        {
-            "FileName": [
-                "song_0000_0000.json"
-            ],
-            "SongID": 0
-        },
-        {
-            "FileName": [
-                "song_0004_0000.json"
-            ],
-            "SongID": 4
-        },
-        {
-            "FileName": [
-                "song_0005_0000.json"
-            ],
-            "SongID": 5
-        }
+    "FileName": [
+        "song_0000.json",
+        "song_0001.json"
     ]
 }

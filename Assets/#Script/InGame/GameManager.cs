@@ -1,3 +1,4 @@
+using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame;
 using InGame.UI;
@@ -82,14 +83,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _sceneLoad.ChangeScene("InGame");
     }
 
-    private void DontDestroyRelease()
-    {
-        ScoreManager.I.Release();
-        JudgementManager.I.Release();
-    }
     public void ReturnTitle()
     {
+        DontDestroyRelease();
         _sceneLoad.ChangeScene("Title");
+    }
+
+    public static void DontDestroyRelease()
+    {
+        ScoreManager.DisposeSingleton();
+        JudgementManager.DisposeSingleton();
+        SongPlayManager.DisposeSingleton();
     }
 
     private void UpdateDebugText()

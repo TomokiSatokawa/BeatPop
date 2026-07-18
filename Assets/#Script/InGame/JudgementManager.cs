@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JudgementManager : SingletonMonoBehaviour<JudgementManager>
+public class JudgementManager : SingletonPersistent<JudgementManager>
 {
     [SerializeField] private float _deleteTime;
     [SerializeField] private float _toleranceValue;
@@ -21,9 +21,5 @@ public class JudgementManager : SingletonMonoBehaviour<JudgementManager>
             return null;
         }
         return judgementData.JudgementDifference(difference);
-    }
-    public void Release()
-    {
-        Destroy(this.gameObject);
     }
 }

@@ -7,15 +7,8 @@ namespace Common.PlaySystem
 
         public void OnLoad(SongSelectData songData,PatternJsonData patternJsonData)
         {
-            if(SongPlayManager.I != null)
-            {
-                Debug.LogError("SongPlayManager‚ªŠù‚É‘¶İ‚µ‚Ä‚¢‚Ü‚·");
-                return;
-            }
-
             var playManager = Instantiate(_managerPrefab);
             playManager.SetData(songData,patternJsonData,0);
-            DontDestroyOnLoad(playManager);
         }
     }
 }

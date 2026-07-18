@@ -11,7 +11,7 @@ public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T
 
         if (I != this)
         {
-            DisposeSingleton();
+            Destroy(this.gameObject);
             return;
         }
 
@@ -19,8 +19,11 @@ public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void DisposeSingleton()
+    public static void DisposeSingleton()
     {
-        Destroy(this.gameObject);
+        if (I != null)
+        {
+            Destroy(I.gameObject);
+        }
     }
 }
