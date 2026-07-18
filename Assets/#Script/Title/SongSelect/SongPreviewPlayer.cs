@@ -43,18 +43,29 @@ namespace Title.SongSelect
 
         private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
         {
-            if (audio != _playAudio)
+            float waitTime = _playWaitTime;
+            if (_playAudio != null)
             {
-                float waitTime = 0;
-                if (_playAudio == null)
-                {
-                    waitTime = _playWaitTime;
-                }
+                waitTime = _playWaitTime / 2;
+            }
 
-                UniTask waitTask = UniTask.WaitForSeconds(waitTime, cancellationToken: token);
+            UniTask waitTask = UniTask.WaitForSeconds(waitTime, cancellationToken: token);
+
+            if (audio == _playAudio)
+            {
+                var isCanceled = await waitTask.SuppressCancellationThrow();
+
+                if (isCanceled)
+                    return;
+            }
+            else
+            {
                 UniTask loadAudio = SoundManager.I.LoadAudioClipAsync(audio);
 
-                await UniTask.WhenAll(waitTask, loadAudio);
+                var isCanceled = await UniTask.WhenAll(waitTask, loadAudio).SuppressCancellationThrow();
+
+                if (isCanceled)
+                    return;
 
                 if (_playAudio != null)
                 {
@@ -65,6 +76,7 @@ namespace Title.SongSelect
                 _playAudio = audio;
                 SoundManager.BGM.PlayBGM(_playAudio, 0);
             }
+
             SoundManager.BGM.VolumeFade(1, _fadeInDuration);
 
         }

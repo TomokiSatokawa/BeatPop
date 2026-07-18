@@ -57,6 +57,7 @@ namespace Title.SongSelect
 
             _songPreviewPlayer.PlayPreview(CurrentData.Value.SongData);
         }
+
         public void OnChangeDifficulty(int value)
         {
             if (!_currentData.HasValue)
@@ -70,6 +71,14 @@ namespace Title.SongSelect
             }
             Debug.LogError("•s³‚È“ïˆÕ“x‚Ì’l");
         }
+
+        public void OnClause()
+        {
+            _currentData = null;
+            OnHiddenAnimation();
+            _songPreviewPlayer.StopPreview();
+        }
+
         private void OnActiveAnimation()
         {
             _panelControl.OnActive();
@@ -77,15 +86,15 @@ namespace Title.SongSelect
             _mainPanel.anchoredPosition = _offScreen;
             _mainPanel.DOAnchorPos(_pos, _animationDuration);
         }
-        public void OnClause()
+
+        private void OnHiddenAnimation()
         {
             _mainPanel.DOKill(true);
             _mainPanel.anchoredPosition = _pos;
             _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
                 .OnComplete(() => _panelControl.OnHidden());
-
-            _songPreviewPlayer.StopPreview();
         }
+
         public void OnPlay()
         {
             if (!_currentData.HasValue) return;
