@@ -32,6 +32,13 @@ namespace Sound
                 _laneSE.Add(new(_laneSources[i], _soundDataBase));
             }
         }
+        public void OnDestroy()
+        {
+            SE = null;
+            BGM = null;
+            BGMSub = null;
+            _laneSE.Clear();
+        }
 
         public class SoundSection
         {

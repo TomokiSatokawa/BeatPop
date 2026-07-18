@@ -28,6 +28,7 @@ namespace Title.SongSelect
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private SceneLoad _sceneLoad;//TODO:‰¼
         [SerializeField] private SegmentedControl _segmentControl;
+        [SerializeField] private SongPreviewPlayer _songPreviewPlayer;
 
         private SongSelectData? _currentData;
         public SongSelectData? CurrentData => _currentData;
@@ -53,6 +54,8 @@ namespace Title.SongSelect
                 _segmentControl.SetButtonActive((int)difficulty, isExist);
             }
             _segmentControl.OnClick((int)data.Difficulty);
+
+            _songPreviewPlayer.PlayPreview(CurrentData.Value.SongData);
         }
         public void OnChangeDifficulty(int value)
         {
@@ -80,14 +83,13 @@ namespace Title.SongSelect
             _mainPanel.anchoredPosition = _pos;
             _mainPanel.DOAnchorPos(_offScreen, _animationDuration)
                 .OnComplete(() => _panelControl.OnHidden());
+
+            _songPreviewPlayer.StopPreview();
         }
-        public async void OnPlay()
+        public void OnPlay()
         {
             if (!_currentData.HasValue) return;
-            var patterns = await CustomDataLoader.I.GetCustomPattern(_currentData.Value.SongData.SongID);
-            var usePattern = patterns.Where(x => x.IsSelect).First();
-            _playLoader.OnLoad(_currentData.Value, usePattern);
-            _sceneLoad.ChangeScene("InGame");
+            TitleManager.I.StartPlay(CurrentData.Value);    
         }
     }
 }

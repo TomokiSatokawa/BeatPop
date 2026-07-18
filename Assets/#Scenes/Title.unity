@@ -8913,7 +8913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -921}
+  m_AnchoredPosition: {x: 0, y: -2794.2}
   m_SizeDelta: {x: 1663, y: 1602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829015999
@@ -8942,6 +8942,7 @@ MonoBehaviour:
   _playLoader: {fileID: 1569844618}
   _sceneLoad: {fileID: 1569844619}
   _segmentControl: {fileID: 1571923492}
+  _songPreviewPlayer: {fileID: 1523306036}
 --- !u!114 &829016000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9217,7 +9218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000091552734}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -9298,7 +9299,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884756573}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -10054,7 +10055,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 964413186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1523306036}
+        m_TargetAssemblyTypeName: Title.SongSelect.SongPreviewPlayer, Assembly-CSharp
+        m_MethodName: StopPreview
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &964413186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11140,7 +11153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Title.SongSelect.SongSelectGenerator
   _content: {fileID: 186968631}
   _titlePrefab: {fileID: 4557633181371095652, guid: bc36b6516cd265c4585ab42f7919a76f, type: 3}
-  _contentsListPrefab: {fileID: 1360254055465798315, guid: b702ef692bc8d3043849b7b204fc768b, type: 3}
+  _contentsListPrefab: {fileID: 1034373548152290456, guid: 1b72c797d4e8f2148a6147a4e9100ee4, type: 3}
   _listSongPrefab: {fileID: 4724775528831732003, guid: 274a05a21165fb746aa788fd84df9671, type: 3}
 --- !u!1 &1034833893
 GameObject:
@@ -17930,6 +17943,7 @@ GameObject:
   - component: {fileID: 1569844617}
   - component: {fileID: 1569844618}
   - component: {fileID: 1569844619}
+  - component: {fileID: 1569844620}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -17978,6 +17992,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
   _fadeImageControl: {fileID: 2005575151}
+--- !u!114 &1569844620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569844616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fa8ee83cd5b5240b8951528ed4c7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Title.TitleManager
+  _songPlayLoader: {fileID: 1569844618}
+  _sceneLoad: {fileID: 1569844619}
 --- !u!1 &1570107661
 GameObject:
   m_ObjectHideFlags: 0
@@ -20875,7 +20903,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8927673
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22163,7 +22191,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909526568}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
