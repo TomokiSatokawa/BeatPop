@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Sound
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : SingletonPersistent<SoundManager>
     {
-        public static SoundManager I;
         [SerializeField] private AudioSource _seSource;
         [SerializeField] private AudioSource _bgmSource;
         [SerializeField] private AudioSource _bgmSubSource;
@@ -18,26 +17,17 @@ namespace Sound
         public static SoundSection BGMSub { get; private set; }
         private readonly static List<SoundSection> _laneSE = new();
         public static IReadOnlyList<SoundSection> LaneSE => _laneSE;
-        
-        private void Awake()
-        {
-            I = this;
 
+        public void Start()
+        {
             SE = new(_seSource, _soundDataBase);
             BGM = new(_bgmSource, _soundDataBase);
             BGMSub = new(_bgmSubSource, _soundDataBase);
 
-            for(int i = 0; i < _laneSources.Length; i++)
+            for (int i = 0; i < _laneSources.Length; i++)
             {
                 _laneSE.Add(new(_laneSources[i], _soundDataBase));
             }
-        }
-        public void OnDestroy()
-        {
-            SE = null;
-            BGM = null;
-            BGMSub = null;
-            _laneSE.Clear();
         }
 
         public class SoundSection
