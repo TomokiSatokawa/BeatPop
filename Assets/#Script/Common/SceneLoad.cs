@@ -22,8 +22,12 @@ public class SceneLoad : MonoBehaviour
 
     private async UniTask LoadSceneAsync(string scenePath)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(scenePath);
+        var op = SceneManager.LoadSceneAsync(scenePath);
+        op.allowSceneActivation = false;
 
-        await operation.ToUniTask();
+        await UniTask.WaitUntil(() => op.progress >= 0.9f);
+
+        op.allowSceneActivation = true;
+        await op.ToUniTask();
     }
 }

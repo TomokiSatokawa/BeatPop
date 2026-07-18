@@ -71,8 +71,7 @@ namespace InGame.UI
 
         public async UniTask SongLoadAsync()
         {
-            SongClip.LoadAudioData();
-            await UniTask.WaitUntil(() => SongClip.loadState == AudioDataLoadState.Loaded);
+            await SoundManager.I.LoadAudioClipAsync(SongClip);
         }
 
         public void StartSongPlay()

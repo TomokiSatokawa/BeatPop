@@ -45,7 +45,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         UniTask songLoad = _stageTimeController.SongLoadAsync();
         UniTask poolClone = PoolManager.I.ClonePoolObject();
-
         await UniTask.WhenAll(songLoad, poolClone);
         await UniTask.WaitForSeconds(1);
 

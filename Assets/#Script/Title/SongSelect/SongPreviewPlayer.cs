@@ -52,9 +52,7 @@ namespace Title.SongSelect
                 }
 
                 UniTask waitTask = UniTask.WaitForSeconds(waitTime, cancellationToken: token);
-
-                audio.LoadAudioData();
-                UniTask loadAudio = UniTask.WaitUntil(() => audio.loadState == AudioDataLoadState.Loaded, cancellationToken: token);
+                UniTask loadAudio = SoundManager.I.LoadAudioClipAsync(audio);
 
                 await UniTask.WhenAll(waitTask, loadAudio);
 

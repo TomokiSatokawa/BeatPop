@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Sound
 {
     public class SoundManager : SingletonPersistent<SoundManager>
     {
+        private const float MaxAudioLoadTimePerFrameMs = 0.5f;
         [SerializeField] private AudioSource _seSource;
         [SerializeField] private AudioSource _bgmSource;
         [SerializeField] private AudioSource _bgmSubSource;
@@ -27,6 +29,33 @@ namespace Sound
             for (int i = 0; i < _laneSources.Length; i++)
             {
                 _laneSE.Add(new(_laneSources[i], _soundDataBase));
+            }
+        }
+
+        public async UniTask LoadAudioClipAsync(AudioClip clip)
+        {
+            if (clip == null)
+                return;
+
+            if (clip.loadState == AudioDataLoadState.Loaded)
+                return;
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+
+            clip.LoadAudioData();
+
+            while (clip.loadState == AudioDataLoadState.Loading)
+            {
+                if (sw.ElapsedMilliseconds >= MaxAudioLoadTimePerFrameMs)
+                {
+                    sw.Restart();
+                    await UniTask.Yield();
+                }
+            }
+
+            if (clip.loadState != AudioDataLoadState.Loaded)
+            {
+                Debug.LogError($"AudioClipÇÃì«Ç›çûÇ›Ç…é∏îsÇµÇ‹ÇµÇΩ : {clip.name}");
             }
         }
 
@@ -97,6 +126,7 @@ namespace Sound
 
                 _audioSource.clip = clip;
                 _audioSource.time = time;
+                SetVolume(1f);
                 _audioSource.PlayScheduled(startDspTime);
 
                 return startDspTime;
