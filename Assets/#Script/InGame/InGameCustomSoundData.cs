@@ -14,7 +14,7 @@ public class InGameCustomSoundData : SingletonMonoBehaviour<InGameCustomSoundDat
 
     void Start()
     {
-        CustomSoundPattern soundPattern = SongPlayManager.I.PatternData.SoundPattern;
+        CustomSoundPattern soundPattern = SongPlayContext.I.PatternData.SoundPattern;
 
         _nodeSE.Add(PoolPrefabType.NormalNote, _soundData.TapSE[soundPattern.NormalSE].Value);
         _nodeSE.Add(PoolPrefabType.FlickNote, _soundData.TapSE[soundPattern.FlickSE].Value);

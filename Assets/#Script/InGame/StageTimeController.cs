@@ -48,12 +48,12 @@ namespace InGame
                 endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
             }
 
-            int sectionIndex = Mathf.Clamp(SongPlayManager.I.StartSection, 0, fileData.Section.Count) - 1;
+            int sectionIndex = Mathf.Clamp(SongPlayContext.I.StartSection, 0, fileData.Section.Count) - 1;
             float sectionTime = 0;
 
             if (sectionIndex != -1)
             {
-                sectionTime = fileData.Section[SongPlayManager.I.StartSection];
+                sectionTime = fileData.Section[SongPlayContext.I.StartSection];
             }
 
             SetPlayData(bpm, endTime, sectionTime);
@@ -63,8 +63,8 @@ namespace InGame
         {
             _bpm = bpm;
             EndTime = endTime;
-            SongClip = SongPlayManager.I.SongData.SongData.Audio;
-            _timeOffset = SongPlayManager.I.SongData.SongData.StageTimeOffSet;
+            SongClip = SongPlayContext.I.SongData.SongData.Audio;
+            _timeOffset = SongPlayContext.I.SongData.SongData.StageTimeOffSet;
 
             StartSectionTime = startSection;
         }

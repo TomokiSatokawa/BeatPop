@@ -15,7 +15,7 @@ public class InGameUIPresenter : MonoBehaviour
 
     public void Start()
     {
-        _scoreUIView.SetData(SongPlayManager.I.SongData.SongData.MaxScore);
+        _scoreUIView.SetData(SongPlayContext.I.SongData.SongData.MaxScore);
 
         _nodeHitExecutor.ShowJudge.Subscribe(data => _judgementView.ViewPrefab(data.Item1, data.Item2)).AddTo(this);
 

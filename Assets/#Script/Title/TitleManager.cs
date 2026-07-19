@@ -15,7 +15,7 @@ namespace Title
         {
             var patterns = await CustomDataLoader.I.GetCustomPattern();
             var usePattern = patterns.Where(x => x.IsSelect).First();
-            _songPlayLoader.OnLoad(songSelectData, usePattern);
+            _songPlayLoader.CreatePlayManager(songSelectData, usePattern);
             _sceneLoad.ChangeScene("InGame");
 
             _onStartPlay.OnNext(songSelectData);

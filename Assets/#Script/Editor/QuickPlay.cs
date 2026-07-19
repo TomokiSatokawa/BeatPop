@@ -160,7 +160,7 @@ public class QuickPlay : EditorWindow
     public async void CreatePlayData()
     {
         var playData = new GameObject("QuickPlayData");
-        var songPlayData = playData.AddComponent<SongPlayManager>();
+        var songPlayData = playData.AddComponent<SongPlayContext>();
 
         DontDestroyOnLoad(playData);
 

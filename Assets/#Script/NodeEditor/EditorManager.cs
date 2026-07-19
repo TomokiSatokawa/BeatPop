@@ -100,14 +100,14 @@ public class EditorManager : SingletonMonoBehaviour<EditorManager>
     }
     public IReadOnlySongData GenerateSongPlayManager(int index)
     {
-        if(SongPlayManager.I == null)
+        if(SongPlayContext.I == null)
         {
             Debug.LogError("SongPlayManagerがありません");
             return null;
         }
 
         var songData = _songData.GetSongData(index);
-        SongPlayManager.I.SetData(new SongSelectData(songData, _difficulty), null,0);
+        SongPlayContext.I.SetData(new SongSelectData(songData, _difficulty), null,0);
 
         return songData;
     }

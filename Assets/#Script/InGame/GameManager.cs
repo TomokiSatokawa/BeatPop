@@ -93,7 +93,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         ScoreManager.DisposeSingleton();
         JudgementManager.DisposeSingleton();
-        SongPlayManager.DisposeSingleton();
+        SongPlayContext.DisposeSingleton();
     }
 
     private void UpdateDebugText()

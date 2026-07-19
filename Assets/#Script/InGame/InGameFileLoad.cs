@@ -18,8 +18,8 @@ namespace InGame
 
         public async UniTask FileLoad()
         {
-            var nodeData = await NodeDataSerializer.AutoDeserialize(SongPlayManager.I.SongData.GetNodeJson().text);
-            var stageData = StageDataSerializer.DeserializeJson(SongPlayManager.I.SongData.SongData.StageEffectData.text);
+            var nodeData = await NodeDataSerializer.AutoDeserialize(SongPlayContext.I.SongData.GetNodeJson().text);
+            var stageData = StageDataSerializer.DeserializeJson(SongPlayContext.I.SongData.SongData.StageEffectData.text);
 
             if (nodeData == null)
                 Debug.LogError("NodeData‚ª‚ ‚è‚Ü‚¹‚ñ");
