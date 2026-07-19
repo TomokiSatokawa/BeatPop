@@ -59,8 +59,26 @@ namespace Sound
             }
         }
 
+        public static void CrossFadeBGM(SoundSection targetSection, SoundSection fadeOutSection, AudioClip audio, float fadeDuration,float time = 0f,bool isLoop = false)
+        {
+            if(targetSection.Audio == audio)
+            {
+                targetSection.VolumeFade(1,fadeDuration);
+                return;
+            }
+
+            fadeOutSection.PlayBGM(targetSection.Audio,targetSection.Volume,targetSection.Time);
+            fadeOutSection.VolumeFade(0, fadeDuration);
+
+            targetSection.PlayBGM(audio, 0, time, isLoop);
+            targetSection.VolumeFade(1, fadeDuration);
+        }
+
         public class SoundSection
         {
+            public float Time => _audioSource.time;
+            public float Volume => _audioSource.volume;
+            public AudioClip Audio => _audioSource.clip;
             private readonly AudioSource _audioSource;
             private readonly SoundDataBase _soundDataBase;
 
@@ -141,16 +159,6 @@ namespace Sound
             {
                 _volumeFade?.Kill();
                 _volumeFade = _audioSource.DOFade(end, duration);
-            }
-
-            public float GetTime()
-            {
-                return _audioSource.time;
-            }
-            
-            public float GetVolume()
-            {
-                return _audioSource.volume;
             }
         }
     }

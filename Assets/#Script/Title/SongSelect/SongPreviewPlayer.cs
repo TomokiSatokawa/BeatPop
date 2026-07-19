@@ -6,13 +6,18 @@ using UnityEngine;
 
 namespace Title.SongSelect
 {
+    /// <summary>
+    /// SongSelect画面でのプレビューサウンド再生指示
+    /// </summary>
     public class SongPreviewPlayer : SingletonMonoBehaviour<SongPreviewPlayer>
     {
         [SerializeField] private float _fadeInDuration;
         [SerializeField] private float _playWaitTime;
         [SerializeField] private float _stopWaitTime;
+        [SerializeField] private AudioClip _titleBGM;
 
         private AudioClip _playAudio;
+        private float _titleBGMTime;
         private CancellationTokenSource _cancellation;
 
         private void Start()
@@ -43,6 +48,7 @@ namespace Title.SongSelect
 
         private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
         {
+            _playAudio = audio;
             float waitTime = _playWaitTime;
             if (_playAudio != null)
             {
@@ -66,27 +72,29 @@ namespace Title.SongSelect
 
                 if (isCanceled)
                     return;
-
-                if (_playAudio != null)
-                {
-                    SoundManager.BGMSub.PlayBGM(_playAudio, SoundManager.BGM.GetVolume(), SoundManager.BGM.GetTime());
-                    SoundManager.BGMSub.VolumeFade(0, _fadeInDuration / 2);
-                }
-
-                _playAudio = audio;
-                SoundManager.BGM.PlayBGM(_playAudio, 0);
             }
 
-            SoundManager.BGM.VolumeFade(1, _fadeInDuration);
+            FadeChangeBGM(audio);
+        }
 
+        public void FadeChangeBGM(AudioClip audio)
+        {
+            if (SoundManager.BGM.Audio == _titleBGM)
+            {
+                _titleBGMTime = SoundManager.BGM.Time;
+            }
+
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration);
         }
 
         public void StopPreview()
         {
+            Debug.Log("StopPreview");
             if (SongInfoControl.I.CurrentData.HasValue
                 && SongInfoControl.I.CurrentData.Value.SongData.Audio == _playAudio)
                 return;
 
+            Debug.Log("Stop");
             CancelToken();
 
             _cancellation = new CancellationTokenSource();
@@ -97,10 +105,9 @@ namespace Title.SongSelect
         private async UniTask WaitStopPreviewAsync(CancellationToken token)
         {
             await UniTask.WaitForSeconds(_stopWaitTime, cancellationToken: token);
-            SoundManager.BGM.VolumeFade(0, _fadeInDuration);
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, _titleBGM, _fadeInDuration, _titleBGMTime,true);
             await UniTask.WaitForSeconds(_fadeInDuration, cancellationToken: token);
-            _playAudio = null;
-
+            _playAudio = _titleBGM;
         }
     }
 }

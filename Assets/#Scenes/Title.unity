@@ -9218,7 +9218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -17570,8 +17570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title.SongSelect.SongPreviewPlayer
   _fadeInDuration: 1.5
-  _playWaitTime: 0.5
+  _playWaitTime: 0.8
   _stopWaitTime: 0.5
+  _titleBGM: {fileID: 8300000, guid: a073ab7dba68a44418eb3223c7a931e7, type: 3}
 --- !u!1001 &1530591029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20903,7 +20904,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.89276725
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
