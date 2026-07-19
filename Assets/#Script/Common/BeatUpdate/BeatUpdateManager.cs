@@ -1,4 +1,4 @@
-using InGame.UI;
+using InGame;
 using R3;
 
 namespace Common.BeatUpdate
@@ -8,33 +8,36 @@ namespace Common.BeatUpdate
         public static readonly BeatGroup FastBeatUpdate = new();
         public static readonly BeatGroup BeatUpdate = new();
         public static readonly BeatGroup LateBeatUpdate = new();
+
         private float _previousTime;
-        public void Start()
+
+        private void Start()
         {
+            //StageTimeControllerがファイルからBPMを読み込む時差を考慮
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
-                FastBeatUpdate.UpdateConstants();
-                BeatUpdate.UpdateConstants();
-                LateBeatUpdate.UpdateConstants();
-            });
+                FastBeatUpdate.RefreshAll();
+                BeatUpdate.RefreshAll();
+                LateBeatUpdate.RefreshAll();
+            }).AddTo(this);
         }
    
         private void Update()
         {
-            float current = StageTimeController.StageTime;
+            float currentTime = StageTimeController.StageTime;
 
-            if (current < _previousTime)
+            if (currentTime < _previousTime)
             {
-                FastBeatUpdate.UpdateNextTime();
-                BeatUpdate.UpdateNextTime();
-                LateBeatUpdate.UpdateNextTime();
+                FastBeatUpdate.UpdateAllNextTime();
+                BeatUpdate.UpdateAllNextTime();
+                LateBeatUpdate.UpdateAllNextTime();
             }
 
             FastBeatUpdate.Tick();
             BeatUpdate.Tick();
             LateBeatUpdate.Tick();
 
-            _previousTime = current;
+            _previousTime = currentTime;
         }
 
         protected override void OnDestroy()
