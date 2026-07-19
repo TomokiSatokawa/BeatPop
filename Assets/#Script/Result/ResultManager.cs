@@ -1,8 +1,9 @@
 using UnityEngine;
-
+using Common;
+using Cysharp.Threading.Tasks;
 public class ResultManager : MonoBehaviour
 {
-    [SerializeField] private SceneLoad _sceneLoad;
+    [SerializeField] private SceneTransition _sceneLoad;
     public void ReturnTitle()
     {
         GameManager.DontDestroyRelease();

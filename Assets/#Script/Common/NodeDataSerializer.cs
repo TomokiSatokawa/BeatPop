@@ -5,7 +5,11 @@ using Cysharp.Threading.Tasks;
 using InGame.Node;
 using InGame;
 using UnityEngine;
+using System;
 
+/// <summary>
+/// NodeData‚ÆJson‚ð•ÏŠ·‚·‚é
+/// </summary>
 public static class NodeDataSerializer
 {
     public const string Version = "2.0";
@@ -90,7 +94,7 @@ public static class NodeDataSerializer
         return PoolPrefabType.NormalNote;
     }
 
-    public static async UniTask<NodeSaveData> DesrializeJson(string json)
+    public static async UniTask<NodeSaveData> DeserializeJson(string json)
     {
         await UniTask.Yield();
         if (string.IsNullOrWhiteSpace(json))
@@ -107,11 +111,13 @@ public static class NodeDataSerializer
             data.Section.Sort();
             return data;
         }
-        catch
+        catch (Exception ex)
         {
+            Debug.LogError($"[NodeDataSerializer] Json Deserialize Error\n{ex}");
             return null;
         }
     }
+
     public static string SerializeJson(List<NodeData> nodes, List<float> sectionTime ,float bpm, int songIndex, string songName = "null")
     {
         for (int i = 0; i < nodes.Count; i++)
@@ -142,13 +148,14 @@ public static class NodeDataSerializer
             return null;
         }
     }
+
     public static async UniTask<NodeSaveData> AutoDeserialize(string text, string path)
     {
         string extension = Path.GetExtension(path).ToLower();
 
         if (extension == ".json")
         {
-            return await DesrializeJson(text);
+            return await DeserializeJson(text);
         }
         else if (extension == ".csv")
         {
@@ -165,9 +172,10 @@ public static class NodeDataSerializer
             return null;
         }
     }
+
     public static async UniTask<NodeSaveData> AutoDeserialize(string text)
     {
-        return await DesrializeJson(text);
+        return await DeserializeJson(text);
     }
 }
 

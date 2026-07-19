@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Common
 {
+    /// <summary>
+    /// ステージデータとJsonを変換する
+    /// </summary>
     public static class StageDataSerializer
     {
         public const string Version = "2.2";
@@ -49,9 +52,7 @@ namespace Common
         }
 
 
-        public static string SerializeJson(
-            LightPatternBaseData[] patternBaseDatas,
-            int songIndex)
+        public static string SerializeJson(LightPatternBaseData[] patternBaseDatas, int songIndex)
         {
             if (patternBaseDatas == null)
                 return null;

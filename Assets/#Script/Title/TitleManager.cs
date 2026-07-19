@@ -1,13 +1,15 @@
 using System.Linq;
 using Common.PlaySystem;
+using Common;
 using R3;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 namespace Title
 {
     public class TitleManager : SingletonMonoBehaviour<TitleManager>
     {
         [SerializeField] private SongPlayLoader _songPlayLoader;
-        [SerializeField] private SceneLoad _sceneLoad;
+        [SerializeField] private SceneTransition _sceneLoad;
         private Subject<SongSelectData> _onStartPlay = new();
         public Observable<SongSelectData> OnStartPlay  => _onStartPlay;
 

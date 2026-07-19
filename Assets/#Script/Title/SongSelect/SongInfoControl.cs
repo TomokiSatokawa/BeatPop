@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Common.PlaySystem;
 using Common.UI;
+using Common;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace Title.SongSelect
         [SerializeField] private TextMeshProUGUI _levelText;
         [Header("Other")]
         [SerializeField] private SongPlayLoader _playLoader;
-        [SerializeField] private SceneLoad _sceneLoad;//TODO:‰¼
+        [SerializeField] private SceneTransition _sceneLoad;//TODO:‰¼
         [SerializeField] private SegmentedControl _segmentControl;
         [SerializeField] private SongPreviewPlayer _songPreviewPlayer;
 

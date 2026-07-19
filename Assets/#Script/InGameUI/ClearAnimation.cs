@@ -1,11 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Common;
 
 public class ClearAnimation : MonoBehaviour
 {
     [SerializeField] private Image _mainVisualMask;
-    [SerializeField] private SceneLoad _sceneLoad;
+    [SerializeField] private SceneTransition _sceneLoad;
     [SerializeField] private float _maxWith;
     [SerializeField] private float _animationDuration;
     private void Start()

@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// インスペクターで表示できるDictionary
+/// </summary>
 [Serializable]
 public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiver
 {
@@ -29,7 +32,6 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
 
     public IReadOnlyList<KeyPair> Items => _items;
 
-    // --- ISerializationCallbackReceiver の実装 ---
 
     public void OnBeforeSerialize()
     {

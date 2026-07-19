@@ -7,10 +7,11 @@ using R3;
 using Sound;
 using TMPro;
 using UnityEngine;
+using Common;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    [SerializeField] private SceneLoad _sceneLoad;
+    [SerializeField] private SceneTransition _sceneLoad;
     [SerializeField] private StageTimeController _stageTimeController;
     [SerializeField] private TextMeshProUGUI _timeText;
 
