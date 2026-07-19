@@ -1,4 +1,4 @@
-using InGame.UI;
+using InGame;
 using UnityEngine;
 public abstract class EditorGeneratorBase<T> : SingletonMonoBehaviour<T> where T:MonoBehaviour
 {

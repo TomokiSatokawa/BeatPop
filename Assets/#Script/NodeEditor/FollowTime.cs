@@ -1,4 +1,4 @@
-using InGame.UI;
+using InGame;
 using UnityEngine;
 
 public class FollowTime : PoolObject

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using InGame.Node;
-using InGame.UI;
+using InGame;
 using R3;
 using Sound;
 using UnityEngine;

@@ -1,6 +1,5 @@
-using System;
+using InGame;
 using InGame.Stage;
-using InGame.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -68,7 +67,7 @@ public class EditorRecording : MonoBehaviour
         {
             EditorNodeData.I.AddNode(PoolPrefabType.HoldNoteStart, GetNodeTime(), 0);
         }
-        else if(Keyboard.current.fKey.wasReleasedThisFrame)
+        else if (Keyboard.current.fKey.wasReleasedThisFrame)
         {
             EditorNodeData.I.AddNode(PoolPrefabType.HoldNoteEnd, GetNodeTime(), 0);
         }
@@ -85,8 +84,8 @@ public class EditorRecording : MonoBehaviour
 
     private void LightMode()
     {
-        if(EditorLightData .I == null
-            || _channel == null ) return;
+        if (EditorLightData.I == null
+            || _channel == null) return;
 
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
@@ -103,6 +102,6 @@ public class EditorRecording : MonoBehaviour
     }
     public enum RecordingMode
     {
-        None,NormalNode, LongNode, LightEditor
+        None, NormalNode, LongNode, LightEditor
     }
 }

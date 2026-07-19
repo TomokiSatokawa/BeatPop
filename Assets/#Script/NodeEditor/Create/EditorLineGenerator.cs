@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using InGame.UI;
+using InGame;
 using UnityEngine;
 
 public class EditorLineGenerator : MonoBehaviour

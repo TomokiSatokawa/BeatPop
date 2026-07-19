@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using Editor.UI;
+using InGame;
 using InGame.Stage;
-using InGame.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class SnapNode : MonoBehaviour
@@ -163,6 +161,6 @@ public class SnapNode : MonoBehaviour
     }
     public enum EditMode
     {
-        None, Create, Section,Light
+        None, Create, Section, Light
     }
 }

@@ -1,5 +1,5 @@
 using InGame.Node;
-using InGame.UI;
+using InGame;
 using UnityEngine;
 using UnityEngine.UI;
 

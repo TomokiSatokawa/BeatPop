@@ -1,6 +1,6 @@
 using Common.BeatUpdate;
 using InGame.Node;
-using InGame.UI;
+using InGame;
 using Input;
 using R3;
 using Sound;

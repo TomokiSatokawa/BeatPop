@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using InGame.Node;
-using InGame.UI;
+using InGame;
 using UnityEngine;
 
 public static class NodeDataSerializer

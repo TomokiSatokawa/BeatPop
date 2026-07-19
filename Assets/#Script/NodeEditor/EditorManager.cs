@@ -1,6 +1,6 @@
 using Common;
 using Common.PlaySystem;
-using InGame.UI;
+using InGame;
 using R3;
 using TMPro;
 using UnityEngine;

@@ -4,7 +4,7 @@ using R3;
 using Sound;
 using UnityEngine;
 
-namespace InGame.UI
+namespace InGame
 {
     /// <summary>
     /// StageTimeを管理する

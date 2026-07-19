@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using InGame.Node;
-using InGame.UI;
+using InGame;
 using Input;
 using Sound;
 using UnityEngine;

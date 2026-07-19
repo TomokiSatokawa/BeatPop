@@ -1,6 +1,6 @@
 using System;
 using InGame.Stage;
-using InGame.UI;
+using InGame;
 using UnityEngine;
 using UnityEngine.UI;
 

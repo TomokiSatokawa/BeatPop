@@ -1,4 +1,4 @@
-using InGame.UI;
+using InGame;
 using R3;
 using UnityEngine;
 

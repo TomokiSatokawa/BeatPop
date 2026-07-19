@@ -1,5 +1,5 @@
 using Common.PlaySystem;
-using InGame.Node;
+using InGame;
 using InGame.UI;
 using R3;
 using UnityEngine;
