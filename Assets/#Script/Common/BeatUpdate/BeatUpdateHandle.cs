@@ -55,11 +55,15 @@ namespace Common.BeatUpdate
         /// </summary>
         private static int GetBeatDivision(int beatIndex)
         {
+            if (beatIndex == 0)
+                return 1;
+
             int division = MaxDivision;
 
-            while (division > 1 && beatIndex % (division / 2) == 0)
+            while ((beatIndex & 1) == 0)
             {
-                division /= 2;
+                beatIndex >>= 1;
+                division >>= 1;
             }
 
             return division;

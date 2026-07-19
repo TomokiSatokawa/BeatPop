@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace Common.PlaySystem
 {
     public class SongPlayLoader : MonoBehaviour
