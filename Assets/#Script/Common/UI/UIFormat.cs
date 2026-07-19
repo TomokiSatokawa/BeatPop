@@ -1,6 +1,10 @@
 using UnityEngine;
+
 namespace Common.UI
 {
+    /// <summary>
+    /// データをUIに表示できるようにフォーマルする
+    /// </summary>
     public static class UIFormat
     {
         /// <summary>

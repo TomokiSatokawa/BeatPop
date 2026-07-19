@@ -83,7 +83,7 @@ namespace Editor.UI
             {
                 return;
             }
-            DeleteChild();
+            DeleteChildren();
             _currentSettingData = data;
 
             Type type = data.GetType();

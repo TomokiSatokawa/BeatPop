@@ -6,7 +6,7 @@ namespace Title.SongSelect
     {
         public void ViewList(IReadOnlyList<SongSelectData> songs, SongUIControl prefab)
         {
-            DeleteChild();
+            DeleteChildren();
             foreach (var song in songs)
             {
                 InstantiateContent(prefab).SetData(song);

@@ -1,6 +1,10 @@
 using UnityEngine;
+
 namespace Common.UI
 {
+    /// <summary>
+    /// パネル切り替えのマネージャー
+    /// </summary>
     public class PanelManager : MonoBehaviour
     {
         [SerializeField] private PanelControl _fastActive;
@@ -14,8 +18,11 @@ namespace Common.UI
 
         public void ChangeActivePanel(PanelControl panel)
         {
+            if (panel == null || _currentActive == panel)
+                return;
+
             _currentActive?.OnHidden(_fadeDuration);
-            panel?.OnActive(_fadeDuration);
+            panel.OnActive(_fadeDuration);
             _currentActive = panel;
         }
     }

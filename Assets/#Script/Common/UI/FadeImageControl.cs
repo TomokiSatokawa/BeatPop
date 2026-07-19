@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.UI;
 
 namespace Common.UI
 {
+    /// <summary>
+    /// シーン切り替え時のフェード
+    /// </summary>
     public class FadeImageControl : MonoBehaviour
     {
         [SerializeField] private Image _fadeImage;
@@ -13,42 +17,52 @@ namespace Common.UI
         [SerializeField] private bool _isStartFadeIn = true;
         [SerializeField] private FadeType _fadeInType;
 
+        private Tween _tween;
+
         public async void Start()
         {
             if (_isStartFadeIn)
             {
-               await  FadeIn(_fadeInType);
+                await FadeIn(_fadeInType);
             }
         }
+
         public async UniTask FadeIn(FadeType fadeType, Action callback = null)
         {
+            _tween?.Kill();
+
             Color startColor = TypeToColor(fadeType);
+            SetupFade(startColor, 1f);
 
-            //フェード画像の初期設定
-            _fadeImage.gameObject.SetActive(true);
-            _fadeImage.transform.SetAsLastSibling();
-            startColor.a = 1f;
-            _fadeImage.color = startColor;
+            _tween = _fadeImage.DOFade(0, _fadeDuration)
+                .OnComplete(() =>
+                {
+                    callback?.Invoke();
+                    _fadeImage.gameObject.SetActive(false);
+                });
 
-            //フェードアニメーション
-            await _fadeImage.DOFade(0, _fadeDuration).AsyncWaitForCompletion();
-            callback?.Invoke();
-
-            _fadeImage.gameObject.SetActive(false);
+            await _tween.AsyncWaitForCompletion();
         }
 
         public async UniTask FadeOut(FadeType fadeType, Action callback = null)
         {
-            Color endColor = TypeToColor(fadeType);
+            _tween?.Kill();
 
-            //フェード画像の初期設定
+            Color endColor = TypeToColor(fadeType);
+            SetupFade(endColor, 0f);
+
+            _tween = _fadeImage.DOFade(1f, _fadeDuration)
+                   .OnComplete(() => callback?.Invoke());
+
+            await _tween.AsyncWaitForCompletion();
+        }
+
+        private void SetupFade(Color color, float alpha)
+        {
             _fadeImage.gameObject.SetActive(true);
             _fadeImage.transform.SetAsLastSibling();
-            endColor.a = 0f;
-            _fadeImage.color = endColor;
-            endColor.a = 1f;
-            await _fadeImage.DOColor(endColor, _fadeDuration).AsyncWaitForCompletion();
-            callback?.Invoke();
+            color.a = alpha;
+            _fadeImage.color = color;
         }
 
         private Color TypeToColor(FadeType fadeType)
@@ -60,11 +74,17 @@ namespace Common.UI
                 case FadeType.White:
                     return Color.white;
                 default:
-                    Debug.LogError("FadeType Error");
-                    return new Color(0,0,0);
+                    Debug.LogError($"[FadeImage] 未対応のFadeTypeです : {fadeType}");
+                    return new Color(0, 0, 0);
             }
         }
+
+        private void OnDestroy()
+        {
+            _tween?.Kill();
+        }
     }
+
     public enum FadeType
     {
         Black,

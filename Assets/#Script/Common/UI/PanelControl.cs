@@ -1,8 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+
 namespace Common.UI
 {
+    /// <summary>
+    /// UIWindow‚Ì•\Ž¦/”ñ•\Ž¦
+    /// </summary>
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelControl : MonoBehaviour
     {
@@ -10,35 +14,55 @@ namespace Common.UI
         [SerializeField] private UnityEvent _activeAction = new();
         [SerializeField] private UnityEvent _hiddenAction = new();
 
-        private Tween _fadeAniamtion;
-        public bool IsActive => _canvasGroup.alpha == 1.0f;
+        private Tween _fadeAnimation;
+        public bool IsActive { get; private set; }
         private void Awake()
         {
-            if (_canvasGroup == null) 
+            if (_canvasGroup == null)
                 _canvasGroup = GetComponent<CanvasGroup>();
 
-            OnHidden();
+            SetVisible(false,0);
         }
 
         public void OnActive(float duration = 0)
         {
             _activeAction?.Invoke();
-            _canvasGroup.alpha = 0f;
-            Fade(1, duration);
-            _canvasGroup.blocksRaycasts = true;
+
+            SetVisible(true, duration);
         }
         public void OnHidden(float duration = 0)
         {
             _hiddenAction?.Invoke();
-            _canvasGroup.alpha = 1f;
-            Fade(0, duration);
-            _canvasGroup.blocksRaycasts = false;
+
+           SetVisible(false,duration);
+        }
+        
+        private void SetVisible(bool visible,float fadeDuration)
+        {
+            float alpha = visible ? 1f : 0f;
+
+            if (fadeDuration > 0f)
+            {
+                Fade(alpha, fadeDuration);
+            }
+            else
+            {
+                _canvasGroup.alpha = alpha;
+            }
+
+            _canvasGroup.blocksRaycasts = visible;
+            IsActive = visible;
         }
 
-        private void Fade(float amount,float duration)
+        private void Fade(float amount, float duration)
         {
-            _fadeAniamtion?.Kill();
-            _fadeAniamtion = _canvasGroup.DOFade(amount,duration);
+            _fadeAnimation?.Kill();
+            _fadeAnimation = _canvasGroup.DOFade(amount, duration);
         }
+
+        private void OnDestroy()
+{
+    _fadeAnimation?.Kill();
+}
     }
 }

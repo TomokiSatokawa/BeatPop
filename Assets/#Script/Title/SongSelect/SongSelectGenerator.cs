@@ -15,14 +15,14 @@ namespace Title.SongSelect
 
         public void InitialView()
         {
-            DeleteChild();
+            DeleteChildren();
             AddTitle("‚¨‚·‚·‚ß");
             AddContentsList(SongRecommender.I.GetRecommendation());
         }
 
         public void KeywordView(string keyword)
         {
-            DeleteChild();
+            DeleteChildren();
             AddContentsList(SongRecommender.I.GetKeywordSong(keyword));
         }
 
@@ -59,9 +59,8 @@ namespace Title.SongSelect
             _clonedObject.Add(list.gameObject);
         }
 
-        protected override void DeleteChild()
+        protected override void OnDeletedChildren()
         {
-            base.DeleteChild();
             _clonedObject.Clear();
         }
     }

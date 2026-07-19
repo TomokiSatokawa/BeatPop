@@ -21,7 +21,7 @@ namespace Title.Custom
         {
             if (!SongInfoControl.I.CurrentData.HasValue) return;
             int songID = SongInfoControl.I.CurrentData.Value.SongData.SongID;
-            DeleteChild();
+            DeleteChildren();
             var patternData = await CustomDataLoader.I.GetCustomPattern();
             if (patternData == null)
             {
