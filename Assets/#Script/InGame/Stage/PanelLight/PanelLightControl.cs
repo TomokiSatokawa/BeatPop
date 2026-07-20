@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace InGame.Stage
 {
-    public class PanelLightControl : LightControlBase
+    /// <summary>
+    /// 光るだけのライト
+    /// </summary>
+    public class PanelLightControl : StageLightBase
     {
         [SerializeField] private Renderer _renderer;
         [SerializeField] private float _maxPower;
@@ -17,18 +20,15 @@ namespace InGame.Stage
         private MaterialPropertyBlock _mpb;
 
         private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
+        private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
 
         private void Awake()
         {
             _mpb = new MaterialPropertyBlock();
+            Initialize();
         }
 
-        public void Start()
-        {
-            initialize();
-        }
-
-        private void initialize()
+        private void Initialize()
         {
             SetColor(Color.black);
             UpdatePower(_minPower);
@@ -36,21 +36,19 @@ namespace InGame.Stage
 
         public override void SetColor(Color color)
         {
-            _renderer.material.color = color;
+            _renderer.GetPropertyBlock(_mpb);
+            _mpb.SetColor(BaseColorID, color);
+            _renderer.SetPropertyBlock(_mpb);
+
             _color = color;
             UpdatePower(_power);
         }
 
         public void UpdatePower(float power)
         {
-            if (power > _outThreshold)
-            {
-                _power = power;
-            }
-            else
-            {
-                _power = _outPower;
-            }
+            //Threshold以下ならOutPower
+            _power = power > _outThreshold ? power : _outPower;
+
             _renderer.GetPropertyBlock(_mpb);
 
             // HDRカラー
@@ -62,29 +60,22 @@ namespace InGame.Stage
         public override void Flash(float duration, float power)
         {
             _flash?.Kill(true);
+
             _flash = DOTween.Sequence()
                 .Append(DoLightPower(_maxPower * power, _minPower, duration));
         }
-        public override void Wave(float duration, float power)
+        public void Wave(float duration, float power)
         {
             _flash?.Kill(true);
 
             _flash = DOTween.Sequence()
                  .Append(DoLightPower(_minPower, _maxPower * power, duration))
-                 .Append(DoLightPower(_maxPower * power,_minPower, duration));
-        }
-
-        private Tweener DoLightPower(float start,float end ,float duration)
-        {
-            return DOVirtual.Float(start, end, duration, x =>
-            {
-                UpdatePower(x);
-            });
+                 .Append(DoLightPower(_maxPower * power, _minPower, duration));
         }
 
         public override void Refresh()
         {
-            _flash?.Kill();
+            _flash?.Kill(true);
             _flash = null;
             UpdatePower(_minPower);
         }
@@ -92,6 +83,14 @@ namespace InGame.Stage
         public override void SetPower(float power)
         {
             UpdatePower(_maxPower * power);
+        }
+
+        private Tweener DoLightPower(float start, float end, float duration)
+        {
+            return DOVirtual.Float(start, end, duration, x =>
+            {
+                UpdatePower(x);
+            });
         }
     }
 }

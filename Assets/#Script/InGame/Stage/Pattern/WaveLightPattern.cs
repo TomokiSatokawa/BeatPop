@@ -10,7 +10,7 @@ namespace InGame.Stage
     {
         private Sequence _sequence;
 
-        public override void InitializeCore(WaveLightPatternData data, LightControlBase[] lights)
+        public override void InitializeCore(WaveLightPatternData data, StageLightBase[] lights)
         {
             base.InitializeCore(data, lights);
 
@@ -78,16 +78,21 @@ namespace InGame.Stage
                 if (index < lights1.Length)
                 {
                     var light = lights1[index];
-
-                    _sequence.AppendCallback(() => light.Wave(Data.FlashDivision, Data.Power));
+                    if (light is PanelLightControl panelLight)
+                    {
+                        _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
+                    }
                 }
-
+            
 
                 if (index < lights2.Length)
                 {
                     var light = lights2[index];
-
-                    _sequence.AppendCallback(() => light.Wave(Data.FlashDivision, Data.Power));
+                    if (light is PanelLightControl panelLight)
+                    {
+                        _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
+                    }
+                
                 }
 
                 _sequence.AppendInterval(interval);
@@ -106,16 +111,16 @@ namespace InGame.Stage
                 lights = lights.Reverse().ToArray();
             }
 
-
             float interval = (float)Data.Duration / lights.Length;
-
 
             foreach (var light in lights)
             {
                 var target = light;
-
-                _sequence.AppendCallback(() => target.Wave(Data.FlashDivision, Data.Power));
-
+                
+                if (light is PanelLightControl panelLight)
+                {
+                    _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
+                }
                 _sequence.AppendInterval(interval);
             }
         }

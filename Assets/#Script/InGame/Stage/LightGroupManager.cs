@@ -11,7 +11,7 @@ namespace InGame.Stage
     /// </summary>
     public class LightGroupManager : MonoBehaviour
     {
-        [SerializeField] private LightControlBase[] _lights;
+        [SerializeField] private StageLightBase[] _lights;
 
         private Dictionary<Type, LightPatternBase> _instancePattern = new();
         private LightPatternBase _currentPattern;

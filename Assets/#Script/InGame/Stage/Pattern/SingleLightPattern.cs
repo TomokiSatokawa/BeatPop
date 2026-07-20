@@ -3,7 +3,7 @@ namespace InGame.Stage
 
     public class SingleLightPattern : LightPatternBase<LightPatternBaseData>
     {
-        public override void Initialize(LightPatternBaseData data, LightControlBase[] lights)
+        public override void Initialize(LightPatternBaseData data, StageLightBase[] lights)
         {
             base.InitializeCore(data, lights);
             foreach (var light in lights)

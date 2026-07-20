@@ -4,7 +4,7 @@ namespace InGame.Stage
 {
     public abstract class LightPatternBase
     {
-        public abstract void Initialize(LightPatternBaseData data, LightControlBase[] lights);
+        public abstract void Initialize(LightPatternBaseData data, StageLightBase[] lights);
         public abstract void BeatUpdate(int division);
         public abstract void Refresh();
         public abstract LightPatternBaseData GetData();
@@ -13,13 +13,13 @@ namespace InGame.Stage
     {
         public bool IsEnabled { get; private set; }
         public T Data { get; private set; }
-        protected LightControlBase[] _lights;
+        protected StageLightBase[] _lights;
 
-        public override void Initialize(LightPatternBaseData data, LightControlBase[] lights)
+        public override void Initialize(LightPatternBaseData data, StageLightBase[] lights)
         {
             InitializeCore(DataCast(data), lights);
         }
-        public virtual void InitializeCore(T data, LightControlBase[] lights)
+        public virtual void InitializeCore(T data, StageLightBase[] lights)
         {
             Data = data;
             _lights = lights;

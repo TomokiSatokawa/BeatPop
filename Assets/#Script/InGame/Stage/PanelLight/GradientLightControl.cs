@@ -2,10 +2,12 @@ using UnityEngine;
 
 namespace InGame.Stage
 {
-    public class GradientLightControl : LightControlBase
+    /// <summary>
+    /// 動くグラデーションライト
+    /// </summary>
+    public class GradientLightControl :  StageLightBase
     {
         [SerializeField] private Renderer _renderer;
-
 
         private MaterialPropertyBlock _mpb;
 
@@ -14,10 +16,11 @@ namespace InGame.Stage
         private static readonly int Color2 = Shader.PropertyToID("_Color2");
         private static readonly int Amount = Shader.PropertyToID("_Amount");
 
-        private void Start()
+        private void Awake()
         {
-            _mpb = new();
+            _mpb = new MaterialPropertyBlock();
         }
+
         public override void Flash(float duration, float power)
         {
             _renderer.GetPropertyBlock(_mpb);
@@ -28,15 +31,11 @@ namespace InGame.Stage
             _renderer.SetPropertyBlock(_mpb);
         }
 
-        public override void Refresh()
-        {
-
-        }
-
         public override void SetColor(Color color)
         {
             SetColor(color, color);
         }
+
         public void SetColor(Color color1, Color color2)
         {
             _renderer.GetPropertyBlock(_mpb);
@@ -57,9 +56,6 @@ namespace InGame.Stage
             _renderer.SetPropertyBlock(_mpb);
         }
 
-        public override void Wave(float duration, float power)
-        {
-            Flash(duration, power);
-        }
+        public override void Refresh() { }
     }
 }

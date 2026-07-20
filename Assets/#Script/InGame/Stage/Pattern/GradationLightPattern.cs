@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GradationLightPattern : LightPatternBase<GradationLightPatternData>
 {
-    public override void InitializeCore(GradationLightPatternData data, LightControlBase[] lights)
+    public override void InitializeCore(GradationLightPatternData data, StageLightBase[] lights)
     {
         base.InitializeCore(data, lights);
 

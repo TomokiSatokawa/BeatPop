@@ -3,7 +3,7 @@ using InGame.Stage;
 public class ManualLightPattern : LightPatternBase<LightPatternBaseData>
 {
     private bool _isSetPower;
-    public override void InitializeCore(LightPatternBaseData data, LightControlBase[] lights)
+    public override void InitializeCore(LightPatternBaseData data, StageLightBase[] lights)
     {
         base.InitializeCore(data, lights);
 
