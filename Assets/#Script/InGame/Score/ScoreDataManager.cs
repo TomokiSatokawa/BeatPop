@@ -1,4 +1,5 @@
 using InGame.Node;
+using R3;
 using UnityEngine;
 
 namespace InGame.Score
@@ -24,6 +25,15 @@ namespace InGame.Score
             _scoreData.Initialize();
             _judgementRecorder.Initialize();
             _resultDataCollector.Initialize();
+        }
+
+        private void Start()
+        {
+            StageTimeController.I.OnInitialized.Subscribe(_ =>
+            {
+                var saveData = InGameFileLoad.I.OnNodeFileLoaded.CurrentValue;
+                _scoreData.CalculateMaxScore(_judgementTable,saveData.Nodes, StageTimeController.I.BPM);
+            }).AddTo(this);
         }
 
         public IReadOnlyJudgementData RecordJudge(NodeData nodeData,float difference)
