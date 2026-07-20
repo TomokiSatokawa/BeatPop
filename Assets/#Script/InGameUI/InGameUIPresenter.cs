@@ -1,5 +1,6 @@
 using Common.PlaySystem;
 using InGame;
+using InGame.Score;
 using InGame.UI;
 using R3;
 using UnityEngine;
@@ -19,13 +20,13 @@ public class InGameUIPresenter : MonoBehaviour
 
         _nodeHitExecutor.ShowJudge.Subscribe(data => _judgementView.ViewPrefab(data.Item1, data.Item2)).AddTo(this);
 
-        ScoreManager.I.Combo.Where(x => x > 0).Subscribe(x => _comboUIControl.UpdateCombo(x)).AddTo(this);
-        ScoreManager.I.Combo.Where(x => x <= 0).Subscribe(_ =>
+        ScoreDataManager.ScoreData.Combo.Where(x => x > 0).Subscribe(x => _comboUIControl.UpdateCombo(x)).AddTo(this);
+        ScoreDataManager.ScoreData.Combo.Where(x => x <= 0).Subscribe(_ =>
         {
             _comboUIControl.HiddenUI();
             _missAnimation.PlayAnimation();
         }).AddTo(this);
-        ScoreManager.I.Score.Subscribe(x => _scoreUIView.UpdateScore(x)).AddTo(this);
+        ScoreDataManager.ScoreData.Score.Subscribe(x => _scoreUIView.UpdateScore(x)).AddTo(this);
 
         StageTimeController.I.OnGameClear.Subscribe(_ => _clearAnimation.PlayClearAnimation()).AddTo(this);
     }

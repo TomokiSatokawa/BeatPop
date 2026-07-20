@@ -14,6 +14,7 @@ namespace InGame.Node
     /// </summary>
     public class NodeController : MonoBehaviour
     {
+        [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
         private List<NodeObject> _nodes = new();
 
@@ -31,7 +32,7 @@ namespace InGame.Node
             _removeNodes.Clear();
             foreach (NodeObject node in _nodes)
             {
-                float deleteTime = StageTimeController.StageTime - JudgementManager.I.DeleteTime;
+                float deleteTime = StageTimeController.StageTime - _judgementTable.DeleteTime;
 
                 if (node.NodeData.Time <= deleteTime)
                 {
@@ -83,7 +84,7 @@ namespace InGame.Node
 
             if (targetNode == null) return null;
 
-            if (bestDifference <= JudgementManager.I.ToleranceValue)
+            if (bestDifference <= _judgementTable.ToleranceValue)
             {
                 return targetNode;
             }

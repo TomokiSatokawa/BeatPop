@@ -1,13 +1,11 @@
 using UnityEngine;
 
-    [CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
+[CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
 public class NodeJudgement : ScriptableObject
 {
     public float ToleranceValue;
     public float DeleteTime;
     public JudgementData[] JudgementDatas;
-
-  
 
     public IReadOnlyJudgementData JudgementDifference(float difference)
     {
@@ -20,12 +18,14 @@ public class NodeJudgement : ScriptableObject
                 return judgement;
             }
         }
-        return null;
+
+        //Ç»ÇØÇÍÇŒàÍî‘ç≈í·ï]âøÇï‘Ç∑
+        return JudgementDatas[JudgementDatas.Length - 1];
     }
 }
 public interface IReadOnlyJudgementData
 {
-  public   JudgementType Name { get; }
+    public JudgementType Name { get; }
     public float Value { get; }
 
     public bool ShowEarlyLateText { get; }
@@ -66,5 +66,5 @@ public class JudgementData : IReadOnlyJudgementData
 }
 public enum JudgementType
 {
-    Perfect, Great, Good, Bad,Miss
+    Perfect, Great, Good, Bad, Miss
 }

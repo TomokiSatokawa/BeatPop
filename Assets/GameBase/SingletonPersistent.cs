@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T : MonoBehaviour
 {
-    public override void Awake()
+    public sealed override void Awake()
     {
         if (I == null)
         {
@@ -17,7 +17,10 @@ public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T
 
         this.transform.parent = null;
         DontDestroyOnLoad(this.gameObject);
+        OnAwake();
     }
+
+    protected virtual void OnAwake() { }
 
     public static void DisposeSingleton()
     {

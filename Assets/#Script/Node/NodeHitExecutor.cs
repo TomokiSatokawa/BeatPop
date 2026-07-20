@@ -5,6 +5,7 @@ using Input;
 using R3;
 using Sound;
 using UnityEngine;
+using InGame.Score;
 
 /// <summary>
 /// ÉmÅ[ÉcÇÃHitèàóù
@@ -52,7 +53,7 @@ public class NodeHitExecutor : MonoBehaviour
     private static IReadOnlyJudgementData JudgeNode(NodeObject targetNode)
     {
         float difference = targetNode.NodeData.Time - StageTimeController.StageTime;
-        var judgeData = ScoreManager.I.AddScore(targetNode.Type, difference, targetNode.NodeData);
+        var judgeData = ScoreDataManager.I.RecordJudge(targetNode.NodeData, difference);
         return judgeData;
     }
 
@@ -70,8 +71,15 @@ public class NodeHitExecutor : MonoBehaviour
     {
         if (_nodeFillManager.HasFill(lane))
         {
-            float difference = isHold ? 0 : JudgementManager.I.ToleranceValue * 2;
-            var judgeData = ScoreManager.I.AddHoldScore(PoolPrefabType.HoldNoteFill, difference);
+            var nodeData = new NodeData()
+            {
+                Lane = lane,
+                Time = StageTimeController.StageTime,
+                PrefabType = PoolPrefabType.HoldNoteFill,
+            };
+
+            float difference = isHold ? 0 : float.MaxValue;
+            var judgeData = ScoreDataManager.I.RecordJudge(nodeData, difference);
             _showJudge.OnNext((judgeData, lane));
         }
     }

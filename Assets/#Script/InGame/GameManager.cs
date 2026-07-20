@@ -8,6 +8,7 @@ using Sound;
 using TMPro;
 using UnityEngine;
 using Common;
+using InGame.Score;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -92,8 +93,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public static void DontDestroyRelease()
     {
-        ScoreManager.DisposeSingleton();
-        JudgementManager.DisposeSingleton();
+        ScoreDataManager.DisposeSingleton();
         SongPlayContext.DisposeSingleton();
     }
 

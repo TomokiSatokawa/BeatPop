@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ba766a05420474887fd9b93c503c3e, type: 3}
+  m_Name: JudgementTable
+  m_EditorClassIdentifier: Assembly-CSharp::JudgementTable
+  _deleteTime: 0.16
+  _toleranceValue: 0.16
+  _nodeTypeJudge:
+    _items:
+    - Key: 1
+      Value: {fileID: 11400000, guid: 1638c43d8c25bbf4bb11578e16ba5daf, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: c318a8f17c55e8842b53100e75f83040, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 6429e3ab406f4c04bad122469bfdd790, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: c19943713762a0744821784895a5d69b, type: 2}
+    - Key: 5
+      Value: {fileID: 11400000, guid: 111c03707f400d64db44b0fbf79186ae, type: 2}
