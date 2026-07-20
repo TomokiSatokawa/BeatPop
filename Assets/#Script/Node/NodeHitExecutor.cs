@@ -18,7 +18,7 @@ public class NodeHitExecutor : MonoBehaviour
     [SerializeField] private float _goalPos;
 
     private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
-    public Observable<(IReadOnlyJudgementData, int)> ShowJudge => _showJudge;
+    public Observable<(IReadOnlyJudgementData Judge, int lane)> ShowJudge => _showJudge;
 
     public void Start()
     {

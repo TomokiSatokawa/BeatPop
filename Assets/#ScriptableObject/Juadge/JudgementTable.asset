@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ba766a05420474887fd9b93c503c3e, type: 3}
   m_Name: JudgementTable
   m_EditorClassIdentifier: Assembly-CSharp::JudgementTable
-  _deleteTime: 0.16
-  _toleranceValue: 0.16
+  _deleteTime: 0.2
+  _toleranceValue: 0.18
   _nodeTypeJudge:
     _items:
     - Key: 1

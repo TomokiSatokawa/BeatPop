@@ -4,39 +4,46 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseUIControl : MonoBehaviour
+namespace InGame.UI
 {
-    [SerializeField] private CountDown _countDown;
-    [SerializeField] private PanelControl _panelControl;
-    [SerializeField] private Button _continueButton;
-    [SerializeField] private Button _retryButton;
-    [SerializeField] private Button _titleButton;
-    void Start()
+    /// <summary>
+    /// ポーズUI
+    /// </summary>
+    public class PauseUIControl : MonoBehaviour
     {
-        InputManager.PauseButton.Where(b => b).Subscribe(_ => ChangeActive()).AddTo(this);
+        [SerializeField] private CountDownUI _countDown;
+        [SerializeField] private PanelControl _panelControl;
+        [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _retryButton;
+        [SerializeField] private Button _titleButton;
 
-        _continueButton.onClick.AddListener(() => ReStart());
-        _retryButton.onClick.AddListener(() => GameManager.I.Retry());
-        _titleButton.onClick.AddListener(() => GameManager.I.ReturnTitle());
-    }
+        void Start()
+        {
+            InputManager.PauseButton.Where(b => b).Subscribe(_ => ChangeActive()).AddTo(this);
 
-    public void ChangeActive()
-    {
-        if (_panelControl.IsActive)
-        {
-            ReStart();
+            _continueButton.onClick.AddListener(() => ReStart());
+            _retryButton.onClick.AddListener(() => GameManager.I.Retry());
+            _titleButton.onClick.AddListener(() => GameManager.I.ReturnTitle());
         }
-        else
+
+        public void ChangeActive()
         {
-            //開く
-            _panelControl.OnActive();
-            GameManager.I.OnPause();
+            if (_panelControl.IsActive)
+            {
+                ReStart();
+            }
+            else
+            {
+                //開く
+                _panelControl.OnActive();
+                GameManager.I.OnPause();
+            }
         }
-    }
-    public void ReStart()
-    {
-        _panelControl.OnHidden();
-        GameManager.I.ReStartCountDown();
-        _countDown.Play(GameManager.I.ReStartStage);
+        public void ReStart()
+        {
+            _panelControl.OnHidden();
+            GameManager.I.ReStartCountDown();
+            _countDown.Play(GameManager.I.ReStartStage);
+        }
     }
 }

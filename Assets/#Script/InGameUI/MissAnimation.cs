@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace InGame.UI
 {
+    /// <summary>
+    /// É~ÉXââèo
+    /// </summary>
     public class MissAnimation : MonoBehaviour
     {
         [SerializeField] private Image _image;

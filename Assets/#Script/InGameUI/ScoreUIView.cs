@@ -1,93 +1,79 @@
 using DG.Tweening;
+using InGame.Score;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreUIView : MonoBehaviour
+namespace InGame.UI
 {
-    [SerializeField] private Image _sliderImage;
-    [SerializeField] private RankData _rankData;
-    [SerializeField] private RectTransform[] _rankLines;
-    [SerializeField] private Image _rankImage;
-    [SerializeField] private TextMeshProUGUI _valueText;
-    [SerializeField] private float _animationDuration = 0.3f;
-
-    private int _maxScore = int.MaxValue;
-    private int _currentScore;
-    private Sprite _currentRank = null;
-
-    private Sequence _addScoreAnimation;
-
-    private void Start()
+    /// <summary>
+    /// InGame中のスコア表示
+    /// </summary>
+    public class ScoreUIView : MonoBehaviour
     {
-        Initialize();
-    }
+        [SerializeField] private Image _sliderImage;
+        [SerializeField] private RankData _rankData;
+        [SerializeField] private RectTransform[] _rankLines;
+        [SerializeField] private TextMeshProUGUI _valueText;
+        [SerializeField] private float _animationDuration = 0.3f;
 
-    private void Initialize()
-    {
-        _sliderImage.fillAmount = 0;
-        _valueText.text = "0";
-        _currentScore = 0;
-    }
+        private int _currentScore;
+        private Sequence _addScoreAnimation;
 
-    public void SetData(int maxScore)
-    {
-        _maxScore = maxScore;
-
-        RectTransform sliderRect = _sliderImage.rectTransform;
-
-        float left = sliderRect.rect.xMin;
-        float right = sliderRect.rect.xMax;
-
-        for (int i = 0; i < _rankData.RankValue.Count && i < _rankLines.Length; i++)
+        private void Start()
         {
-            float t = Mathf.Clamp01((float)_rankData.RankValue[i].Value);
-
-            RectTransform rankLine = _rankLines[i];
-
-            Vector2 pos = rankLine.anchoredPosition;
-            pos.x = Mathf.Lerp(left, right, t);
-            rankLine.anchoredPosition = pos;
+            Initialize();
         }
-    }
 
-    public void UpdateScore(int score)
-    {
-        _addScoreAnimation?.Kill();
-
-        int startScore = _currentScore;
-        _currentScore = score;
-
-        _addScoreAnimation = DOTween.Sequence();
-
-        _addScoreAnimation.Join(
-            _sliderImage.DOFillAmount((float)score / _maxScore, _animationDuration));
-
-        _addScoreAnimation.Join(
-            DOVirtual.Int(startScore, score, _animationDuration,
-                x => _valueText.text = x.ToString()));
-
-        RankAnimation(_rankData.GetRank((float)_currentScore / _maxScore));
-    }
-
-    private void RankAnimation(Sprite rank)
-    {
-        if (_currentRank == rank) return;
-        _currentRank = rank;
-
-        _rankImage.DOKill();
-
-        Sequence sequence = DOTween.Sequence();
-
-        sequence.Append(_rankImage.rectTransform.DOScale(0f, 0.12f).SetEase(Ease.InBack));
-
-        sequence.AppendCallback(() =>
+        private void Initialize()
         {
-            _rankImage.sprite = rank;
-        });
+            _sliderImage.fillAmount = 0;
+            _valueText.text = "0";
+            _currentScore = 0;
+        }
 
-        sequence.Append(_rankImage.rectTransform.DOScale(1.2f, 0.18f).SetEase(Ease.OutBack));
+        public void SetData()
+        {
+            RectTransform sliderRect = _sliderImage.rectTransform;
 
-        sequence.Append(_rankImage.rectTransform.DOScale(1f, 0.08f));
+            float left = sliderRect.rect.xMin;
+            float right = sliderRect.rect.xMax;
+
+            for (int i = 0; i < _rankData.RankValue.Count && i < _rankLines.Length; i++)
+            {
+                float t = Mathf.Clamp01((float)_rankData.RankValue[i].Value);
+
+                RectTransform rankLine = _rankLines[i];
+
+                Vector2 pos = rankLine.anchoredPosition;
+                pos.x = Mathf.Lerp(left, right, t);
+                rankLine.anchoredPosition = pos;
+            }
+        }
+
+        public void UpdateScore(int score)
+        {
+            _addScoreAnimation?.Kill();
+
+            int startScore = _currentScore;
+            _currentScore = score;
+
+            _addScoreAnimation = DOTween.Sequence();
+
+            float fillAmount = 0;
+
+            if (score > 0) 
+            { 
+                fillAmount = (float)score / ScoreDataManager.ScoreData.MaxScore;
+            }
+
+            _addScoreAnimation.Join(
+                _sliderImage.DOFillAmount(fillAmount, _animationDuration));
+
+            _addScoreAnimation.Join(
+                DOVirtual.Int(startScore, score, _animationDuration,
+                    x => _valueText.text = x.ToString()));
+
+        }
     }
 }

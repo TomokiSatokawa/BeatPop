@@ -4117,6 +4117,7 @@ GameObject:
   - component: {fileID: 1320716438}
   - component: {fileID: 1320716440}
   - component: {fileID: 1320716439}
+  - component: {fileID: 1320716441}
   m_Layer: 5
   m_Name: RankImage
   m_TagString: Untagged
@@ -4181,6 +4182,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320716437}
   m_CullTransparentMesh: 1
+--- !u!114 &1320716441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320716437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85c6733c95cf514bbfd254e5f53c83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RankUIControl
+  _rankImage: {fileID: 1320716439}
+  _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
+  _fadeDuration: 0.15
+  _scaleUpDuration: 0.25
+  _scaleDownDuration: 0.15
+  _startScale: 0
+  _maxScale: 1.25
+  _endScale: 1
+  _scaleUpEase: 27
+  _scaleDownEase: 30
+  _waitTime: 0
 --- !u!1 &1390119646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,7 +4521,6 @@ GameObject:
   - component: {fileID: 1469794268}
   - component: {fileID: 1469794267}
   - component: {fileID: 1469794271}
-  - component: {fileID: 1469794272}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -4611,29 +4634,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0e4eeab3a808542a0f52981e357b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameUIPresenter
-  _judgementView: {fileID: 1469794272}
+  _judgeUIControl: {fileID: 1684669671}
   _comboUIControl: {fileID: 954025800}
   _nodeHitExecutor: {fileID: 1252056269}
   _clearAnimation: {fileID: 591454740}
   _scoreUIView: {fileID: 1931139028}
+  _rankUIControl: {fileID: 1320716441}
   _missAnimation: {fileID: 38819842}
---- !u!114 &1469794272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469794266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5ba49aa303d444f8d62b53d2d630aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JudgementView
-  _canvas: {fileID: 1469794269}
-  _judgeUI: {fileID: 1684669671}
-  _pos:
-  - {fileID: 644539286}
-  - {fileID: 1950628531}
 --- !u!1 &1475808208
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,7 +5342,6 @@ MonoBehaviour:
   - {fileID: 356666014}
   - {fileID: 754990782}
   - {fileID: 486679274}
-  _rankImage: {fileID: 1320716439}
   _valueText: {fileID: 964780269}
   _animationDuration: 0.3
 --- !u!1 &1946836277

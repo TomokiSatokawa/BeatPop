@@ -1,6 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class RankUIControl : MonoBehaviour
 {
@@ -22,10 +22,15 @@ public class RankUIControl : MonoBehaviour
     [SerializeField] private float _waitTime;
 
     private Tween _animation;
+    private Sprite _currentRank = null;
 
     public void OnAnimation(float scoreRate)
     {
-        _rankImage.sprite = _rankData.GetRank(scoreRate);
+        var rank = _rankData.GetRank(scoreRate);
+        if (rank == _currentRank) return;
+
+        _currentRank = rank;
+        _rankImage.sprite = _currentRank;
         _rankImage.gameObject.SetActive(false);
         _animation?.Kill();
 

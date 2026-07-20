@@ -16,7 +16,7 @@ public class RankData : ScriptableObject
                 return kv.Key;
             }
         }
-        Debug.LogError("Runk is not found");
+        Debug.LogError("Rank is not found");
         return null;
     }
 }
