@@ -1,5 +1,8 @@
 namespace InGame.Stage
 {
+    /// <summary>
+    /// 全ライトを同じタイミングで光らせる
+    /// </summary>
     public class BeatSyncLightPattern : LightPatternBase<LightPatternBaseData>
     {
         public override void BeatUpdate(int division)

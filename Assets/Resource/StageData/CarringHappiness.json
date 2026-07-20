@@ -3,7 +3,7 @@
     "SongDataIndex": 1,
     "LightData": [
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 0.0,
             "Channel": 0,
             "Division": 4,
@@ -17,7 +17,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 0.0,
             "Channel": 1,
             "Division": 4,
@@ -115,7 +115,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 12.75,
             "Channel": 0,
             "Division": 32,
@@ -171,7 +171,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 27.0,
             "Channel": 0,
             "Division": 32,
@@ -185,7 +185,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 27.0,
             "Channel": 1,
             "Division": 32,
@@ -227,7 +227,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 28.875,
             "Channel": 1,
             "Division": 32,
@@ -255,7 +255,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 29.625,
             "Channel": 1,
             "Division": 32,
@@ -283,7 +283,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 30.375,
             "Channel": 1,
             "Division": 32,
@@ -311,7 +311,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 31.125,
             "Channel": 1,
             "Division": 32,
@@ -339,7 +339,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 31.875,
             "Channel": 1,
             "Division": 32,
@@ -367,7 +367,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 32.625,
             "Channel": 1,
             "Division": 32,
@@ -395,7 +395,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 33.375,
             "Channel": 1,
             "Division": 32,
@@ -493,7 +493,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 39.375,
             "Channel": 0,
             "Division": 32,
@@ -507,7 +507,7 @@
             }
         },
         {
-            "PatternType": "ManualLightPattern",
+            "PatternType": "PersistentLightPattern",
             "Time": 39.375,
             "Channel": 1,
             "Division": 32,

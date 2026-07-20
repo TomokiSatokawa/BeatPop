@@ -1,25 +1,32 @@
-using InGame.Stage;
 using UnityEngine;
 
-public class GradationLightPattern : LightPatternBase<GradationLightPatternData>
+namespace InGame.Stage
 {
-    public override void InitializeCore(GradationLightPatternData data, StageLightBase[] lights)
+    /// <summary>
+    /// グラデーションライトパターン
+    /// </summary>
+    public class GradationLightPattern : LightPatternBase<GradationLightPatternData>
     {
-        base.InitializeCore(data, lights);
-
-        foreach (var light in lights)
+        public override void InitializeCore(GradationLightPatternData data, StageLightBase[] lights)
         {
-            if (light is not GradientLightControl gradientLight) continue;
+            base.InitializeCore(data, lights);
 
-            gradientLight.SetColor(data.MainColor.GetColor(), data.SubColor.GetColor());
+            foreach (var light in lights)
+            {
+                if (light is not GradientLightControl gradientLight) continue;
 
-            gradientLight.Flash(data.Duration, data.Power);
+                gradientLight.SetColor(data.MainColor.GetColor(), data.SubColor.GetColor());
+
+                gradientLight.Flash(data.Duration, data.Power);
+            }
         }
-    }
-    public override void BeatUpdate(int division){ }
-}
-public class GradationLightPatternData: LightPatternBaseData
-{
-    public ColorData SubColor = new ColorData(Color.green);
 
+        // 初期化時のみ設定するため更新不要
+        public override void BeatUpdate(int division) { }
+    }
+    public class GradationLightPatternData : LightPatternBaseData
+    {
+        public ColorData SubColor = new ColorData(Color.green);
+
+    }
 }

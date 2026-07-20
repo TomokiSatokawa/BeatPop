@@ -22,7 +22,7 @@
         }
       },
       {
-        "$type": "GradationLightPatternData, Assembly-CSharp",
+        "$type": "InGame.Stage.GradationLightPatternData, Assembly-CSharp",
         "SubColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 1.0,
@@ -30,7 +30,7 @@
           "B": 0.0,
           "A": 1.0
         },
-        "PatternType": "GradationLightPattern",
+        "PatternType": "InGame.Stage.GradationLightPattern",
         "Time": 0.0,
         "Channel": 2,
         "Division": 4,
@@ -495,7 +495,7 @@
         }
       },
       {
-        "$type": "GradationLightPatternData, Assembly-CSharp",
+        "$type": "InGame.Stage.GradationLightPatternData, Assembly-CSharp",
         "SubColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 0.2,
@@ -503,7 +503,7 @@
           "B": 1.0,
           "A": 1.0
         },
-        "PatternType": "GradationLightPattern",
+        "PatternType": "InGame.Stage.GradationLightPattern",
         "Time": 3.69230771,
         "Channel": 2,
         "Division": 4,
@@ -731,7 +731,7 @@
       },
       {
         "$type": "InGame.Stage.LightPatternBaseData, Assembly-CSharp",
-        "PatternType": "ManualLightPattern",
+        "PatternType": "InGame.Stage.PersistentLightPattern",
         "Time": 48.0,
         "Channel": 0,
         "Division": 4,
@@ -762,7 +762,7 @@
         }
       },
       {
-        "$type": "GradationLightPatternData, Assembly-CSharp",
+        "$type": "InGame.Stage.GradationLightPatternData, Assembly-CSharp",
         "SubColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 1.0,
@@ -770,7 +770,7 @@
           "B": 1.0,
           "A": 1.0
         },
-        "PatternType": "GradationLightPattern",
+        "PatternType": "InGame.Stage.GradationLightPattern",
         "Time": 48.0,
         "Channel": 2,
         "Division": 4,
@@ -897,7 +897,7 @@
         }
       },
       {
-        "$type": "GradationLightPatternData, Assembly-CSharp",
+        "$type": "InGame.Stage.GradationLightPatternData, Assembly-CSharp",
         "SubColor": {
           "$type": "InGame.Stage.ColorData, Assembly-CSharp",
           "R": 0.2,
@@ -905,7 +905,7 @@
           "B": 1.0,
           "A": 1.0
         },
-        "PatternType": "GradationLightPattern",
+        "PatternType": "InGame.Stage.GradationLightPattern",
         "Time": 59.0769234,
         "Channel": 2,
         "Division": 4,

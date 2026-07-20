@@ -2,10 +2,12 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using DG.Tweening;
-using UnityEngine;
 
 namespace InGame.Stage
 {
+    /// <summary>
+    /// ウェーブパターン
+    /// </summary>
     public class WaveLightPattern : LightPatternBase<WaveLightPatternData>
     {
         private Sequence _sequence;
@@ -30,6 +32,16 @@ namespace InGame.Stage
             }
         }
 
+        public override void BeatUpdate(int division)
+        {
+            if (division > Data.Division)
+                return;
+
+            if (_sequence == null)
+                return;
+
+            _sequence.Restart();
+        }
 
         private void CreateSequence()
         {
@@ -40,70 +52,53 @@ namespace InGame.Stage
                 .Pause();
         }
 
-
         private void SetSideWave()
         {
-            var lights1 = _lights.Take(_lights.Length / 2).ToArray();
+            var takeLights = _lights.Take(_lights.Length / 2);
+            var skipLights = _lights.Skip(_lights.Length / 2);
 
-            var lights2 = _lights.Skip(_lights.Length / 2).ToArray();
-
+            StageLightBase[] lights1;
+            StageLightBase[] lights2;
 
             // 内→外
             if (Data.Type == WaveType.InsideToOutside)
             {
-                lights1 = lights1.Reverse().ToArray();
-                lights2 = lights2.ToArray();
+                lights1 = takeLights.Reverse().ToArray();
+                lights2 = skipLights.ToArray();
             }
             // 外→内
             else
             {
-                lights1 = lights1.ToArray();
-                lights2 = lights2.Reverse().ToArray();
+                lights1 = takeLights.ToArray();
+                lights2 = skipLights.Reverse().ToArray();
             }
 
-
-            int lightCount = Math.Max(
-                lights1.Length,
-                lights2.Length
-            );
-
-
+            int lightCount = Math.Max(lights1.Length, lights2.Length);
             float interval = (float)Data.Duration / lightCount;
 
             for (int i = 0; i < lightCount; i++)
             {
                 int index = i;
 
-
                 if (index < lights1.Length)
                 {
-                    var light = lights1[index];
-                    if (light is PanelLightControl panelLight)
-                    {
-                        _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
-                    }
+                    var target = lights1[index];
+                    AppendWave(target);
                 }
-            
 
                 if (index < lights2.Length)
                 {
-                    var light = lights2[index];
-                    if (light is PanelLightControl panelLight)
-                    {
-                        _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
-                    }
-                
+                    var target = lights2[index];
+                    AppendWave(target);
                 }
 
                 _sequence.AppendInterval(interval);
             }
         }
 
-
         private void SetMoveWave()
         {
             var lights = _lights.ToArray();
-
 
             // 左→右
             if (Data.Type == WaveType.LeftToRight)
@@ -116,25 +111,21 @@ namespace InGame.Stage
             foreach (var light in lights)
             {
                 var target = light;
-                
-                if (light is PanelLightControl panelLight)
-                {
-                    _sequence.AppendCallback(() => panelLight.Wave(Data.FlashDivision, Data.Power));
-                }
+
+                AppendWave(target);
                 _sequence.AppendInterval(interval);
             }
         }
 
-
-        public override void BeatUpdate(int division)
+        private void AppendWave(StageLightBase light)
         {
-            if (division > Data.Division)
+            if (light is not PanelLightControl panelLight)
+            {
                 return;
+            }
 
-            if (_sequence == null)
-                return;
-
-            _sequence.Restart();
+            _sequence.AppendCallback(() =>
+                panelLight.Wave(Data.FlashDivision, Data.Power));
         }
     }
 
@@ -164,19 +155,20 @@ namespace InGame.Stage
         }
 
     }
-        [Serializable]
-        public enum WaveType
-        {
-            [Description("内 → 外")]
-            InsideToOutside,
 
-            [Description("外 → 内")]
-            OutsideToInside,
+    [Serializable]
+    public enum WaveType
+    {
+        [Description("内 → 外")]
+        InsideToOutside,
 
-            [Description("右 → 左")]
-            RightToLeft,
+        [Description("外 → 内")]
+        OutsideToInside,
 
-            [Description("左 → 右")]
-            LeftToRight
-        }
+        [Description("右 → 左")]
+        RightToLeft,
+
+        [Description("左 → 右")]
+        LeftToRight
     }
+}

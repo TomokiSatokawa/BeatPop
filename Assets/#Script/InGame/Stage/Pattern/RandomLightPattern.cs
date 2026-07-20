@@ -1,16 +1,11 @@
 using UnityEngine;
-
-public class RandomLightPattern : MonoBehaviour
+namespace InGame.Stage
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// ƒ‰ƒ“ƒ_ƒ€‚ÈêŠ‚ğŒõ‚ç‚¹‚éi–¢À‘•j
+    /// </summary>
+    public class RandomLightPattern : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+       
     }
 }

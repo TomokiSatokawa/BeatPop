@@ -36,6 +36,11 @@ namespace InGame.Stage
 
         private void ChangePattern(Type type, LightPatternBaseData data)
         {
+            if (type == null)
+            {
+                Debug.LogError($"[LightGroupManager] Type is null Type:{type}");
+                return;
+            }
             //なかったら生成
             if (!_instancePattern.TryGetValue(type, out var pattern))
             {
