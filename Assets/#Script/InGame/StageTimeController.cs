@@ -24,15 +24,16 @@ namespace InGame
 
         private readonly ReactiveProperty<bool> _isPlaying = new();
         public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
-
-        private Subject<Unit> _onInitialized = new();
-        public Observable<Unit> OnInitialized => _onInitialized;
         public bool IsInitialized { get; private set; } = false;
 
-        private Subject<Unit> _onGameClear = new();
+        private double _startDspTime;
+
+        //イベント
+        private readonly Subject<Unit> _onInitialized = new();
+        private readonly Subject<Unit> _onGameClear = new();
+        public Observable<Unit> OnInitialized => _onInitialized;
         public Observable<Unit> OnGameClear => _onGameClear;
 
-        private double _startDspTime;
 
         public void Start()
         {
@@ -48,12 +49,12 @@ namespace InGame
                 endTime = fileData.Nodes[fileData.Nodes.Count - 1].Time;
             }
 
-            int sectionIndex = Mathf.Clamp(SongPlayContext.I.StartSection, 0, fileData.Section.Count) - 1;
+            int sectionIndex = Mathf.Clamp(SongPlayContext.I.StartSection, 0, fileData.Section.Count - 1);
             float sectionTime = 0;
 
-            if (sectionIndex != -1)
+            if (sectionIndex >= 0)
             {
-                sectionTime = fileData.Section[SongPlayContext.I.StartSection];
+                sectionTime = fileData.Section[sectionIndex];
             }
 
             SetPlayData(bpm, endTime, sectionTime);
@@ -95,7 +96,7 @@ namespace InGame
 
             if (StageTime >= EndTime + _resultDelay)
             {
-                //_isPlaying.Value = false;
+                _isPlaying.Value = false;
                 _onGameClear.OnNext(Unit.Default);
             }
         }
@@ -113,7 +114,7 @@ namespace InGame
 
         public void MoveStageTime(float amount)
         {
-            StageTime += amount;
+            _startDspTime -= amount;
         }
     }
 }
