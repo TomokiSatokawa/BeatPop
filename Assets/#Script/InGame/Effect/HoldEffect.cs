@@ -1,15 +1,22 @@
 using UnityEngine;
 
-public class HoldEffect : PoolObject
+namespace InGame.Effect
 {
-    [SerializeField] private ParticleSystem[] _particleSystems;
-
-    public void SetEmission(bool b)
+    /// <summary>
+    /// ホールド中のエフェクト
+    /// </summary>
+    public class HoldEffect : PoolObject
     {
-        foreach(var p in _particleSystems)
+        [SerializeField] private ParticleSystem[] _particleSystems;
+
+        public void SetEmission(bool b)
         {
-            var emission = p.emission;
-            emission.enabled = b;
+            foreach (var p in _particleSystems)
+            {
+                var emission = p.emission;
+                emission.enabled = b;
+            }
         }
     }
+
 }
