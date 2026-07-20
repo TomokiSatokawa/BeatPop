@@ -4,10 +4,10 @@ using InGame.Node;
 
 namespace InGame.Score
 {
-   /// <summary>
-   /// リザルト用統計データを管理
-   /// </summary>
-    public class ResultDataCollector  : IReadOnlyResultData
+    /// <summary>
+    /// リザルト用統計データを管理
+    /// </summary>
+    public class ResultDataCollector : IReadOnlyResultData
     {
         /// <summary>ノード別ヒット数（打率）</summary>
         private readonly Dictionary<PoolPrefabType, HitData> _nodeHitCount = new();
@@ -19,18 +19,20 @@ namespace InGame.Score
         public void Initialize()
         {
             _nodeHitCount.Clear();
+            _sumDifferenceOffset = 0f;
         }
 
         /// <summary>
         /// 打率追加
         /// </summary>
-        public void AddNode(NodeData node , IReadOnlyJudgementData judgementData)
+        public void AddNode(NodeData node, IReadOnlyJudgementData judgementData)
         {
             var type = node.PrefabType;
 
-            if (!_nodeHitCount.ContainsKey(type))
+            if (!_nodeHitCount.TryGetValue(type, out var hitData))
             {
-                _nodeHitCount.Add(type, new());
+                hitData = new HitData();
+                _nodeHitCount.Add(type, hitData);
             }
 
             if (judgementData.IsComboContinued)
@@ -46,7 +48,7 @@ namespace InGame.Score
         /// <summary>
         /// タイミング加算 
         /// </summary>
-       public void AddDifferenceValue(NodeData nodeData, float difference)
+        public void AddDifferenceValue(NodeData nodeData, float difference)
         {
             //ホールドは含まない
             if (nodeData.PrefabType == PoolPrefabType.HoldNoteFill)
@@ -58,7 +60,7 @@ namespace InGame.Score
         /// <summary>
         /// ノーツ別のHitカウンター
         /// </summary>
-        public class HitData
+        private class HitData
         {
             public int TotalCount { get; private set; }
             public int HitCount { get; private set; }
@@ -84,5 +86,6 @@ namespace InGame.Score
     public interface IReadOnlyResultData
     {
         public float SumDifferenceOffset { get; }
+        //TODO:Type別打率を取得する関数
     }
 }

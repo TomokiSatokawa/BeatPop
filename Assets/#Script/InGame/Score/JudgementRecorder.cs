@@ -19,12 +19,7 @@ namespace InGame.Score
 
         public void AddJudgeCount(IReadOnlyJudgementData judgement)
         {
-            if (!_judgeDataCount.TryGetValue(judgement, out var count))
-            {
-                count = 0;
-            }
-
-            _judgeDataCount[judgement] = count + 1;
+            _judgeDataCount[judgement] = _judgeDataCount.GetValueOrDefault(judgement) + 1;
         }
     }
     public interface IReadOnlyJudgementRecorder

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using InGame.Node;
 using R3;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace InGame.Score
 {
@@ -26,23 +25,24 @@ namespace InGame.Score
         ReadOnlyReactiveProperty<int> IReadOnlyScoreData.Combo => _combo;
 
         private readonly ReactiveProperty<int> _score = new();
-        /// <summary>コンボ数</summary>
+        /// <summary>スコア</summary>
         ReadOnlyReactiveProperty<int> IReadOnlyScoreData.Score => _score;
 
         public void Initialize()
-        {   
+        {
             _isAllPerfect = true;
             _combo.Value = 0;
             _score.Value = 0;
+            _maxScore = 0;
         }
 
         /// <summary>
         /// スコア加算
         /// </summary>
-        public void AddScore(IReadOnlyJudgementData JudgementData)
+        public void AddScore(IReadOnlyJudgementData judgementData)
         {
-            UpdateJudgeState(JudgementData);
-            _score.Value += JudgementData.Score;
+            UpdateJudgeState(judgementData);
+            _score.Value += judgementData.Score;
         }
 
         public void CalculateMaxScore(JudgementTable judgementTable, IReadOnlyList<NodeData> nodeDatas, float bpm)
@@ -57,6 +57,13 @@ namespace InGame.Score
 
                 //HoldFillの計算
                 NodeData start = nodeData;
+
+                if (start.Connect < 0 || start.Connect >= nodeDatas.Count)
+                {
+                    Debug.LogError($"[Score] HoldNoteの接続先が不正です。Time={start.Time}, Connect={start.Connect}, NodeCount={nodeDatas.Count}");
+                    continue;
+                }
+
                 NodeData end = nodeDatas[start.Connect];
 
                 float intervalTime = (60f / bpm) * (4f / LongNoteDivisionInterval);
