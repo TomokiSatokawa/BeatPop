@@ -11,9 +11,13 @@ namespace InGame.UI
     /// </summary>
     public class CountDownUI : MonoBehaviour
     {
+
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private int _startCount = 3;
         [SerializeField] private float _duration = 0.8f;
+        [SerializeField] private float _scaleDurationRatio = 0.5f;
+        [SerializeField] private float _waitDurationRatio = 0.3f;
+        [SerializeField] private float _fadeDurationRatio = 0.2f;
 
         private Tween _currentTween;
 
@@ -25,7 +29,7 @@ namespace InGame.UI
             PlayAsync().ContinueWith(() =>
             {
                 onComplete?.Invoke();
-            }).Forget();
+            }).Forget(Debug.LogException);
         }
 
         /// <summary>
@@ -45,18 +49,15 @@ namespace InGame.UI
                 _currentTween?.Kill();
 
                 _currentTween = DOTween.Sequence()
-                    .Append(
-                        _text.transform
-                            .DOScale(1f, _duration * 0.5f)
-                            .SetEase(Ease.OutBack)
-                    )
-                    .Join(_text.DOFade(1f, _duration * 0.2f))
-                    .AppendInterval(_duration * 0.3f)
-                    .Append(_text.DOFade(0f, _duration * 0.2f));
+                    .Append(_text.transform.DOScale(1f, _duration * _scaleDurationRatio)
+                    .SetEase(Ease.OutBack))
+
+                    .Join(_text.DOFade(1f, _duration * _fadeDurationRatio))
+                    .AppendInterval(_duration * _waitDurationRatio)
+                    .Append(_text.DOFade(0f, _duration * _fadeDurationRatio));
 
                 await _currentTween.AsyncWaitForCompletion();
             }
-
             gameObject.SetActive(false);
         }
 

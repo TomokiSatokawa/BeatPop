@@ -90,6 +90,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _sceneLoad.ChangeScene("Title");
     }
 
+    public void Clear()
+    {
+        _sceneLoad.ChangeScene("Result");
+    }
+
     public static void DontDestroyRelease()
     {
         ScoreDataManager.DisposeSingleton();

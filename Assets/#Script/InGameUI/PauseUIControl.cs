@@ -1,3 +1,4 @@
+using System;
 using Common.UI;
 using Input;
 using R3;
@@ -17,20 +18,25 @@ namespace InGame.UI
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _titleButton;
 
-        void Start()
+        public event Action OnReStart;
+        public event Action OnStartCountDown;
+        public event Action OnRetry;
+        public event Action OnReturnTitle;
+
+        private void Start()
         {
             InputManager.PauseButton.Where(b => b).Subscribe(_ => ChangeActive()).AddTo(this);
 
-            _continueButton.onClick.AddListener(() => ReStart());
-            _retryButton.onClick.AddListener(() => GameManager.I.Retry());
-            _titleButton.onClick.AddListener(() => GameManager.I.ReturnTitle());
+            _continueButton.onClick.AddListener(() => StartCountDown());
+            _retryButton.onClick.AddListener(() => OnRetry?.Invoke());
+            _titleButton.onClick.AddListener(() => OnReturnTitle?.Invoke());
         }
 
         public void ChangeActive()
         {
             if (_panelControl.IsActive)
             {
-                ReStart();
+                StartCountDown();
             }
             else
             {
@@ -39,11 +45,18 @@ namespace InGame.UI
                 GameManager.I.OnPause();
             }
         }
-        public void ReStart()
+        public void StartCountDown()
         {
             _panelControl.OnHidden();
-            GameManager.I.ReStartCountDown();
-            _countDown.Play(GameManager.I.ReStartStage);
+            OnStartCountDown.Invoke();
+            _countDown.Play(OnReStart);
+        }
+
+        private void OnDestroy()
+        {
+            _continueButton.onClick.RemoveListener(() => StartCountDown());
+            _retryButton.onClick.RemoveListener(() => OnRetry?.Invoke());
+            _titleButton.onClick.RemoveListener(() => OnReturnTitle?.Invoke());
         }
     }
 }

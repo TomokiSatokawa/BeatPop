@@ -2299,7 +2299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClearAnimation
   _mainVisualMask: {fileID: 1953305748}
   _sceneLoad: {fileID: 2101936842}
-  _maxWith: 1637
+  _maxWidth: 1637
   _animationDuration: 1
 --- !u!1 &591648927
 GameObject:
@@ -3270,6 +3270,9 @@ MonoBehaviour:
   _text: {fileID: 914042199}
   _startCount: 3
   _duration: 0.8
+  _scaleDurationRatio: 0.5
+  _waitDurationRatio: 0.3
+  _fadeDurationRatio: 0.2
 --- !u!1 &954025798
 GameObject:
   m_ObjectHideFlags: 0
@@ -3328,6 +3331,9 @@ MonoBehaviour:
   _minSize: 1.2
   _afterMaxSize: 2
   _animationDuration: 0.3
+  _expandRatio: 0.7
+  _shrinkRatio: 0.3
+  _afterFadeRatio: 0.5
 --- !u!1 &964780267
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,6 +4647,7 @@ MonoBehaviour:
   _scoreUIView: {fileID: 1931139028}
   _rankUIControl: {fileID: 1320716441}
   _missAnimation: {fileID: 38819842}
+  _pauseUIControl: {fileID: 1445815583}
 --- !u!1 &1475808208
 GameObject:
   m_ObjectHideFlags: 0

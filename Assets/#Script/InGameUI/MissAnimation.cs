@@ -15,7 +15,12 @@ namespace InGame.UI
 
         private Sequence _sequence;
 
-        private void Start()
+        private void Awake()
+        {
+            CreateAnimation();
+        }
+
+        private void CreateAnimation()
         {
             _sequence = DOTween.Sequence()
                 .Append(_image.DOFade(0, 0))

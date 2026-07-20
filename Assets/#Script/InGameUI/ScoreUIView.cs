@@ -20,9 +20,10 @@ namespace InGame.UI
         private int _currentScore;
         private Sequence _addScoreAnimation;
 
-        private void Start()
+        private void Awake()
         {
-            Initialize();
+            Initialize(); 
+            InitializeRankLines();
         }
 
         private void Initialize()
@@ -32,7 +33,7 @@ namespace InGame.UI
             _currentScore = 0;
         }
 
-        public void SetData()
+        private void InitializeRankLines()
         {
             RectTransform sliderRect = _sliderImage.rectTransform;
 
@@ -51,7 +52,7 @@ namespace InGame.UI
             }
         }
 
-        public void UpdateScore(int score)
+        public void UpdateScore(int score,float scoreRatio)
         {
             _addScoreAnimation?.Kill();
 
@@ -60,20 +61,18 @@ namespace InGame.UI
 
             _addScoreAnimation = DOTween.Sequence();
 
-            float fillAmount = 0;
-
-            if (score > 0) 
-            { 
-                fillAmount = (float)score / ScoreDataManager.ScoreData.MaxScore;
-            }
-
             _addScoreAnimation.Join(
-                _sliderImage.DOFillAmount(fillAmount, _animationDuration));
+                _sliderImage.DOFillAmount(scoreRatio, _animationDuration));
 
             _addScoreAnimation.Join(
                 DOVirtual.Int(startScore, score, _animationDuration,
                     x => _valueText.text = x.ToString()));
 
+        }
+
+        private void OnDestroy()
+        {
+            _addScoreAnimation?.Kill();
         }
     }
 }

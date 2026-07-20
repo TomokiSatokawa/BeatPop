@@ -9,16 +9,13 @@ namespace InGame.UI
     public class JudgeUIView : MonoBehaviour
     {
         [Header("Animation")]
-        [SerializeField] private float _duration = 0.5f;
+        [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private float _popScale = 1.2f;
         [SerializeField] private float _popDuration = 0.08f;
         [SerializeField] private float _returnDuration = 0.12f;
         [SerializeField] private float _fadeDelay = 0.25f;
         [SerializeField] private float _fadeDuration = 0.25f;
         [SerializeField] private float _defaultSize = 1f;
-
-        [SerializeField] private TextMeshProUGUI _text;
-        public TextMeshProUGUI Text => _text;
 
         private Sequence _sequence;
         private void Awake()
@@ -37,11 +34,16 @@ namespace InGame.UI
             _text.alpha = 1f;
         }
 
-        public void OnPlay(string text, Color color)
+        public void PlayAnimation(string text, Color color)
         {
             _text.text = text;
             _text.color = color;
             _sequence.Restart();
+        }
+
+        private void OnDestroy()
+        {
+            _sequence?.Kill();
         }
     }
 }

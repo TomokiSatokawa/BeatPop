@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+
 namespace InGame.UI
 {
     /// <summary>
@@ -8,19 +9,26 @@ namespace InGame.UI
     /// </summary>
     public class ComboUIControl : MonoBehaviour
     {
+        [Header("Object")]
         [SerializeField] private Transform _parentObject;
         [SerializeField] private TextMeshProUGUI _comboText;
         [SerializeField] private TextMeshProUGUI _afterText;
+        [Header("Size")]
         [SerializeField] private float _maxSize;
         [SerializeField] private float _minSize;
+        [Header("Duration")]
         [SerializeField] private float _afterMaxSize;
         [SerializeField] private float _animationDuration;
+        [SerializeField] private float _expandRatio = 0.7f;
+        [SerializeField] private float _shrinkRatio = 0.3f;
+        [SerializeField] private float _afterFadeRatio = 0.5f;
 
         private Sequence _sequence;
         private float _defaultSize;
+
         private void Start()
         {
-            _defaultSize = _parentObject.transform.localScale.x;
+            _defaultSize = _parentObject.localScale.x;
             CreateAnimation();
         }
 
@@ -39,25 +47,31 @@ namespace InGame.UI
 
             });
 
-            _sequence.Append(_parentObject.DOScale(_maxSize, _animationDuration * 0.7f).From(_minSize));
-            _sequence.Join(_afterText.transform.DOScale(_afterMaxSize, _animationDuration / 2).From(_minSize));
+            _sequence.Append(_parentObject.DOScale(_maxSize, _animationDuration * _expandRatio).From(_minSize));
+            _sequence.Join(_afterText.transform.DOScale(_afterMaxSize, _animationDuration * _afterFadeRatio).From(_minSize));
             _sequence.Join(_afterText.DOFade(0, _animationDuration));
 
-            _sequence.Append(_parentObject.DOScale(_defaultSize, _animationDuration * 0.3f));
+            _sequence.Append(_parentObject.DOScale(_defaultSize, _animationDuration * _shrinkRatio));
             _sequence.ForceInit();
 
         }
 
-        public void UpdateCombo(int count)
+        public void PlayComboAnimation(int count)
         {
             _comboText.text = count.ToString();
             _afterText.text = count.ToString();
 
             _sequence.Restart(true);
         }
-        public void HiddenUI()
+
+        public void Hide()
         {
             _parentObject.gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            _sequence?.Kill();
         }
     }
 }
