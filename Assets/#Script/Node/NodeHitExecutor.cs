@@ -1,11 +1,12 @@
 using Common.BeatUpdate;
-using InGame.Node;
 using InGame;
+using InGame.Effect;
+using InGame.Node;
+using InGame.Score;
 using Input;
 using R3;
 using Sound;
 using UnityEngine;
-using InGame.Score;
 
 /// <summary>
 /// ÉmÅ[ÉcÇÃHitèàóù
@@ -13,7 +14,7 @@ using InGame.Score;
 public class NodeHitExecutor : MonoBehaviour
 {
     [SerializeField] private HoldNodeFillManager _nodeFillManager;
-    [SerializeField] private LaneClick _laneClick;
+    [SerializeField] private LaneClickEffect _laneClick;
     [SerializeField] private float _goalPos;
 
     private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();

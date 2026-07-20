@@ -11,9 +11,9 @@ namespace InGame
     /// </summary>
     public class InGameFileLoad : SingletonMonoBehaviour<InGameFileLoad>
     {
-        private ReactiveProperty<NodeSaveData> _onNodeFileLoaded = new();
+        private readonly ReactiveProperty<NodeSaveData> _onNodeFileLoaded = new();
         public ReadOnlyReactiveProperty<NodeSaveData> OnNodeFileLoaded => _onNodeFileLoaded;
-        private ReactiveProperty<StageSaveData> _onStageFileLoaded = new();
+        private readonly ReactiveProperty<StageSaveData> _onStageFileLoaded = new();
         public ReadOnlyReactiveProperty<StageSaveData> OnStageFileLoaded => _onStageFileLoaded;
 
         public async UniTask FileLoad()
@@ -22,10 +22,10 @@ namespace InGame
             var stageData = StageDataSerializer.DeserializeJson(SongPlayContext.I.SongData.SongData.StageEffectData.text);
 
             if (nodeData == null)
-                Debug.LogError("NodeData‚ª‚ ‚è‚Ü‚¹‚ñ");
+                Debug.LogError("[InGameFileLoad] NodeData‚ª‚ ‚è‚Ü‚¹‚ñ");
 
             if (stageData == null)
-                Debug.LogError("StageData‚ª‚ ‚è‚Ü‚¹‚ñ");
+                Debug.LogError("[InGameFileLoad] StageData‚ª‚ ‚è‚Ü‚¹‚ñ");
 
             _onNodeFileLoaded.OnNext(nodeData);
             _onStageFileLoaded.OnNext(stageData);

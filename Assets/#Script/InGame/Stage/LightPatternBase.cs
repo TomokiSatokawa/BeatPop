@@ -1,7 +1,11 @@
 using System;
 using UnityEngine;
+
 namespace InGame.Stage
 {
+    /// <summary>
+    /// ライトパターンのベースクラス
+    /// </summary>
     public abstract class LightPatternBase
     {
         public abstract void Initialize(LightPatternBaseData data, StageLightBase[] lights);
@@ -9,6 +13,10 @@ namespace InGame.Stage
         public abstract void Refresh();
         public abstract LightPatternBaseData GetData();
     }
+
+    /// <summary>
+    /// パターンとデータを紐づけるベースクラス
+    /// </summary>
     public abstract class LightPatternBase<T> : LightPatternBase where T : LightPatternBaseData
     {
         public bool IsEnabled { get; private set; }
@@ -59,6 +67,10 @@ namespace InGame.Stage
         }
     }
 
+    /// <summary>
+    /// ライトパターンデータのベースクラス
+    /// </summary>
+
     [Serializable]
     public class LightPatternBaseData
     {
@@ -86,6 +98,10 @@ namespace InGame.Stage
 
         public ColorData MainColor = new(Color.red);
     }
+
+    /// <summary>
+    /// Json対応のColorData
+    /// </summary>
     [Serializable]
     public struct ColorData
     {

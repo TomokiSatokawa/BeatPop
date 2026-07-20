@@ -1,3 +1,4 @@
+using InGame.Effect;
 using Input;
 using R3;
 using Sound;
@@ -12,7 +13,7 @@ namespace InGame.Node
     {
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private HoldNodeFillManager _holdNodeFillManager;
-        [SerializeField] private LaneClick _laneClick;
+        [SerializeField] private LaneClickEffect _laneClick;
 
         void Start()
         {

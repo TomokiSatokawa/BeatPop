@@ -1,14 +1,13 @@
+using Common;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame;
-using InGame.UI;
+using InGame.Score;
 using Input;
 using R3;
 using Sound;
 using TMPro;
 using UnityEngine;
-using Common;
-using InGame.Score;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -19,24 +18,24 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Start()
     {
         InputManager.SetInputEnabled(true);
+
         StageTimeController.I.OnGameClear.Subscribe(_ =>
         {
             StageTimeController.I.Pause();
             InputManager.SetInputEnabled(false);
-        });
+        }).AddTo(this);
 
-        Initialize();
+        Initialize().Forget();
     }
 
-    private async void Initialize()
+    private async UniTask Initialize()
     {
         InGameFileLoad.I?.OnNodeFileLoaded.Skip(1).Subscribe(async fileData =>
         {
-            await LoadPlayAsync(fileData);
+           LoadPlayAsync(fileData).Forget();
         }).AddTo(this);
 
         await UniTask.Yield();
-
         await InGameFileLoad.I.FileLoad();
     }
 
@@ -48,8 +47,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         UniTask songLoad = _stageTimeController.SongLoadAsync();
         UniTask poolClone = PoolManager.I.ClonePoolObject();
+
         await UniTask.WhenAll(songLoad, poolClone);
-        await UniTask.WaitForSeconds(1);
 
         _stageTimeController.StartSongPlay();
     }

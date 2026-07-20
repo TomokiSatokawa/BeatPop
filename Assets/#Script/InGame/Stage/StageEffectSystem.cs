@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace InGame.Stage
 {
+    /// <summary>
+    /// ステージ演出全体を管理するクラス
+    /// </summary>
     public class StageEffectSystem : MonoBehaviour
     {
         [SerializeField] private LightGroupManager _frontUpperPanelLight;
