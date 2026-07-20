@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Common.BeatUpdate;
-using InGame.UI;
 using R3;
 using UnityEngine;
 
@@ -13,14 +12,13 @@ namespace InGame.Stage
         [SerializeField] private LightGroupManager _stageGradientLight;
         [SerializeField] private LightGroupManager _laneGradientLight;
         [SerializeField] private float _startOffset;
-        [SerializeField] private bool _isAllCheckPattern;
 
         private IReadOnlyList<LightPatternBaseData> _patternList;
         private int _nextPatternIndex;
 
         private void Start()
         {
-            StageTimeController.I.OnInitialized.Subscribe(_ => SetPattern()).AddTo(this);
+            StageTimeController.I.OnInitialized.Subscribe(_ => LoadPatternData()).AddTo(this);
 
             StageTimeController.I.IsPlaying
                 .Where(x => x)
@@ -47,24 +45,23 @@ namespace InGame.Stage
                     break;
                 }
 
-                StartPattern(data);
+                ApplyPattern(data);
                 _nextPatternIndex++;
             }
         }
-        
 
-        public void StartPattern(LightPatternBaseData data)
+
+        public void ApplyPattern(LightPatternBaseData data)
         {
             switch (data.Channel)
             {
                 case 0:
-                    Debug.Log(data.GetType().ToString());
                     _frontUpperPanelLight.ChangePattern(data);
                     break;
                 case 1:
                     _backUpperPanelLight.ChangePattern(data);
                     break;
-                    case 2:
+                case 2:
                     _stageGradientLight.ChangePattern(data);
                     _laneGradientLight.ChangePattern(data);
                     break;
@@ -94,10 +91,10 @@ namespace InGame.Stage
             // 現在有効なパターンを復元
             if (_nextPatternIndex > 0)
             {
-                StartPattern(_patternList[_nextPatternIndex - 1]);
+                ApplyPattern(_patternList[_nextPatternIndex - 1]);
             }
         }
-        private void SetPattern()
+        private void LoadPatternData()
         {
             if (EditorLightData.I != null)
             {

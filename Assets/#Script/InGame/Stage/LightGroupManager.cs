@@ -15,6 +15,7 @@ namespace InGame.Stage
 
         private Dictionary<Type, LightPatternBase> _instancePattern = new();
         private LightPatternBase _currentPattern;
+
         private void Start ()
         {
             BeatUpdateManager.BeatUpdate.Subscribe(16, 0, x => BeatUpdate(x.Division));
@@ -38,13 +39,15 @@ namespace InGame.Stage
         {
             if (type == null)
             {
-                Debug.LogError($"[LightGroupManager] Type is null Type:{type}");
+                Debug.LogError($"[LightGroupManager] Type is null Type:{type} PatternData:{data}");
                 return;
             }
+
             //なかったら生成
             if (!_instancePattern.TryGetValue(type, out var pattern))
             {
                 pattern = (LightPatternBase)Activator.CreateInstance(type);
+                _instancePattern.Add(type, pattern);
             }
 
             _instancePattern[type] = pattern;
