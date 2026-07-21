@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using InGame.Node;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
-using UnityEngine.InputSystem;
 
 public class JudgementCountControl : MonoBehaviour
 {
@@ -31,7 +30,8 @@ public class JudgementCountControl : MonoBehaviour
             }
             text.text = "";
             _sequence.Join(ScrambleText(text, ((int)type + 1) * _showInterval).OnComplete(() => text.text = count.ToString()));
-;        }
+            ;
+        }
 
         AddSequence(JudgementType.Perfect);
         AddSequence(JudgementType.Great);
@@ -48,6 +48,6 @@ public class JudgementCountControl : MonoBehaviour
         {
             int random = Random.Range(0, 999999);
             text.text = random.ToString("N0");
-        }, 1, duration );
+        }, 1, duration);
     }
 }

@@ -1,50 +1,39 @@
 using System.Collections.Generic;
 using Common.BeatUpdate;
 using Cysharp.Threading.Tasks;
-using InGame.UI;
 using R3;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace InGame.Node
 {
     /// <summary>
     /// ノーツの生成
     /// </summary>
-    public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>
+    public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>//TODO：StageのSOできたら消す
     {
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private GameObject _nodePrefab;
         [SerializeField] private Transform[] _clonePosition;
         [SerializeField] private float _goalZ;
         [SerializeField] private float _arrivalSeconds;
-        [SerializeField] private bool _isGenerating = true;
         [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
-
-        public List<NodeData> NodeDates { get; private set; }
-        private int _nextNode = 0;
         public float ArrivalSeconds => _arrivalSeconds;
-        void Start()
+
+        private List<NodeData> _nodeDataList;
+        private int _nextNode = 0;
+
+        private void Start()
         {
-            InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => NodeDates = x.Nodes).AddTo(this);
+            InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => _nodeDataList = x.Nodes).AddTo(this);
 
             BeatUpdateManager.BeatUpdate.Subscribe(16, -_arrivalSeconds, _ => GenerateNodes());
-            BeatUpdateManager.BeatUpdate.Subscribe(4, -_arrivalSeconds, x => GenerateLines(x.Time));
+            BeatUpdateManager.BeatUpdate.Subscribe(4, -_arrivalSeconds, x => CreateLines(x.Time));
         }
 
-        void Update()
-        {
-            if (NodeDates == null || !_isGenerating) return;
-
-            // 全ノード生成済みなら終了
-            if (_nextNode >= NodeDates.Count)
-            {
-                _isGenerating = false;
-                return;
-            }
-        }
-
-        private void GenerateLines(float time)
+        /// <summary>
+        /// 線を生成
+        /// </summary>
+        private void CreateLines(float time)
         {
             float lineTime = time + _arrivalSeconds;
             for (int lane = 0; lane < _clonePosition.Length; lane++)
@@ -58,14 +47,19 @@ namespace InGame.Node
             }
         }
 
+        /// <summary>
+        /// ノーツ生成の指示出し
+        /// </summary>
         private void GenerateNodes()
         {
+            if (!StageTimeController.I.IsPlaying.CurrentValue) return;
+
             double generateTime = StageTimeController.StageTime + _arrivalSeconds;
             double startSectionTime = StageTimeController.I.StartSectionTime;
 
-            while (_nextNode < NodeDates.Count)
+            while (_nextNode < _nodeDataList.Count)
             {
-                NodeData nodeData = NodeDates[_nextNode];
+                NodeData nodeData = _nodeDataList[_nextNode];
 
                 if (nodeData.Time > generateTime)
                     return;
@@ -79,6 +73,9 @@ namespace InGame.Node
             }
         }
 
+        /// <summary>
+        /// ノーツ種類別に指示を出す
+        /// </summary>
         private void CreateNode(NodeData nodeData)
         {
             PoolPrefabType prefabType = nodeData.PrefabType;
@@ -96,7 +93,7 @@ namespace InGame.Node
                 case PoolPrefabType.NormalNote:
                 case PoolPrefabType.FlickNote:
                 case PoolPrefabType.Line:
-                    GenerateNode<NodeObject>(nodeData);
+                    CreateNodeObject<NodeObject>(nodeData);
                     return;
 
                 default:
@@ -105,12 +102,11 @@ namespace InGame.Node
             }
         }
 
-        private T GenerateNode<T>(NodeData nodeData) where T : NodeObject
+        /// <summary>
+        /// ノーツオブジェクトの生成処理
+        /// </summary>
+        private T CreateNodeObject<T>(NodeData nodeData) where T : NodeObject
         {
-            if (Keyboard.current.yKey.wasPressedThisFrame)
-            {
-
-            }
             var newObject = PoolManager.I.Get<T>(nodeData.PrefabType);
             Vector3 startPosition = _clonePosition[nodeData.Lane].position;
             newObject.transform.position = startPosition;
@@ -122,26 +118,31 @@ namespace InGame.Node
             return newObject;
         }
 
+        /// <summary>
+        /// ロングノーツ(開始)の専用処理
+        /// </summary>
         private void CreateHoldStartNode(NodeData nodeData)
         {
-            var holdObject = GenerateNode<NodeObject>(nodeData);
+            var holdObject = CreateNodeObject<NodeObject>(nodeData);
 
-            //終了ノーツを探す
+            //終了ノーツを探す 脳筋Ver
             int endIndex = -1;
 
-            for (int j = nodeData.NodeID + 1; j < NodeDates.Count; j++)
-            {
-                var node = NodeDates[j];
+            //for (int j = nodeData.NodeID + 1; j < NodeDataList.Count; j++)
+            //{
+            //    var node = NodeDataList[j];
 
-                if (node.Lane != nodeData.Lane)
-                    continue;
+            //    if (node.Lane != nodeData.Lane)
+            //        continue;
 
-                if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
-                {
-                    endIndex = j;
-                    break;
-                }
-            }
+            //    if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
+            //    {
+            //        endIndex = j;
+            //        break;
+            //    }
+            //}
+
+            endIndex = nodeData.Connect;
 
             if (endIndex < 0)
             {
@@ -149,12 +150,15 @@ namespace InGame.Node
                 return;
             }
 
-            _nodeFillRenderer.AddClone(nodeData, NodeDates[endIndex], holdObject);
+            _nodeFillRenderer.AddClone(nodeData, _nodeDataList[endIndex], holdObject);
         }
 
+        /// <summary>
+        /// ロングノーツ(終了)の専用処理
+        /// </summary>
         private void CreateHoldEndNode(NodeData nodeData)
         {
-            var holdObject = GenerateNode<NodeObject>(nodeData);
+            var holdObject = CreateNodeObject<NodeObject>(nodeData);
             _nodeFillRenderer.SetEndObject(nodeData, holdObject);
         }
     }

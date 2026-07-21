@@ -32,7 +32,7 @@ MonoBehaviour:
     Prefab: {fileID: 6731787771697468245, guid: 7da3f661a705a22488c3779c066abbc1, type: 3}
     StartCloneCount: 5
   - Type: 4
-    Prefab: {fileID: -237628307273540026, guid: 7a2e1283819bf354c848674cedb78aea, type: 3}
+    Prefab: {fileID: 7635352183370393811, guid: 7a2e1283819bf354c848674cedb78aea, type: 3}
     StartCloneCount: 3
   - Type: 5
     Prefab: {fileID: 5351719247677405752, guid: 58672e0681e2435488248568201bbbb2, type: 3}
@@ -55,14 +55,8 @@ MonoBehaviour:
   - Type: 12
     Prefab: {fileID: 4698260947559513053, guid: 4380b265c28303444abb7f954bde2efd, type: 3}
     StartCloneCount: 3
-  - Type: 15
-    Prefab: {fileID: 5952359683889639790, guid: 892741e2e7f70464b953956f7403f026, type: 3}
-    StartCloneCount: 0
   - Type: 16
     Prefab: {fileID: 7244646473857114861, guid: a87ef9430fe48a443afd729a581fffc0, type: 3}
-    StartCloneCount: 0
-  - Type: 17
-    Prefab: {fileID: -7886157771580841754, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
     StartCloneCount: 0
   - Type: 18
     Prefab: {fileID: -5634364672537834446, guid: 88c24b0c1cfb21048868f3d67d4c9266, type: 3}

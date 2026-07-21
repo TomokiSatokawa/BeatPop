@@ -1,10 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Common.BeatUpdate;
-using InGame.UI;
-using Input;
-using R3;
-using Sound;
 using UnityEngine;
 
 namespace InGame.Node
@@ -16,8 +11,8 @@ namespace InGame.Node
     {
         [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
-        private List<NodeObject> _nodes = new();
 
+        private readonly List<NodeObject> _nodes = new();
         private readonly List<NodeObject> _removeNodes = new();
 
         public void AddNode(NodeObject node)
@@ -25,14 +20,23 @@ namespace InGame.Node
             _nodes.Add(node);
         }
 
-        public void Update()
+        private void Update()
         {
             if (!StageTimeController.I.IsPlaying.CurrentValue) return;
 
+            UpdateNodes();
+            RemoveExpiredNodes();
+        }
+
+        private void UpdateNodes()
+        {
             _removeNodes.Clear();
+
+            float stageTime = StageTimeController.StageTime;
+            float deleteTime = stageTime - _judgementTable.DeleteTime;
+
             foreach (NodeObject node in _nodes)
             {
-                float deleteTime = StageTimeController.StageTime - _judgementTable.DeleteTime;
 
                 if (node.NodeData.Time <= deleteTime)
                 {
@@ -40,31 +44,37 @@ namespace InGame.Node
                 }
                 float startTime = node.NodeData.Time - NodeGenerator.I.ArrivalSeconds;
 
-                float progress = (StageTimeController.StageTime - startTime) / (node.NodeData.Time - startTime);
+                float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
                 Vector3 startPosition = node.StartPosition;
                 Vector3 endPosition = startPosition;
                 endPosition.z = node.GoalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
+        }
 
+        private void RemoveExpiredNodes()
+        {
             foreach (NodeObject node in _removeNodes)
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                 _nodeHitExecutor.RemoveAction(node);
+                    _nodeHitExecutor.RemoveAction(node);
                 }
                 node.Release();
                 _nodes.Remove(node);
             }
         }
+
+        /// <summary>
+        /// 現在レーンをクリックした場合に消されるノーツを取得
+        /// </summary>
         public NodeObject GetClickNode(int lane)
         {
             if (!StageTimeController.I.IsPlaying.CurrentValue) return null;
 
             NodeObject targetNode = null;
             float bestDifference = float.MaxValue;
-            float nodeTime = 0;
 
             foreach (var node in _nodes)
             {
@@ -78,7 +88,6 @@ namespace InGame.Node
                 {
                     bestDifference = difference;
                     targetNode = node;
-                    nodeTime = node.NodeData.Time;
                 }
             }
 
@@ -100,7 +109,7 @@ namespace InGame.Node
 
         public NodeObject GetClonedNode(int nodeID)
         {
-            return _nodes.Where(x => x.NodeData.NodeID == nodeID).FirstOrDefault();
+            return _nodes.FirstOrDefault(x => x.NodeData.NodeID == nodeID);
         }
     }
 }

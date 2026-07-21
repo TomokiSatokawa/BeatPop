@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5146709904104830789}
   - component: {fileID: 6287632505174608578}
   - component: {fileID: 2028655941174409738}
-  - component: {fileID: -237628307273540026}
+  - component: {fileID: 7635352183370393811}
   m_Layer: 0
   m_Name: HoldNoteFill
   m_TagString: Untagged
@@ -226,7 +226,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-237628307273540026
+--- !u!114 &7635352183370393811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,19 +235,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7479763466594860701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da41d6257ea43a419080383d7e3a1ea, type: 3}
+  m_Script: {fileID: 11500000, guid: c852aa8c1622da44cbe6782a77c86b4e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoldNode
-  _objectData:
-    _tapEffect: 0
-    _nodeColor: {r: 0, g: 0, b: 0, a: 0}
-    _inputType: 4
-  NodeData:
-    NodeID: 0
-    Lane: 0
-    Time: 0
-    PrefabType: 0
-    Connect: 0
-  StartPosition: {x: 0, y: 0, z: 0}
-  MoveAmount: 0
-  _fillObject: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PoolObject

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using InGame.Node;
 
 namespace InGame.Score
 {

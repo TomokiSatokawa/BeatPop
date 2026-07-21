@@ -50,7 +50,7 @@ namespace InGame.Score
             int maxScore = 0;
             foreach (NodeData nodeData in nodeDatas)
             {
-                maxScore += judgementTable.GetJudgement(nodeData.PrefabType, 0).Score;
+                maxScore += judgementTable.GetJudgementResult(nodeData.PrefabType, 0).Score;
 
                 if (nodeData.PrefabType != PoolPrefabType.HoldNoteStart)
                     continue;
@@ -70,7 +70,7 @@ namespace InGame.Score
                 float duration = end.Time - start.Time;
                 int count = Mathf.FloorToInt(duration / intervalTime);
 
-                maxScore += judgementTable.GetJudgement(PoolPrefabType.HoldNoteFill, 0).Score * count;
+                maxScore += judgementTable.GetJudgementResult(PoolPrefabType.HoldNoteFill, 0).Score * count;
             }
 
             _maxScore = maxScore;

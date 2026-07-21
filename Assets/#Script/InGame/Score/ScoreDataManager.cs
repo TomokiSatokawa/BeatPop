@@ -38,7 +38,7 @@ namespace InGame.Score
 
         public IReadOnlyJudgementData RecordJudge(NodeData nodeData,float difference)
         {
-            var judgement = _judgementTable.GetJudgement(nodeData.PrefabType, difference);
+            var judgement = _judgementTable.GetJudgementResult(nodeData.PrefabType, difference);
 
             _scoreData.AddScore(judgement);
 

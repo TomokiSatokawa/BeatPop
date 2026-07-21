@@ -1,70 +1,74 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
-public class NodeJudgement : ScriptableObject
+namespace InGame.Node
 {
-    public float ToleranceValue;
-    public float DeleteTime;
-    public JudgementData[] JudgementDatas;
 
-    public IReadOnlyJudgementData JudgementDifference(float difference)
+    [CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
+    public class NodeJudgement : ScriptableObject
     {
-        float absDiff = Mathf.Abs(difference);
+        public float ToleranceValue;
+        public float DeleteTime;
+        public JudgementData[] JudgementDatas;
 
-        foreach (var judgement in JudgementDatas)
+        public IReadOnlyJudgementData JudgementDifference(float difference)
         {
-            if (absDiff <= judgement.Value)
+            float absDiff = Mathf.Abs(difference);
+
+            foreach (var judgement in JudgementDatas)
             {
-                return judgement;
+                if (absDiff <= judgement.Value)
+                {
+                    return judgement;
+                }
             }
+
+            //‚È‚¯‚ê‚Îˆê”ÔÅ’á•]‰¿‚ð•Ô‚·
+            return JudgementDatas[JudgementDatas.Length - 1];
         }
-
-        //‚È‚¯‚ê‚Îˆê”ÔÅ’á•]‰¿‚ð•Ô‚·
-        return JudgementDatas[JudgementDatas.Length - 1];
     }
-}
-public interface IReadOnlyJudgementData
-{
-    public JudgementType Name { get; }
-    public float Value { get; }
+    public interface IReadOnlyJudgementData
+    {
+        public JudgementType Name { get; }
+        public float Value { get; }
 
-    public bool ShowEarlyLateText { get; }
+        public bool ShowEarlyLateText { get; }
 
-    public Color TextColor { get; }
+        public Color TextColor { get; }
 
-    public bool IsComboContinued { get; }
+        public bool IsComboContinued { get; }
 
-    public bool IsAllPerfectContinued { get; }
+        public bool IsAllPerfectContinued { get; }
 
-    public int Score { get; }
+        public int Score { get; }
 
-    public float TapSEVolume { get; }
-}
+        public float TapSEVolume { get; }
+    }
 
-[System.Serializable]
-public class JudgementData : IReadOnlyJudgementData
-{
-    public JudgementType Name;
-    public float Value;
-    public bool ShowEarlyLateText;
-    public Color TextColor;
+    [System.Serializable]
+    public class JudgementData : IReadOnlyJudgementData
+    {
+        public JudgementType Name;
+        public float Value;
+        public bool ShowEarlyLateText;
+        public Color TextColor;
 
-    public bool IsComboContinued;
-    public bool IsAllPerfectContinued;
-    public int Score;
-    public float TapSEVolume;
+        public bool IsComboContinued;
+        public bool IsAllPerfectContinued;
+        public int Score;
+        public float TapSEVolume;
 
-    JudgementType IReadOnlyJudgementData.Name => Name;
-    float IReadOnlyJudgementData.Value => Value;
-    bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
-    Color IReadOnlyJudgementData.TextColor => TextColor;
-    bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
-    bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
-    int IReadOnlyJudgementData.Score => Score;
-    float IReadOnlyJudgementData.TapSEVolume => TapSEVolume;
+        JudgementType IReadOnlyJudgementData.Name => Name;
+        float IReadOnlyJudgementData.Value => Value;
+        bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
+        Color IReadOnlyJudgementData.TextColor => TextColor;
+        bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
+        bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
+        int IReadOnlyJudgementData.Score => Score;
+        float IReadOnlyJudgementData.TapSEVolume => TapSEVolume;
 
-}
-public enum JudgementType
-{
-    Perfect, Great, Good, Bad, Miss
+    }
+    public enum JudgementType
+    {
+        Perfect, Great, Good, Bad, Miss
+    }
 }

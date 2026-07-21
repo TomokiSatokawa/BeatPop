@@ -1,21 +1,28 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "JudgementTable", menuName = "Scriptable Objects/JudgementTable")]
-public class JudgementTable : ScriptableObject
+namespace InGame.Node
 {
-    [SerializeField] private float _deleteTime;
-    public float DeleteTime => _deleteTime;
-    [SerializeField] private float _toleranceValue;
-    public float ToleranceValue => _toleranceValue;
-    [SerializeField] private SerializableDictionary<PoolPrefabType, NodeJudgement> _nodeTypeJudge;
-
-    public IReadOnlyJudgementData GetJudgement(PoolPrefabType type, float difference)
+    /// <summary>
+    /// ƒm[ƒc•Κ”»’θ‚π‚ά‚Ζ‚ί‚ι
+    /// </summary>
+    [CreateAssetMenu(fileName = "JudgementTable", menuName = "Scriptable Objects/JudgementTable")]
+    public class JudgementTable : ScriptableObject
     {
-        if (!_nodeTypeJudge.TryGetValue(type, out var judgementData))
+        [SerializeField,Header("Α‚·Τ")] private float _deleteTime;
+        [SerializeField, Header("”»’θ‚π‚·‚ιθ‡’l")] private float _toleranceValue;
+        [SerializeField] private SerializableDictionary<PoolPrefabType, NodeJudgement> _nodeTypeJudge;
+
+        public float DeleteTime => _deleteTime;
+        public float ToleranceValue => _toleranceValue;
+
+        public IReadOnlyJudgementData GetJudgementResult(PoolPrefabType type, float difference)
         {
-            Debug.LogError($"[ScoreDataManager] judge is not found  Type:{type}");
-            return null;
+            if (!_nodeTypeJudge.TryGetValue(type, out var judgementData))
+            {
+                Debug.LogError($"[JudgementTable] Judgement is not found. Type:{type}");
+                return null;
+            }
+            return judgementData.JudgementDifference(difference);
         }
-        return judgementData.JudgementDifference(difference);
     }
 }
