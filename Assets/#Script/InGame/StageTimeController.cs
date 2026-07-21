@@ -114,7 +114,7 @@ namespace InGame
 
         public void MoveStageTime(float amount)
         {
-            _startDspTime -= amount;
+            StageTime += amount;
         }
     }
 }

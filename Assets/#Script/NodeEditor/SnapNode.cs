@@ -3,6 +3,7 @@ using InGame;
 using InGame.Stage;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 namespace Editor
 {
     public class SnapNode : MonoBehaviour
@@ -19,27 +20,24 @@ namespace Editor
         private LightPatternBaseData _snapPattern = new LightPatternBaseData();
         private EditMode _editMode = EditMode.None;
         private PoolPrefabType _prefabType;
-        public void Start()
-        {
-            //if (_snapObject != null) return;
-            //_snapObject = PoolManager.I.Get<EditorNode>(PoolPrefabType.EditorNote, _snapObjectParent);
-        }
+
         public void OnNewNode(int prefab)
         {
             _editMode = EditMode.Create;
             _prefabType = (PoolPrefabType)prefab;
         }
 
-
         public void OnSection()
         {
             _editMode = EditMode.Section;
         }
+
         public void OnLight()
         {
             _editMode = EditMode.Light;
             _patternSettingsControl.ShowSettings(_snapPattern);
         }
+
         public void Update()
         {
             if (_editMode == EditMode.None) return;
@@ -60,8 +58,6 @@ namespace Editor
 
             Vector2 pos = localMousePos;
 
-
-
             int laneIndex = GetLaneIndex();
 
             if (laneIndex == -1)
@@ -73,8 +69,6 @@ namespace Editor
             Vector3 localPos = _snapObjectParent.InverseTransformPoint(worldPos);
 
             pos.y = localPos.y;
-
-
 
             // X Å® Time
             double noteTime =
@@ -106,7 +100,7 @@ namespace Editor
                         var data = _snapPattern.Clone();
                         data.Time = (float)noteTime;
                         data.Channel = laneIndex;
-                        EditorLightData.I.AddNode(data);
+                        EditorLightData.I.AddLightPattern(data);
                         break;
                 }
             }
@@ -123,7 +117,7 @@ namespace Editor
                         EditorNodeData.I.RemoveSection((float)noteTime);
                         break;
                     case EditMode.Light:
-                        EditorLightData.I.DeleteNode((float)noteTime, laneIndex);
+                        EditorLightData.I.RemoveLightPattern((float)noteTime, laneIndex);
                         break;
                 }
             }

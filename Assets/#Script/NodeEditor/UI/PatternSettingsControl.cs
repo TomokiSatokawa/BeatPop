@@ -20,7 +20,7 @@ namespace Editor.UI
         [SerializeField] private ValuePrefabControl _valuePrefab;
         [SerializeField] private SelectPrefabControl _selectPrefab;
 
-        private const string TruncateTarget = "LightPattern";
+        private const string _truncateTarget = "LightPattern";
         private LightPatternBaseData _currentSettingData;
         private List<Type> _patternTypes = new();
 
@@ -119,7 +119,7 @@ namespace Editor.UI
             int selectType = _patternTypes.FindIndex(x => x.FullName == targetField.GetValue(data).ToString());
 
             InstantiateContent(_selectPrefab)
-            .SetData(_patternTypes.Select(x => x.Name.Replace(TruncateTarget, "")).ToList(), targetField.Name, selectType
+            .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget, "")).ToList(), targetField.Name, selectType
             , x =>
             {
                 targetField.SetValue(data, _patternTypes[x].FullName);

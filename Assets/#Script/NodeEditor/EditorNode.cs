@@ -2,6 +2,7 @@ using InGame.Node;
 using InGame;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace Editor
 {
     public class EditorNode : FollowTime

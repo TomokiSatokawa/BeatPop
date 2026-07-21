@@ -3,6 +3,7 @@ using InGame.Stage;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 namespace Editor
 {
     public class EditorRecording : MonoBehaviour
@@ -93,7 +94,7 @@ namespace Editor
                 var data = new LightPatternBaseData();
                 data.Time = (float)GetNodeTime();
                 data.Channel = (int)_channel.value;
-                EditorLightData.I.AddNode(data);
+                EditorLightData.I.AddLightPattern(data);
             }
         }
 

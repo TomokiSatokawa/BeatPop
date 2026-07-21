@@ -105,14 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeObject
   _objectData:
-    _tapEffect: 14
+    _tapEffect: 13
     _nodeColor: {r: 0, g: 0, b: 0, a: 0}
     _inputType: 1
-  NodeData:
-    NodeID: 0
-    Lane: 0
-    Time: 0
-    PrefabType: 0
-    Connect: 0
-  StartPosition: {x: 0, y: 0, z: 0}
-  MoveAmount: 0

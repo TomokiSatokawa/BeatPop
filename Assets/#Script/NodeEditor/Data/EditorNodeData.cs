@@ -1,54 +1,31 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using InGame;
 using InGame.Node;
 using R3;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+
 namespace Editor
 {
-    public class EditorNodeData : SingletonMonoBehaviour<EditorNodeData>
+    /// <summary>
+    /// エディターでのノーツデータを管理
+    /// </summary>
+    public class EditorNodeData : EditorDataManagerBase<EditorNodeData>
     {
-        [SerializeField] private TextAsset _editFile;
-        [SerializeField] private Button _exportButton;
-        [SerializeField] private Button _importButton;
-        public List<NodeData> Nodes => _nodes;
         private List<NodeData> _nodes = new();
         private List<float> _sectionTime = new();
+        private readonly Subject<NodeData> _onRemove = new();
+        private readonly ReactiveProperty<NodeSaveData> _loadedFile = new();
+
+        public IReadOnlyList<NodeData> Nodes => _nodes;
         public IReadOnlyList<float> SectionTime => _sectionTime;
-        private Subject<NodeData> _onRemove = new();
         public Observable<NodeData> OnRemove => _onRemove;
-
-        private ReactiveProperty<NodeSaveData> _loadedFile = new();
         public ReadOnlyReactiveProperty<NodeSaveData> LoadedFile => _loadedFile;
-
-        private readonly double _epsilon = 0.0001;
-
-
-        public void Start()
-        {
-            _importButton.onClick.AddListener(OnImport);
-            _exportButton.onClick.AddListener(OnExport);
-        }
-
-        private async void FileLoad(string file)
-        {
-            var data = await NodeDataSerializer.AutoDeserialize(file);
-            if (data == null)
-            {
-                Debug.LogError("ファイル読み込みエラー");
-                return;
-            }
-            _nodes = data.Nodes;
-            _loadedFile.OnNext(data);
-        }
 
         public void AddNode(PoolPrefabType prefab, double time, int lean)
         {
-            if (_nodes.Exists(x => Math.Abs(x.Time - time) < _epsilon && x.Lane == lean)) return;
+            if (_nodes.Exists(x => Math.Abs(x.Time - time) < Epsilon && x.Lane == lean)) return;
 
             _nodes.Add(new NodeData()
             {
@@ -57,9 +34,10 @@ namespace Editor
                 PrefabType = prefab
             });
         }
+
         public void DeleteNode(double time, int lean)
         {
-            var targetNode = _nodes.FindIndex(x => Math.Abs(x.Time - time) < _epsilon && x.Lane == lean);
+            var targetNode = _nodes.FindIndex(x => Math.Abs(x.Time - time) < Epsilon && x.Lane == lean);
             if (targetNode == -1) return;
 
             _onRemove.OnNext(_nodes[targetNode]);
@@ -68,8 +46,7 @@ namespace Editor
 
         public void AddSection(float time)
         {
-            float tolerance = 0.0001f;
-            if (_sectionTime.Exists(t => Mathf.Abs(t - time) < tolerance))
+            if (_sectionTime.Exists(t => Mathf.Abs(t - time) < Epsilon))
                 return;
 
             _sectionTime.Add(time);
@@ -77,59 +54,34 @@ namespace Editor
 
         public void RemoveSection(float time)
         {
-            float tolerance = 0.0001f;
-            int index = _sectionTime.FindIndex(t => Mathf.Abs(t - time) < tolerance);
+            int index = _sectionTime.FindIndex(t => Mathf.Abs(t - time) < Epsilon);
             if (index == -1)
                 return;
 
             _sectionTime.RemoveAt(index);
         }
 
-        public void OnImport()
+        protected override string GetSerializeJson()
         {
-#if UNITY_EDITOR
-            string path = EditorUtility.OpenFilePanel(
-               "Open Save Data",
-               "",
-               "json");
+            List<NodeData> nodes = FinalizeNodes(_nodes);
+            List<float> sectionTime = FinalizeSection(_sectionTime);
+            float bpm = StageTimeController.I.BPM;
+            int soundIndex = LoadedFile.CurrentValue.SoundIndex;
 
-            if (string.IsNullOrEmpty(path))
-                return;
-
-            string fileText = File.ReadAllText(path);
-
-            FileLoad(fileText);
-#endif
-        }
-        public void OnExport()
-        {
-#if UNITY_EDITOR
-            string path = EditorUtility.SaveFilePanel(
-                "Save Save Data",
-                "",
-                "SaveData",
-                "json");
-
-            if (string.IsNullOrEmpty(path))
-                return;
-
-            File.WriteAllText(path, NodeDataSerializer.SerializeJson(
-                FinalizeNodes(_nodes), FinalizeSection(_sectionTime),
-                StageTimeController.I.BPM, LoadedFile.CurrentValue.SoundIndex));
-#endif
+            return NodeDataSerializer.SerializeJson(nodes, sectionTime, bpm, soundIndex);
         }
         private List<NodeData> FinalizeNodes(List<NodeData> nodes)
         {
             List<NodeData> result = nodes.OrderBy(x => x.Time).ToList();
 
-            // NodeID振り直し
-            for (int i = 0; i < result.Count; i++)
-            {
-                var node = result[i];
-                node.NodeID = i;
-                result[i] = node;
-            }
+            AssignNodeIds(result);
+            ConnectHoldNotes(result);
 
+            return result;
+        }
+
+        private void ConnectHoldNotes(List<NodeData> result)
+        {
             // Hold接続
             for (int i = 0; i < result.Count; i++)
             {
@@ -163,8 +115,17 @@ namespace Editor
 
                 result[i] = startNode;
             }
+        }
 
-            return result;
+        private void AssignNodeIds(List<NodeData> result)
+        {
+            // NodeID振り直し
+            for (int i = 0; i < result.Count; i++)
+            {
+                var node = result[i];
+                node.NodeID = i;
+                result[i] = node;
+            }
         }
 
         private List<float> FinalizeSection(List<float> section)
@@ -175,6 +136,30 @@ namespace Editor
             }
 
             return section.OrderBy(x => x).ToList();
+        }
+
+        protected override async void DeserializeJson(string json)
+        {
+            var data = await NodeDataSerializer.AutoDeserialize(json);
+            if (data == null)
+            {
+                Debug.LogError("ファイル読み込みエラー");
+                return;
+            }
+            _nodes = data.Nodes;
+            _sectionTime = data.Section;
+            _loadedFile.OnNext(data);
+        }
+
+        protected override void CreateNewFile()
+        {
+            _nodes.Clear();
+            _sectionTime.Clear();
+            _loadedFile.Value = new()
+            {
+                BPM = 120f,
+                SongName = "デフォルト",
+            };
         }
     }
 }
