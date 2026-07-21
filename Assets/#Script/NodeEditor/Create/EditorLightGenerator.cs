@@ -67,7 +67,7 @@ namespace Editor
             var target = _clonedNode.Where(x => x.PatternBaseData == old).FirstOrDefault();
             if (target == null) return;
 
-            target.ChangeData(newData);
+            target.UpdatePatternData(newData);
         }
 
         public void RemoveNode((float time, float channel) data)

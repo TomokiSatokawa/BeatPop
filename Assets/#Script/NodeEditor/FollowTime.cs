@@ -2,6 +2,9 @@ using InGame;
 using UnityEngine;
 namespace Editor
 {
+    /// <summary>
+    /// StageTimeに合わせてタイムライン上の位置を変える
+    /// </summary>
     public class FollowTime : PoolObject
     {
         [SerializeField] protected RectTransform _rect;

@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 namespace Editor
 {
+    /// <summary>
+    /// エディターのマネージャー
+    /// </summary>
     public class EditorManager : SingletonMonoBehaviour<EditorManager>
     {
         [SerializeField] private SongListDataBase _songData;
@@ -58,6 +61,8 @@ namespace Editor
             _te.text = StageTimeController.StageTime.ToString("N2");
 
             StageTimeController.I.UpdateStageTime();
+
+            //データがなかったら動かさない
             if (EditorNodeData.I != null && EditorNodeData.I.LoadedFile.CurrentValue == null) return;
             if (EditorLightData.I != null && EditorLightData.I.LoadedFile.CurrentValue == null) return;
 
@@ -66,6 +71,11 @@ namespace Editor
                 _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / _audio.length));
             }
 
+            UpdateInput();
+        }
+
+        private void UpdateInput()
+        {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 if (StageTimeController.I.IsPlaying.CurrentValue)
@@ -78,15 +88,24 @@ namespace Editor
                 }
             }
 
-            //if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
-            //{
-            //    _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue + _keyMoveAmount ,0, _audioClip.length);
-            //}
+            float moveDirection = 0;
 
-            //if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-            //{
-            //    _editorTime.Value = Mathf.Clamp((float)EditorTime.CurrentValue - _keyMoveAmount ,0, _audioClip.length);
-            //}
+            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                moveDirection = 1;
+
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                moveDirection = -1;
+
+            if (moveDirection == 0) return;
+
+            float currentTime = StageTimeController.StageTime;
+            float songLength = StageTimeController.I.SongClip.length;
+
+            float targetTime = Mathf.Clamp(currentTime + _keyMoveAmount * moveDirection, 0, songLength);
+
+            float moveAmount = targetTime - currentTime;
+
+            StageTimeController.I.MoveStageTime(moveAmount);
         }
 
         public void OnBarChangeValue(float value)
