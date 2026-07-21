@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 namespace Editor.UI
 {
+    /// <summary>
+    /// ライトパターンのパラメータ設定UI
+    /// </summary>
     public class PatternSettingsControl : ScrollViewBase
     {
         [SerializeField] private SerializableDictionary<string, Color> _colorPallet;
@@ -17,7 +20,7 @@ namespace Editor.UI
         [SerializeField] private ValuePrefabControl _valuePrefab;
         [SerializeField] private SelectPrefabControl _selectPrefab;
 
-        private const string _truncateTarget = "LightPattern";
+        private const string TruncateTarget = "LightPattern";
         private LightPatternBaseData _currentSettingData;
         private List<Type> _patternTypes = new();
 
@@ -25,8 +28,6 @@ namespace Editor.UI
         {
             _clauseButton.onClick.RemoveAllListeners();
             _clauseButton.onClick.AddListener(() => _panelControl.OnHidden());
-
-            var baseType = typeof(LightPatternBase<LightPatternBaseData>);
 
             foreach (Type type in Assembly.GetAssembly(typeof(LightPatternBaseData)).GetTypes())
             {
@@ -96,71 +97,81 @@ namespace Editor.UI
 
             foreach (FieldInfo field in allFields)
             {
-                FieldInfo targetField = field;
+                if (field.FieldType == typeof(int))
+                    CreateIntField(data, field);
 
-                switch (field.FieldType.Name)
-                {
-                    case nameof(Int32):
-                        InstantiateContent(_valuePrefab)
-                            .SetData(true, targetField.Name, targetField.GetValue(data).ToString()
-                            , x => targetField.SetValue(data, int.Parse(x)));
-                        break;
-                    case nameof(Single):
-                        InstantiateContent(_valuePrefab)
-                        .SetData(false, targetField.Name, targetField.GetValue(data).ToString()
-                        , x => targetField.SetValue(data, float.Parse(x)));
-                        break;
-                    case nameof(String):
-                        int selectType = _patternTypes.FindIndex(x => x.FullName == targetField.GetValue(data).ToString());
+                else if (field.FieldType == typeof(float))
+                    CreateFloatField(data, field);
 
-                        InstantiateContent(_selectPrefab)
-                        .SetData(_patternTypes.Select(x => x.Name.Replace(_truncateTarget, "")).ToList(), targetField.Name, selectType
-                        , x =>
-                        {
-                            targetField.SetValue(data, _patternTypes[x].FullName);
-                            var newData = EditorLightData.I.ChangeType(data, GetParameterTypeFromPattern(_patternTypes[x]));
-                            EditorLightGenerator.I.UpdateData(data, newData);   
-                        });
-                        break;
-                    case nameof(ColorData):
-                        int selectIndex = -1;
-                        Color selectColor = ((ColorData)targetField.GetValue(data)).GetColor();
+                else if (field.FieldType == typeof(string))
+                    CreatePatternField(data, field);
 
-                        int i = 0;
-                        foreach (var kv in _colorPallet.Items)
-                        {
-                            if (kv.Value == selectColor)
-                            {
-                                break;
-                            }
-                            i++;
-                        }
-                        InstantiateContent(_selectPrefab)
-                      .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, i
-                      , x => targetField.SetValue(data, new ColorData(_colorPallet.Items[x].Value)));
-                        break;
+                else if (field.FieldType == typeof(ColorData))
+                    CreateColorField(data, field);
 
-                    default:
-                        if (targetField.FieldType.IsEnum)
-                        {
-                            var enumNames = Enum.GetNames(targetField.FieldType).ToList();
-                            var currentValue = targetField.GetValue(data);
-                            int selectedIndex = Array.IndexOf(Enum.GetValues(targetField.FieldType), currentValue);
-
-                            InstantiateContent(_selectPrefab)
-                                .SetData(
-                                    enumNames,
-                                    targetField.Name,
-                                    selectedIndex,
-                                    x =>
-                                    {
-                                        var value = Enum.GetValues(targetField.FieldType).GetValue(x);
-                                        targetField.SetValue(data, value);
-                                    });
-                        }
-                        break;
-                }
+                else if (field.FieldType.IsEnum)
+                    CreateEnumField(data, field);
             }
+        }
+
+        private void CreatePatternField(LightPatternBaseData data, FieldInfo targetField)
+        {
+            int selectType = _patternTypes.FindIndex(x => x.FullName == targetField.GetValue(data).ToString());
+
+            InstantiateContent(_selectPrefab)
+            .SetData(_patternTypes.Select(x => x.Name.Replace(TruncateTarget, "")).ToList(), targetField.Name, selectType
+            , x =>
+            {
+                targetField.SetValue(data, _patternTypes[x].FullName);
+                var newData = EditorLightData.I.ChangeType(data, GetParameterTypeFromPattern(_patternTypes[x]));
+                EditorLightGenerator.I.UpdateData(data, newData);
+            });
+        }
+
+        private void CreateColorField(LightPatternBaseData data, FieldInfo targetField)
+        {
+            Color selectColor = ((ColorData)targetField.GetValue(data)).GetColor();
+
+            int i = 0;
+            foreach (var kv in _colorPallet.Items)
+            {
+                if (kv.Value == selectColor)
+                {
+                    break;
+                }
+                i++;
+            }
+            InstantiateContent(_selectPrefab)
+          .SetData(_colorPallet.Items.Select(x => x.Key).ToList(), targetField.Name, i
+          , x => targetField.SetValue(data, new ColorData(_colorPallet.Items[x].Value)));
+        }
+
+        private void CreateEnumField(LightPatternBaseData data, FieldInfo targetField)
+        {
+            var enumNames = Enum.GetNames(targetField.FieldType).ToList();
+            var currentValue = targetField.GetValue(data);
+            int selectedIndex = Array.IndexOf(Enum.GetValues(targetField.FieldType), currentValue);
+
+            InstantiateContent(_selectPrefab).SetData(enumNames, targetField.Name, selectedIndex,
+                    x =>
+                    {
+                        var value = Enum.GetValues(targetField.FieldType).GetValue(x);
+                        targetField.SetValue(data, value);
+                    });
+        }
+
+        private void CreateFloatField(LightPatternBaseData data, FieldInfo targetField)
+        {
+            InstantiateContent(_valuePrefab)
+            .SetData(false, targetField.Name, targetField.GetValue(data).ToString()
+            , x => targetField.SetValue(data, float.Parse(x)));
+        }
+
+        private void CreateIntField(LightPatternBaseData data, FieldInfo targetField)
+        {
+            InstantiateContent(_valuePrefab)
+                .SetData(true, targetField.Name, targetField.GetValue(data).ToString()
+                , x => targetField.SetValue(data, int.Parse(x)));
         }
     }
 }
