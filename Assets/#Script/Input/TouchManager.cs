@@ -1,31 +1,30 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace Input
 {
+    /// <summary>
+    /// タッチ入力の計算
+    /// </summary>
     public class TouchManager : MonoBehaviour
     {
         [SerializeField] private float _flickMoveAmount;
         private FloatRange _laneY;
+
+        //2レーン固定
         private FloatRange _lane0;
         private FloatRange _lane1;
-        private FloatRange _lane2;
-        private FloatRange _lane3;
 
         private void Start()
         {
             int width = Screen.width;
             int height = Screen.height;
 
-            _laneY.Min = 0;
-            _laneY.Max = height / 2;
-
-            _lane0.Min = 0;
-            _lane0.Max = width / 2;
-
-            _lane1.Min = width / 2;
-            _lane1.Max = width;
-
+            _laneY = new(0, height / 2);
+            _lane0 = new(0, width / 2);
+            _lane1 = new(width / 2, width);
         }
+
         public int TapLane(Vector2 pos)
         {
             if (!_laneY.Contains(pos.y)) return -1;
@@ -35,16 +34,26 @@ namespace Input
 
             return -1;
         }
-        public bool IsFlick(Vector2 start,Vector3 end)
+
+        public bool IsFlick(Vector2 start, Vector2 end)
         {
             return end.y - start.y > _flickMoveAmount;
         }
     }
+
     [System.Serializable]
-    public struct FloatRange
+    public readonly struct FloatRange
     {
-        public float Min;
-        public float Max;
+        public float Min { get; }
+        public float Max { get; }
+        public FloatRange(float min , float max)
+        {
+            if (min > max)
+                (min, max) = (max, min);
+
+            Min = min;
+            Max = max;
+        }
         public bool Contains(float value)
         {
             return value >= Min && value <= Max;

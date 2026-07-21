@@ -1,5 +1,5 @@
+using System;
 using R3;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -7,59 +7,99 @@ using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Input
 {
-    public class InputManager : SingletonMonoBehaviour<InputManager>
+    /// <summary>
+    /// InGameÇÃì¸óÕÇä«óù
+    /// </summary>
+    public class InputManager : MonoBehaviour
     {
-        public TextMeshProUGUI _text;
         [SerializeField] private TouchManager _touchManager;
-        private static GameInputs GameInputs;
 
-        private static ReactiveProperty<bool> _rightLane = new();
-        public static ReadOnlyReactiveProperty<bool> RightLane => _rightLane;
-        private static ReactiveProperty<bool> _leftLane = new();
-        public static ReadOnlyReactiveProperty<bool> LeftLane => _leftLane;
-        private static ReactiveProperty<bool> _flickLeftLane = new();
-        public static ReadOnlyReactiveProperty<bool> FlickLeftLane => _flickLeftLane;
-        private static ReactiveProperty<bool> _flickRightLane = new();
-        public static ReadOnlyReactiveProperty<bool> FlickRightLane => _flickRightLane;
-
-        private static ReactiveProperty<bool> _pauseButton = new();
-        public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
-
-        private static Subject<int> _onFlick = new();
-        public static Observable<int> OnFlick => _onFlick;
-
+        private static GameInputs _gameInputs;
         private static TouchState[] _touchState;
 
-        public override void Awake()
+        private readonly static ReactiveProperty<bool> _rightLane = new();
+        private readonly static ReactiveProperty<bool> _leftLane = new();
+        private readonly static ReactiveProperty<bool> _flickLeftLane = new();
+        private readonly static ReactiveProperty<bool> _flickRightLane = new();
+        private readonly static ReactiveProperty<bool> _pauseButton = new();
+        private readonly static Subject<int> _onFlick = new();
+
+        public static ReadOnlyReactiveProperty<bool> RightLane => _rightLane;
+        public static ReadOnlyReactiveProperty<bool> LeftLane => _leftLane;
+        public static ReadOnlyReactiveProperty<bool> FlickLeftLane => _flickLeftLane;
+        public static ReadOnlyReactiveProperty<bool> FlickRightLane => _flickRightLane;
+        public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
+        public static Observable<int> OnFlick => _onFlick;
+
+        private Action _disableAction;
+
+        public void Awake()
         {
-            GameInputs = new();
+            _gameInputs = new();
 
-            GameInputs.Player.RightKey.performed += OnRightKey;
-            GameInputs.Player.RightKey.canceled += OnRightKey;
-
-            GameInputs.Player.LeftKey.performed += OnLeftKey;
-            GameInputs.Player.LeftKey.canceled += OnLeftKey;
-
-            GameInputs.Player.RightFlick.performed += OnFlickRightKey;
-            GameInputs.Player.RightFlick.canceled += OnFlickRightKey;
-
-            GameInputs.Player.LeftFlick.performed += OnFlickLeftKey;
-            GameInputs.Player.LeftFlick.canceled += OnFlickLeftKey;
-
-            GameInputs.Player.Pause.performed += OnPauseKey;
-            GameInputs.Player.Pause.canceled += OnPauseKey;
+            RegisterAction(_gameInputs.Player.RightKey, OnRightKey);
+            RegisterAction(_gameInputs.Player.LeftKey, OnLeftKey);
+            RegisterAction(_gameInputs.Player.RightFlick, OnFlickRightKey);
+            RegisterAction(_gameInputs.Player.LeftFlick, OnFlickLeftKey);
+            RegisterAction(_gameInputs.Player.Pause, OnPauseKey);
 
             _touchState = new TouchState[4];
 
-            GameInputs.Player.Touch_0.performed += c => OnTouch(c, ref _touchState[0]);
-            GameInputs.Player.Touch_1.performed += c => OnTouch(c, ref _touchState[1]);
-            GameInputs.Player.Touch_2.performed += c => OnTouch(c, ref _touchState[2]);
-            GameInputs.Player.Touch_3.performed += c => OnTouch(c, ref _touchState[3]);
+            RegisterTouchAction(_gameInputs.Player.Touch_0, 0);
+            RegisterTouchAction(_gameInputs.Player.Touch_1, 1);
+            RegisterTouchAction(_gameInputs.Player.Touch_2, 2);
+            RegisterTouchAction(_gameInputs.Player.Touch_3, 3);
 
-            GameInputs.Enable();
+            _gameInputs.Enable();
         }
 
-        public void OnRightKey(InputAction.CallbackContext context)
+        private void RegisterAction(InputAction input, Action<InputAction.CallbackContext> action)
+        {
+            input.performed += action;
+            input.canceled += action;
+
+            _disableAction += () => input.performed -= action;
+            _disableAction += () => input.canceled -= action;
+        }
+
+        private void RegisterTouchAction(InputAction input, int index)
+        {
+            Action<InputAction.CallbackContext> action = c => OnTouch(c, ref _touchState[index]);
+
+            input.performed += action;
+            input.canceled += action;
+
+            _disableAction += () => input.performed -= action;
+            _disableAction += () => input.canceled -= action;
+        }
+
+        public static void SetInputEnabled(bool enabled)
+        {
+            if (enabled)
+            {
+                _gameInputs.Player.RightKey.Enable();
+                _gameInputs.Player.LeftKey.Enable();
+                _gameInputs.Player.RightFlick.Enable();
+                _gameInputs.Player.LeftFlick.Enable();
+                _gameInputs.Player.Touch_0.Enable();
+                _gameInputs.Player.Touch_1.Enable();
+                _gameInputs.Player.Touch_2.Enable();
+                _gameInputs.Player.Touch_3.Enable();
+            }
+            else
+            {
+                _gameInputs.Player.RightKey.Disable();
+                _gameInputs.Player.LeftKey.Disable();
+                _gameInputs.Player.RightFlick.Disable();
+                _gameInputs.Player.LeftFlick.Disable();
+                _gameInputs.Player.Touch_0.Disable();
+                _gameInputs.Player.Touch_1.Disable();
+                _gameInputs.Player.Touch_2.Disable();
+                _gameInputs.Player.Touch_3.Disable();
+            }
+        }
+
+        private void OnRightKey(InputAction.CallbackContext context)
         {
             _rightLane.Value = context.started || context.performed;
             if (_rightLane.Value)
@@ -68,7 +108,7 @@ namespace Input
             }
         }
 
-        public void OnLeftKey(InputAction.CallbackContext context)
+        private void OnLeftKey(InputAction.CallbackContext context)
         {
             _leftLane.Value = context.started || context.performed;
             if (_leftLane.Value)
@@ -76,7 +116,8 @@ namespace Input
                 FlickCheck(0);
             }
         }
-        public void OnFlickRightKey(InputAction.CallbackContext context)
+
+        private void OnFlickRightKey(InputAction.CallbackContext context)
         {
             _flickRightLane.Value = context.started || context.performed;
             if (_flickRightLane.Value)
@@ -84,7 +125,8 @@ namespace Input
                 FlickCheck(1);
             }
         }
-        public void OnFlickLeftKey(InputAction.CallbackContext context)
+
+        private void OnFlickLeftKey(InputAction.CallbackContext context)
         {
             _flickLeftLane.Value = context.started || context.performed;
             if (_flickLeftLane.Value)
@@ -93,12 +135,12 @@ namespace Input
             }
         }
 
-        public void OnPauseKey(InputAction.CallbackContext context)
+        private void OnPauseKey(InputAction.CallbackContext context)
         {
             _pauseButton.Value = context.started || context.performed;
         }
 
-        public void OnTouch(InputAction.CallbackContext context, ref TouchState touchState)
+        private void OnTouch(InputAction.CallbackContext context, ref TouchState touchState)
         {
             touchState = context.ReadValue<TouchState>();
             switch (touchState.phase)
@@ -106,7 +148,6 @@ namespace Input
                 case TouchPhase.Began:
                 case TouchPhase.Ended:
 
-                    _text.text = touchState.startPosition.ToString();
                     int lane = _touchManager.TapLane(touchState.startPosition);
 
                     if (lane == 0)
@@ -133,32 +174,6 @@ namespace Input
             }
         }
 
-        public static void SetInputEnabled(bool enabled)
-        {
-            if (enabled)
-            {
-                GameInputs.Player.RightKey.Enable();
-                GameInputs.Player.LeftKey.Enable();
-                GameInputs.Player.RightFlick.Enable();
-                GameInputs.Player.LeftFlick.Enable();
-                GameInputs.Player.Touch_0.Enable();
-                GameInputs.Player.Touch_1.Enable();
-                GameInputs.Player.Touch_2.Enable();
-                GameInputs.Player.Touch_3.Enable();
-            }
-            else
-            {
-                GameInputs.Player.RightKey.Disable();
-                GameInputs.Player.LeftKey.Disable();
-                GameInputs.Player.RightFlick.Disable();
-                GameInputs.Player.LeftFlick.Disable();
-                GameInputs.Player.Touch_0.Disable();
-                GameInputs.Player.Touch_1.Disable();
-                GameInputs.Player.Touch_2.Disable();
-                GameInputs.Player.Touch_3.Disable();
-            }
-        }
-
         private void FlickCheck(int i)
         {
             if (i == 1 && RightLane.CurrentValue && FlickRightLane.CurrentValue)
@@ -171,9 +186,11 @@ namespace Input
                 _onFlick.OnNext(i);
             }
         }
-        private void OnDisable()
+
+        private void OnDestroy()
         {
-            GameInputs.Disable();
+            _disableAction?.Invoke();
+            _gameInputs.Disable();
         }
     }
 }
