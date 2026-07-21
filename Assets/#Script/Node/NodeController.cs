@@ -11,6 +11,7 @@ namespace InGame.Node
     {
         [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
+        [SerializeField] private float _goalPos;
 
         private readonly List<NodeObject> _nodes = new();
         private readonly List<NodeObject> _removeNodes = new();
@@ -46,9 +47,9 @@ namespace InGame.Node
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
-                Vector3 startPosition = node.StartPosition;
+                Vector3 startPosition = node.StartPosition;//TODO:StageSO‚ÆNodeObject.NodeData.Lane‚ÅŽæ“¾‚·‚é
                 Vector3 endPosition = startPosition;
-                endPosition.z = node.GoalPos;
+                endPosition.z = _goalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
             }
         }
@@ -59,7 +60,7 @@ namespace InGame.Node
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                    _nodeHitExecutor.RemoveAction(node);
+                    _nodeHitExecutor.HandleRemove(node);
                 }
                 node.Release();
                 _nodes.Remove(node);
@@ -104,7 +105,7 @@ namespace InGame.Node
         {
             targetNode.Release();
             _nodes.Remove(targetNode);
-            _nodeHitExecutor.HitAction(targetNode);
+            _nodeHitExecutor.HandleHit(targetNode);
         }
 
         public NodeObject GetClonedNode(int nodeID)

@@ -2,7 +2,9 @@ using UnityEngine;
 
 namespace InGame.Node
 {
-
+    /// <summary>
+    /// îªíËÉfÅ[É^
+    /// </summary>
     [CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
     public class NodeJudgement : ScriptableObject
     {
@@ -10,8 +12,14 @@ namespace InGame.Node
         public float DeleteTime;
         public JudgementData[] JudgementDatas;
 
-        public IReadOnlyJudgementData JudgementDifference(float difference)
+        public IReadOnlyJudgementData GetJudgement(float difference)
         {
+            if (JudgementDatas == null || JudgementDatas.Length == 0)
+            {
+                Debug.LogError("[NodeJudgement] JudgementDatas is empty.");
+                return null;
+            }
+
             float absDiff = Mathf.Abs(difference);
 
             foreach (var judgement in JudgementDatas)

@@ -22,7 +22,7 @@ namespace InGame.Node
                 Debug.LogError($"[JudgementTable] Judgement is not found. Type:{type}");
                 return null;
             }
-            return judgementData.JudgementDifference(difference);
+            return judgementData.GetJudgement(difference);
         }
     }
 }

@@ -80,10 +80,13 @@ namespace InGame.UI
 
         private void OnDestroy()
         {
-            _pauseUIControl.OnStartCountDown -= GameManager.I.ReStartCountDown;
-            _pauseUIControl.OnReStart -= GameManager.I.ReStartStage;
-            _pauseUIControl.OnRetry -= GameManager.I.Retry;
-            _pauseUIControl.OnReturnTitle -= GameManager.I.ReturnTitle;
+            if (_pauseUIControl != null)
+            {
+                _pauseUIControl.OnStartCountDown -= GameManager.I.ReStartCountDown;
+                _pauseUIControl.OnReStart -= GameManager.I.ReStartStage;
+                _pauseUIControl.OnRetry -= GameManager.I.Retry;
+                _pauseUIControl.OnReturnTitle -= GameManager.I.ReturnTitle;
+            }
         }
     }
 }

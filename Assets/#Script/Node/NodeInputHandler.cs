@@ -15,47 +15,54 @@ namespace InGame.Node
         [SerializeField] private HoldNodeFillManager _holdNodeFillManager;
         [SerializeField] private LaneClickEffect _laneClick;
 
-        void Start()
+        private void Start()
         {
-            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => ClickLane(0, b, false)).AddTo(this);
-            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => ClickLane(1, b, false)).AddTo(this);
-            InputManager.OnFlick.Subscribe(x => ClickLane(x, false, true)).AddTo(this);
+            SubscribeInput();
         }
-        public void ClickLane(int lane, bool isClick, bool isFlick)
+
+        private void SubscribeInput()
+        {
+            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => HandleLaneInput(0, b, false)).AddTo(this);
+            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => HandleLaneInput(1, b, false)).AddTo(this);
+            InputManager.OnFlick.Subscribe(x => HandleLaneInput(x, false, true)).AddTo(this);
+        }
+
+        private void HandleLaneInput(int lane, bool isClick, bool isFlick)
         {
             var node = _nodeController.GetClickNode(lane);
-            if (node != null)
-            {
-                InputType inputType = GetInputType(isClick, isFlick);
 
-                if (node.NodeObjData.InputType == inputType)
-                {
-                    _nodeController.ClickNode(node);
-                    return;
-                }
+            if (IsClickNode(isClick, isFlick, node))
+            {
+                _nodeController.ClickNode(node);
+                return;
             }
+
             if (_holdNodeFillManager.HasFill(lane)) return;
 
-            bool nextFlick = node == null || node.NodeObjData.InputType != InputType.Flick;
+            bool isNextFlick = node?.NodeObjData.InputType == InputType.Flick;
 
-            if (isClick && nextFlick)
+            if (isClick && !isNextFlick)
                 EmptyClick(lane);
         }
 
-        private InputType GetInputType(bool isClick, bool isFlick)
+        private bool IsClickNode(bool isClick, bool isFlick, NodeObject node)
         {
-            InputType inputType = InputType.None;
+            if (node == null) return false;
 
+            InputType inputType = GetInputType(isClick, isFlick);
+            if (node.NodeObjData.InputType == inputType)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static InputType GetInputType(bool isClick, bool isFlick)
+        {
             if (isFlick)
-            {
-                inputType = InputType.Flick;
-            }
-            else
-            {
-                inputType = isClick ? InputType.Down : InputType.Up;
-            }
+                return InputType.Flick;
 
-            return inputType;
+            return isClick ? InputType.Down : InputType.Up;
         }
 
         private void EmptyClick(int lane)

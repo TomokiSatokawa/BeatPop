@@ -2,19 +2,16 @@ using UnityEngine;
 
 namespace InGame.Node
 {
+    /// <summary>
+    /// ノーツオブジェクトのデータ保持
+    /// </summary>
     public class NodeObject : PoolObject
     {
         [SerializeField] private NodeObjectData _objectData;
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
-        public NodeData NodeData;
-        public Vector3 StartPosition;
+        public NodeData NodeData { get; private set; }
+        public Vector3 StartPosition { get; private set; }
 
-        public float MoveAmount;
-        public float GoalPos => _goalZ;
-        private float _goalZ;
-        /// <summary>
-        /// arrivalSeconds秒後にtargetZへ到達する速度を計算
-        /// </summary>
         public void SetMoveData(NodeData data, Vector3 startPosition)
         {
             NodeData = data;
@@ -22,12 +19,5 @@ namespace InGame.Node
         }
 
         public virtual void Update() { }
-
-        public void SetGoal(float goalZ)
-        {
-            _goalZ = goalZ; float distance = StartPosition.z - _goalZ;
-            float remainTime = NodeData.Time - StageTimeController.StageTime;
-            MoveAmount = distance / remainTime;
-        }
     }
 }

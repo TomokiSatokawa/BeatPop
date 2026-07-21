@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace InGame.Node
 {
-
     /// <summary>
     /// ノーツのHit処理
     /// </summary>
@@ -16,7 +15,7 @@ namespace InGame.Node
     {
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
         [SerializeField] private LaneClickEffect _laneClick;
-        [SerializeField] private float _goalPos;
+        [SerializeField] private float _goalPos;//TODO:StageのSO
 
         private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
         public Observable<(IReadOnlyJudgementData Judge, int lane)> ShowJudge => _showJudge;
@@ -25,11 +24,12 @@ namespace InGame.Node
         {
             BeatUpdateManager.BeatUpdate.Subscribe(8, 0, _ =>
             {
-                HoldLane(0, InputManager.LeftLane.CurrentValue);
-                HoldLane(1, InputManager.RightLane.CurrentValue);
+                ExecuteHoldJudge(0, InputManager.LeftLane.CurrentValue);
+                ExecuteHoldJudge(1, InputManager.RightLane.CurrentValue);
             });
         }
-        public void HitAction(NodeObject targetNode)
+
+        public void HandleHit(NodeObject targetNode)
         {
             if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
             {
@@ -43,47 +43,51 @@ namespace InGame.Node
             tapEffect.transform.position = pos;
 
             //ジャッチUI
-            var judgeData = JudgeNode(targetNode);
-            _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
+            var judgeData = ExecuteJudgeNode(targetNode.NodeData);
 
             _laneClick.PlayNodeClickEffect(targetNode.NodeData.Lane);
 
+            //SE
             var se = InGameCustomSoundData.I.NodeSE[targetNode.Type];
             SoundManager.SE.PlaySE(se, judgeData.TapSEVolume);
         }
 
-        private static IReadOnlyJudgementData JudgeNode(NodeObject targetNode)
+        public void HandleRemove(NodeObject targetNode)
         {
-            float difference = targetNode.NodeData.Time - StageTimeController.StageTime;
-            var judgeData = ScoreDataManager.I.RecordJudge(targetNode.NodeData, difference);
-            return judgeData;
-        }
+            ExecuteJudgeNode(targetNode.NodeData);
 
-        public void RemoveAction(NodeObject targetNode)
-        {
-            var judgeData = JudgeNode(targetNode);
-
-            _showJudge.OnNext((judgeData, targetNode.NodeData.Lane));
             if (targetNode.Type == PoolPrefabType.HoldNoteEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
         }
-        public void HoldLane(int lane, bool isHold)
-        {
-            if (_nodeFillManager.HasFill(lane))
-            {
-                var nodeData = new NodeData()
-                {
-                    Lane = lane,
-                    Time = StageTimeController.StageTime,
-                    PrefabType = PoolPrefabType.HoldNoteFill,
-                };
 
-                float difference = isHold ? 0 : float.MaxValue;
-                var judgeData = ScoreDataManager.I.RecordJudge(nodeData, difference);
-                _showJudge.OnNext((judgeData, lane));
-            }
+        public void ExecuteHoldJudge(int lane, bool isHold)
+        {
+            if (!_nodeFillManager.HasFill(lane)) return;
+
+            var nodeData = new NodeData()
+            {
+                Lane = lane,
+                Time = StageTimeController.StageTime,
+                PrefabType = PoolPrefabType.HoldNoteFill,
+            };
+
+            float difference = isHold ? 0 : float.MaxValue;
+            ExecuteJudgeNode(nodeData, difference);
+        }
+
+        private IReadOnlyJudgementData ExecuteJudgeNode(NodeData nodeData)
+        {
+            float difference = nodeData.Time - StageTimeController.StageTime;
+            return ExecuteJudgeNode(nodeData, difference);
+        }
+
+        private IReadOnlyJudgementData ExecuteJudgeNode(NodeData nodeData, float difference)
+        {
+            var judgeData = ScoreDataManager.I.RecordJudge(nodeData, difference);
+            _showJudge.OnNext((judgeData, nodeData.Lane));
+            return judgeData;
         }
     }
 }

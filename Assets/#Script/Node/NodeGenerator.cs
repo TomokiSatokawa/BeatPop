@@ -113,7 +113,6 @@ namespace InGame.Node
             newObject.transform.rotation = Quaternion.identity;
 
             newObject.SetMoveData(nodeData, startPosition);
-            newObject.SetGoal(_goalZ);
             _nodeController.AddNode(newObject);
             return newObject;
         }
@@ -125,26 +124,10 @@ namespace InGame.Node
         {
             var holdObject = CreateNodeObject<NodeObject>(nodeData);
 
-            //èIóπÉmÅ[ÉcÇíTÇ∑ î]ãÿVer
             int endIndex = -1;
-
-            //for (int j = nodeData.NodeID + 1; j < NodeDataList.Count; j++)
-            //{
-            //    var node = NodeDataList[j];
-
-            //    if (node.Lane != nodeData.Lane)
-            //        continue;
-
-            //    if (node.PrefabType == PoolPrefabType.HoldNoteEnd)
-            //    {
-            //        endIndex = j;
-            //        break;
-            //    }
-            //}
-
             endIndex = nodeData.Connect;
 
-            if (endIndex < 0)
+            if (endIndex < 0 || endIndex >= _nodeDataList.Count)
             {
                 Debug.LogError($"HoldEnd is not found. StartNodeID:{nodeData.NodeID}");
                 return;

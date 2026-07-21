@@ -2,7 +2,9 @@ using UnityEngine;
 
 namespace InGame.Node
 {
-
+    /// <summary>
+    /// ノーツごとの設定データ
+    /// </summary>
     [System.Serializable]
     public class NodeObjectData : IReadOnlyNodeObjectData
     {
