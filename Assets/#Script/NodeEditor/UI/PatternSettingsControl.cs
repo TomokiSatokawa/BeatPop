@@ -6,9 +6,9 @@ using Common.UI;
 using InGame.Stage;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace Editor.UI
 {
-
     public class PatternSettingsControl : ScrollViewBase
     {
         [SerializeField] private SerializableDictionary<string, Color> _colorPallet;

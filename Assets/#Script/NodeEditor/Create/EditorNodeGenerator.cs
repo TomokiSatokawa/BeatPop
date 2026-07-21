@@ -3,65 +3,77 @@ using InGame.Node;
 using R3;
 using UnityEngine;
 
-public class EditorNodeGenerator : EditorGeneratorBase<EditorNodeGenerator>
+namespace Editor
 {
-    [SerializeField] private RectTransform _content;
-    [SerializeField] private RectTransform[] _lean;
-
-    private readonly Dictionary<NodeData, FollowTime> _clonedNode = new();
-    public void Start()
+    /// <summary>
+    /// ÉmÅ[ÉcÇÃï\é¶
+    /// </summary>
+    public class EditorNodeGenerator : EditorGeneratorBase<EditorNodeGenerator>
     {
-        EditorNodeData.I.OnRemove.Subscribe(x => RemoveNode(x)).AddTo(this);
-    }
+        [SerializeField] private RectTransform _content;
+        [SerializeField] private RectTransform[] _lean;
 
-    protected override void UpdateInRange(double minTime, double maxTime)
-    {
-        List<NodeData> removeNode = new();
+        private readonly Dictionary<NodeData, FollowTime> _clonedNode = new();
 
-        foreach (var node in _clonedNode.Keys)
+        private void Start()
         {
-            if (node.Time < minTime || node.Time > maxTime)
+            EditorNodeData.I.OnRemove.Subscribe(x => RemoveNode(x)).AddTo(this);
+        }
+
+        protected override void UpdateInRange(double minTime, double maxTime)
+        {
+            List<NodeData> removeNodes = new();
+
+            foreach (var node in _clonedNode.Keys)
             {
-                _clonedNode[node].Release();
-                removeNode.Add(node);
+                if (node.Time < minTime || node.Time > maxTime)
+                {
+                    removeNodes.Add(node);
+                }
+            }
+
+            foreach (var remove in removeNodes)
+            {
+                if (!_clonedNode.TryGetValue(remove, out var poolObject))
+                    continue;
+
+                poolObject.Release();
+                _clonedNode.Remove(remove);
+            }
+
+            foreach (var node in EditorNodeData.I.Nodes)
+            {
+                RenderNode(minTime, maxTime, node, PoolPrefabType.EditorNote);
+            }
+
+            foreach (var section in EditorNodeData.I.SectionTime)
+            {
+                var node = new NodeData()
+                {
+                    Time = section,
+                    Lane = 0,
+                    PrefabType = PoolPrefabType.SectionNode
+                };
+
+                RenderNode(minTime, maxTime, node, PoolPrefabType.SectionNode);
             }
         }
 
-        foreach (var remove in removeNode)
-        {
-            _clonedNode.Remove(remove);
-        }
-
-        foreach (var node in EditorNodeData.I.Nodes)
-        {
-            NodeRendering(node, PoolPrefabType.EditorNote);
-        }
-
-        foreach (var section in EditorNodeData.I.SectionTime)
-        {
-            var node = new NodeData()
-            {
-                Time = section,
-                Lane = 0,
-                PrefabType = PoolPrefabType.SectionNode
-            };
-
-            NodeRendering(node, PoolPrefabType.SectionNode);
-        }
-
-        void NodeRendering(NodeData node, PoolPrefabType editorNote)
+        private void RenderNode(double minTime, double maxTime, NodeData node, PoolPrefabType editorNote)
         {
             if (node.Time < minTime || node.Time > maxTime)
                 return;
             if (_clonedNode.ContainsKey(node)) return;
 
-            var newNode = PoolManager.I.Get<EditorNode>(editorNote, _content);
+            var newNode = CreateNode(node, editorNote);
 
-            newNode.LeanY = _lean[node.Lane].anchoredPosition.y;
-            newNode.Time = node.Time;
-            newNode.Data = node;
-            newNode.gameObject.name = $"NormalNode {node.NodeID}";
+            ApplyNodeColor(node, newNode);
 
+            _clonedNode.Add(node, newNode);
+        }
+
+        private void ApplyNodeColor(NodeData node, EditorNode newNode)
+        {
             switch (node.PrefabType)
             {
                 case PoolPrefabType.NormalNote:
@@ -83,16 +95,26 @@ public class EditorNodeGenerator : EditorGeneratorBase<EditorNodeGenerator>
                     newNode.ChangeColor(Color.gray);
                     break;
             }
-
-            _clonedNode.Add(node, newNode);
         }
-    }
 
-    public void RemoveNode(NodeData node)
-    {
-        Debug.Log(node + "Remove");
-        FollowTime poolObject = _clonedNode[node];
-        poolObject.Release();
-        _clonedNode.Remove(node);
+        private EditorNode CreateNode(NodeData node, PoolPrefabType editorNote)
+        {
+            var newNode = PoolManager.I.Get<EditorNode>(editorNote, _content);
+
+            newNode.LeanY = _lean[node.Lane].anchoredPosition.y;
+            newNode.Time = node.Time;
+            newNode.Data = node;
+            newNode.gameObject.name = $"{node.PrefabType} {node.NodeID}";
+            return newNode;
+        }
+
+        public void RemoveNode(NodeData node)
+        {
+            if (!_clonedNode.TryGetValue(node, out var poolObject))
+                return;
+
+            poolObject.Release();
+            _clonedNode.Remove(node);
+        }
     }
 }

@@ -5,48 +5,51 @@ using InGame;
 using R3;
 using Sound;
 using UnityEngine;
-public class EditorNodeSound : MonoBehaviour
+namespace Editor
 {
-    private List<NodeData> _soundTimeData;
-    public void Start()
+    public class EditorNodeSound : MonoBehaviour
     {
-        StageTimeController.I.IsPlaying
-            .Where(x => x)
-            .Subscribe(_ => UpdateNodeData())
-            .AddTo(this);
-    }
-    public void UpdateNodeData()
-    {
-        _soundTimeData = new();
-        foreach (var nodeData in EditorNodeData.I.Nodes)
+        private List<NodeData> _soundTimeData;
+        public void Start()
         {
-            if (nodeData.Time < StageTimeController.StageTime)
+            StageTimeController.I.IsPlaying
+                .Where(x => x)
+                .Subscribe(_ => UpdateNodeData())
+                .AddTo(this);
+        }
+        public void UpdateNodeData()
+        {
+            _soundTimeData = new();
+            foreach (var nodeData in EditorNodeData.I.Nodes)
             {
-                continue;
-            }
+                if (nodeData.Time < StageTimeController.StageTime)
+                {
+                    continue;
+                }
                 _soundTimeData.Add(nodeData);
-        }
-        _soundTimeData = _soundTimeData.OrderBy(x => x.Time).ToList();
-    }
-    void Update()
-    {
-        if (!StageTimeController.I.IsPlaying.CurrentValue) return;
-        List<NodeData> removeList = new();
-
-        foreach (var nodeData in _soundTimeData)
-        {
-            if (nodeData.Time <= StageTimeController.StageTime)
-            {
-                SoundManager.SE.PlaySE(SESoundType.Tap1);
-                removeList.Add(nodeData);
-                continue;
             }
-            break;
+            _soundTimeData = _soundTimeData.OrderBy(x => x.Time).ToList();
         }
-
-        foreach (var nodeData in removeList)
+        void Update()
         {
-            _soundTimeData.Remove(nodeData);
+            if (!StageTimeController.I.IsPlaying.CurrentValue) return;
+            List<NodeData> removeList = new();
+
+            foreach (var nodeData in _soundTimeData)
+            {
+                if (nodeData.Time <= StageTimeController.StageTime)
+                {
+                    SoundManager.SE.PlaySE(SESoundType.Tap1);
+                    removeList.Add(nodeData);
+                    continue;
+                }
+                break;
+            }
+
+            foreach (var nodeData in removeList)
+            {
+                _soundTimeData.Remove(nodeData);
+            }
         }
     }
 }

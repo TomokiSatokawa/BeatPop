@@ -1,22 +1,30 @@
 using InGame;
 using UnityEngine;
-public abstract class EditorGeneratorBase<T> : SingletonMonoBehaviour<T> where T:MonoBehaviour
+
+namespace Editor
 {
-    [SerializeField] private float _extraClone;
-
-    protected virtual void Update()
+    /// <summary>
+    /// エディターでの描画ベースクラス
+    /// </summary>
+    public abstract class EditorGeneratorBase<T> : SingletonMonoBehaviour<T> where T : MonoBehaviour
     {
-        double extraTime = _extraClone / EditorManager.I.Magnification;
+        [SerializeField] private float _extraClone;
 
-        double displayTime =
-            EditorManager.I.DisplayRange / EditorManager.I.Magnification;
+        private void Update()
+        {
+            double extraTime = _extraClone / EditorManager.I.Magnification;
 
-        double minTime = StageTimeController.StageTime - extraTime;
+            double displayTime =
+                EditorManager.I.DisplayRange / EditorManager.I.Magnification;
 
-        double maxTime = StageTimeController.StageTime + displayTime + extraTime;
+            double minTime = StageTimeController.StageTime - extraTime;
 
-        UpdateInRange(minTime, maxTime);
+            double maxTime = StageTimeController.StageTime + displayTime + extraTime;
+
+            UpdateInRange(minTime, maxTime);
+            OnUpdate();
+        }
+        protected abstract void UpdateInRange(double minTime, double maxTime);
+        protected virtual void OnUpdate() { }
     }
-
-    protected abstract void UpdateInRange(double minTime, double maxTime);
 }

@@ -96,7 +96,7 @@ namespace InGame
 
             if (StageTime >= EndTime + _resultDelay)
             {
-                _isPlaying.Value = false;
+                //_isPlaying.Value = false;
                 _onGameClear.OnNext(Unit.Default);
             }
         }

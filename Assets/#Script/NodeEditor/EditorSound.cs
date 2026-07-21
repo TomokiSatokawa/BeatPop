@@ -1,23 +1,25 @@
 using InGame;
 using R3;
 using UnityEngine;
-
-public class EditorSound : MonoBehaviour
+namespace Editor
 {
-    [SerializeField] private AudioSource _bgm;
-    void Start()
+    public class EditorSound : MonoBehaviour
     {
-        StageTimeController.I.IsPlaying.Where(b => b).Subscribe(_ => OnPlay()).AddTo(this);
-        StageTimeController.I.IsPlaying.Where(b => !b).Subscribe(_ => OnStop()).AddTo(this);  
-    }
-    public void OnPlay()
-    {
-        _bgm.clip = EditorManager.I.Audio;
-        _bgm.time = (float)StageTimeController.StageTime;
-        _bgm.PlayScheduled(AudioSettings.dspTime);
-    }
-    public void OnStop()
-    {
-        _bgm.Pause();
+        [SerializeField] private AudioSource _bgm;
+        void Start()
+        {
+            StageTimeController.I.IsPlaying.Where(b => b).Subscribe(_ => OnPlay()).AddTo(this);
+            StageTimeController.I.IsPlaying.Where(b => !b).Subscribe(_ => OnStop()).AddTo(this);
+        }
+        public void OnPlay()
+        {
+            _bgm.clip = EditorManager.I.Audio;
+            _bgm.time = (float)StageTimeController.StageTime;
+            _bgm.PlayScheduled(AudioSettings.dspTime);
+        }
+        public void OnStop()
+        {
+            _bgm.Pause();
+        }
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
-
-public class LineData : FollowTime
+namespace Editor
 {
-    public int Wide;
+    public class LineData : FollowTime
+    {
+        public int Wide;
+    }
 }
