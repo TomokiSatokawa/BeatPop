@@ -5,19 +5,15 @@ using UnityEngine.UI;
 
 namespace Editor
 {
+    /// <summary>
+    /// ÉmÅ[ÉcUI
+    /// </summary>
     public class EditorNode : FollowTime
     {
         [SerializeField] private Image _nodeImage;
-        private NodeData _data;
-        public NodeData Data
-        {
-            get { return _data; }
-            set
-            {
-                _data = value;
-            }
-        }
-        public float LeanY { get; set; }
+
+        public NodeData Data;
+        public float LeanY;
 
         public override void ChangePos()
         {

@@ -13,7 +13,7 @@ namespace Editor
         }
         public void OnPlay()
         {
-            _bgm.clip = EditorManager.I.Audio;
+            _bgm.clip = StageTimeController.I.SongClip;
             _bgm.time = (float)StageTimeController.StageTime;
             _bgm.PlayScheduled(AudioSettings.dspTime);
         }

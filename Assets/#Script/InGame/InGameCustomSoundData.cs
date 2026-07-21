@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Common.PlaySystem;
+using R3;
 using Sound;
 using UnityEngine;
 
@@ -16,7 +17,12 @@ namespace InGame
 
         void Start()
         {
-            CustomSoundPattern soundPattern = SongPlayContext.I.PatternData.SoundPattern;
+            StageTimeController.I.OnInitialized.Subscribe(_ => Initialize()).AddTo(this);
+        }
+
+        private void Initialize()
+        {
+            CustomSoundPattern soundPattern = SongPlayContext.I?.PatternData?.SoundPattern ?? _soundData.GetDefaultCustom();
 
             _nodeSE.Add(PoolPrefabType.NormalNote, _soundData.TapSE[soundPattern.NormalSE].Value);
             _nodeSE.Add(PoolPrefabType.FlickNote, _soundData.TapSE[soundPattern.FlickSE].Value);

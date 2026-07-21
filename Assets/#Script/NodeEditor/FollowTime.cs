@@ -18,6 +18,7 @@ namespace Editor
         {
             ChangePos();
         }
+
         public virtual void ChangePos()
         {
             var pos = _rect.anchoredPosition;

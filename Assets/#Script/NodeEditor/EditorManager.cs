@@ -1,11 +1,12 @@
 using Common;
 using Common.PlaySystem;
+using Cysharp.Threading.Tasks;
 using InGame;
 using R3;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 namespace Editor
 {
     /// <summary>
@@ -16,17 +17,15 @@ namespace Editor
         [SerializeField] private SongListDataBase _songData;
         [SerializeField] private Scrollbar _scrollBar;
         [SerializeField] private RectTransform _displayRange;
-        [SerializeField] private float _keyMoveAmount;
-        [SerializeField] private int _division;
         [SerializeField] private Difficulty _difficulty;
-        public TextMeshProUGUI _te;
-        public float DisplayRange => _displayRange.sizeDelta.x;
+        [SerializeField] private int _division;
         [SerializeField] private float _magnification;
+        public TextMeshProUGUI _te;
+
+        public float DisplayRange => _displayRange.sizeDelta.x;
         public float Magnification => _magnification;
         public int Division => _division;
 
-        private AudioClip _audio;
-        public AudioClip Audio => _audio;
         private void Start()
         {
             EditorNodeData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
@@ -35,27 +34,30 @@ namespace Editor
 
             ChangeDivisionCount(4);
         }
+
         public async void Initialize(NodeSaveData saveData)
         {
             if (saveData == null) return;
             GenerateSongPlayManager(saveData.SoundIndex);
             StageTimeController.I.SetPlayData(saveData);
-            await StageTimeController.I.SongLoadAsync();
-            StageTimeController.I.StartSongPlay();
-            StageTimeController.I.Pause();
-            _audio = _songData.GetSongData(saveData.SoundIndex).Audio;
-
+            await PrepareSongAsync();
         }
+
         public async void Initialize(StageSaveData saveData)
         {
             if (saveData == null) return;
             var data = GenerateSongPlayManager(saveData.SongDataIndex);
             StageTimeController.I.SetPlayData(data.BPM, 0, 0);
+            await PrepareSongAsync();
+        }
+
+        private async UniTask PrepareSongAsync()
+        {
             await StageTimeController.I.SongLoadAsync();
             StageTimeController.I.StartSongPlay();
             StageTimeController.I.Pause();
-            _audio = _songData.GetSongData(saveData.SongDataIndex).Audio;
         }
+
         private void Update()
         {
             _te.text = StageTimeController.StageTime.ToString("N2");
@@ -68,57 +70,23 @@ namespace Editor
 
             if (StageTimeController.I.IsPlaying.CurrentValue)
             {
-                _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / _audio.length));
+                _scrollBar.SetValueWithoutNotify((float)(StageTimeController.StageTime / StageTimeController.I.SongClip.length));
             }
-
-            UpdateInput();
-        }
-
-        private void UpdateInput()
-        {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                if (StageTimeController.I.IsPlaying.CurrentValue)
-                {
-                    StageTimeController.I.Pause();
-                }
-                else
-                {
-                    StageTimeController.I.ReStart();
-                }
-            }
-
-            float moveDirection = 0;
-
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-                moveDirection = 1;
-
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-                moveDirection = -1;
-
-            if (moveDirection == 0) return;
-
-            float currentTime = StageTimeController.StageTime;
-            float songLength = StageTimeController.I.SongClip.length;
-
-            float targetTime = Mathf.Clamp(currentTime + _keyMoveAmount * moveDirection, 0, songLength);
-
-            float moveAmount = targetTime - currentTime;
-
-            StageTimeController.I.MoveStageTime(moveAmount);
         }
 
         public void OnBarChangeValue(float value)
         {
-            float time = _audio.length * value;
+            float time = StageTimeController.I.SongClip.length * value;
             float moveAmount = time - StageTimeController.StageTime;
             StageTimeController.I.MoveStageTime(moveAmount);
         }
+
         public void ChangeDivisionCount(int count)
         {
             _division = count;
         }
-        public IReadOnlySongData GenerateSongPlayManager(int index)
+
+        private IReadOnlySongData GenerateSongPlayManager(int index)
         {
             if (SongPlayContext.I == null)
             {

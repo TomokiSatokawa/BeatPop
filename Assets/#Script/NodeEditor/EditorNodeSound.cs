@@ -5,11 +5,16 @@ using InGame;
 using R3;
 using Sound;
 using UnityEngine;
+
 namespace Editor
 {
+    /// <summary>
+    /// エディターでノーツの音を出す
+    /// </summary>
     public class EditorNodeSound : MonoBehaviour
     {
         private List<NodeData> _soundTimeData;
+
         public void Start()
         {
             StageTimeController.I.IsPlaying
@@ -39,7 +44,7 @@ namespace Editor
             {
                 if (nodeData.Time <= StageTimeController.StageTime)
                 {
-                    SoundManager.SE.PlaySE(SESoundType.Tap1);
+                    SoundManager.SE.PlaySE(InGameCustomSoundData.I.NodeSE[nodeData.PrefabType]);
                     removeList.Add(nodeData);
                     continue;
                 }

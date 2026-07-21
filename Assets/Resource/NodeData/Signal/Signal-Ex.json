@@ -153,24 +153,24 @@
         },
         {
             "NodeID": 21,
-            "Lane": 1,
-            "Time": 4.269230842590332,
-            "PrefabType": 3,
-            "Connect": 23
+            "Lane": 0,
+            "Time": 4.384615421295166,
+            "PrefabType": 2,
+            "Connect": 0
         },
         {
             "NodeID": 22,
-            "Lane": 0,
-            "Time": 4.269230842590332,
-            "PrefabType": 2,
-            "Connect": 0
+            "Lane": 1,
+            "Time": 4.384615421295166,
+            "PrefabType": 3,
+            "Connect": 23
         },
         {
             "NodeID": 23,
             "Lane": 1,
             "Time": 4.730769157409668,
             "PrefabType": 5,
-            "Connect": 21
+            "Connect": 22
         },
         {
             "NodeID": 24,

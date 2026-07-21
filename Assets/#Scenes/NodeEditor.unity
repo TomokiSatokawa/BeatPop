@@ -1804,6 +1804,7 @@ GameObject:
   - component: {fileID: 781383609}
   - component: {fileID: 781383610}
   - component: {fileID: 781383611}
+  - component: {fileID: 781383612}
   m_Layer: 0
   m_Name: Managaer
   m_TagString: Untagged
@@ -1826,11 +1827,10 @@ MonoBehaviour:
   _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _scrollBar: {fileID: 940475955}
   _displayRange: {fileID: 564475092}
-  _keyMoveAmount: 2
-  _division: 0
   _difficulty: 0
-  _te: {fileID: 385217892}
+  _division: 0
   _magnification: 1500
+  _te: {fileID: 385217892}
 --- !u!4 &781383601
 Transform:
   m_ObjectHideFlags: 0
@@ -1925,9 +1925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830fc5b62dc6ba34c8f5e98f6dd560a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorNodeData
-  _editFile: {fileID: 4900000, guid: 28a4e5c76ac2bee45a37389dc5269de7, type: 3}
   _exportButton: {fileID: 567384265}
   _importButton: {fileID: 1564401861}
+  _newFileButton: {fileID: 0}
 --- !u!114 &781383608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,6 +1981,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorRecording
   _channel: {fileID: 0}
+--- !u!114 &781383612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781383599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2661c7557a378fa47aec8db4bc80429c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Editor.EditorInput
+  _keyMoveAmount: 0.5
 --- !u!1 &846166893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,11 +2069,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846166893}
   m_CullTransparentMesh: 1
---- !u!82 &905021987 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1926607842076185705, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-  m_PrefabInstance: {fileID: 2118457279}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &940475953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2752,13 @@ MonoBehaviour:
   _rect: {fileID: 0}
   Time: 0
   _nodeImage: {fileID: 0}
+  Data:
+    NodeID: 0
+    Lane: 0
+    Time: 0
+    PrefabType: 0
+    Connect: 0
+  LeanY: 0
 --- !u!1 &1188152254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,7 +3717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EditorSound
   _bgm: {fileID: 2018820506}
-  _se: {fileID: 905021987}
 --- !u!114 &1395569576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5370,7 +5384,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1776976431665994775, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
       propertyPath: m_Name
