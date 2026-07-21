@@ -12,6 +12,7 @@ namespace InGame.Node
     public class HoldNodeFillManager : MonoBehaviour
     {
         [SerializeField] private Transform[] _lane;
+        [SerializeField]private JudgementTable _judgementTable;
         [SerializeField] private float _cloneZ;
         [SerializeField] private float _tapZ;
 
@@ -45,7 +46,7 @@ namespace InGame.Node
         {
             foreach (var fillData in _activeFillData.Values)
             {
-                if (fillData.StartNode.Lane == lane && fillData.StartNode.Time <= StageTimeController.StageTime)
+                if (fillData.StartNode.Lane == lane && fillData.StartNode.Time + _judgementTable.ToleranceValue <= StageTimeController.StageTime)
                 {
                     return true;
                 }

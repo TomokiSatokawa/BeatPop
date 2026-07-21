@@ -3897,7 +3897,6 @@ MonoBehaviour:
   - {fileID: 1032196361}
   _goalZ: -10
   _arrivalSeconds: 0.7
-  _isGenerating: 1
   _nodeFillRenderer: {fileID: 1252056267}
 --- !u!4 &1252056264
 Transform:
@@ -3928,6 +3927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
   _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
   _nodeHitExecutor: {fileID: 1252056269}
+  _goalPos: 0
 --- !u!114 &1252056267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3943,9 +3943,9 @@ MonoBehaviour:
   _lane:
   - {fileID: 840021716}
   - {fileID: 1032196361}
+  _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
   _cloneZ: 65.901
   _tapZ: -10
-  _deleteZ: -15
 --- !u!114 &1252056268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,7 +5422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fae223106fd7d4ebd292107c76bb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Input.InputManager
-  _text: {fileID: 208123497}
   _touchManager: {fileID: 1946836283}
 --- !u!114 &1946836281
 MonoBehaviour:
