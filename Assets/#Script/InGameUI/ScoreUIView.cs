@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.Score;
+using Title.SongSelect;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

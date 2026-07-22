@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class CustomPatternLoader : MonoBehaviour
+namespace Title.Custom
 {
-    [SerializeField] private CustomSoundData _customSoundData;
-    public PatternJsonData GetDefaultPattern()
+    public class CustomPatternLoader : MonoBehaviour
     {
-        PatternJsonData pattern = new();
-        pattern.SoundPattern = _customSoundData.GetDefaultCustom();
-        return pattern;
+        [SerializeField] private CustomSoundData _customSoundData;
+        public PatternJsonData GetDefaultPattern()
+        {
+            PatternJsonData pattern = new();
+            pattern.SoundPattern = _customSoundData.GetDefaultCustom();
+            return pattern;
+        }
     }
-}
 
-public class PatternJsonData
-{
-    public string PatternName = "デフォルト";
-    public string FillName;
-    public bool IsSelect;
-    public CustomSoundPattern SoundPattern;
+    public class PatternJsonData
+    {
+        public string PatternName = "デフォルト";
+        public string FillName;
+        public bool IsSelect;
+        public CustomSoundPattern SoundPattern;
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Common.UI;
+
 namespace Title.SongSelect
 {
     public class ContentsList : ScrollViewBase

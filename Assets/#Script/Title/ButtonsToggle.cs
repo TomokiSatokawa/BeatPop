@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Title
+namespace Title.Common
 {
     public class ButtonsToggle : MonoBehaviour
     {

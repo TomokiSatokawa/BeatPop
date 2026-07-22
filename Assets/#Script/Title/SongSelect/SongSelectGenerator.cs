@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Common.UI;
 using TMPro;
 using UnityEngine;
+
 namespace Title.SongSelect
 {
     public class SongSelectGenerator : ScrollViewBase

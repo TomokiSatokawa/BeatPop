@@ -4,6 +4,9 @@ using Common;
 using R3;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Title.SongSelect;
+using Title.Custom;
+
 namespace Title
 {
     public class TitleManager : SingletonMonoBehaviour<TitleManager>
