@@ -9,12 +9,13 @@ namespace Editor
     /// </summary>
     public class EditorLineGenerator : MonoBehaviour
     {
-        private const float HiddenPositionX = 10000f;
+        private const float HiddenPositionX = 10000f; 
+        private const double Epsilon = 0.00001;
         [SerializeField] private int[] _lineWidth;
         [SerializeField] private RectTransform _content;
         [SerializeField] private float _extraClone;
 
-        private readonly List<LineData> _clonedLine = new();
+        private readonly List<FollowTime> _clonedLine = new();
 
         private void Update()
         {
@@ -61,7 +62,7 @@ namespace Editor
                     if (exists)
                         continue;
 
-                    var lineData = PoolManager.I.Get<LineData>(
+                    var lineData = PoolManager.I.Get<FollowTime>(
                         PoolPrefabType.EditorLine,
                         _content);
 
@@ -73,36 +74,30 @@ namespace Editor
                     if (EditorManager.I.Division == 1)
                     {
                         width = _lineWidth[0];
-                        lineData.Wide = 1;
                     }
                     else if (EditorManager.I.Division == 4)
                     {
                         width = division == 0 ? _lineWidth[0] : _lineWidth[1];
-                        lineData.Wide = 4;
                     }
                     else
                     {
                         if (division == 0)
                         {
                             width = _lineWidth[0];
-                            lineData.Wide = 4;
                         }
                         else if (EditorManager.I.Division >= 4 &&
                                  division % (EditorManager.I.Division / 4) == 0)
                         {
                             width = _lineWidth[1];
-                            lineData.Wide = 4;
                         }
                         else if (EditorManager.I.Division >= 8 &&
                                  division % (EditorManager.I.Division / 8) == 0)
                         {
                             width = _lineWidth[2];
-                            lineData.Wide = 8;
                         }
                         else
                         {
                             width = _lineWidth[3];
-                            lineData.Wide = 16;
                         }
                     }
 
@@ -123,14 +118,21 @@ namespace Editor
                     line.Time < minTime ||
                     line.Time > maxTime;
 
-                bool tooDense = line.Wide > EditorManager.I.Division;
 
-                if (outOfRange || tooDense)
+                if (outOfRange || !IsVisibleLine(line.Time))
                 {
                     _clonedLine.RemoveAt(i);
                     line.Release();
                 }
             }
+        }
+
+        private bool IsVisibleLine(double time)
+        {
+            double interval = 60.0 / StageTimeController.I.BPM * (4.0 / EditorManager.I.Division);
+
+            return time % interval < Epsilon ||
+                   interval - (time % interval) < Epsilon;
         }
 
         private void CalculateRange(out double minTime, out double maxTime, out float barInterval, out float divisionInterval)

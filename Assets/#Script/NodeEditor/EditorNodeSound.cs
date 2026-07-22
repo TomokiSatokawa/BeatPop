@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using InGame.Node;
 using InGame;
+using InGame.Node;
 using R3;
 using Sound;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace Editor
     /// </summary>
     public class EditorNodeSound : MonoBehaviour
     {
-        private List<NodeData> _soundTimeData;
+        private Queue<NodeData> _soundTimeData;
 
         public void Start()
         {
@@ -24,36 +24,20 @@ namespace Editor
         }
         public void UpdateNodeData()
         {
-            _soundTimeData = new();
-            foreach (var nodeData in EditorNodeData.I.Nodes)
-            {
-                if (nodeData.Time < StageTimeController.StageTime)
-                {
-                    continue;
-                }
-                _soundTimeData.Add(nodeData);
-            }
-            _soundTimeData = _soundTimeData.OrderBy(x => x.Time).ToList();
+            _soundTimeData = new Queue<NodeData>(
+                EditorNodeData.I.Nodes
+                .Where(x => x.Time >= StageTimeController.StageTime)
+                .OrderBy(x => x.Time));
         }
         void Update()
         {
             if (!StageTimeController.I.IsPlaying.CurrentValue) return;
-            List<NodeData> removeList = new();
 
-            foreach (var nodeData in _soundTimeData)
+            while (_soundTimeData.Count > 0 && _soundTimeData.Peek().Time <= StageTimeController.StageTime)
             {
-                if (nodeData.Time <= StageTimeController.StageTime)
-                {
-                    SoundManager.SE.PlaySE(InGameCustomSoundData.I.NodeSE[nodeData.PrefabType]);
-                    removeList.Add(nodeData);
-                    continue;
-                }
-                break;
-            }
+                var nodeData = _soundTimeData.Dequeue();
 
-            foreach (var nodeData in removeList)
-            {
-                _soundTimeData.Remove(nodeData);
+                SoundManager.SE.PlaySE(InGameCustomSoundData.I.NodeSE[nodeData.PrefabType]);
             }
         }
     }

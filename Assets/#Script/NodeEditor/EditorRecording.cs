@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace Editor
 {
+    /// <summary>
+    /// エディターでキー入力で書き込む
+    /// </summary>
     public class EditorRecording : MonoBehaviour
     {
         [SerializeField] private Slider _channel;

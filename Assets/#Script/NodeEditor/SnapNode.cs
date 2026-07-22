@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 namespace Editor
 {
+    /// <summary>
+    /// クリックによるノーツ配置
+    /// </summary>
     public class SnapNode : MonoBehaviour
     {
         [SerializeField] private RectTransform _snapObjectParent;
@@ -17,7 +20,7 @@ namespace Editor
         [SerializeField] private UIPointerHover _fieldHover;
         [SerializeField] private PatternSettingsControl _patternSettingsControl;
 
-        private LightPatternBaseData _snapPattern = new LightPatternBaseData();
+        private LightPatternBaseData _previewPattern = new LightPatternBaseData();
         private EditMode _editMode = EditMode.None;
         private PoolPrefabType _prefabType;
 
@@ -35,13 +38,71 @@ namespace Editor
         public void OnLight()
         {
             _editMode = EditMode.Light;
-            _patternSettingsControl.ShowSettings(_snapPattern);
+            _patternSettingsControl.ShowSettings(_previewPattern);
         }
 
         public void Update()
         {
             if (_editMode == EditMode.None) return;
             if (!_fieldHover.IsPointerOver.CurrentValue) return;
+
+
+            if (!UpdatePointer(out var laneIndex, out var noteTime)) return;
+            UpdatePointerVisible();
+
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                CreateObject(laneIndex, noteTime);
+            }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                DeleteObject(laneIndex, noteTime);
+            }
+        }
+
+        private void DeleteObject(int laneIndex, double noteTime)
+        {
+            switch (_editMode)
+            {
+                case EditMode.Create:
+                    EditorNodeData.I.DeleteNode(noteTime, laneIndex);
+                    break;
+
+                case EditMode.Section:
+                    EditorNodeData.I.RemoveSection((float)noteTime);
+                    break;
+                case EditMode.Light:
+                    EditorLightData.I.RemoveLightPattern((float)noteTime, laneIndex);
+                    break;
+            }
+        }
+
+        private void CreateObject(int laneIndex, double noteTime)
+        {
+            switch (_editMode)
+            {
+                case EditMode.Create:
+                    EditorNodeData.I.AddNode(_prefabType, noteTime, laneIndex);
+                    break;
+
+                case EditMode.Section:
+                    EditorNodeData.I.AddSection((float)noteTime);
+                    break;
+                case EditMode.Light:
+                    var data = _previewPattern.Clone();
+                    data.Time = (float)noteTime;
+                    data.Channel = laneIndex;
+                    EditorLightData.I.AddLightPattern(data);
+                    break;
+            }
+        }
+
+        private bool UpdatePointer(out int laneIndex, out double noteTime)
+        {
+            laneIndex = 0;
+            noteTime = 0;
+
             Vector2 mousePos = Mouse.current.position.ReadValue();
 
             RectTransform parent = _snapObjectParent;
@@ -52,18 +113,13 @@ namespace Editor
                 null,
                 out Vector2 localMousePos);
 
-            _createPointer.gameObject.SetActive(_editMode == EditMode.Create);
-            _sectionPointer.gameObject.SetActive(_editMode == EditMode.Section);
-            _lightPointer.gameObject.SetActive(_editMode == EditMode.Light);
-
             Vector2 pos = localMousePos;
 
-            int laneIndex = GetLaneIndex();
-
+            laneIndex = GetLaneIndex();
             if (laneIndex == -1)
             {
                 _createPointer.gameObject.SetActive(false);
-                return;
+                return false;
             }
             Vector3 worldPos = _laneRect[laneIndex].TransformPoint(_laneRect[laneIndex].rect.center);
             Vector3 localPos = _snapObjectParent.InverseTransformPoint(worldPos);
@@ -71,56 +127,21 @@ namespace Editor
             pos.y = localPos.y;
 
             // X → Time
-            double noteTime =
-                StageTimeController.StageTime +
+            noteTime = StageTimeController.StageTime +
                 (localMousePos.x / EditorManager.I.Magnification);
-
             noteTime = SnapNodeTime(noteTime);
 
             // Time → X
             pos.x = (float)(noteTime - StageTimeController.StageTime)
                 * EditorManager.I.Magnification;
+            return true;
+        }
 
-            _sectionPointer.anchoredPosition = pos;
-            _createPointer.anchoredPosition = pos;
-            _lightPointer.anchoredPosition = pos;
-
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                switch (_editMode)
-                {
-                    case EditMode.Create:
-                        EditorNodeData.I.AddNode(_prefabType, noteTime, laneIndex);
-                        break;
-
-                    case EditMode.Section:
-                        EditorNodeData.I.AddSection((float)noteTime);
-                        break;
-                    case EditMode.Light:
-                        var data = _snapPattern.Clone();
-                        data.Time = (float)noteTime;
-                        data.Channel = laneIndex;
-                        EditorLightData.I.AddLightPattern(data);
-                        break;
-                }
-            }
-
-            if (Mouse.current.rightButton.wasPressedThisFrame)
-            {
-                switch (_editMode)
-                {
-                    case EditMode.Create:
-                        EditorNodeData.I.DeleteNode(noteTime, laneIndex);
-                        break;
-
-                    case EditMode.Section:
-                        EditorNodeData.I.RemoveSection((float)noteTime);
-                        break;
-                    case EditMode.Light:
-                        EditorLightData.I.RemoveLightPattern((float)noteTime, laneIndex);
-                        break;
-                }
-            }
+        private void UpdatePointerVisible()
+        {
+            _createPointer.gameObject.SetActive(_editMode == EditMode.Create);
+            _sectionPointer.gameObject.SetActive(_editMode == EditMode.Section);
+            _lightPointer.gameObject.SetActive(_editMode == EditMode.Light);
         }
 
         public static double SnapNodeTime(double noteTime)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8108474514801024626}
   - component: {fileID: 3965511079565920532}
   - component: {fileID: 6493291477468282189}
-  - component: {fileID: -8679495203122415245}
+  - component: {fileID: 1966277480479144369}
   m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-8679495203122415245
+--- !u!114 &1966277480479144369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,9 +85,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 571025230026213042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d8a3d67aedc3fb4681ddf5e3d57b143, type: 3}
+  m_Script: {fileID: 11500000, guid: 51c9afa67e60e324297fcd82c4eff40c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LineData
+  m_EditorClassIdentifier: Assembly-CSharp::Editor.FollowTime
   _rect: {fileID: 8108474514801024626}
   Time: 0
-  Wide: 0
