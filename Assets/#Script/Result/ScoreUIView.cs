@@ -23,7 +23,7 @@ namespace Result.UI
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
 
-            _sequence.Append(_scoreSlider.DOFillAmount(fillAmount, _animationDuration))S;
+            _sequence.Append(_scoreSlider.DOFillAmount(fillAmount, _animationDuration));
             _sequence.Append(DOVirtual.Int(0, score, _animationDuration,
                 x => _scoreValue.text = x.ToString()));
 

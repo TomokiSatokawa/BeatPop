@@ -12,7 +12,7 @@ namespace Result.UI
 
         private void Start()
         {
-            if(_sceneLoad == null)
+            if (_sceneLoad == null)
                 _sceneLoad = FindAnyObjectByType<SceneTransition>();
         }
 

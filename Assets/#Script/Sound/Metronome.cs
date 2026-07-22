@@ -1,25 +1,29 @@
 using Common.BeatUpdate;
+using Sound;
 using UnityEngine;
 
 namespace InGame.Sound
 {
+    /// <summary>
+    /// ÉÅÉgÉçÉmÅ[ÉÄ
+    /// </summary>
     public class Metronome : MonoBehaviour
     {
         [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioClip _clip;
-        [SerializeField] private AudioClip _headSE;
+        [SerializeField] private AudioClip _firstBeatClip;
+        [SerializeField] private AudioClip _subBeatClip;
 
-        void Start()
+        private void Start()
         {
-            BeatUpdateManager.BeatUpdate.Subscribe(4,0,x =>
+            BeatUpdateManager.BeatUpdate.Subscribe(4, 0, x =>
             {
-                if(x.Division == 1)
+                if (x.Division == 1)
                 {
-                    _audioSource.PlayOneShot(_headSE);
+                    SoundManager.SE.PlaySE(_firstBeatClip);
                 }
                 else
                 {
-                    _audioSource.PlayOneShot(_clip);
+                    SoundManager.SE.PlaySE(_subBeatClip);
                 }
             });
         }

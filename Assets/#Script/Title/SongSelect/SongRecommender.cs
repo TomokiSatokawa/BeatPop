@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Title;
 using UnityEngine;
+using Common;
 
 public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
 {
@@ -12,7 +13,7 @@ public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
     public IReadOnlyList<SongSelectData> GetRecommendation()
     {
         var result = new List<SongSelectData>();
-        foreach (var songData in _songListData.SongDates)
+        foreach (var songData in _songListData.SongDatas)
         {
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
             {
@@ -39,7 +40,7 @@ public class SongRecommender : SingletonMonoBehaviour<SongRecommender>
     {
         var result = new List<SongSelectData>();
 
-        foreach (var songData in _songListData.SongDates)
+        foreach (var songData in _songListData.SongDatas)
         {
             if(!songData.SongName.Contains(keyword)) continue;
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))

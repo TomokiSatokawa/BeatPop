@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3335f7c0e4f13c4bba7fcb57e109dd6, type: 3}
   m_Name: SongListDataBase
   m_EditorClassIdentifier: Assembly-CSharp::SongListDataBase
-  _songDates:
-  - {fileID: 11400000, guid: 357cbd0568b50a44a8afe6f25f8e3cb2, type: 2}
-  - {fileID: 11400000, guid: 4e04a322f7b161445ad3dc63d518ea96, type: 2}
+  _songDatas:
   - {fileID: 11400000, guid: a9767a3b8e894f34ab511f3ae50ffa44, type: 2}
+  - {fileID: 11400000, guid: 4e04a322f7b161445ad3dc63d518ea96, type: 2}
+  - {fileID: 11400000, guid: 357cbd0568b50a44a8afe6f25f8e3cb2, type: 2}
   - {fileID: 11400000, guid: be73e53f3ceff924b80078c66598e8b0, type: 2}
   - {fileID: 11400000, guid: 29dda3cc50b456046a14ed730a3eeec7, type: 2}

@@ -2,13 +2,30 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SongListDataBase", menuName = "Scriptable Objects/SongListDataBase")]
-public class SongListDataBase : ScriptableObject
+namespace Common
 {
-    [SerializeField] private List<SongData> _songDates;
-    public IReadOnlyList<IReadOnlySongData> SongDates => _songDates;
-    public IReadOnlySongData GetSongData(int id)
+    /// <summary>
+    /// ã»ÉfÅ[É^àÍóó
+    /// </summary>
+    [CreateAssetMenu(fileName = "SongListDataBase", menuName = "Scriptable Objects/SongListDataBase")]
+    public class SongListDataBase : ScriptableObject
     {
-        return _songDates.Where(x => x.SongID == id).FirstOrDefault();
+        [SerializeField] private List<SongData> _songDatas;
+        public IReadOnlyList<IReadOnlySongData> SongDatas => _songDatas;
+
+        private Dictionary<int, SongData> _songIdDataMap;
+
+        private void Initialize()
+        {
+            _songIdDataMap = _songDatas.ToDictionary(x => x.SongID);
+        }
+
+        public IReadOnlySongData GetSongData(int id)
+        {
+            if (_songIdDataMap == null || _songIdDataMap.Count == 0)
+                Initialize();
+
+            return _songIdDataMap.TryGetValue(id, out var song) ? song : null;
+        }
     }
 }

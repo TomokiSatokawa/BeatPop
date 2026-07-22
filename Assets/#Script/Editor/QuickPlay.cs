@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using Common;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using UnityEditor;
@@ -172,7 +173,7 @@ public class QuickPlay : EditorWindow
             SoundPattern = _soundData.GetDefaultCustom()
         };
 
-        songPlayData.SetData(songSelectData, pattern,_startSection);
+        songPlayData.SetData(songSelectData, pattern, _startSection);
 
         await UniTask.DelayFrame(3);
 

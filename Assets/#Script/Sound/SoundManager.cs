@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Sound
 {
+    /// <summary>
+    /// サウンド再生
+    /// </summary>
     public class SoundManager : SingletonPersistent<SoundManager>
     {
         private const float MaxAudioLoadTimePerFrameMs = 0.5f;
@@ -17,6 +20,7 @@ namespace Sound
         public static SoundSection SE { get; private set; }
         public static SoundSection BGM { get; private set; }
         public static SoundSection BGMSub { get; private set; }
+
         private readonly static List<SoundSection> _laneSE = new();
         public static IReadOnlyList<SoundSection> LaneSE => _laneSE;
 
@@ -26,6 +30,7 @@ namespace Sound
             BGM = new(_bgmSource, _soundDataBase);
             BGMSub = new(_bgmSubSource, _soundDataBase);
 
+            _laneSE.Clear();
             for (int i = 0; i < _laneSources.Length; i++)
             {
                 _laneSE.Add(new(_laneSources[i], _soundDataBase));
@@ -59,15 +64,15 @@ namespace Sound
             }
         }
 
-        public static void CrossFadeBGM(SoundSection targetSection, SoundSection fadeOutSection, AudioClip audio, float fadeDuration,float time = 0f,bool isLoop = false)
+        public static void CrossFadeBGM(SoundSection targetSection, SoundSection fadeOutSection, AudioClip audio, float fadeDuration, float time = 0f, bool isLoop = false)
         {
-            if(targetSection.Audio == audio)
+            if (targetSection.Audio == audio)
             {
-                targetSection.VolumeFade(1,fadeDuration);
+                targetSection.VolumeFade(1, fadeDuration);
                 return;
             }
 
-            fadeOutSection.PlayBGM(targetSection.Audio,targetSection.Volume,targetSection.Time);
+            fadeOutSection.PlayBGM(targetSection.Audio, targetSection.Volume, targetSection.Time);
             fadeOutSection.VolumeFade(0, fadeDuration);
 
             targetSection.PlayBGM(audio, 0, time, isLoop);
@@ -96,19 +101,30 @@ namespace Sound
                 PlaySE(soundData.Clip, volume * soundData.Volume);
             }
 
-            public void PlaySE(AudioClip clip ,float volume = 1f)
+            public void PlaySE(AudioClip clip, float volume = 1f)
             {
-                _audioSource.PlayOneShot(clip,volume);
+                if (clip == null)
+                {
+                    Debug.LogError($"[Sound] AudioClip が設定されていません。");
+                    return;
+                }
+                _audioSource.PlayOneShot(clip, volume);
             }
 
-            public void PlayBGM(SESoundType type, float volume = 1f,float time = 0, bool isLoop = false)
+            public void PlayBGM(SESoundType type, float volume = 1f, float time = 0, bool isLoop = false)
             {
                 var soundData = _soundDataBase.GetSESound(type);
-                PlayBGM(soundData.Clip, volume * soundData.Volume,time,isLoop);
+                PlayBGM(soundData.Clip, volume * soundData.Volume, time, isLoop);
             }
 
-            public void PlayBGM(AudioClip clip,float volume = 1f, float time = 0, bool isLoop = false)
+            public void PlayBGM(AudioClip clip, float volume = 1f, float time = 0, bool isLoop = false)
             {
+                if (clip == null)
+                {
+                    Debug.LogError($"[Sound] AudioClip が設定されていません。");
+                    return;
+                }
+
                 _volumeFade?.Kill();
 
                 _audioSource.clip = clip;
@@ -135,12 +151,12 @@ namespace Sound
                 }
             }
 
-            public double PlayDspBGM(AudioClip clip, float dray, float time)
+            public double PlayDspBGM(AudioClip clip, float delay, float time)
             {
                 _volumeFade?.Kill();
                 double startDspTime;
 
-                startDspTime = AudioSettings.dspTime + dray;
+                startDspTime = AudioSettings.dspTime + delay;
 
                 _audioSource.clip = clip;
                 _audioSource.time = time;

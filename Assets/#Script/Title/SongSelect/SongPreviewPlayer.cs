@@ -1,4 +1,5 @@
 using System.Threading;
+using Common;
 using Cysharp.Threading.Tasks;
 using R3;
 using Sound;
@@ -105,7 +106,7 @@ namespace Title.SongSelect
         private async UniTask WaitStopPreviewAsync(CancellationToken token)
         {
             await UniTask.WaitForSeconds(_stopWaitTime, cancellationToken: token);
-            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, _titleBGM, _fadeInDuration, _titleBGMTime,true);
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, _titleBGM, _fadeInDuration, _titleBGMTime, true);
             await UniTask.WaitForSeconds(_fadeInDuration, cancellationToken: token);
             _playAudio = _titleBGM;
         }
