@@ -79,6 +79,8 @@ namespace Editor.UI
         }
         public void ShowSettings(LightPatternBaseData data)
         {
+            if (data == null) return;
+
             _panelControl.OnActive();
             if (data == _currentSettingData)
             {

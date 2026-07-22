@@ -1887,15 +1887,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapNode
   _snapObjectParent: {fileID: 564475092}
-  _sectionPointer: {fileID: 1404647199}
-  _lightPointer: {fileID: 1404647199}
-  _createPointer: {fileID: 1946211082}
-  _pointerRect: {fileID: 429637544}
+  _pointerRect: {fileID: 1946211083}
   _laneRect:
   - {fileID: 1404520832}
   - {fileID: 960626810}
   _fieldHover: {fileID: 564475095}
-  _patternSettingsControl: {fileID: 0}
+  _nodeSnapState:
+    _pointerImage: {fileID: 0}
+    _pointerColor: {r: 0, g: 0, b: 0, a: 0}
+  _lightPatternSnapState:
+    _pointerImage: {fileID: 0}
+    _pointerColor: {r: 0, g: 0, b: 0, a: 0}
+    _patternSettingsControl: {fileID: 0}
 --- !u!114 &781383605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,81 +3767,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1858.5, y: 298.25}
   m_SizeDelta: {x: 3717, y: 595.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1404647198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1404647199}
-  - component: {fileID: 1404647201}
-  - component: {fileID: 1404647200}
-  m_Layer: 5
-  m_Name: SectionPointer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1404647199
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404647198}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2073308924}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!114 &1404647200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404647198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.3283019, g: 0.3283019, b: 0.3283019, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1404647201
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404647198}
-  m_CullTransparentMesh: 1
 --- !u!1 &1408915265
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,7 +4885,7 @@ GameObject:
   - component: {fileID: 1946211084}
   - component: {fileID: 1946211083}
   m_Layer: 5
-  m_Name: CreatePointer
+  m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5189,7 +5117,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1946211082}
-  - {fileID: 1404647199}
   m_Father: {fileID: 1270590729}
   m_LocalEulerAnglesHint: {x: -0.8, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
