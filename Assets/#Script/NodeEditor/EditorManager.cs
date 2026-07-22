@@ -21,7 +21,6 @@ namespace Editor
         [SerializeField] private Difficulty _difficulty;
         [SerializeField] private int _division;
         [SerializeField] private float _magnification;
-        public TextMeshProUGUI _te;
 
         public float DisplayRange => _displayRange.sizeDelta.x;
         public float Magnification => _magnification;
@@ -61,8 +60,6 @@ namespace Editor
 
         private void Update()
         {
-            _te.text = StageTimeController.StageTime.ToString("N2");
-
             StageTimeController.I.UpdateStageTime();
 
             //データがなかったら動かさない

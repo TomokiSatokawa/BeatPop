@@ -4388,6 +4388,7 @@ GameObject:
   - component: {fileID: 1463515346}
   - component: {fileID: 1463515348}
   - component: {fileID: 1463515347}
+  - component: {fileID: 1463515349}
   m_Layer: 5
   m_Name: StageTime
   m_TagString: Untagged
@@ -4514,6 +4515,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463515345}
   m_CullTransparentMesh: 1
+--- !u!114 &1463515349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463515345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd50c6810b2a076449b8a643f094f02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.StageTimeText
+  _text: {fileID: 1463515347}
 --- !u!1 &1469794266
 GameObject:
   m_ObjectHideFlags: 0
@@ -5437,7 +5451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _sceneLoad: {fileID: 2101936842}
   _stageTimeController: {fileID: 1946836284}
-  _timeText: {fileID: 1463515347}
 --- !u!114 &1946836282
 MonoBehaviour:
   m_ObjectHideFlags: 0

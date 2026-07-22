@@ -2127,6 +2127,7 @@ GameObject:
   - component: {fileID: 385217891}
   - component: {fileID: 385217893}
   - component: {fileID: 385217892}
+  - component: {fileID: 385217894}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2253,6 +2254,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385217890}
   m_CullTransparentMesh: 1
+--- !u!114 &385217894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385217890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd50c6810b2a076449b8a643f094f02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.StageTimeText
+  _text: {fileID: 385217892}
 --- !u!1 &404330215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,11 +3958,10 @@ MonoBehaviour:
   _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _scrollBar: {fileID: 940475955}
   _displayRange: {fileID: 564475092}
-  _keyMoveAmount: 2
-  _division: 0
   _difficulty: 0
-  _te: {fileID: 385217892}
+  _division: 0
   _magnification: 1500
+  _te: {fileID: 385217892}
 --- !u!4 &781383601
 Transform:
   m_ObjectHideFlags: 0
@@ -4060,9 +4073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapNode
   _snapObjectParent: {fileID: 564475092}
-  _sectionPointer: {fileID: 1404647199}
-  _lightPointer: {fileID: 1946211082}
-  _createPointer: {fileID: 1404647199}
   _pointerRect: {fileID: 429637544}
   _laneRect:
   - {fileID: 1404520832}
@@ -4077,7 +4087,16 @@ MonoBehaviour:
   - {fileID: 800789971}
   - {fileID: 119610698}
   _fieldHover: {fileID: 564475096}
-  _patternSettingsControl: {fileID: 877743773}
+  _nodeSnapState:
+    _pointerImage: {fileID: 0}
+    _pointerColor: {r: 0, g: 0, b: 0, a: 1}
+  _sectionSnapState:
+    _pointerImage: {fileID: 0}
+    _pointerColor: {r: 0, g: 0, b: 0, a: 1}
+  _lightPatternSnapState:
+    _pointerImage: {fileID: 0}
+    _pointerColor: {r: 0, g: 0, b: 0, a: 1}
+    _patternSettingsControl: {fileID: 0}
 --- !u!114 &781383613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5734,6 +5753,13 @@ MonoBehaviour:
   _rect: {fileID: 0}
   Time: 0
   _nodeImage: {fileID: 0}
+  Data:
+    NodeID: 0
+    Lane: 0
+    Time: 0
+    PrefabType: 0
+    Connect: 0
+  LeanY: 0
 --- !u!1 &1240007775
 GameObject:
   m_ObjectHideFlags: 0

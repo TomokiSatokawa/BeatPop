@@ -6,14 +6,12 @@ using InGame.Score;
 using Input;
 using R3;
 using Sound;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private SceneTransition _sceneLoad;
     [SerializeField] private StageTimeController _stageTimeController;
-    [SerializeField] private TextMeshProUGUI _timeText;
 
     private void Start()
     {
@@ -32,7 +30,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         InGameFileLoad.I?.OnNodeFileLoaded.Skip(1).Subscribe(async fileData =>
         {
-           LoadPlayAsync(fileData).Forget();
+            LoadPlayAsync(fileData).Forget();
         }).AddTo(this);
 
         await UniTask.Yield();
@@ -55,8 +53,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Update()
     {
-        UpdateDebugText();
-
         _stageTimeController.UpdateStageTime();
     }
 
@@ -99,13 +95,5 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         ScoreDataManager.DisposeSingleton();
         SongPlayContext.DisposeSingleton();
-    }
-
-    private void UpdateDebugText()
-    {
-        if (_timeText != null)
-        {
-            _timeText.text = StageTimeController.StageTime.ToString("N2");
-        }
     }
 }
