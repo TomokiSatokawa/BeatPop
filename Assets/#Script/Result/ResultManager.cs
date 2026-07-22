@@ -1,12 +1,25 @@
-using UnityEngine;
 using Common;
-using Cysharp.Threading.Tasks;
-public class ResultManager : MonoBehaviour
+using UnityEngine;
+
+namespace Result.UI
 {
-    [SerializeField] private SceneTransition _sceneLoad;
-    public void ReturnTitle()
+    /// <summary>
+    /// リザルトシールの管理クラス
+    /// </summary>
+    public class ResultManager : MonoBehaviour
     {
-        GameManager.DontDestroyRelease();
-        _sceneLoad.ChangeScene("Title");
+        [SerializeField] private SceneTransition _sceneLoad;
+
+        private void Start()
+        {
+            if(_sceneLoad == null)
+                _sceneLoad = FindAnyObjectByType<SceneTransition>();
+        }
+
+        public void ReturnTitle()
+        {
+            GameManager.DontDestroyRelease();
+            _sceneLoad.ChangeScene("Title");
+        }
     }
 }

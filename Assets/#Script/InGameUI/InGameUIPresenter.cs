@@ -77,16 +77,5 @@ namespace InGame.UI
             _pauseUIControl.OnRetry += GameManager.I.Retry;
             _pauseUIControl.OnReturnTitle += GameManager.I.ReturnTitle;
         }
-
-        private void OnDestroy()
-        {
-            if (_pauseUIControl != null)
-            {
-                _pauseUIControl.OnStartCountDown -= GameManager.I.ReStartCountDown;
-                _pauseUIControl.OnReStart -= GameManager.I.ReStartStage;
-                _pauseUIControl.OnRetry -= GameManager.I.Retry;
-                _pauseUIControl.OnReturnTitle -= GameManager.I.ReturnTitle;
-            }
-        }
     }
 }
