@@ -5,6 +5,7 @@ namespace Editor
     /// <summary>
     /// スナップステートのベースクラス
     /// </summary>
+    [System.Serializable]
     public abstract class EditorSnapStateBase
     {
         [SerializeField] private Sprite _pointerImage;

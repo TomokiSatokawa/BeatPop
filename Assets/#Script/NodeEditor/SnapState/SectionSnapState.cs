@@ -1,5 +1,8 @@
 namespace Editor
 {
+    /// <summary>
+    /// セクションステート
+    /// </summary>
     [System.Serializable]
     public class SectionSnapState : EditorSnapStateBase
     {
