@@ -10,7 +10,8 @@ namespace Editor
     public class EditorInput : MonoBehaviour
     {
         [SerializeField] private float _keyMoveAmount;
-        void Update()
+
+        private void Update()
         {
             PlayPause();
             MoveTimeLine();
@@ -18,13 +19,19 @@ namespace Editor
 
         private void MoveTimeLine()
         {
-            float moveDirection = 0;
+            int moveDirection = 0;
 
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+            Keyboard current = Keyboard.current;
+            if (current == null) return;
+
+            if (current.rightArrowKey.wasPressedThisFrame)
+            {
                 moveDirection = 1;
-
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+            }
+            else if (current.leftArrowKey.wasPressedThisFrame)
+            {
                 moveDirection = -1;
+            }
 
             if (moveDirection == 0) return;
 
@@ -38,20 +45,19 @@ namespace Editor
             StageTimeController.I.MoveStageTime(moveAmount);
         }
 
-        private static void PlayPause()
+        private void PlayPause()
         {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (!Keyboard.current.spaceKey.wasPressedThisFrame)
+                return;
+            
+            if (StageTimeController.I.IsPlaying.CurrentValue)
             {
-                if (StageTimeController.I.IsPlaying.CurrentValue)
-                {
-                    StageTimeController.I.Pause();
-                }
-                else
-                {
-                    StageTimeController.I.ReStart();
-                }
+                StageTimeController.I.Pause();
+            }
+            else
+            {
+                StageTimeController.I.ReStart();
             }
         }
     }
-
 }
