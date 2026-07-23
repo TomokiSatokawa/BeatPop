@@ -1,41 +1,40 @@
 using System;
-using System.Threading;
-using Common;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Title.Custom
 {
-
-
+    /// <summary>
+    /// カスタムデータJsonの管理
+    /// </summary>
     public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
     {
         [SerializeField] private CustomPatternLoader _patternLoader;
-        [SerializeField] private SongListDataBase _songData;
 
         private ManifestData _manifestData;
-        private const string MANIFEST_FILE_NAME = "manifest.json";
+        private const string ManifestFileName = "manifest.json";
+        private const string FolderName = "CustomData";
 
-        public async UniTask LoadManifest(CancellationToken cancellationToken)
+        public async UniTask LoadManifest()
         {
             string manifestJson = "";
 
             //manifestを作る
-            if (!await CustomPatternFile.TryGetText(MANIFEST_FILE_NAME, t => manifestJson = t))
+            if (!await FileStorage.TryGetText(FolderName,ManifestFileName, t => manifestJson = t))
             {
                 manifestJson = await CreateDefaultManifest();
-                await CustomPatternFile.CreateFile(MANIFEST_FILE_NAME, manifestJson);
+                await FileStorage.CreateFile(FolderName, ManifestFileName, manifestJson);
             }
 
             _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
 
-            //SongData=>manifestの照合
+            //SongData => manifestの照合
 
-            foreach (var fillPath in _manifestData.FileName)
+            foreach (var filePath in _manifestData.FileName)
             {
-                if (!await CustomPatternFile.TryGetText(fillPath, null))
+                if (!await FileStorage.TryGetText(FolderName, filePath, null))
                 {
-                    Debug.LogError($"ファイル破損 {fillPath}");
+                    Debug.LogError($"ファイル破損 {filePath}");
                 }
             }
 
@@ -49,7 +48,7 @@ namespace Title.Custom
             {
                 string patternJson = "";
                 string fileName = _manifestData.FileName[i];
-                if (!await CustomPatternFile.TryGetText(fileName, t => patternJson = t))
+                if (!await FileStorage.TryGetText(FolderName, fileName, t => patternJson = t))
                 {
                     Debug.LogError($"{fileName}");
                     continue;
@@ -58,32 +57,32 @@ namespace Title.Custom
             }
             return result;
         }
-        public async void AddPattern(PatternJsonData patternData)
+        public async UniTask AddPattern(PatternJsonData patternData)
         {
             Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
 
             string filName = $"song_{(_manifestData.FileName.Length - 1):D4}.json";
             _manifestData.FileName[_manifestData.FileName.Length - 1] = filName;
-            patternData.FillName = filName;
+            patternData.FileName = filName;
 
             string patternJson = JsonUtility.ToJson(patternData, true);
-            await CustomPatternFile.CreateFile(filName, patternJson);
-            await UpdateManifestFill();
+            await FileStorage.CreateFile(FolderName, filName, patternJson);
+            await UpdateManifestFile();
         }
 
         public async UniTask SavePattern(PatternJsonData patternData)
         {
             string patternJson = JsonUtility.ToJson(patternData, true);
-            if (!await CustomPatternFile.UpdateFile(patternData.FillName, patternJson))
+            if (!await FileStorage.UpdateFile(FolderName, patternData.FileName, patternJson))
             {
-                Debug.LogError($"パターンセーブ失敗 {patternData.PatternName} {patternData.FillName}");
+                Debug.LogError($"パターンセーブ失敗 {patternData.PatternName} {patternData.FileName}");
             }
         }
 
-        private async UniTask UpdateManifestFill()
+        private async UniTask UpdateManifestFile()
         {
-            string manifestJosn = JsonUtility.ToJson(_manifestData, true);
-            if (!await CustomPatternFile.UpdateFile(MANIFEST_FILE_NAME, manifestJosn))
+            string manifestJson = JsonUtility.ToJson(_manifestData, true);
+            if (!await FileStorage.UpdateFile(FolderName, ManifestFileName, manifestJson))
             {
                 Debug.LogError("manifest更新失敗");
                 return;
@@ -94,26 +93,21 @@ namespace Title.Custom
         {
             var manifestData = new ManifestData();
 
-            string filName = $"song_{0:D4}.json";
+            string fileName = $"song_{0:D4}.json";
 
-            if (!await CustomPatternFile.TryGetText(filName, null))
+            if (!await FileStorage.TryGetText(FolderName, fileName, null))
             {
                 PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
                 patternJsonData.IsSelect = true;
-                patternJsonData.FillName = filName;
+                patternJsonData.FileName = fileName;
                 string patternJson = JsonUtility.ToJson(patternJsonData, true);
-                await CustomPatternFile.CreateFile(filName, patternJson);
+                await FileStorage.CreateFile(FolderName, fileName, patternJson);
             }
 
             manifestData.FileName = new string[1];
-            manifestData.FileName[0] = filName;
+            manifestData.FileName[0] = fileName;
 
-            return GetManifestJson(manifestData);
-        }
-        private string GetManifestJson(ManifestData songDatas)
-        {
-            string json = JsonUtility.ToJson(songDatas, true);
-            return json;
+            return JsonUtility.ToJson(manifestData, true);
         }
 
         [System.Serializable]

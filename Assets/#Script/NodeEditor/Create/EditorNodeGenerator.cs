@@ -91,6 +91,9 @@ namespace Editor
                 case PoolPrefabType.HoldNoteEnd:
                     newNode.ChangeColor(Color.darkGreen);
                     break;
+                case PoolPrefabType.TickNode:
+                    newNode.ChangeColor(Color.skyBlue);
+                    break;
                 case PoolPrefabType.SectionNode:
                     newNode.ChangeColor(Color.gray);
                     break;

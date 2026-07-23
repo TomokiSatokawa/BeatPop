@@ -31,4 +31,7 @@ MonoBehaviour:
   - Type: 13
     Clip: {fileID: 8300000, guid: 8396238071436d149ba3f7626c14dd8c, type: 3}
     Volume: 10
+  - Type: 5
+    Clip: {fileID: 8300000, guid: 525d70ff6e5e9de498fd60abb3947d94, type: 3}
+    Volume: 10
   _bgmData: []

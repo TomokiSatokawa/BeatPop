@@ -24,5 +24,15 @@ namespace InGame.Node
             }
             return judgementData.GetJudgement(difference);
         }
+
+        public NodeJudgement GetJudgementData(PoolPrefabType type)
+        {
+            if (!_nodeTypeJudge.TryGetValue(type, out var judgementData))
+            {
+                Debug.LogError($"[JudgementTable] Judgement is not found. Type:{type}");
+                return null;
+            }
+            return judgementData;
+        }
     }
 }

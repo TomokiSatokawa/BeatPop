@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152734e35f891ff4198ab8770185e547, type: 3}
+  m_Name: Tick
+  m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
+  ToleranceValue: 0.16
+  DeleteTime: 0.16
+  JudgementDatas:
+  - Name: 0
+    Value: 0.16
+    ShowEarlyLateText: 0
+    TextColor: {r: 1, g: 0.6092078, b: 0, a: 1}
+    IsComboContinued: 1
+    IsAllPerfectContinued: 1
+    Score: 20
+    TapSEVolume: 1.2
+  - Name: 4
+    Value: 10
+    ShowEarlyLateText: 0
+    TextColor: {r: 0.98490566, g: 0.98490566, b: 0.98490566, a: 1}
+    IsComboContinued: 0
+    IsAllPerfectContinued: 0
+    Score: 0
+    TapSEVolume: 0

@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace Title.Custom
 {
-    public static class CustomPatternFile
+    /// <summary>
+    /// 指定パスの書き込み読み込みを行う
+    /// </summary>
+    public static class FileStorage
     {
-        private const string FolderName = "CustomPattern";
+        private const string RootFolder = "SaveData";
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -31,22 +34,23 @@ namespace Title.Custom
 
 #endif
 
-        public static string GetPath(string fileName)
+        public static string GetPath(string folderName,string fileName)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
         return $"{Application.persistentDataPath}/{FolderName}/{fileName}";
 #else
             return Path.Combine(
                 Directory.GetParent(Application.dataPath)!.FullName,
-                FolderName,
+                RootFolder ,
+                folderName,
                 fileName
             );
 #endif
         }
 
-        public static async UniTask<bool> TryGetText(string fileName, Action<string> onSuccess)
+        public static async UniTask<bool> TryGetText(string folderName,string fileName, Action<string> onSuccess)
         {
-            string path = GetPath(fileName);
+            string path = GetPath(folderName,fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -77,9 +81,9 @@ namespace Title.Custom
 #endif
         }
 
-        public static async UniTask CreateFile(string fileName, string text)
+        public static async UniTask CreateFile(string folderName, string fileName, string text)
         {
-            string path = GetPath(fileName);
+            string path = GetPath(folderName,fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -94,15 +98,22 @@ namespace Title.Custom
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-
-            await File.WriteAllTextAsync(path, text);
+            try
+            {
+                await File.WriteAllTextAsync(path, text);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[CustomPattern] {ex}");
+                return;
+            }
 
 #endif
-        }
+}
 
-        public static async UniTask<bool> UpdateFile(string fileName, string text)
+        public static async UniTask<bool> UpdateFile(string folderName, string fileName, string text)
         {
-            string path = GetPath(fileName);
+            string path = GetPath(folderName, fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -119,18 +130,24 @@ namespace Title.Custom
 
             if (!File.Exists(path))
                 return false;
-
-            await File.WriteAllTextAsync(path, text);
-
+            try
+            {
+                await File.WriteAllTextAsync(path, text);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[CustomPattern] {ex}");
+                return false;
+            }
             return true;
 
 #endif
         }
 
-        public static async UniTask<bool> RenameFile(string oldFileName, string newFileName)
+        public static async UniTask<bool> RenameFile(string  folderName ,string oldFileName, string newFileName)
         {
-            string oldPath = GetPath(oldFileName);
-            string newPath = GetPath(newFileName);
+            string oldPath = GetPath(folderName, oldFileName);
+            string newPath = GetPath(folderName, newFileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -158,17 +175,24 @@ namespace Title.Custom
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-
-            File.Move(oldPath, newPath);
+            try
+            {
+                File.Move(oldPath, newPath);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[CustomPattern] {ex}");
+                return false;
+            }
 
             return true;
 
 #endif
         }
 
-        public static async UniTask<bool> DeleteFile(string fileName)
+        public static async UniTask<bool> DeleteFile(string folderName, string fileName)
         {
-            string path = GetPath(fileName);
+            string path = GetPath(folderName, fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 

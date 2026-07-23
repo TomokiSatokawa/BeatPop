@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Title.Common
 {
+    /// <summary>
+    /// ボタンが順番に出てくる演出
+    /// </summary>
     public class ButtonSlideInAnimation : MonoBehaviour
     {
         [Header("Target")]
@@ -33,7 +36,7 @@ namespace Title.Common
         private Sequence _animation;
 
         private void Start()
-        {
+        {   
             CreateAnimation();
         }
 

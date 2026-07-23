@@ -2,6 +2,7 @@ using Common.UI;
 using UnityEngine;
 using Title.SongSelect;
 using UnityEngine.Events;
+using Cysharp.Threading.Tasks;
 
 namespace Title.Custom
 {
@@ -38,7 +39,7 @@ namespace Title.Custom
         {
             var newPattern = _patternLoader.GetDefaultPattern();
             AddPatternUI(newPattern);
-            CustomDataLoader.I.AddPattern( newPattern);
+            CustomDataLoader.I.AddPattern( newPattern).Forget();
         }
 
         private void AddPatternUI(PatternJsonData pattern)

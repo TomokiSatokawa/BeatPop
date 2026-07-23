@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using Input;
 using UnityEngine;
 
 namespace InGame.Node
@@ -15,6 +17,8 @@ namespace InGame.Node
 
         private readonly List<NodeObject> _nodes = new();
         private readonly List<NodeObject> _removeNodes = new();
+        private readonly List<NodeObject> _tickNodeHit = new();
+
 
         public void AddNode(NodeObject node)
         {
@@ -26,6 +30,7 @@ namespace InGame.Node
             if (!StageTimeController.I.IsPlaying.CurrentValue) return;
 
             UpdateNodes();
+            ClickHitNode();
             RemoveExpiredNodes();
         }
 
@@ -38,7 +43,6 @@ namespace InGame.Node
 
             foreach (NodeObject node in _nodes)
             {
-
                 if (node.NodeData.Time <= deleteTime)
                 {
                     _removeNodes.Add(node);
@@ -51,7 +55,21 @@ namespace InGame.Node
                 Vector3 endPosition = startPosition;
                 endPosition.z = _goalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
+
+                if(node.Type == PoolPrefabType.TickNode && TickNodeCheck(node))
+                {
+                   _tickNodeHit.Add(node);
+                }
             }
+        }
+
+        private void ClickHitNode()
+        {
+            foreach(NodeObject node in _tickNodeHit)
+            {
+               ClickNode(node);
+            }
+            _tickNodeHit.Clear();
         }
 
         private void RemoveExpiredNodes()
@@ -65,6 +83,23 @@ namespace InGame.Node
                 node.Release();
                 _nodes.Remove(node);
             }
+        }
+
+        private bool TickNodeCheck(NodeObject node)
+        {
+            if(node.NodeData.Time <= StageTimeController.StageTime)
+            {
+                if (node.NodeData.Lane == 0 && InputManager.LeftLane.CurrentValue)
+                {
+                    return true;
+                }
+                else if (node.NodeData.Lane == 1 && InputManager.RightLane.CurrentValue)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

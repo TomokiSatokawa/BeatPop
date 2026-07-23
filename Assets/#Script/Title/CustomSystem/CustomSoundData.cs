@@ -15,6 +15,7 @@ namespace Title.Custom
         [SerializeField] public int _longStartDefault;
         [SerializeField] public int _longFillDefault;
         [SerializeField] public int _longEndDefault;
+        [SerializeField] public int _tickDefault;
         public IReadOnlyList<KeyPair> TapSE => _tapSE.Items;
         public IReadOnlyList<KeyPair> HoldSE => _holdSE.Items;
 
@@ -27,6 +28,7 @@ namespace Title.Custom
             result.HoldStart = _longStartDefault;
             result.HoldFill = _longFillDefault;
             result.HoldEnd = _longEndDefault;
+            result.TickNode = _tickDefault;
 
             return result;
         }
@@ -39,5 +41,6 @@ namespace Title.Custom
         public int HoldStart;
         public int HoldFill;
         public int HoldEnd;
+        public int TickNode;
     }
 }

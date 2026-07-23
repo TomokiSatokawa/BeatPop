@@ -19,13 +19,13 @@ MonoBehaviour:
   - Type: 2
     Prefab: {fileID: 6634633610155461654, guid: 72a7ad02e7c5aa745900636de2bca9ec, type: 3}
     StartCloneCount: 5
-  - Type: 6
+  - Type: 9
     Prefab: {fileID: 1429189914526941574, guid: 096ae760940a7434ab5cea51e82d9f5e, type: 3}
     StartCloneCount: 6
-  - Type: 7
+  - Type: 10
     Prefab: {fileID: 7244646473857114861, guid: e0be576ae707472438dd3f2c4b4310cb, type: 3}
     StartCloneCount: 0
-  - Type: 8
+  - Type: 11
     Prefab: {fileID: 1966277480479144369, guid: 101fe503f6f16e64fa77150440c1a10f, type: 3}
     StartCloneCount: 0
   - Type: 3
@@ -37,28 +37,31 @@ MonoBehaviour:
   - Type: 5
     Prefab: {fileID: 5351719247677405752, guid: 58672e0681e2435488248568201bbbb2, type: 3}
     StartCloneCount: 5
-  - Type: 10
+  - Type: 8
+    Prefab: {fileID: 4250796986132325863, guid: de55b85c2e7368c409d97725fea61119, type: 3}
+    StartCloneCount: 5
+  - Type: 13
     Prefab: {fileID: 7583762305357898255, guid: 7704a9a4ac7989647af0f45f39a2f6ca, type: 3}
     StartCloneCount: 4
-  - Type: 11
+  - Type: 14
     Prefab: {fileID: 6524822110215515538, guid: f0bc7e719f11c554c8d81a381fcae07c, type: 3}
     StartCloneCount: 3
-  - Type: 9
+  - Type: 12
     Prefab: {fileID: 1841960236145613977, guid: 6ef87a3e64e233f40bef9ab0bd9b96d7, type: 3}
     StartCloneCount: 3
-  - Type: 13
+  - Type: 16
     Prefab: {fileID: 7251247897354649043, guid: 31366b3fa134f7d4b90776976c3f7f04, type: 3}
     StartCloneCount: 3
-  - Type: 14
+  - Type: 17
     Prefab: {fileID: 2455020409629954557, guid: 29d6d1b98583abb44a663ba29d9f19f6, type: 3}
     StartCloneCount: 3
-  - Type: 12
+  - Type: 15
     Prefab: {fileID: 4698260947559513053, guid: 4380b265c28303444abb7f954bde2efd, type: 3}
     StartCloneCount: 3
-  - Type: 16
+  - Type: 19
     Prefab: {fileID: 7244646473857114861, guid: a87ef9430fe48a443afd729a581fffc0, type: 3}
     StartCloneCount: 0
-  - Type: 18
+  - Type: 21
     Prefab: {fileID: -5634364672537834446, guid: 88c24b0c1cfb21048868f3d67d4c9266, type: 3}
     StartCloneCount: 0
   _maxTaskSpawnCount: 1

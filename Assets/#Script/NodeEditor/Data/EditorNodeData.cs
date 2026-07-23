@@ -94,8 +94,9 @@ namespace Editor
                 {
                     var targetNode = result[j];
 
-                    // 他レーンは無視
-                    if (targetNode.Lane != startNode.Lane)
+                    // 他レーンとTickは無視
+                    if (targetNode.Lane != startNode.Lane 
+                        || targetNode.PrefabType == PoolPrefabType.TickNode)
                         continue;
 
                     // 同レーンの終点発見

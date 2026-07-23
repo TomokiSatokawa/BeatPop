@@ -21,8 +21,7 @@ namespace StartScreen
         private async void Initialize()
         {
             _loadText.gameObject.SetActive(true);
-            var ct = this.GetCancellationTokenOnDestroy();
-            await _manifestLoader.LoadManifest(ct);
+            await _manifestLoader.LoadManifest();
 
             _isLoaded = true;
             _loadText.gameObject.SetActive(false);

@@ -30,6 +30,7 @@ namespace InGame
             _nodeSE.Add(PoolPrefabType.HoldNoteStart, _soundData.TapSE[soundPattern.HoldStart].Value);
             _nodeSE.Add(PoolPrefabType.HoldNoteFill, _soundData.TapSE[soundPattern.HoldFill].Value);
             _nodeSE.Add(PoolPrefabType.HoldNoteEnd, _soundData.TapSE[soundPattern.HoldEnd].Value);
+            _nodeSE.Add(PoolPrefabType.TickNode, _soundData.TapSE[soundPattern.TickNode].Value);
         }
     }
 }

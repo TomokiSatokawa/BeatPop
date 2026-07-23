@@ -5,18 +5,23 @@ using UnityEngine;
 
 namespace Title.Common
 {
-
+    /// <summary>
+    /// ボタンにカーソルを合わせた時のアニメーション
+    /// </summary>
     [RequireComponent(typeof(UIPointerHover))]
     public class ButtonHoverAnimation : MonoBehaviour
     {
         [SerializeField] private UIPointerHover _uIPointerHover;
         [SerializeField] private float _hoverScale = 1.1f;
         [SerializeField] private float _duration = 0.15f;
-        [SerializeField] private Ease _ease = Ease.OutBack;
-        public Action OnEnter;
-        public Action OnExit;
+        [SerializeField] private Ease _enterEase = Ease.OutBack;
+        [SerializeField] private Ease _exitEase = Ease.OutQuad;
+
         private Vector3 _defaultScale;
         private Tween _tween;
+
+        public Action OnEnter;
+        public Action OnExit;
 
         private void Awake()
         {
@@ -34,19 +39,19 @@ namespace Title.Common
             _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => OnPointerExit()).AddTo(this);
         }
 
-        public void OnPointerEnter()
+        private void OnPointerEnter()
         {
             _tween?.Kill();
             _tween = transform.DOScale(_defaultScale * _hoverScale, _duration)
-                .SetEase(_ease);
+                .SetEase(_enterEase);
             OnEnter?.Invoke();
         }
 
-        public void OnPointerExit()
+        private void OnPointerExit()
         {
             _tween?.Kill();
             _tween = transform.DOScale(_defaultScale, _duration)
-                .SetEase(Ease.OutQuad);
+                .SetEase(_exitEase);
             OnExit?.Invoke();
         }
 

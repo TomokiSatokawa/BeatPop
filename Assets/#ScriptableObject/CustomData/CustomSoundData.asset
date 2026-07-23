@@ -32,8 +32,11 @@ MonoBehaviour:
       Value: 3
     - Key: TapSE4
       Value: 4
+    - Key: TapSE5
+      Value: 5
   _normalDefault: 0
   _flickDefault: 1
   _longStartDefault: 2
   _longFillDefault: 3
   _longEndDefault: 3
+  _tickDefault: 4

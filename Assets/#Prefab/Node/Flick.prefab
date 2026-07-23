@@ -199,17 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeObject
   _objectData:
-    _tapEffect: 11
+    _tapEffect: 14
     _nodeColor: {r: 0, g: 0, b: 0, a: 0}
     _inputType: 3
-  NodeData:
-    NodeID: 0
-    Lane: 0
-    Time: 0
-    PrefabType: 0
-    Connect: 0
-  StartPosition: {x: 0, y: 0, z: 0}
-  MoveAmount: 0
 --- !u!95 &2306297064319771660
 Animator:
   serializedVersion: 7

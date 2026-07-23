@@ -22,12 +22,12 @@ namespace InGame.Node
 
         private void SubscribeInput()
         {
-            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => HandleLaneInput(0, b, false)).AddTo(this);
-            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => HandleLaneInput(1, b, false)).AddTo(this);
-            InputManager.OnFlick.Subscribe(x => HandleLaneInput(x, false, true)).AddTo(this);
+            InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => HandleClickLaneInput(0, b, false)).AddTo(this);
+            InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => HandleClickLaneInput(1, b, false)).AddTo(this);
+            InputManager.OnFlick.Subscribe(x => HandleClickLaneInput(x, false, true)).AddTo(this);
         }
 
-        private void HandleLaneInput(int lane, bool isClick, bool isFlick)
+        private void HandleClickLaneInput(int lane, bool isClick, bool isFlick)
         {
             var node = _nodeController.GetClickNode(lane);
 

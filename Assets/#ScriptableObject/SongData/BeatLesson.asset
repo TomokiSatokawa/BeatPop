@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca581ea6b6080ba4a92d8a7d040c1462, type: 3}
+  m_Name: BeatLesson
+  m_EditorClassIdentifier: Assembly-CSharp::SongData
+  _songName: BeatLesson
+  _songID: 6
+  _bpm: 164
+  _jacket: {fileID: 0}
+  _charts:
+    EasyLevel: 1
+    EasyJson: {fileID: 4900000, guid: 10380b09128968a45a879d0ade27a5f4, type: 3}
+    NormalLevel: 8
+    NormalJson: {fileID: 0}
+    HardLevel: 10
+    HardJson: {fileID: 4900000, guid: 972090a71d195d94a95542dd5e3962c1, type: 3}
+    ExpertLevel: 21
+    ExpertJson: {fileID: 4900000, guid: 189e14709e055634dbfd07664b90f346, type: 3}
+  _audioClip: {fileID: 8300000, guid: 1cd2057fc28fcc64299e04beb8c8065a, type: 3}
+  _stageTimeOffSet: 0
+  _editorTimeOffSet: -0.2
+  _stageEffectData: {fileID: 4900000, guid: c87b9446f9e55414ca42c5ccb222e7f8, type: 3}
