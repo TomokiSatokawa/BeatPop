@@ -3927,7 +3927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
   _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
   _nodeHitExecutor: {fileID: 1252056269}
-  _goalPos: 0
+  _goalPos: -10
 --- !u!114 &1252056267
 MonoBehaviour:
   m_ObjectHideFlags: 0

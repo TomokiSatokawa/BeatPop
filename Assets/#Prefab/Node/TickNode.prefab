@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeObject
   _objectData:
-    _tapEffect: 12
+    _tapEffect: 22
     _nodeColor: {r: 0, g: 0.82582617, b: 1, a: 1}
     _inputType: 4
 --- !u!1 &9141963523306866587

@@ -64,4 +64,7 @@ MonoBehaviour:
   - Type: 21
     Prefab: {fileID: -5634364672537834446, guid: 88c24b0c1cfb21048868f3d67d4c9266, type: 3}
     StartCloneCount: 0
+  - Type: 22
+    Prefab: {fileID: 7997943028281086872, guid: daff0bae02181a04f9a7930e6b3dc9ee, type: 3}
+    StartCloneCount: 5
   _maxTaskSpawnCount: 1
