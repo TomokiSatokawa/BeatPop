@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
   ToleranceValue: 0.2
   DeleteTime: 0.2
+  MaxScore: 5
+  BaseScore: 1
   JudgementDatas:
   - Name: 0
     Value: 0.04
@@ -21,7 +23,7 @@ MonoBehaviour:
     TextColor: {r: 1, g: 0.6092078, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
-    Score: 5
+    ScoreMultiplier: 1
     TapSEVolume: 1.5
   - Name: 1
     Value: 0.08
@@ -29,7 +31,7 @@ MonoBehaviour:
     TextColor: {r: 0.87169814, g: 0.82808113, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
-    Score: 4
+    ScoreMultiplier: 0.8
     TapSEVolume: 1.2
   - Name: 2
     Value: 0.15
@@ -37,7 +39,7 @@ MonoBehaviour:
     TextColor: {r: 0.24851394, g: 1, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
-    Score: 2
+    ScoreMultiplier: 0.7
     TapSEVolume: 1
   - Name: 3
     Value: 0.2
@@ -45,7 +47,7 @@ MonoBehaviour:
     TextColor: {r: 0, g: 0.27811432, b: 1, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
-    Score: 1
+    ScoreMultiplier: 0.5
     TapSEVolume: 0.8
   - Name: 4
     Value: 10
@@ -53,5 +55,5 @@ MonoBehaviour:
     TextColor: {r: 0.98490566, g: 0.98490566, b: 0.98490566, a: 1}
     IsComboContinued: 0
     IsAllPerfectContinued: 0
-    Score: 0
+    ScoreMultiplier: 0
     TapSEVolume: 0

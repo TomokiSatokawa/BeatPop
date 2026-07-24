@@ -25,7 +25,7 @@ namespace InGame.Node
             return judgementData.GetJudgement(difference);
         }
 
-        public NodeJudgement GetJudgementData(PoolPrefabType type)
+        public IReadOnlyNodeJudgement GetJudgementData(PoolPrefabType type)
         {
             if (!_nodeTypeJudge.TryGetValue(type, out var judgementData))
             {

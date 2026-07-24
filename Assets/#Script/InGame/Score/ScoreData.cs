@@ -39,10 +39,10 @@ namespace InGame.Score
         /// <summary>
         /// ÉXÉRÉAâ¡éZ
         /// </summary>
-        public void AddScore(IReadOnlyJudgementData judgementData)
+        public void AddScore( IReadOnlyNodeJudgement nodeJudgment, IReadOnlyJudgementData result)
         {
-            UpdateJudgeState(judgementData);
-            _score.Value += judgementData.Score;
+            UpdateJudgeState(result);
+            _score.Value += GetScore(nodeJudgment,result);
         }
 
         public void CalculateMaxScore(JudgementTable judgementTable, IReadOnlyList<NodeData> nodeDatas, float bpm)
@@ -50,7 +50,10 @@ namespace InGame.Score
             int maxScore = 0;
             foreach (NodeData nodeData in nodeDatas)
             {
-                maxScore += judgementTable.GetJudgementResult(nodeData.PrefabType, 0).Score;
+                IReadOnlyNodeJudgement nodeJudgment = judgementTable.GetJudgementData(nodeData.PrefabType);
+                IReadOnlyJudgementData result = judgementTable.GetJudgementResult(nodeData.PrefabType, 0);
+
+                maxScore += GetScore(nodeJudgment,result);
 
                 if (nodeData.PrefabType != PoolPrefabType.HoldNoteStart)
                     continue;
@@ -70,10 +73,22 @@ namespace InGame.Score
                 float duration = end.Time - start.Time;
                 int count = Mathf.FloorToInt(duration / intervalTime);
 
-                maxScore += judgementTable.GetJudgementResult(PoolPrefabType.HoldNoteFill, 0).Score * count;
+
+
+                maxScore += GetScore(judgementTable.GetJudgementData(PoolPrefabType.HoldNoteFill), judgementTable.GetJudgementResult(PoolPrefabType.HoldNoteFill, 0)) * count;
             }
 
             _maxScore = maxScore;
+        }
+
+        private static int GetScore(IReadOnlyNodeJudgement type, IReadOnlyJudgementData result)
+        {
+            if(result.ScoreMultiplier <= 0)
+            {
+                return 0;
+            }
+
+            return Mathf.RoundToInt(type.MaxScore * result.ScoreMultiplier + type.MaxScore);
         }
 
         private void UpdateJudgeState(IReadOnlyJudgementData judgement)

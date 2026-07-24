@@ -6,11 +6,16 @@ namespace InGame.Node
     /// 判定データ
     /// </summary>
     [CreateAssetMenu(fileName = "NodeJudgement", menuName = "Scriptable Objects/NodeJudgement")]
-    public class NodeJudgement : ScriptableObject
+    public class NodeJudgement : ScriptableObject, IReadOnlyNodeJudgement
     {
-        public float ToleranceValue;
-        public float DeleteTime;
-        public JudgementData[] JudgementDatas;
+        [SerializeField] private float ToleranceValue;
+        [SerializeField] private float DeleteTime;
+        [SerializeField] private float MaxScore;
+        [SerializeField] private float BaseScore;
+        [SerializeField] private JudgementData[] JudgementDatas;
+
+        float IReadOnlyNodeJudgement.MaxScore => MaxScore;
+        float IReadOnlyNodeJudgement.BaseScore => BaseScore;
 
         public IReadOnlyJudgementData GetJudgement(float difference)
         {
@@ -34,6 +39,16 @@ namespace InGame.Node
             return JudgementDatas[JudgementDatas.Length - 1];
         }
     }
+
+    public interface IReadOnlyNodeJudgement
+    {
+        public float MaxScore { get; }
+        public float BaseScore { get; }
+    }
+
+
+
+    //TODO:以下別ファイルに分離
     public interface IReadOnlyJudgementData
     {
         public JudgementType Name { get; }
@@ -47,7 +62,7 @@ namespace InGame.Node
 
         public bool IsAllPerfectContinued { get; }
 
-        public int Score { get; }
+        public float ScoreMultiplier { get; }
 
         public float TapSEVolume { get; }
     }
@@ -62,7 +77,7 @@ namespace InGame.Node
 
         public bool IsComboContinued;
         public bool IsAllPerfectContinued;
-        public int Score;
+        public float ScoreMultiplier;
         public float TapSEVolume;
 
         JudgementType IReadOnlyJudgementData.Name => Name;
@@ -71,7 +86,7 @@ namespace InGame.Node
         Color IReadOnlyJudgementData.TextColor => TextColor;
         bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
         bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
-        int IReadOnlyJudgementData.Score => Score;
+        float IReadOnlyJudgementData.ScoreMultiplier => ScoreMultiplier;
         float IReadOnlyJudgementData.TapSEVolume => TapSEVolume;
 
     }
