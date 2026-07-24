@@ -13,8 +13,6 @@ namespace InGame.Node
     {
         [SerializeField] private Transform[] _lane;
         [SerializeField]private JudgementTable _judgementTable;
-        [SerializeField] private float _cloneZ;
-        [SerializeField] private float _tapZ;
 
         private Dictionary<NodeData, FillData> _activeFillData = new();
 
@@ -22,7 +20,11 @@ namespace InGame.Node
         {
             if (_activeFillData.ContainsKey(end)) return;
 
-            var fillData = new FillData(start, end, _lane[start.Lane], _cloneZ, _tapZ);
+            float clone = StageContext.I.GetClonePos(0).z;
+            float goal = StageContext.I.StageLayout.GoalPos;
+            float delete = StageContext.I.StageLayout.DeletePos;
+
+            var fillData = new FillData(start, end, _lane[start.Lane], clone, goal, delete);
             fillData.SetNodeObject(start: startObject);
             _activeFillData.Add(end, fillData);
         }
@@ -81,9 +83,10 @@ namespace InGame.Node
             private readonly Transform _lane;
             private readonly float _clonePosZ;
             private readonly float _tapPosZ;
+            private readonly float _deletePosZ;
             private readonly HoldEffect _effect;
 
-            public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float tapZ)
+            public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float tapZ,float deletePos)
             {
                 _fillObject = PoolManager.I.Get<PoolObject>(PoolPrefabType.HoldNoteFill);
                 _effect = PoolManager.I.Get<HoldEffect>(PoolPrefabType.HoldFillEffect);
@@ -92,6 +95,7 @@ namespace InGame.Node
                 _lane = lane;
                 _clonePosZ = cloneZ;
                 _tapPosZ = tapZ;
+                _deletePosZ = deletePos;
                 _fillObject.gameObject.SetActive(false);
 
                 _effect.transform.position = new Vector3(_lane.transform.position.x, _lane.transform.position.y, _tapPosZ);
@@ -159,13 +163,14 @@ namespace InGame.Node
             private void UpdateFill()
             {
                 Vector3 start = _lane.transform.position;
+
                 if (_startObject?.IsPoolActive ?? false)
                 {
                     start.z = _startObject.transform.position.z;
                 }
                 else
                 {
-                    start.z = _tapPosZ;
+                    start.z = _isInput ? _tapPosZ: _deletePosZ;
                     _startObject = null;
                 }
 

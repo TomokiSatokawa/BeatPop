@@ -15,12 +15,12 @@ MonoBehaviour:
   _rankValue:
     _items:
     - Key: {fileID: 21300000, guid: 76204cc7bf7d031458c7b68c45e3d15a, type: 3}
-      Value: 0.85
+      Value: 0.92
     - Key: {fileID: 21300000, guid: 7cfcd5b61e4f8f3408847a4e8190bd44, type: 3}
-      Value: 0.65
+      Value: 0.81
     - Key: {fileID: 21300000, guid: ab025b81bbef81140a466d9072fbfc66, type: 3}
-      Value: 0.5
+      Value: 0.7
     - Key: {fileID: 21300000, guid: 6fdbc8dd64c77db49b9e28ec88e88d67, type: 3}
-      Value: 0.4
+      Value: 0.6
     - Key: {fileID: 21300000, guid: 0cdde4f95f42e5d4caf7bb35deade875, type: 3}
       Value: 0

@@ -14,10 +14,7 @@ namespace InGame.Node
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private GameObject _nodePrefab;
         [SerializeField] private Transform[] _clonePosition;
-        [SerializeField] private float _goalZ;
-        [SerializeField] private float _arrivalSeconds;
         [SerializeField] private HoldNodeFillManager _nodeFillRenderer;
-        public float ArrivalSeconds => _arrivalSeconds;
 
         private List<NodeData> _nodeDataList;
         private int _nextNode = 0;
@@ -26,8 +23,9 @@ namespace InGame.Node
         {
             InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => _nodeDataList = x.Nodes).AddTo(this);
 
-            BeatUpdateManager.BeatUpdate.Subscribe(16, -_arrivalSeconds, _ => GenerateNodes());
-            BeatUpdateManager.BeatUpdate.Subscribe(4, -_arrivalSeconds, x => CreateLines(x.Time));
+            float arrivalSeconds = StageContext.I.ArrivalSeconds;
+            BeatUpdateManager.BeatUpdate.Subscribe(16, -arrivalSeconds, _ => GenerateNodes());
+            BeatUpdateManager.BeatUpdate.Subscribe(4, -arrivalSeconds, x => CreateLines(x.Time));
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace InGame.Node
         /// </summary>
         private void CreateLines(float time)
         {
-            float lineTime = time + _arrivalSeconds;
+            float lineTime = time + StageContext.I.ArrivalSeconds;
             for (int lane = 0; lane < _clonePosition.Length; lane++)
             {
                 CreateNode(new NodeData
@@ -54,7 +52,7 @@ namespace InGame.Node
         {
             if (!StageTimeController.I.IsPlaying.CurrentValue) return;
 
-            double generateTime = StageTimeController.StageTime + _arrivalSeconds;
+            double generateTime = StageTimeController.StageTime + StageContext.I.ArrivalSeconds;
             double startSectionTime = StageTimeController.I.StartSectionTime;
 
             while (_nextNode < _nodeDataList.Count)

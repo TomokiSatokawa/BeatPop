@@ -16,13 +16,13 @@ MonoBehaviour:
   DeleteTime: 0.16
   JudgementDatas:
   - Name: 0
-    Value: 0.16
+    Value: 0.05
     ShowEarlyLateText: 0
     TextColor: {r: 1, g: 0.6092078, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
-    Score: 20
-    TapSEVolume: 1.2
+    Score: 3
+    TapSEVolume: 0.8
   - Name: 4
     Value: 10
     ShowEarlyLateText: 0

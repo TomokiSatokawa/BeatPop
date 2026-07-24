@@ -1090,8 +1090,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.7
-  m_fontSizeBase: 71.7
+  m_fontSize: 50.56
+  m_fontSizeBase: 50.56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1693,8 +1693,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.7
-  m_fontSizeBase: 71.7
+  m_fontSize: 50.56
+  m_fontSizeBase: 50.56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1982,8 +1982,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.7
-  m_fontSizeBase: 71.7
+  m_fontSize: 50.56
+  m_fontSizeBase: 50.56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2119,8 +2119,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.7
-  m_fontSizeBase: 71.7
+  m_fontSize: 50.56
+  m_fontSizeBase: 50.56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2727,7 +2727,7 @@ GameObject:
   - component: {fileID: 840021714}
   - component: {fileID: 840021713}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: ClooePosition_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3758,7 +3758,7 @@ GameObject:
   - component: {fileID: 1032196359}
   - component: {fileID: 1032196358}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ClooePosition_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3895,8 +3895,6 @@ MonoBehaviour:
   _clonePosition:
   - {fileID: 840021716}
   - {fileID: 1032196361}
-  _goalZ: -10
-  _arrivalSeconds: 0.7
   _nodeFillRenderer: {fileID: 1252056267}
 --- !u!4 &1252056264
 Transform:
@@ -3927,7 +3925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
   _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
   _nodeHitExecutor: {fileID: 1252056269}
-  _goalPos: -10
 --- !u!114 &1252056267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,8 +3941,6 @@ MonoBehaviour:
   - {fileID: 840021716}
   - {fileID: 1032196361}
   _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
-  _cloneZ: 65.901
-  _tapZ: -10
 --- !u!114 &1252056268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3975,7 +3970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NodeHitExecutor
   _nodeFillManager: {fileID: 1252056267}
   _laneClick: {fileID: 1946836279}
-  _goalPos: -10
 --- !u!1 &1258396494
 GameObject:
   m_ObjectHideFlags: 0
@@ -5382,6 +5376,7 @@ GameObject:
   - component: {fileID: 1946836284}
   - component: {fileID: 1946836285}
   - component: {fileID: 1946836286}
+  - component: {fileID: 1946836287}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5517,6 +5512,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b5ee6be1105de4c8d851a7f70bfc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.BeatUpdateManager
+--- !u!114 &1946836287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946836277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc62d8436e0d78a4390e2b3b17bb5614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.StageContext
+  _stageLayoutData: {fileID: 11400000, guid: 38fb37629063fa14eb856bd1f60138dc, type: 2}
+  _clonePos:
+  - {fileID: 840021716}
+  - {fileID: 1032196361}
+  _arrivalSeconds: 1
 --- !u!1 &1950628530
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,8 +5925,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.7
-  m_fontSizeBase: 71.7
+  m_fontSize: 50.56
+  m_fontSizeBase: 50.56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

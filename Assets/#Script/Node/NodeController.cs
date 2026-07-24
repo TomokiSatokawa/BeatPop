@@ -13,7 +13,6 @@ namespace InGame.Node
     {
         [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
-        [SerializeField] private float _goalPos;
 
         private readonly List<NodeObject> _nodes = new();
         private readonly List<NodeObject> _removeNodes = new();
@@ -47,13 +46,13 @@ namespace InGame.Node
                 {
                     _removeNodes.Add(node);
                 }
-                float startTime = node.NodeData.Time - NodeGenerator.I.ArrivalSeconds;
+                float startTime = node.NodeData.Time - StageContext.I.ArrivalSeconds;
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
                 Vector3 startPosition = node.StartPosition;//TODO:StageSO‚ÆNodeObject.NodeData.Lane‚ÅŽæ“¾‚·‚é
                 Vector3 endPosition = startPosition;
-                endPosition.z = _goalPos;
+                endPosition.z = StageContext.I.StageLayout.GoalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
 
                 if(node.Type == PoolPrefabType.TickNode && TickNodeCheck(node))

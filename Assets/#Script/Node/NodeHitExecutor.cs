@@ -15,7 +15,6 @@ namespace InGame.Node
     {
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
         [SerializeField] private LaneClickEffect _laneClick;
-        [SerializeField] private float _goalPos;//TODO:StageのSO
 
         private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
         public Observable<(IReadOnlyJudgementData Judge, int lane)> ShowJudge => _showJudge;
@@ -39,7 +38,7 @@ namespace InGame.Node
             //タップエフェクト
             var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.NodeObjData.TapEffect);
             Vector3 pos = targetNode.transform.position;
-            pos.z = _goalPos;
+            pos.z = StageContext.I.StageLayout.GoalPos;
             tapEffect.transform.position = pos;
 
             //ジャッチUI

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152734e35f891ff4198ab8770185e547, type: 3}
   m_Name: NomalNode
   m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
-  ToleranceValue: 0.16
-  DeleteTime: 0.16
+  ToleranceValue: 0.2
+  DeleteTime: 0.2
   JudgementDatas:
   - Name: 0
     Value: 0.04
@@ -21,32 +21,32 @@ MonoBehaviour:
     TextColor: {r: 1, g: 0.6092078, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
-    Score: 20
-    TapSEVolume: 1.2
+    Score: 10
+    TapSEVolume: 1.5
   - Name: 1
-    Value: 0.06
+    Value: 0.08
     ShowEarlyLateText: 0
     TextColor: {r: 0.87169814, g: 0.82808113, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
-    Score: 15
-    TapSEVolume: 1
+    Score: 9
+    TapSEVolume: 1.2
   - Name: 2
-    Value: 0.08
+    Value: 0.15
     ShowEarlyLateText: 1
     TextColor: {r: 0.24851394, g: 1, b: 0, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
-    Score: 10
-    TapSEVolume: 0.7
+    Score: 6
+    TapSEVolume: 1
   - Name: 3
-    Value: 0.15
+    Value: 0.2
     ShowEarlyLateText: 1
     TextColor: {r: 0, g: 0.27811432, b: 1, a: 1}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
-    Score: 5
-    TapSEVolume: 0.5
+    Score: 2
+    TapSEVolume: 0.8
   - Name: 4
     Value: 10
     ShowEarlyLateText: 0
