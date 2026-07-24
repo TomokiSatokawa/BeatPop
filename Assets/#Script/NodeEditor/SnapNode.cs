@@ -15,12 +15,18 @@ namespace Editor
         [SerializeField] private Image _pointerRect;
         [SerializeField] private RectTransform[] _laneRect;
         [SerializeField] private UIPointerHover _fieldHover;
+        [SerializeField] private Slider _convertLevelSlider;
         [Header("State")]
         [SerializeField] private NodeSnapState _nodeSnapState;
         [SerializeField] private SectionSnapState _sectionSnapState;
         [SerializeField] private LightPatternSnapState _lightPatternSnapState;
 
         private EditorSnapStateBase _currentSnapState;
+
+        private void Start()
+        {
+            _convertLevelSlider?.onValueChanged.AddListener(x =>_nodeSnapState.SetConvertLevel(int.Parse(x.ToString())));
+        }
         public void OnNewNode(int prefab)
         {
             _nodeSnapState.SetPrefabType((PoolPrefabType)prefab);

@@ -2,6 +2,7 @@ using InGame.Node;
 using InGame;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Editor
 {
@@ -11,6 +12,7 @@ namespace Editor
     public class EditorNode : FollowTime
     {
         [SerializeField] private Image _nodeImage;
+        [SerializeField] private TextMeshProUGUI _convertText;
 
         public NodeData Data;
         public float LeanY;
@@ -26,6 +28,14 @@ namespace Editor
         public void ChangeColor(Color color)
         {
             _nodeImage.color = color;
+        }
+
+        public void SetConvertLevel(int  level)
+        {
+            if(_convertText != null)
+            {
+            _convertText.text = level.ToString();
+            }
         }
     }
 }

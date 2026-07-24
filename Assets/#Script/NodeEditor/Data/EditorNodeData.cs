@@ -23,7 +23,7 @@ namespace Editor
         public Observable<NodeData> OnRemove => _onRemove;
         public ReadOnlyReactiveProperty<NodeSaveData> LoadedFile => _loadedFile;
 
-        public void AddNode(PoolPrefabType prefab, double time, int lean)
+        public void AddNode(PoolPrefabType prefab, double time, int lean,int convertLevel = 0)
         {
             if (_nodes.Exists(x => Math.Abs(x.Time - time) < Epsilon && x.Lane == lean)) return;
 
@@ -31,7 +31,8 @@ namespace Editor
             {
                 Time = (float)time,
                 Lane = lean,
-                PrefabType = prefab
+                PrefabType = prefab,
+                ConvertLevel = convertLevel
             });
         }
 

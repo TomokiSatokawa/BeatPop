@@ -107,6 +107,7 @@ namespace Editor
             newNode.LeanY = _lean[node.Lane].anchoredPosition.y;
             newNode.Time = node.Time;
             newNode.Data = node;
+            newNode.SetConvertLevel(node.ConvertLevel);
             newNode.gameObject.name = $"{node.PrefabType} {node.NodeID}";
             return newNode;
         }

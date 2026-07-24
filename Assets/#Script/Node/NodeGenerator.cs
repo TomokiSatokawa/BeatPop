@@ -152,6 +152,7 @@ namespace InGame.Node
         public int NodeID;
         public int Lane;
         public float Time;
+        public int ConvertLevel;
         public PoolPrefabType PrefabType;
         public int Connect;
 
@@ -160,6 +161,7 @@ namespace InGame.Node
             NodeID = id;
             Lane = -1;
             Time = -1;
+            ConvertLevel = 0;
             PrefabType = PoolPrefabType.None;
             Connect = -1;
         }
