@@ -33,14 +33,4 @@ namespace Title.Custom
             return result;
         }
     }
-    [System.Serializable]
-    public struct CustomSoundPattern
-    {
-        public int NormalSE;
-        public int FlickSE;
-        public int HoldStart;
-        public int HoldFill;
-        public int HoldEnd;
-        public int TickNode;
-    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Title.Custom
 {
-    public class CustomSound : MonoBehaviour
+    public class CustomSound : CustomDataBinder<CustomSoundPattern>
     {
         [SerializeField] private CustomSoundData _soundData;
         [Header("UI")]
@@ -30,7 +30,7 @@ namespace Title.Custom
             InitializeDropdown(_longEndNotes, tapOption, _soundData.TapSE);
 
             OnDefault();
-        }
+        }   
 
         private void InitializeDropdown(TMP_Dropdown dropdown,List<TMP_Dropdown.OptionData> options
             ,IReadOnlyList<SerializableDictionary<string,SESoundType>.KeyPair> soundData)
@@ -48,7 +48,8 @@ namespace Title.Custom
             if (!_isReviewSound) return;
             SoundManager.SE.PlaySE(seSound);
         }
-        public void SetCustom(CustomSoundPattern customSound)
+
+        public override void SetCustom(CustomSoundPattern customSound)
         {
             _isReviewSound = false;
             _normalNotes.value = customSound.NormalSE;
@@ -58,7 +59,7 @@ namespace Title.Custom
             _longEndNotes.value = customSound.HoldEnd;
             _isReviewSound = true;
         }
-        public CustomSoundPattern GetCustom()
+        public override CustomSoundPattern GetCustom()
         {
             var result = new CustomSoundPattern();
 
@@ -70,7 +71,7 @@ namespace Title.Custom
 
             return result;
         }
-        private void OnDefault()
+        public override void OnDefault()
         {
             _isReviewSound = false;
             _normalNotes.value = _soundData._normalDefault;
@@ -80,7 +81,17 @@ namespace Title.Custom
             _longEndNotes.value = _soundData._longEndDefault;
             _isReviewSound = true;
         }
-        
+
+    }
+    [System.Serializable]
+    public struct CustomSoundPattern
+    {
+        public int NormalSE;
+        public int FlickSE;
+        public int HoldStart;
+        public int HoldFill;
+        public int HoldEnd;
+        public int TickNode;
     }
 }
 

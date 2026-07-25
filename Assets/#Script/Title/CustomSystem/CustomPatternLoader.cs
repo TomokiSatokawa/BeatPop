@@ -19,5 +19,6 @@ namespace Title.Custom
         public string FileName;
         public bool IsSelect;
         public CustomSoundPattern SoundPattern;
+        public CustomChartPattern ChartPattern;
     }
 }

@@ -12,6 +12,7 @@ namespace Title
         [SerializeField] private UnityEvent<int> _onValueChanged;
         private int _currentIndex = -1;
         public int CurrentIndex => _currentIndex;
+        public int StartIndex => _startIndex;
         private void Start()
         {
             for(int i = 0; i < _buttons.Length; i++)

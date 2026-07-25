@@ -7,6 +7,11 @@
         "FlickSE": 1,
         "HoldStart": 2,
         "HoldFill": 3,
-        "HoldEnd": 3
+        "HoldEnd": 3,
+        "TickNode": 0
+    },
+    "ChartPattern": {
+        "FlickConvertLevel": 0,
+        "LongConvertLevel": 0
     }
 }

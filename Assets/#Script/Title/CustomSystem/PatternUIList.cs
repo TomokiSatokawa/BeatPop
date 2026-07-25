@@ -11,6 +11,7 @@ namespace Title.Custom
         [SerializeField] private PatternUIControl _prefab;
         [SerializeField] private CustomPatternLoader _patternLoader;
         [SerializeField] private CustomSound _sound;
+        [SerializeField] private CustomChart _chart;
         [SerializeField] private UnityEvent _onPatternSelect;
 
         private PatternUIControl _currentSelect;
@@ -70,6 +71,7 @@ namespace Title.Custom
 
             //カスタムの値を変更
             _sound.SetCustom(patternUI.PatternData.SoundPattern);
+            _chart.SetCustom(patternUI.PatternData.ChartPattern);
         }
 
         public async void SetPattern()
@@ -89,6 +91,7 @@ namespace Title.Custom
         {
             if (_currentSelect == null) return;
             _currentSelect.PatternData.SoundPattern = _sound.GetCustom();
+            _currentSelect.PatternData.ChartPattern = _chart.GetCustom();
             await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
     }

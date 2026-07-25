@@ -24,7 +24,7 @@ MonoBehaviour:
     HardLevel: 10
     HardJson: {fileID: 4900000, guid: 4956d2cd0b7add64aa4905279e576571, type: 3}
     ExpertLevel: 21
-    ExpertJson: {fileID: 0}
+    ExpertJson: {fileID: 4900000, guid: 9bdb0118080cd7c4ba67594e98c6be69, type: 3}
   _audioClip: {fileID: 8300000, guid: 776ee367d39150c4a8729b2f57f3b8e5, type: 3}
   _stageTimeOffSet: 0
   _editorTimeOffSet: 0.015
