@@ -11,7 +11,7 @@
         "TickNode": 0
     },
     "ChartPattern": {
-        "FlickConvertLevel": -1,
-        "LongConvertLevel": 1
+        "FlickConvertLevel": 0,
+        "LongConvertLevel": 0
     }
 }

@@ -28,6 +28,7 @@ namespace Title.SongSelect
                 CancelToken();
                 SoundManager.BGM.VolumeFade(0, _fadeInDuration);
             }).AddTo(this);
+            StopPreview();
         }
         public void PlayPreview(IReadOnlySongData songData)
         {
@@ -49,6 +50,7 @@ namespace Title.SongSelect
 
         private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
         {
+            if (audio == null) return;
             _playAudio = audio;
             float waitTime = _playWaitTime;
             if (_playAudio != null)
@@ -90,12 +92,10 @@ namespace Title.SongSelect
 
         public void StopPreview()
         {
-            Debug.Log("StopPreview");
             if (SongInfoControl.I.CurrentData.HasValue
                 && SongInfoControl.I.CurrentData.Value.SongData.Audio == _playAudio)
                 return;
 
-            Debug.Log("Stop");
             CancelToken();
 
             _cancellation = new CancellationTokenSource();

@@ -84,6 +84,7 @@ namespace InGame.Node
                     CreateHoldStartNode(nodeData);
                     return;
 
+                case PoolPrefabType.HoldFlickEnd:
                 case PoolPrefabType.HoldNoteEnd:
                     CreateHoldEndNode(nodeData);
                     return;

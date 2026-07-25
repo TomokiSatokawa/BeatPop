@@ -6,5 +6,5 @@ public enum PoolPrefabType
     TapEffect,LaneEffect,FlickEffect,HoldFillEffect, HoldStartEffect, HoldEndEffect,FlashEffect,
     SectionNode,JudgeUI,
     EditorLightNode,
-    TickEffect
+    TickEffect,HoldFlickEffect
 }

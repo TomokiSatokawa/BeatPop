@@ -101,7 +101,8 @@ namespace Editor
                         continue;
 
                     // “¯ƒŒ[ƒ“‚ÌI“_”­Œ©
-                    if (targetNode.PrefabType == PoolPrefabType.HoldNoteEnd)
+                    if (targetNode.PrefabType == PoolPrefabType.HoldNoteEnd
+                        ||targetNode.PrefabType == PoolPrefabType.HoldFlickEnd)
                     {
                         startNode.Connect = targetNode.NodeID;
 

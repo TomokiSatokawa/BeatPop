@@ -23,6 +23,7 @@ namespace InGame.Node
                         break;
                     case PoolPrefabType.HoldNoteStart:
                     case PoolPrefabType.HoldNoteEnd:
+                    case PoolPrefabType.HoldFlickEnd:
                         if (node.ConvertLevel > pattern.LongConvertLevel)
                         {
                             node.PrefabType = PoolPrefabType.NormalNote;
@@ -47,7 +48,8 @@ namespace InGame.Node
                     continue;
                 }
 
-                if (start.PrefabType == PoolPrefabType.HoldNoteEnd)
+                if (start.PrefabType == PoolPrefabType.HoldNoteEnd
+                    || start.PrefabType == PoolPrefabType.HoldFlickEnd)
                     continue;
 
                 bool isHold = false;

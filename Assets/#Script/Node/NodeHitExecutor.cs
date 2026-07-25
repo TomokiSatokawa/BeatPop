@@ -30,7 +30,8 @@ namespace InGame.Node
 
         public void HandleHit(NodeObject targetNode)
         {
-            if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd)
+            if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd
+                ||targetNode.NodeData.PrefabType == PoolPrefabType.HoldFlickEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
@@ -55,7 +56,8 @@ namespace InGame.Node
         {
             ExecuteJudgeNode(targetNode.NodeData);
 
-            if (targetNode.Type == PoolPrefabType.HoldNoteEnd)
+            if (targetNode.Type == PoolPrefabType.HoldNoteEnd 
+                || targetNode.Type == PoolPrefabType.HoldFlickEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }

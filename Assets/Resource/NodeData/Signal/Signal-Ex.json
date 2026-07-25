@@ -169,7 +169,7 @@
             "Lane": 0,
             "Time": 4.038461685180664,
             "ConvertLevel": 0,
-            "PrefabType": 5,
+            "PrefabType": 7,
             "Connect": 17
         },
         {
@@ -178,7 +178,7 @@
             "Time": 4.384615421295166,
             "ConvertLevel": 0,
             "PrefabType": 3,
-            "Connect": 23
+            "Connect": 24
         },
         {
             "NodeID": 22,
@@ -190,19 +190,19 @@
         },
         {
             "NodeID": 23,
-            "Lane": 1,
-            "Time": 4.730769157409668,
-            "ConvertLevel": 0,
-            "PrefabType": 5,
-            "Connect": 21
-        },
-        {
-            "NodeID": 24,
             "Lane": 0,
             "Time": 4.730769157409668,
             "ConvertLevel": 0,
             "PrefabType": 2,
             "Connect": 0
+        },
+        {
+            "NodeID": 24,
+            "Lane": 1,
+            "Time": 4.730769157409668,
+            "ConvertLevel": 0,
+            "PrefabType": 7,
+            "Connect": 21
         },
         {
             "NodeID": 25,
@@ -257,7 +257,7 @@
             "Lane": 1,
             "Time": 5.884615421295166,
             "ConvertLevel": 0,
-            "PrefabType": 5,
+            "PrefabType": 7,
             "Connect": 28
         },
         {
@@ -289,7 +289,7 @@
             "Lane": 0,
             "Time": 6.57692289352417,
             "ConvertLevel": 0,
-            "PrefabType": 5,
+            "PrefabType": 7,
             "Connect": 32
         },
         {
@@ -345,7 +345,7 @@
             "Lane": 0,
             "Time": 7.730769157409668,
             "ConvertLevel": 0,
-            "PrefabType": 5,
+            "PrefabType": 7,
             "Connect": 39
         },
         {

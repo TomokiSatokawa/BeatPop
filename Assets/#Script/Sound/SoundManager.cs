@@ -72,8 +72,11 @@ namespace Sound
                 return;
             }
 
-            fadeOutSection.PlayBGM(targetSection.Audio, targetSection.Volume, targetSection.Time);
-            fadeOutSection.VolumeFade(0, fadeDuration);
+            if (targetSection.Audio != null)
+            {
+                fadeOutSection.PlayBGM(targetSection.Audio, targetSection.Volume, targetSection.Time);
+                fadeOutSection.VolumeFade(0, fadeDuration);
+            }
 
             targetSection.PlayBGM(audio, 0, time, isLoop);
             targetSection.VolumeFade(1, fadeDuration);
