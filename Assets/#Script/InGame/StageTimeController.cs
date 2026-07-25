@@ -70,11 +70,6 @@ namespace InGame
             StartSectionTime = startSection;
         }
 
-        public async UniTask SongLoadAsync()
-        {
-            await SoundManager.I.LoadAudioClipAsync(SongClip);
-        }
-
         public void StartSongPlay()
         {
             float dray = Mathf.Max(0, _waitSeconds - StartSectionTime);

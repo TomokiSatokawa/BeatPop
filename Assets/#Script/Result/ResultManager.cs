@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using Common.UI;
@@ -17,31 +18,23 @@ namespace Result.UI
     {
         [SerializeField] private SceneTransition _sceneLoad;
         [SerializeField] private FadeImageControl _fadeImageControl;
-        [SerializeField] private RankDataBase _rankData;
-        [SerializeField] private float _fadeDuration;
+        [SerializeField] private ResultSoundManager _soundManager;
 
         private void Start()
         {
             if (_sceneLoad == null)
                 _sceneLoad = FindAnyObjectByType<SceneTransition>();
-
-            int score = ScoreDataManager.ScoreData.Score.CurrentValue;
-            int maxScore = ScoreDataManager.ScoreData.MaxScore;
-            float scoreRate = maxScore > 0 ? score / (float)maxScore : 0f;
-
-            SoundManager.BGM.PlayBGM(_rankData.GetRank(scoreRate).Clip);
         }
 
-        public async Task ReturnTitle()
+        public async void ReturnTitle()
         {
             GameManager.DontDestroyRelease();
 
             UniTask fade = _fadeImageControl.FadeOut(FadeType.White);
-            UniTask bgmFade = UniTask.WaitForSeconds(_fadeDuration);
+            UniTask bgmFade = _soundManager.FadeOut();
 
-            SoundManager.BGM.VolumeFade(0,_fadeDuration);
             await UniTask.WhenAll(fade, bgmFade);
-            _sceneLoad.ChangeScene("Title");
+            await _sceneLoad.LoadSceneAsync("Title",new CancellationTokenSource().Token);
         }
     }
 }

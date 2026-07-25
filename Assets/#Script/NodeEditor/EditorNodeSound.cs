@@ -37,7 +37,8 @@ namespace Editor
             {
                 var nodeData = _soundTimeData.Dequeue();
 
-                SoundManager.SE.PlaySE(InGameCustomSoundData.I.NodeSE[nodeData.PrefabType]);
+                var seData = InGameCustomSoundData.I.NodeSE[nodeData.PrefabType];
+                SoundManager.SE.PlaySE(seData.Clip, seData.Volume);
             }
         }
     }

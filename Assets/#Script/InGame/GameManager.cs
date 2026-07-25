@@ -43,7 +43,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         _stageTimeController.SetPlayData(fileData);
 
-        UniTask songLoad = _stageTimeController.SongLoadAsync();
+        UniTask songLoad = SoundManager.I.LoadAudioClipAsync(StageTimeController.I.SongClip);
+        //UniTask seLoad = SoundManager.I.LoadAudioClipAsync(InGameCustomSoundData.I.)
         UniTask poolClone = PoolManager.I.ClonePoolObject();
 
         await UniTask.WhenAll(songLoad, poolClone);
@@ -76,7 +77,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void Retry()
     {
-        DontDestroyRelease();
+        ScoreDataManager.DisposeSingleton();
+        SoundManager.BGM.PlayBGM(null);
         _sceneLoad.ChangeScene("InGame");
     }
 

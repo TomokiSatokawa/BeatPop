@@ -3,6 +3,7 @@ using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame;
 using R3;
+using Sound;
 using Title.SongSelect;
 using TMPro;
 using UnityEngine;
@@ -53,7 +54,7 @@ namespace Editor
 
         private async UniTask PrepareSongAsync()
         {
-            await StageTimeController.I.SongLoadAsync();
+            await SoundManager.I.LoadAudioClipAsync(StageTimeController.I.SongClip);
             StageTimeController.I.StartSongPlay();
             StageTimeController.I.Pause();
         }

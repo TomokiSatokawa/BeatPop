@@ -21,29 +21,26 @@ namespace Title.Custom
             var tapOption = new List<TMP_Dropdown.OptionData>();
             foreach (var item in _soundData.TapSE)
             {
-                tapOption.Add(new(item.Key));
+                tapOption.Add(new(item.Name));
             }
-            InitializeDropdown(_normalNotes, tapOption,_soundData.TapSE);
+            InitializeDropdown(_normalNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_flickNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_longStartNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_longFillNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_longEndNotes, tapOption, _soundData.TapSE);
 
             OnDefault();
-        }   
+        }
 
-        private void InitializeDropdown(TMP_Dropdown dropdown,List<TMP_Dropdown.OptionData> options
-            ,IReadOnlyList<SerializableDictionary<string,SESoundType>.KeyPair> soundData)
+        private void InitializeDropdown(TMP_Dropdown dropdown, List<TMP_Dropdown.OptionData> options
+            , IReadOnlyList<SEData> soundData)
         {
             dropdown.options = options;
-            dropdown.onValueChanged.AddListener(x =>
-            {
-                SESoundType soundType = soundData[x].Value;
-                OnChangeValue(soundType);
-            });
-;        }
+            dropdown.onValueChanged.AddListener(x => OnChangeValue(soundData[x].Clip));
+            ;
+        }
 
-        public void OnChangeValue(SESoundType seSound)
+        public void OnChangeValue(AudioClip seSound)
         {
             if (!_isReviewSound) return;
             SoundManager.SE.PlaySE(seSound);
@@ -66,7 +63,7 @@ namespace Title.Custom
             result.NormalSE = _normalNotes.value;
             result.FlickSE = _flickNotes.value;
             result.HoldStart = _longStartNotes.value;
-            result.HoldFill  = _longFillNotes.value;
+            result.HoldFill = _longFillNotes.value;
             result.HoldEnd = _longEndNotes.value;
 
             return result;

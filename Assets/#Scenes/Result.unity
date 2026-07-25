@@ -582,6 +582,70 @@ MonoBehaviour:
     - Key: 4
       Value: {fileID: 841686074}
   _showInterval: 0.5
+--- !u!1 &398536584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398536587}
+  - component: {fileID: 398536586}
+  - component: {fileID: 398536585}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &398536585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398536584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f984d8d0ebf0343a814813b71f99c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Result.ResultSoundManager
+  _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
+  _bgmStartWaitTime: 1
+  _fadeDuration: 1
+  _bgmVolume: 0.6
+--- !u!114 &398536586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398536584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c98c8931ec69b4ba21ab4f28504c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResultManager
+  _sceneLoad: {fileID: 89348880}
+  _fadeImageControl: {fileID: 957265883}
+  _soundManager: {fileID: 398536585}
+--- !u!4 &398536587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398536584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417130476
 GameObject:
   m_ObjectHideFlags: 0
@@ -4643,8 +4707,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2103821571}
-        m_TargetAssemblyTypeName: ResultManager, Assembly-CSharp
+      - m_Target: {fileID: 398536586}
+        m_TargetAssemblyTypeName: Result.UI.ResultManager, Assembly-CSharp
         m_MethodName: ReturnTitle
         m_Mode: 1
         m_Arguments:
@@ -5234,7 +5298,6 @@ GameObject:
   - component: {fileID: 2103821566}
   - component: {fileID: 2103821565}
   - component: {fileID: 2103821570}
-  - component: {fileID: 2103821571}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5356,22 +5419,6 @@ MonoBehaviour:
   _judgementCount: {fileID: 255538298}
   _scoreUIControl: {fileID: 1694712882}
   _rankUIControl: {fileID: 162826664}
---- !u!114 &2103821571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103821564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c98c8931ec69b4ba21ab4f28504c52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResultManager
-  _sceneLoad: {fileID: 89348880}
-  _fadeImageControl: {fileID: 957265883}
-  _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
-  _fadeDuration: 0
 --- !u!1 &2107185127
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,3 +5823,4 @@ SceneRoots:
   - {fileID: 2103821569}
   - {fileID: 846406542}
   - {fileID: 89348881}
+  - {fileID: 398536587}

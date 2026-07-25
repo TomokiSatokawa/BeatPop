@@ -37,30 +37,33 @@ namespace Sound
             }
         }
 
-        public async UniTask LoadAudioClipAsync(AudioClip clip)
+        public async UniTask LoadAudioClipAsync(params AudioClip[] clips)
         {
-            if (clip == null)
-                return;
-
-            if (clip.loadState == AudioDataLoadState.Loaded)
-                return;
-
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-
-            clip.LoadAudioData();
-
-            while (clip.loadState == AudioDataLoadState.Loading)
+            foreach (var clip in clips)
             {
-                if (sw.ElapsedMilliseconds >= MaxAudioLoadTimePerFrameMs)
+                if (clip == null)
+                    return;
+
+                if (clip.loadState == AudioDataLoadState.Loaded)
+                    return;
+
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+
+                clip.LoadAudioData();
+
+                while (clip.loadState == AudioDataLoadState.Loading)
                 {
-                    sw.Restart();
-                    await UniTask.Yield();
+                    if (sw.ElapsedMilliseconds >= MaxAudioLoadTimePerFrameMs)
+                    {
+                        sw.Restart();
+                        await UniTask.Yield();
+                    }
                 }
-            }
 
-            if (clip.loadState != AudioDataLoadState.Loaded)
-            {
-                Debug.LogError($"AudioClipÇÃì«Ç›çûÇ›Ç…é∏îsÇµÇ‹ÇµÇΩ : {clip.name}");
+                if (clip.loadState != AudioDataLoadState.Loaded)
+                {
+                    Debug.LogError($"AudioClipÇÃì«Ç›çûÇ›Ç…é∏îsÇµÇ‹ÇµÇΩ : {clip.name}");
+                }
             }
         }
 

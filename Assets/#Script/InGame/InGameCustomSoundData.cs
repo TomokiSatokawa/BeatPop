@@ -13,8 +13,8 @@ namespace InGame
     public class InGameCustomSoundData : SingletonMonoBehaviour<InGameCustomSoundData>
     {
         [SerializeField] private CustomSoundData _soundData;
-        private readonly Dictionary<PoolPrefabType, SESoundType> _nodeSE = new();
-        public IReadOnlyDictionary<PoolPrefabType, SESoundType> NodeSE => _nodeSE;
+        private readonly Dictionary<PoolPrefabType, SEData> _nodeSE = new();
+        public IReadOnlyDictionary<PoolPrefabType, SEData> NodeSE => _nodeSE;
 
         void Start()
         {
@@ -25,13 +25,13 @@ namespace InGame
         {
             CustomSoundPattern soundPattern = SongPlayContext.I?.PatternData?.SoundPattern ?? _soundData.GetDefaultCustom();
 
-            _nodeSE.Add(PoolPrefabType.NormalNote, _soundData.TapSE[soundPattern.NormalSE].Value);
-            _nodeSE.Add(PoolPrefabType.FlickNote, _soundData.TapSE[soundPattern.FlickSE].Value);
-            _nodeSE.Add(PoolPrefabType.HoldNoteStart, _soundData.TapSE[soundPattern.HoldStart].Value);
-            _nodeSE.Add(PoolPrefabType.HoldNoteFill, _soundData.TapSE[soundPattern.HoldFill].Value);
-            _nodeSE.Add(PoolPrefabType.HoldFlickEnd, _soundData.TapSE[soundPattern.FlickSE].Value);
-            _nodeSE.Add(PoolPrefabType.HoldNoteEnd, _soundData.TapSE[soundPattern.HoldEnd].Value);
-            _nodeSE.Add(PoolPrefabType.TickNode, _soundData.TapSE[soundPattern.TickNode].Value);
+            _nodeSE.Add(PoolPrefabType.NormalNote, _soundData.TapSE[soundPattern.NormalSE]);
+            _nodeSE.Add(PoolPrefabType.FlickNote, _soundData.TapSE[soundPattern.FlickSE]);
+            _nodeSE.Add(PoolPrefabType.HoldNoteStart, _soundData.TapSE[soundPattern.HoldStart]);
+            _nodeSE.Add(PoolPrefabType.HoldNoteFill, _soundData.TapSE[soundPattern.HoldFill]);
+            _nodeSE.Add(PoolPrefabType.HoldFlickEnd, _soundData.TapSE[soundPattern.FlickSE]);
+            _nodeSE.Add(PoolPrefabType.HoldNoteEnd, _soundData.TapSE[soundPattern.HoldEnd]);
+            _nodeSE.Add(PoolPrefabType.TickNode, _soundData.TapSE[soundPattern.TickNode]);
         }
     }
 }

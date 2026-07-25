@@ -49,7 +49,7 @@ namespace InGame.Node
 
             //SE
             var se = InGameCustomSoundData.I.NodeSE[targetNode.Type];
-            SoundManager.SE.PlaySE(se, judgeData.TapSEVolume);
+            SoundManager.SE.PlaySE(se.Clip, se.Volume * judgeData.TapSEVolume);
         }
 
         public void HandleRemove(NodeObject targetNode)

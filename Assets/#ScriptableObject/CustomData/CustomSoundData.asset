@@ -13,27 +13,25 @@ MonoBehaviour:
   m_Name: CustomSoundData
   m_EditorClassIdentifier: Assembly-CSharp::CustomSoundData
   _holdSE:
-    _items:
-    - Key: 1
-      Value: 0
-    - Key: 2
-      Value: 0
-    - Key: 3
-      Value: 0
-    - Key: 4
-      Value: 0
+  - _name: Hold1
+    _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
+    _volume: 10
   _tapSE:
-    _items:
-    - Key: TapSE1
-      Value: 1
-    - Key: TapSE2
-      Value: 2
-    - Key: TapSE3
-      Value: 3
-    - Key: TapSE4
-      Value: 4
-    - Key: TapSE5
-      Value: 5
+  - _name: Tap1
+    _clip: {fileID: 8300000, guid: ca203f76c4c49314da9ee8d58852b6e7, type: 3}
+    _volume: 10
+  - _name: Tap2
+    _clip: {fileID: 8300000, guid: ea13e5c2d40c8e74f8dcbbd2382ed845, type: 3}
+    _volume: 10
+  - _name: Tap3
+    _clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
+    _volume: 10
+  - _name: Tap4
+    _clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
+    _volume: 10
+  - _name: Tap5
+    _clip: {fileID: 8300000, guid: 525d70ff6e5e9de498fd60abb3947d94, type: 3}
+    _volume: 10
   _normalDefault: 0
   _flickDefault: 1
   _longStartDefault: 2
