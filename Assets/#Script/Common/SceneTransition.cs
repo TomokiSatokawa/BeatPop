@@ -22,7 +22,7 @@ namespace Common
 
             ChangeSceneAsync(scenePath).Forget();
         }
-        public void ChangeScene(string scenePath)
+        public void ChangeScene(string scenePath )
         {
             ChangeSceneAsync(scenePath).Forget();
         }
@@ -46,7 +46,6 @@ namespace Common
                 {
                     await _fadeImageControl.FadeOut(FadeType.White);
                 }
-
                 await LoadSceneAsync(scenePath, _cancellation.Token);
             }
             finally
@@ -55,7 +54,7 @@ namespace Common
             }
         }
 
-        private async UniTask LoadSceneAsync(string scenePath, CancellationToken token)
+        public async UniTask LoadSceneAsync(string scenePath, CancellationToken token)
         {
             var op = SceneManager.LoadSceneAsync(scenePath);
             op.allowSceneActivation = false;

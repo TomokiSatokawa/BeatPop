@@ -5255,6 +5255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _fastActive: {fileID: 79387970}
+  _fadeDuration: 0
 --- !u!114 &2103821566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5368,6 +5369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultManager
   _sceneLoad: {fileID: 89348880}
+  _fadeImageControl: {fileID: 957265883}
+  _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
+  _fadeDuration: 0
 --- !u!1 &2107185127
 GameObject:
   m_ObjectHideFlags: 0

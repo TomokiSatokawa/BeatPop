@@ -8,7 +8,7 @@ namespace Title.SongSelect
     {
         [Header("Reference")]
         [SerializeField] private Image _rankImage;
-        [SerializeField] private RankData _rankData;
+        [SerializeField] private RankDataBase _rankData;
 
         [Header("Animation")]
         [SerializeField] private float _fadeDuration = 0.15f;
@@ -28,7 +28,7 @@ namespace Title.SongSelect
 
         public void OnAnimation(float scoreRate)
         {
-            var rank = _rankData.GetRank(scoreRate);
+            var rank = _rankData.GetRank(scoreRate).Image;
             if (rank == _currentRank) return;
 
             _currentRank = rank;

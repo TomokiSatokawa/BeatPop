@@ -124,7 +124,7 @@ namespace Sound
             {
                 if (clip == null)
                 {
-                    Debug.LogError($"[Sound] AudioClip ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+                    _audioSource.clip = null;
                     return;
                 }
 

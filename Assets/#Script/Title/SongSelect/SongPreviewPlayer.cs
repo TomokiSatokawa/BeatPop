@@ -1,4 +1,5 @@
 using System.Threading;
+using System.Threading.Tasks;
 using Common;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace Title.SongSelect
 {
     /// <summary>
-    /// SongSelect画面でのプレビューサウンド再生指示
+    /// タイトルシーン内専用SoundController
     /// </summary>
     public class SongPreviewPlayer : SingletonMonoBehaviour<SongPreviewPlayer>
     {
@@ -26,8 +27,10 @@ namespace Title.SongSelect
             TitleManager.I.OnStartPlay.Subscribe(_ =>
             {
                 CancelToken();
-                SoundManager.BGM.VolumeFade(0, _fadeInDuration);
             }).AddTo(this);
+
+
+            SoundManager.BGM.PlayBGM(null);
             StopPreview();
         }
         public void PlayPreview(IReadOnlySongData songData)
@@ -36,6 +39,12 @@ namespace Title.SongSelect
             _cancellation = new CancellationTokenSource();
 
             WaitPlayPreviewAsync(songData.Audio, _cancellation.Token).Forget();
+        }
+
+        public async UniTask WaitBGMFadeOut()
+        {
+            SoundManager.BGM.VolumeFade(0, _fadeInDuration);
+            await UniTask.WaitForSeconds(_fadeInDuration);
         }
 
         private void CancelToken()
@@ -50,7 +59,7 @@ namespace Title.SongSelect
 
         private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
         {
-            if (audio == null) return;
+            if (audio == null)return;
             _playAudio = audio;
             float waitTime = _playWaitTime;
             if (_playAudio != null)

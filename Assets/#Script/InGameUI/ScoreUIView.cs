@@ -13,7 +13,7 @@ namespace InGame.UI
     public class ScoreUIView : MonoBehaviour
     {
         [SerializeField] private Image _sliderImage;
-        [SerializeField] private RankData _rankData;
+        [SerializeField] private RankDataBase _rankData;
         [SerializeField] private RectTransform[] _rankLines;
         [SerializeField] private TextMeshProUGUI _valueText;
         [SerializeField] private float _animationDuration = 0.3f;
@@ -43,7 +43,7 @@ namespace InGame.UI
 
             for (int i = 0; i < _rankData.RankValue.Count && i < _rankLines.Length; i++)
             {
-                float t = Mathf.Clamp01((float)_rankData.RankValue[i].Value);
+                float t = Mathf.Clamp01((float)_rankData.RankValue[i].Rate);
 
                 RectTransform rankLine = _rankLines[i];
 

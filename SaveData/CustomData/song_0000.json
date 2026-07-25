@@ -8,7 +8,7 @@
         "HoldStart": 2,
         "HoldFill": 3,
         "HoldEnd": 3,
-        "TickNode": 0
+        "TickNode": 4
     },
     "ChartPattern": {
         "FlickConvertLevel": 0,
