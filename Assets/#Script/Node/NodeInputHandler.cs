@@ -24,7 +24,8 @@ namespace InGame.Node
         {
             InputManager.LeftLane.Where(_ => !InputManager.FlickLeftLane.CurrentValue).Subscribe(b => HandleClickLaneInput(0, b, false)).AddTo(this);
             InputManager.RightLane.Where(_ => !InputManager.FlickRightLane.CurrentValue).Subscribe(b => HandleClickLaneInput(1, b, false)).AddTo(this);
-            InputManager.OnFlick.Subscribe(x => HandleClickLaneInput(x, false, true)).AddTo(this);
+            InputManager.OnLeftFlick.Subscribe(x => HandleClickLaneInput(0, x, true)).AddTo(this);
+            InputManager.OnRightFlick.Subscribe(x => HandleClickLaneInput(1, x, true)).AddTo(this);
         }
 
         private void HandleClickLaneInput(int lane, bool isClick, bool isFlick)
@@ -39,7 +40,7 @@ namespace InGame.Node
 
             if (_holdNodeFillManager.HasFill(lane)) return;
 
-            bool isNextFlick = node?.NodeObjData.InputType == InputType.Flick;
+            bool isNextFlick = node?.NodeObjData.InputType == InputType.DownFlick;
 
             if (isClick && !isNextFlick)
                 EmptyClick(lane);
@@ -60,7 +61,9 @@ namespace InGame.Node
         private static InputType GetInputType(bool isClick, bool isFlick)
         {
             if (isFlick)
-                return InputType.Flick;
+            {
+                return isClick ? InputType.DownFlick : InputType.UpFlick;
+            }
 
             return isClick ? InputType.Down : InputType.Up;
         }
@@ -75,6 +78,6 @@ namespace InGame.Node
 
 public enum InputType
 {
-    None, Down, Up, Flick, Hold
+    None, Down, Up, DownFlick, Hold,UpFlick, 
 }
 

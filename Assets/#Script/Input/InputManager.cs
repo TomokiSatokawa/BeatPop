@@ -13,23 +13,31 @@ namespace Input
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private TouchManager _touchManager;
+        [SerializeField] private float _flickInterval;
 
         private static GameInputs _gameInputs;
         private static TouchState[] _touchState;
+
+        private readonly InputEvent _rightMainEvent = new();
+        private readonly InputEvent _leftMainEvent = new();
+        private readonly InputEvent _rightFlickEvent = new();
+        private readonly InputEvent _leftFlickEvent = new();
 
         private readonly static ReactiveProperty<bool> _rightLane = new();
         private readonly static ReactiveProperty<bool> _leftLane = new();
         private readonly static ReactiveProperty<bool> _flickLeftLane = new();
         private readonly static ReactiveProperty<bool> _flickRightLane = new();
         private readonly static ReactiveProperty<bool> _pauseButton = new();
-        private readonly static Subject<int> _onFlick = new();
+        private readonly static Subject<bool> _onRightFlick = new();
+        private readonly static Subject<bool> _onleftFlick = new();
 
         public static ReadOnlyReactiveProperty<bool> RightLane => _rightLane;
         public static ReadOnlyReactiveProperty<bool> LeftLane => _leftLane;
         public static ReadOnlyReactiveProperty<bool> FlickLeftLane => _flickLeftLane;
         public static ReadOnlyReactiveProperty<bool> FlickRightLane => _flickRightLane;
         public static ReadOnlyReactiveProperty<bool> PauseButton => _pauseButton;
-        public static Observable<int> OnFlick => _onFlick;
+        public static Observable<bool> OnRightFlick => _onRightFlick;
+        public static Observable<bool> OnLeftFlick => _onleftFlick;
 
         private Action _disableAction;
 
@@ -101,38 +109,46 @@ namespace Input
 
         private void OnRightKey(InputAction.CallbackContext context)
         {
-            _rightLane.Value = context.started || context.performed;
-            if (_rightLane.Value)
-            {
-                FlickCheck(1);
-            }
+            bool performed = context.started || context.performed;
+            _rightLane.Value = performed;
+
+            _rightMainEvent.isDown = performed;
+            _rightMainEvent.Time = (float)context.time;
+
+            FlickCheck(_rightMainEvent, _rightFlickEvent, _onRightFlick);
         }
 
         private void OnLeftKey(InputAction.CallbackContext context)
         {
-            _leftLane.Value = context.started || context.performed;
-            if (_leftLane.Value)
-            {
-                FlickCheck(0);
-            }
+            bool performed = context.started || context.performed;
+            _leftLane.Value = performed;
+
+            _leftMainEvent.isDown = performed;
+            _leftMainEvent.Time = (float)context.time;
+
+            FlickCheck(_leftMainEvent, _leftFlickEvent, _onleftFlick);
         }
 
         private void OnFlickRightKey(InputAction.CallbackContext context)
         {
-            _flickRightLane.Value = context.started || context.performed;
-            if (_flickRightLane.Value)
-            {
-                FlickCheck(1);
-            }
+            bool performed = context.started || context.performed;
+            _flickRightLane.Value = performed;
+
+            _rightFlickEvent.isDown = performed;
+            _rightFlickEvent.Time = (float)context.time;
+
+            FlickCheck(_rightMainEvent, _rightFlickEvent, _onRightFlick);
         }
 
         private void OnFlickLeftKey(InputAction.CallbackContext context)
         {
-            _flickLeftLane.Value = context.started || context.performed;
-            if (_flickLeftLane.Value)
-            {
-                FlickCheck(0);
-            }
+            bool performed = context.started || context.performed;
+            _flickLeftLane.Value = performed;
+
+            _leftFlickEvent.isDown = performed;
+            _leftFlickEvent.Time = (float)context.time;
+
+            FlickCheck(_leftMainEvent, _leftFlickEvent, _onleftFlick);
         }
 
         private void OnPauseKey(InputAction.CallbackContext context)
@@ -169,21 +185,18 @@ namespace Input
                     if (lane == -1)
                         break;
 
-                    _onFlick.OnNext(lane);
+                    //_onRightFlick.OnNext(lane);
                     break;
             }
         }
 
-        private void FlickCheck(int i)
+        private void FlickCheck(InputEvent main, InputEvent flick, Subject<bool> subject)
         {
-            if (i == 1 && RightLane.CurrentValue && FlickRightLane.CurrentValue)
-            {
-                _onFlick.OnNext(i);
-            }
+            if (!flick.isDown) return;
 
-            if (i == 0 && LeftLane.CurrentValue && FlickLeftLane.CurrentValue)
+            if (Mathf.Abs(main.Time - flick.Time) < _flickInterval)
             {
-                _onFlick.OnNext(i);
+                subject.OnNext(main.isDown);
             }
         }
 
@@ -191,6 +204,12 @@ namespace Input
         {
             _disableAction?.Invoke();
             _gameInputs.Disable();
+        }
+
+        private class InputEvent
+        {
+            public bool isDown;
+            public float Time;
         }
     }
 }

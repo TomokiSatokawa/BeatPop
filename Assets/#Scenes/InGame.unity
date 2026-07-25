@@ -5432,6 +5432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Input.InputManager
   _touchManager: {fileID: 1946836283}
+  _flickInterval: 0.1
 --- !u!114 &1946836281
 MonoBehaviour:
   m_ObjectHideFlags: 0
