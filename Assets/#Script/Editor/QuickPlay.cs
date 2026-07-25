@@ -172,7 +172,8 @@ public class QuickPlay : EditorWindow
         var pattern = new PatternJsonData
         {
             PatternName = "QuickPlay",
-            SoundPattern = _soundData.GetDefaultCustom()
+            SoundPattern = _soundData.GetDefaultCustom(),
+            ChartPattern = default
         };
 
         songPlayData.SetData(songSelectData, pattern, _startSection);

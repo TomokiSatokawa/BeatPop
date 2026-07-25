@@ -1,6 +1,7 @@
 using Common;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
+using InGame.Node;
 using R3;
 using Debug = UnityEngine.Debug;
 
@@ -26,6 +27,9 @@ namespace InGame
 
             if (stageData == null)
                 Debug.LogError("[InGameFileLoad] StageData‚ª‚ ‚è‚Ü‚¹‚ñ");
+
+            ChartModifier.Modifier(nodeData.Nodes,SongPlayContext.I.PatternData.ChartPattern);
+            ChartModifier.NormalizeLongNotes(nodeData.Nodes);
 
             _onNodeFileLoaded.OnNext(nodeData);
             _onStageFileLoaded.OnNext(stageData);
