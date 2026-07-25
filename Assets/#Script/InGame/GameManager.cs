@@ -1,3 +1,4 @@
+using System.Linq;
 using Common;
 using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
@@ -44,10 +45,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _stageTimeController.SetPlayData(fileData);
 
         UniTask songLoad = SoundManager.I.LoadAudioClipAsync(StageTimeController.I.SongClip);
-        //UniTask seLoad = SoundManager.I.LoadAudioClipAsync(InGameCustomSoundData.I.)
+        UniTask seLoad = SoundManager.I.LoadAudioClipAsync(InGameCustomSoundData.I.NodeSE.Values.Select(x => x.Clip).ToArray());
         UniTask poolClone = PoolManager.I.ClonePoolObject();
 
-        await UniTask.WhenAll(songLoad, poolClone);
+        await UniTask.WhenAll(songLoad, seLoad, poolClone);
 
         _stageTimeController.StartSongPlay();
     }

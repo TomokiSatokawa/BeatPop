@@ -23,6 +23,7 @@ namespace InGame.Node
         {
             InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => _nodeDataList = x.Nodes).AddTo(this);
 
+            //TODOBeat
             float arrivalSeconds = StageContext.I.ArrivalSeconds;
             BeatUpdateManager.BeatUpdate.Subscribe(16, -arrivalSeconds, _ => GenerateNodes());
             BeatUpdateManager.BeatUpdate.Subscribe(4, -arrivalSeconds, x => CreateLines(x.Time));

@@ -38,7 +38,7 @@ namespace InGame.UI
         private void SubscribeCombo()
         {
             //ƒRƒ“ƒ{
-            ScoreDataManager.ScoreData.Combo.Where(x => x > 0).Subscribe(x => _comboUIControl.PlayComboAnimation(x)).AddTo(this);
+            ScoreDataManager.ScoreData.Combo.Where(x => x > 0).Subscribe(x => _comboUIControl.PlayComboAnimation(x,ScoreDataManager.ScoreData.IsAllPerfect)).AddTo(this);
             ScoreDataManager.ScoreData.Combo.Where(x => x <= 0).Subscribe(_ =>
             {
                 _comboUIControl.Hide();

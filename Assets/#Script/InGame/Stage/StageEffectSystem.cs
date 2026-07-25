@@ -29,8 +29,9 @@ namespace InGame.Stage
                 .Subscribe(_ => UpdateNextPattern())
                 .AddTo(this);
 
-
+            //TODOBeat
             BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
+
         }
 
         public void NextPattern()
@@ -107,6 +108,23 @@ namespace InGame.Stage
             if (InGameFileLoad.I != null)
             {
                 _patternList = InGameFileLoad.I.OnStageFileLoaded.CurrentValue.LightData;
+            }
+
+            foreach (var pattern in _patternList)
+            {
+                switch (pattern.Channel)
+                {
+                    case 0:
+                        _frontUpperPanelLight.TryCreatePattern(pattern);
+                        break;
+                    case 1:
+                        _backUpperPanelLight.TryCreatePattern(pattern);
+                        break;
+                    case 2:
+                        _stageGradientLight.TryCreatePattern(pattern);
+                        _laneGradientLight.TryCreatePattern(pattern);
+                        break;
+                }
             }
         }
     }

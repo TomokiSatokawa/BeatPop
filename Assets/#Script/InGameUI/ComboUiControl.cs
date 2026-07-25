@@ -13,6 +13,9 @@ namespace InGame.UI
         [SerializeField] private Transform _parentObject;
         [SerializeField] private TextMeshProUGUI _comboText;
         [SerializeField] private TextMeshProUGUI _afterText;
+        [SerializeField] private TextMeshProUGUI _subText;
+        [SerializeField] private TMP_ColorGradient _perfectColor;
+        [SerializeField] private TMP_ColorGradient _normalColor;
         [Header("Size")]
         [SerializeField] private float _maxSize;
         [SerializeField] private float _minSize;
@@ -56,10 +59,13 @@ namespace InGame.UI
 
         }
 
-        public void PlayComboAnimation(int count)
+        public void PlayComboAnimation(int count,bool isPerfect)
         {
             _comboText.text = count.ToString();
             _afterText.text = count.ToString();
+
+            _comboText.colorGradientPreset = isPerfect ? _perfectColor : _normalColor;
+            _subText.colorGradientPreset = isPerfect ? _perfectColor : _normalColor;
 
             _sequence.Restart(true);
         }

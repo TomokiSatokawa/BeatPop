@@ -8,6 +8,9 @@ namespace InGame.Stage
     public class GradientLightControl :  StageLightBase
     {
         [SerializeField] private Renderer _renderer;
+        [SerializeField] private Color _startColor1 = Color.black;
+        [SerializeField] private Color _startColor2 = Color.gray;
+        [SerializeField] private float _startPower = 1f;
 
         private MaterialPropertyBlock _mpb;
 
@@ -19,6 +22,8 @@ namespace InGame.Stage
         private void Awake()
         {
             _mpb = new MaterialPropertyBlock();
+            SetColor(_startColor1, _startColor2);
+            SetPower(_startPower);
         }
 
         public override void Flash(float duration, float power)

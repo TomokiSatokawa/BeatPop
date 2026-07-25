@@ -24,10 +24,10 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: ea13e5c2d40c8e74f8dcbbd2382ed845, type: 3}
     _volume: 10
   - _name: Tap3
-    _clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
+    _clip: {fileID: 8300000, guid: eeb62268f0b984a4dae7b38f04e4c765, type: 3}
     _volume: 10
   - _name: Tap4
-    _clip: {fileID: 8300000, guid: f7eff6bcde5055f4690b870d1723c2bf, type: 3}
+    _clip: {fileID: 8300000, guid: eeb62268f0b984a4dae7b38f04e4c765, type: 3}
     _volume: 10
   - _name: Tap5
     _clip: {fileID: 8300000, guid: 525d70ff6e5e9de498fd60abb3947d94, type: 3}

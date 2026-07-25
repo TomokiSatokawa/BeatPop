@@ -18,6 +18,7 @@ namespace InGame.Stage
 
         private void Start ()
         {
+            //TODOBeat
             BeatUpdateManager.BeatUpdate.Subscribe(16, 0, x => BeatUpdate(x.Division));
         }
 
@@ -44,16 +45,24 @@ namespace InGame.Stage
             }
 
             //なかったら生成
+            var pattern = TryCreatePattern(data);
+
+            _instancePattern[type] = pattern;
+            _currentPattern?.Refresh();
+            _currentPattern = pattern;
+            _currentPattern.Initialize(data, _lights);
+        }
+        public LightPatternBase TryCreatePattern(LightPatternBaseData data)
+        {
+            Type type = Assembly.GetExecutingAssembly().GetType(data.PatternType);
+
             if (!_instancePattern.TryGetValue(type, out var pattern))
             {
                 pattern = (LightPatternBase)Activator.CreateInstance(type);
                 _instancePattern.Add(type, pattern);
             }
 
-            _instancePattern[type] = pattern;
-            _currentPattern?.Refresh();
-            _currentPattern = pattern;
-            _currentPattern.Initialize(data, _lights);
+            return pattern;
         }
     }
 }
