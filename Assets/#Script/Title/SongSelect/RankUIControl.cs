@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +27,7 @@ namespace Title.SongSelect
         private Tween _animation;
         private Sprite _currentRank = null;
 
-        public void OnAnimation(float scoreRate)
+        public void OnAnimation(float scoreRate,bool isPlaySe = false)
         {
             var rank = _rankData.GetRank(scoreRate).Image;
             if (rank == _currentRank) return;
@@ -42,7 +43,16 @@ namespace Title.SongSelect
             Sequence sequence = DOTween.Sequence();
 
             sequence.AppendInterval(_waitTime);
-            sequence.AppendCallback(() => _rankImage.gameObject.SetActive(true));
+
+            sequence.AppendCallback(() =>
+            {
+                _rankImage.gameObject.SetActive(true);
+
+                if (isPlaySe)
+                {
+                    SoundManager.SE.PlaySE(SESoundType.RankView);
+                }
+            });
             sequence.Append(_rankImage.DOFade(1f, _fadeDuration));
 
             sequence.Join(
@@ -58,6 +68,8 @@ namespace Title.SongSelect
             );
 
             _animation = sequence;
+
+
         }
     }
 }

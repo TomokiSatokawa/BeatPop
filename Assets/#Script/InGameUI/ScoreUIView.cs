@@ -13,8 +13,6 @@ namespace InGame.UI
     public class ScoreUIView : MonoBehaviour
     {
         [SerializeField] private Image _sliderImage;
-        [SerializeField] private RankDataBase _rankData;
-        [SerializeField] private RectTransform[] _rankLines;
         [SerializeField] private TextMeshProUGUI _valueText;
         [SerializeField] private float _animationDuration = 0.3f;
 
@@ -24,7 +22,6 @@ namespace InGame.UI
         private void Awake()
         {
             Initialize(); 
-            InitializeRankLines();
         }
 
         private void Initialize()
@@ -34,24 +31,6 @@ namespace InGame.UI
             _currentScore = 0;
         }
 
-        private void InitializeRankLines()
-        {
-            RectTransform sliderRect = _sliderImage.rectTransform;
-
-            float left = sliderRect.rect.xMin;
-            float right = sliderRect.rect.xMax;
-
-            for (int i = 0; i < _rankData.RankValue.Count && i < _rankLines.Length; i++)
-            {
-                float t = Mathf.Clamp01((float)_rankData.RankValue[i].Rate);
-
-                RectTransform rankLine = _rankLines[i];
-
-                Vector2 pos = rankLine.anchoredPosition;
-                pos.x = Mathf.Lerp(left, right, t);
-                rankLine.anchoredPosition = pos;
-            }
-        }
 
         public void UpdateScore(int score,float scoreRatio)
         {

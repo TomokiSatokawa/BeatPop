@@ -46,6 +46,12 @@ public static class SceneTabWindow
         EditorSceneManager.SaveOpenScenes();
         OpenScene(5);
     }
+    [MenuItem("Scene/6 Test")]
+    public static void Scene06()
+    {
+        EditorSceneManager.SaveOpenScenes();
+        OpenScene(7);
+    }
     private static void OpenScene(int sceneIndex)
     {
         string scenePath = SceneUtility.GetScenePathByBuildIndex(sceneIndex);

@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: Pixel Parade
   _songID: 5
   _bpm: 157.5
-  _jacket: {fileID: 0}
+  _jacket: {fileID: 21300000, guid: 279ceb62b4d6f2f41b8922cc2f83ebd2, type: 3}
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 0}

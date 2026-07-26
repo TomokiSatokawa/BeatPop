@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using InGame.Node;
 using R3;
+using Result.UI;
 using UnityEngine;
 
 namespace InGame.Score
@@ -19,6 +20,9 @@ namespace InGame.Score
         private bool _isAllPerfect;
         /// <summary>オールパーフェクトが続いているか</summary>
         bool IReadOnlyScoreData.IsAllPerfect => _isAllPerfect;
+        private bool _isFullCombo;
+        /// <summary>オールパーフェクトが続いているか</summary>
+        bool IReadOnlyScoreData.IsFullCombo => _isFullCombo;
 
         private readonly ReactiveProperty<int> _combo = new();
         /// <summary>コンボ数</summary>
@@ -31,6 +35,7 @@ namespace InGame.Score
         public void Initialize()
         {
             _isAllPerfect = true;
+            _isFullCombo = true;
             _combo.Value = 0;
             _score.Value = 0;
             _maxScore = 0;
@@ -81,6 +86,17 @@ namespace InGame.Score
             _maxScore = maxScore;
         }
 
+        public ResultType GetResultType()
+        {
+            if (_isAllPerfect)
+                return ResultType.AllPerfect;
+
+            if(_isFullCombo) 
+                return ResultType.FullCombo;
+
+            return ResultType.Clear;
+        }
+
         private static int GetScore(IReadOnlyNodeJudgement type, IReadOnlyJudgementData result)
         {
             if(result.ScoreMultiplier <= 0)
@@ -103,6 +119,7 @@ namespace InGame.Score
             else
             {
                 _combo.OnNext(0);
+                _isFullCombo = false;
             }
         }
 
@@ -112,7 +129,10 @@ namespace InGame.Score
     {
         public int MaxScore { get; }
         public bool IsAllPerfect { get; }
+        public bool IsFullCombo { get; }
         public ReadOnlyReactiveProperty<int> Combo { get; }
         public ReadOnlyReactiveProperty<int> Score { get; }
+
+        public ResultType GetResultType();
     }
 }

@@ -66,8 +66,9 @@ namespace Sound
     public enum SESoundType
     {
         None,
-        Tap1, Tap2, Tap3, Tap4, Tap5, Tap6, Tap7, Tap8,
-        Hold1, Hold2, Hold3, Hold4,
-        EmptyHit
+        EmptyHit,
+        RankView,
+        ScoreCount,
+        BadgeView,
     }
 }

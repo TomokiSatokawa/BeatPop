@@ -134,7 +134,7 @@ namespace InGame.Node
 
                 if (_isInput)
                 {
-                    SoundManager.LaneSE[StartNode.Lane].PlayBGM(SESoundType.Hold1, isLoop: true);
+                    SoundManager.LaneSE[StartNode.Lane].PlayBGM(InGameCustomSoundData.I.NodeSE[PoolPrefabType.HoldNoteFill].Clip, isLoop: true);
                 }
                 else
                 {

@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: BeatLesson
   _songID: 6
   _bpm: 164
-  _jacket: {fileID: 0}
+  _jacket: {fileID: 21300000, guid: 6c6a7685de7b0ae4bb7705b2b63c8104, type: 3}
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 4900000, guid: 10380b09128968a45a879d0ade27a5f4, type: 3}

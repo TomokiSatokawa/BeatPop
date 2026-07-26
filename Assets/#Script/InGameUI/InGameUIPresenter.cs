@@ -14,7 +14,7 @@ namespace InGame.UI
         [SerializeField] private JudgeUIView _judgeUIControl;
         [SerializeField] private ComboUIControl _comboUIControl;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
-        [SerializeField] private ClearAnimation _clearAnimation;
+        [SerializeField] private ClearAnimationSwitcher _clearAnimation;
         [SerializeField] private ScoreUIView _scoreUIView;
         [SerializeField] private RankUIControl _rankUIControl;
         [SerializeField] private MissAnimation _missAnimation;
@@ -67,7 +67,7 @@ namespace InGame.UI
         {
             //ƒNƒŠƒA‰‰o
             StageTimeController.I.OnGameClear.Subscribe(_ =>
-            _clearAnimation.StartAnimation(() => GameManager.I.Clear())).AddTo(this);
+            _clearAnimation.Play( ScoreDataManager.ScoreData.GetResultType(),() => GameManager.I.Clear())).AddTo(this);
         }
 
         private void SubscribePause()

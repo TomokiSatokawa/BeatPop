@@ -37,4 +37,8 @@ namespace Result.UI
             await _sceneLoad.LoadSceneAsync("Title",new CancellationTokenSource().Token);
         }
     }
+    public enum ResultType
+    {
+        Clear,FullCombo,AllPerfect
+    }
 }
