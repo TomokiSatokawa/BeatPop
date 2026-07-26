@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +66,8 @@ namespace InGame.UI
             // 背景（アニメーション開始と同時）
             _sequence.Append(
                 _backGround.DOFade(_backgroundAlpha, _backgroundFadeDuration));
+
+            _sequence.InsertCallback(_textStartDelay, () => SoundManager.SE.PlaySE(SESoundType.StageClear));
 
             // タイトル（アニメーション開始から _textStartDelay 秒後）
             _sequence.Insert(

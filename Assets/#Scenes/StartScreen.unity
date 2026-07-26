@@ -296,22 +296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
   _manifestLoader: {fileID: 1012845166}
-  _onClickAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 227749954}
-        m_TargetAssemblyTypeName: SceneLoad, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Title
-          m_BoolArgument: 0
-        m_CallState: 2
+  _fadeImageControl: {fileID: 67526974}
+  _sceneTransition: {fileID: 227749954}
+  _bgmFadeDuration: 1
   _loadText: {fileID: 1024399295}
+  _titleBGM: {fileID: 8300000, guid: dbffacd6079e28d4c8b8f4176f64baae, type: 3}
 --- !u!1 &227749952
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +742,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomManifestLoader
   _patternLoader: {fileID: 227749955}
-  _songData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
 --- !u!4 &1012845167
 Transform:
   m_ObjectHideFlags: 0

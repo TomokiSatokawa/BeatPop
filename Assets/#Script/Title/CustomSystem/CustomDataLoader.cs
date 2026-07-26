@@ -35,7 +35,9 @@ namespace Title.Custom
                 if (!await FileStorage.TryGetText(FolderName, filePath, null))
                 {
                     Debug.LogError($"ƒtƒ@ƒCƒ‹”j‘¹ {filePath}");
-                }
+                }   
+
+                await UniTask.Yield();
             }
 
             DontDestroyOnLoad(this.gameObject);

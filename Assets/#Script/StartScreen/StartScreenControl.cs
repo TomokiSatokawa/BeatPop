@@ -1,4 +1,8 @@
+using System.Threading;
+using Common;
+using Common.UI;
 using Cysharp.Threading.Tasks;
+using Sound;
 using Title.Custom;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,33 +13,45 @@ namespace StartScreen
     public class StartScreenControl : MonoBehaviour
     {
         [SerializeField] private CustomDataLoader _manifestLoader;
-        [SerializeField] private UnityEvent _onClickAction;
+        [SerializeField] private FadeImageControl _fadeImageControl;
+        [SerializeField] private SceneTransition _sceneTransition;
+        [SerializeField] private float _bgmFadeDuration;
         [SerializeField] private GameObject _loadText;
+        [SerializeField] private AudioClip _titleBGM;
 
-        private bool _isLoaded;
+        private bool _isLoading;
         private void Start()
         {
-            _isLoaded = false;
-            Initialize();
+            _isLoading = false;
+            SoundManager.BGM.PlayBGM(_titleBGM);
+            _loadText.gameObject.SetActive(false);
         }
-        private async void Initialize()
+        private async UniTask LoadSaveData()
         {
             _loadText.gameObject.SetActive(true);
             await _manifestLoader.LoadManifest();
-
-            _isLoaded = true;
             _loadText.gameObject.SetActive(false);
         }
-        void Update()
+        private void Update()
         {
-            if (!_isLoaded) return;
+            if (_isLoading) return;
             if ((Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) ||
                 (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
                 (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame))
             {
-                _onClickAction?.Invoke();
-                this.enabled = false;
+                _isLoading = true;
+                StartGame();
             }
+        }
+        private async void StartGame()
+        {
+            await LoadSaveData();
+            SoundManager.BGM.VolumeFade(0, _bgmFadeDuration);
+
+            UniTask fadeScreen = _fadeImageControl.FadeOut(FadeType.White);
+            UniTask fadeBGM = UniTask.WaitForSeconds(_bgmFadeDuration);
+            await UniTask.WhenAll(fadeScreen, fadeBGM);
+            await _sceneTransition.LoadSceneAsync("Title", new CancellationTokenSource().Token);
         }
     }
 }

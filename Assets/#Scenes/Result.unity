@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Result.ResultSoundManager
   _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
-  _bgmStartWaitTime: 1
+  _bgmStartWaitTime: 0
   _fadeDuration: 1
   _bgmVolume: 0.6
 --- !u!114 &398536586
@@ -4317,7 +4317,7 @@ MonoBehaviour:
   _fullCombo: {fileID: 423157104}
   _duration: 0.5
   _startScale: 1.5
-  _waitTime: 2
+  _waitTime: 1.5
 --- !u!1 &1360065619
 GameObject:
   m_ObjectHideFlags: 0

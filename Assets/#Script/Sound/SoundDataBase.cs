@@ -70,5 +70,6 @@ namespace Sound
         RankView,
         ScoreCount,
         BadgeView,
+        StageClear,
     }
 }
