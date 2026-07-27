@@ -21,7 +21,6 @@ namespace InGame.Node
 
         public void Start()
         {
-            //TODOBeat
             BeatUpdateManager.BeatUpdate.Subscribe(8, 0, _ =>
             {
                 ExecuteHoldJudge(0, InputManager.LeftLane.CurrentValue);

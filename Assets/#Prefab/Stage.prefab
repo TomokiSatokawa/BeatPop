@@ -6313,6 +6313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.GradientLightControl
   _renderer: {fileID: 3294391263499008012}
+  _startColor1: {r: 0.3509434, g: 0.3509434, b: 0.3509434, a: 1}
+  _startColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _startPower: 1
 --- !u!114 &7623835674518803150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7140,6 +7143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2690026428045509152}
+  - component: {fileID: 8628239158404938758}
   m_Layer: 6
   m_Name: Fire
   m_TagString: Untagged
@@ -7168,6 +7172,25 @@ Transform:
   - {fileID: 1153399298116029332}
   m_Father: {fileID: 7957129529170220345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8628239158404938758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7469259694601217002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f28f61cd8f3ea4caac373c2db91697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.LightGroupManager
+  _lights:
+  - {fileID: 3422138283870514331}
+  - {fileID: 9177702207675772208}
+  - {fileID: 8813311073870194066}
+  - {fileID: 739513386690074586}
+  - {fileID: 4112322076693989159}
+  - {fileID: 6105115074886431267}
 --- !u!1 &7673750808824834327
 GameObject:
   m_ObjectHideFlags: 0
@@ -7554,6 +7577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.GradientLightControl
   _renderer: {fileID: 4898503337694117842}
+  _startColor1: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
+  _startColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _startPower: 1
 --- !u!1 &8212164777572144605
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,6 +8128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.GradientLightControl
   _renderer: {fileID: 1909932227670757411}
+  _startColor1: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
+  _startColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _startPower: 1
 --- !u!1 &8853168428653550920
 GameObject:
   m_ObjectHideFlags: 0
@@ -8429,8 +8458,8 @@ MonoBehaviour:
   _backUpperPanelLight: {fileID: 5132542139638096024}
   _stageGradientLight: {fileID: 7623835674518803150}
   _laneGradientLight: {fileID: 1243100120025342831}
+  _flamethrower: {fileID: 8628239158404938758}
   _startOffset: -0.01
-  _isAllCheckPattern: 1
 --- !u!1001 &1157982594651351814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8461,7 +8490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -76.4
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8529,6 +8558,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
   m_PrefabInstance: {fileID: 1157982594651351814}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6105115074886431267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 1157982594651351814}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!1001 &3563669325667400875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8653,7 +8693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.4000015
+      value: -9.7
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8721,6 +8761,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
   m_PrefabInstance: {fileID: 4320637941529359381}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9177702207675772208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 4320637941529359381}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!1001 &4532707422287379639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8751,7 +8802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.400002
+      value: -16.7
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8819,6 +8870,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
   m_PrefabInstance: {fileID: 4532707422287379639}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8813311073870194066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 4532707422287379639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!1001 &5686644836400451327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8849,7 +8911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.4
+      value: -52.2
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8899,10 +8961,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.9642638
       objectReference: {fileID: 0}
-    - target: {fileID: 198214374999220926, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 199711072805571688, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -8912,6 +8970,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+--- !u!114 &739513386690074586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 5686644836400451327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!4 &5691227067783720557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
@@ -8929,25 +8998,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameThrower
       objectReference: {fileID: 0}
-    - target: {fileID: 1819868529388052, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.3121438
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.3121438
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.3121438
-      objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.6
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8985,31 +9038,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4691803356102260, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9642638
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691803356102260, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.9642638
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691803356102260, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.9642638
-      objectReference: {fileID: 0}
-    - target: {fileID: 198214374999220926, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 199711072805571688, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+--- !u!114 &3422138283870514331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 7770295385077478846}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!4 &7765872616162006316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
@@ -9045,7 +9089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -58.4
+      value: -57.9
       objectReference: {fileID: 0}
     - target: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9108,6 +9152,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+--- !u!114 &4112322076693989159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4947277689053223205, guid: 2c3517e717995fb448f852db5df323a1, type: 3}
+  m_PrefabInstance: {fileID: 9059454630042017282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bec97d71bed3468579502d86e7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Stage.FileLightControl
 --- !u!4 &9055028528232234640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 2c3517e717995fb448f852db5df323a1, type: 3}

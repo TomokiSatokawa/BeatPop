@@ -4916,6 +4916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890214042251763634}
   - component: {fileID: 4698260947559513053}
+  - component: {fileID: 4943775964351714457}
   m_Layer: 0
   m_Name: HoldEffect
   m_TagString: Untagged
@@ -4955,6 +4956,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e5a4ea19234a44889acd40d71fc991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldEffect
+  _particleController: {fileID: 4943775964351714457}
+--- !u!114 &4943775964351714457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394913954837661703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405fc46e9b006ef4b9916e31d302cc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.Effect.ParticleSystemController
   _particleSystems:
   - {fileID: 4792355301846851}
   - {fileID: 7680012088105687920}

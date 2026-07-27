@@ -15,6 +15,7 @@ namespace InGame.Stage
         [SerializeField] private LightGroupManager _backUpperPanelLight;
         [SerializeField] private LightGroupManager _stageGradientLight;
         [SerializeField] private LightGroupManager _laneGradientLight;
+        [SerializeField] private LightGroupManager _flamethrower;
         [SerializeField] private float _startOffset;
 
         private IReadOnlyList<LightPatternBaseData> _patternList;
@@ -39,7 +40,7 @@ namespace InGame.Stage
             if (_patternList == null || _patternList.Count == 0)
                 return;
 
-            float currentTime = StageTimeController.StageTime;
+            float currentTime = StageTimeController.StageTime + _startOffset;
 
             while (_nextPatternIndex < _patternList.Count)
             {
@@ -69,6 +70,9 @@ namespace InGame.Stage
                 case 2:
                     _stageGradientLight.ChangePattern(data);
                     _laneGradientLight.ChangePattern(data);
+                    break;
+                case 9:
+                    _flamethrower.ChangePattern(data);
                     break;
             }
         }

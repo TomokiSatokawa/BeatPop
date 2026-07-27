@@ -1,3 +1,4 @@
+using Common.Effect;
 using UnityEngine;
 
 namespace InGame.Effect
@@ -7,15 +8,11 @@ namespace InGame.Effect
     /// </summary>
     public class HoldEffect : PoolObject
     {
-        [SerializeField] private ParticleSystem[] _particleSystems;
+        [SerializeField] private ParticleSystemController _particleController;
 
-        public void SetEmission(bool b)
+        public void SetEmission(bool enable)
         {
-            foreach (var p in _particleSystems)
-            {
-                var emission = p.emission;
-                emission.enabled = b;
-            }
+            _particleController.SetEmission(enable);
         }
     }
 
