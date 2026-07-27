@@ -16,6 +16,7 @@ namespace InGame.Stage
         [SerializeField] private LightGroupManager _stageGradientLight;
         [SerializeField] private LightGroupManager _laneGradientLight;
         [SerializeField] private LightGroupManager _flamethrower;
+        [SerializeField] private LightGroupManager _penLight;
         [SerializeField] private float _startOffset;
 
         private IReadOnlyList<LightPatternBaseData> _patternList;
@@ -73,6 +74,9 @@ namespace InGame.Stage
                     break;
                 case 9:
                     _flamethrower.ChangePattern(data);
+                    break;
+                case 10:
+                    _penLight.ChangePattern(data);
                     break;
             }
         }

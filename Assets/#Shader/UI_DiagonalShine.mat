@@ -29,11 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Angle: 47
+    - _Angle: 45
     - _ColorMask: 15
-    - _ShineIntensity: 2.05
-    - _ShineSpeed: 1.78
-    - _ShineWidth: 0.064
+    - _ShineIntensity: 1.72
+    - _ShineSpeed: 0.72
+    - _ShineWidth: 0.258
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -42,6 +42,6 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShineColor: {r: 0.5018867, g: 0.5018867, b: 0.5018867, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -26,7 +26,7 @@ MonoBehaviour:
     ScoreMultiplier: 1
     TapSEVolume: 1.5
   - Name: 1
-    Value: 0.08
+    Value: 0.1
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: 20754f003752f4d479c8091bc68faea0, type: 2}
     IsComboContinued: 1
