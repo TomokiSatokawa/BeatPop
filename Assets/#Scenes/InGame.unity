@@ -4746,6 +4746,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1895021187}
     m_Modifications:
+    - target: {fileID: 2726337335285239533, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
+      propertyPath: _moveX
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726337335285239533, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
+      propertyPath: _duration
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3033778938421704510, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4808,7 +4816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033778938421704510, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3033778938421704510, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5516,7 +5524,7 @@ MonoBehaviour:
   _sliderImage: {fileID: 1492466799}
   _valueText: {fileID: 964780269}
   _addScore: {fileID: 1480051052}
-  _animationDuration: 0.3
+  _animationDuration: 0.2
 --- !u!1 &1946836277
 GameObject:
   m_ObjectHideFlags: 0
