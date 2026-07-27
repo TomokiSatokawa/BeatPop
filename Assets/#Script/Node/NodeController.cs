@@ -50,7 +50,7 @@ namespace InGame.Node
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
-                Vector3 startPosition = node.StartPosition;//TODO:StageSO‚ÆNodeObject.NodeData.Lane‚ÅŽæ“¾‚·‚é
+                Vector3 startPosition = StageContext.I.GetClonePos(node.NodeData.Lane);
                 Vector3 endPosition = startPosition;
                 endPosition.z = StageContext.I.StageLayout.GoalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);

@@ -9,7 +9,7 @@ namespace InGame.Node
     /// <summary>
     /// ÉmÅ[ÉcÇÃê∂ê¨
     /// </summary>
-    public class NodeGenerator : SingletonMonoBehaviour<NodeGenerator>//TODOÅFStageÇÃSOÇ≈Ç´ÇΩÇÁè¡Ç∑
+    public class NodeGenerator : MonoBehaviour
     {
         [SerializeField] private NodeController _nodeController;
         [SerializeField] private GameObject _nodePrefab;
@@ -23,7 +23,6 @@ namespace InGame.Node
         {
             InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => _nodeDataList = x.Nodes).AddTo(this);
 
-            //TODOBeat
             float arrivalSeconds = StageContext.I.ArrivalSeconds;
             BeatUpdateManager.BeatUpdate.Subscribe(16, -arrivalSeconds, _ => GenerateNodes());
             BeatUpdateManager.BeatUpdate.Subscribe(4, -arrivalSeconds, x => CreateLines(x.Time));
@@ -113,7 +112,7 @@ namespace InGame.Node
             newObject.transform.position = startPosition;
             newObject.transform.rotation = Quaternion.identity;
 
-            newObject.SetMoveData(nodeData, startPosition);
+            newObject.SetNodeData(nodeData);
             _nodeController.AddNode(newObject);
             return newObject;
         }
