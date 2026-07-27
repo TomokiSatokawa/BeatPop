@@ -25,8 +25,8 @@ namespace Title.Custom
 
         public async void ShowList()
         {
-            if (!SongInfoControl.I.CurrentData.HasValue) return;
-            int songID = SongInfoControl.I.CurrentData.Value.SongData.SongID;
+            if (!SongInfoControl.CurrentData.HasValue) return;
+            int songID = SongInfoControl.CurrentData.Value.SongData.SongID;
             DeleteChildren();
             var patternData = await CustomDataLoader.I.GetAllCustomPattern();
             if (patternData == null)

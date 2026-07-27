@@ -10045,7 +10045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00015258789}
+  m_AnchoredPosition: {x: 0, y: 0.00018310547}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -12151,6 +12151,7 @@ MonoBehaviour:
   _titlePrefab: {fileID: 4557633181371095652, guid: bc36b6516cd265c4585ab42f7919a76f, type: 3}
   _contentsListPrefab: {fileID: 1034373548152290456, guid: 1b72c797d4e8f2148a6147a4e9100ee4, type: 3}
   _listSongPrefab: {fileID: 4724775528831732003, guid: 274a05a21165fb746aa788fd84df9671, type: 3}
+  _songInfoControl: {fileID: 829015999}
 --- !u!1 &1034833893
 GameObject:
   m_ObjectHideFlags: 0
@@ -22455,7 +22456,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8927673
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

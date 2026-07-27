@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Common.UI;
 
@@ -5,12 +6,12 @@ namespace Title.SongSelect
 {
     public class ContentsList : ScrollViewBase
     {
-        public void ViewList(IReadOnlyList<SongSelectData> songs, SongUIControl prefab)
+        public void ViewList(IReadOnlyList<SongSelectData> songs, SongUIControl prefab, Action<SongSelectData> onSelect)
         {
             DeleteChildren();
             foreach (var song in songs)
             {
-                InstantiateContent(prefab).SetData(song);
+                InstantiateContent(prefab).SetData(song, onSelect);
             }
         }
     }

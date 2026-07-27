@@ -101,8 +101,8 @@ namespace Title.SongSelect
 
         public void StopPreview()
         {
-            if (SongInfoControl.I.CurrentData.HasValue
-                && SongInfoControl.I.CurrentData.Value.SongData.Audio == _playAudio)
+            if (SongInfoControl.CurrentData.HasValue
+                && SongInfoControl.CurrentData.Value.SongData.Audio == _playAudio)
                 return;
 
             CancelToken();

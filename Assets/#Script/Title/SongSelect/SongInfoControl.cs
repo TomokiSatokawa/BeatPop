@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Common;
 using Common.PlaySystem;
 using Common.UI;
@@ -10,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Title.SongSelect
 {
-    public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>//TODO:シングルトンいる？
+    public class SongInfoControl : MonoBehaviour
     {
         [Header("Animation")]
         [SerializeField] private PanelControl _panelControl;
@@ -35,8 +34,8 @@ namespace Title.SongSelect
         [SerializeField] private SegmentedControl _segmentControl;
         [SerializeField] private SongPreviewPlayer _songPreviewPlayer;
 
-        private SongSelectData? _currentData;
-        public SongSelectData? CurrentData => _currentData;
+        private static SongSelectData? _currentData;
+        public static SongSelectData? CurrentData => _currentData;
         private void Start()
         {
             _clauseButton.onClick.AddListener(OnClause);
