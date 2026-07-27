@@ -1,8 +1,7 @@
 using System;
-using System.Linq;
+using Common;
 using Common.PlaySystem;
 using Common.UI;
-using Common;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Title.SongSelect
 {
-    public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>
+    public class SongInfoControl : SingletonMonoBehaviour<SongInfoControl>//TODO:シングルトンいる？
     {
         [Header("Animation")]
         [SerializeField] private PanelControl _panelControl;
@@ -20,12 +19,15 @@ namespace Title.SongSelect
         [SerializeField] private float _animationDuration;
         [Header("UI")]
         [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private Image _jacket;
+        [SerializeField] private Image _difficultyImage;
         [SerializeField] private Button _clauseButton;
         [SerializeField] private Button _backGroundArea;
         [SerializeField] private TextMeshProUGUI _bpmInfo;
         [SerializeField] private TextMeshProUGUI _secondInfo;
         [SerializeField] private TextMeshProUGUI _levelText;
         [Header("Other")]
+        [SerializeField] private DifficultyColor _difficultyColor;
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private SceneTransition _sceneLoad;//TODO:仮
         [SerializeField] private SegmentedControl _segmentControl;
@@ -42,11 +44,7 @@ namespace Title.SongSelect
         public void ShowInfo(SongSelectData data)
         {
             _currentData = data;
-
-            _nameText.text = data.SongData.SongName;
-            _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
-            _bpmInfo.text = data.SongData.BPM.ToString();
-            _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
+            UpdateInfoUI(data);
 
             OnActiveAnimation();
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
@@ -59,6 +57,16 @@ namespace Title.SongSelect
             _songPreviewPlayer.PlayPreview(CurrentData.Value.SongData);
         }
 
+        private void UpdateInfoUI(SongSelectData data)
+        {
+            _nameText.text = data.SongData.SongName;
+            _jacket.sprite = data.SongData.Jacket;
+            _difficultyImage.color = _difficultyColor.GetDifficultyColor(data.Difficulty);
+            _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
+            _bpmInfo.text = data.SongData.BPM.ToString();
+            _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
+        }
+
         public void OnChangeDifficulty(int value)
         {
             if (!_currentData.HasValue)
@@ -67,7 +75,8 @@ namespace Title.SongSelect
             }
             if (Enum.IsDefined(typeof(Difficulty), value))
             {
-                _currentData.Value.ChangeDifficulty((Difficulty)value);
+                _currentData = new SongSelectData(_currentData.Value.SongData, (Difficulty)value);
+                UpdateInfoUI(_currentData.Value);
                 return;
             }
             Debug.LogError("不正な難易度の値");
@@ -99,7 +108,7 @@ namespace Title.SongSelect
         public void OnPlay()
         {
             if (!_currentData.HasValue) return;
-            TitleManager.I.StartPlay(CurrentData.Value);    
+            TitleManager.I.StartPlay(CurrentData.Value);
         }
     }
 }

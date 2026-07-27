@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Title.Custom
 {
+    /// <summary>
+    /// パターンPrefabのコントロール
+    /// </summary>
     public class PatternUIControl : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _patternName;
@@ -23,14 +26,17 @@ namespace Title.Custom
             _patternName.text = _patternData.PatternName;
             OnDeselect();
         }
+
         public void OnSelect()
         {
             _selectLine.gameObject.SetActive(true);
         }
+
         public void OnDeselect()
         {
             _selectLine.gameObject.SetActive(false);
         }
+
         public void ShowSetPattern(bool active)
         {
             _setPattern.SetActive(active);

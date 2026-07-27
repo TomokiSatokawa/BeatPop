@@ -61,16 +61,13 @@ namespace Title.SongSelect
     public struct SongSelectData
     {
         public readonly IReadOnlySongData SongData;
-        public Difficulty Difficulty { get; private set; }
+        public readonly Difficulty Difficulty;
         public SongSelectData(IReadOnlySongData songData, Difficulty difficulty)
         {
             SongData = songData;
             Difficulty = difficulty;
         }
-        public void ChangeDifficulty(Difficulty difficulty)
-        {
-            Difficulty = difficulty;
-        }
+
         public TextAsset GetNodeJson()
         {
             return SongData.Charts.GetChart(Difficulty);

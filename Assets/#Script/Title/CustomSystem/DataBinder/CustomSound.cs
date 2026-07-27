@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Title.Custom
 {
+    /// <summary>
+    /// ノーツSEのカスタム
+    /// </summary>
     public class CustomSound : CustomDataBinder<CustomSoundPattern>
     {
         [SerializeField] private CustomSoundData _soundData;
@@ -15,7 +18,7 @@ namespace Title.Custom
         [SerializeField] private TMP_Dropdown _longFillNotes;
         [SerializeField] private TMP_Dropdown _longEndNotes;
 
-        private bool _isReviewSound = true;
+        private bool _enablePreview = true;
         private void Start()
         {
             var tapOption = new List<TMP_Dropdown.OptionData>();
@@ -23,6 +26,8 @@ namespace Title.Custom
             {
                 tapOption.Add(new(item.Name));
             }
+
+            //TODO:ノーツ別SEになったらコレクションにする
             InitializeDropdown(_normalNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_flickNotes, tapOption, _soundData.TapSE);
             InitializeDropdown(_longStartNotes, tapOption, _soundData.TapSE);
@@ -37,24 +42,23 @@ namespace Title.Custom
         {
             dropdown.options = options;
             dropdown.onValueChanged.AddListener(x => OnChangeValue(soundData[x].Clip));
-            ;
         }
 
         public void OnChangeValue(AudioClip seSound)
         {
-            if (!_isReviewSound) return;
+            if (!_enablePreview) return;
             SoundManager.SE.PlaySE(seSound);
         }
 
         public override void SetCustom(CustomSoundPattern customSound)
         {
-            _isReviewSound = false;
+            _enablePreview = false;
             _normalNotes.value = customSound.NormalSE;
             _flickNotes.value = customSound.FlickSE;
             _longStartNotes.value = customSound.HoldStart;
             _longFillNotes.value = customSound.HoldFill;
             _longEndNotes.value = customSound.HoldEnd;
-            _isReviewSound = true;
+            _enablePreview = true;
         }
         public override CustomSoundPattern GetCustom()
         {
@@ -70,13 +74,13 @@ namespace Title.Custom
         }
         public override void OnDefault()
         {
-            _isReviewSound = false;
+            _enablePreview = false;
             _normalNotes.value = _soundData._normalDefault;
             _flickNotes.value = _soundData._flickDefault;
             _longStartNotes.value = _soundData._longStartDefault;
             _longFillNotes.value = _soundData._longFillDefault;
             _longEndNotes.value = _soundData._longEndDefault;
-            _isReviewSound = true;
+            _enablePreview = true;
         }
 
     }

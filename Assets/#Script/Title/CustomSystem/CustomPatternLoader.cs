@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Title.Custom
 {
+    /// <summary>
+    /// デフォルトカスタムデータを取得
+    /// </summary>
     public class CustomPatternLoader : MonoBehaviour
     {
         [SerializeField] private CustomSoundData _customSoundData;
@@ -9,6 +12,7 @@ namespace Title.Custom
         {
             PatternJsonData pattern = new();
             pattern.SoundPattern = _customSoundData.GetDefaultCustom();
+            pattern.ChartPattern = default;
             return pattern;
         }
     }

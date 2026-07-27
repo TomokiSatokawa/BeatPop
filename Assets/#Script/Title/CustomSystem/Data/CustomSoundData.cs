@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using Sound;
 using UnityEngine;
-using static SerializableDictionary<string,UnityEngine.AudioClip>;
 
 namespace Title.Custom
 {
     [CreateAssetMenu(fileName = "CustomSoundData", menuName = "Scriptable Objects/CustomSoundData")]
     public class CustomSoundData : ScriptableObject
     {
-        [SerializeField] private List<SEData>_holdSE;
+        //TODO:ÉmÅ[Écï SEÇ…ïœçXÇ∑ÇÈ
+        [SerializeField] private List<SEData> _holdSE;
         [SerializeField] private List<SEData> _tapSE;
         [SerializeField] public int _normalDefault;
         [SerializeField] public int _flickDefault;
@@ -17,7 +16,7 @@ namespace Title.Custom
         [SerializeField] public int _longEndDefault;
         [SerializeField] public int _tickDefault;
         public IReadOnlyList<SEData> TapSE => _tapSE;
-        public IReadOnlyList<SEData> HoldSE => _holdSE; 
+        public IReadOnlyList<SEData> HoldSE => _holdSE;
 
         public CustomSoundPattern GetDefaultCustom()
         {
@@ -39,7 +38,7 @@ namespace Title.Custom
         [SerializeField] private string _name;
         [SerializeField] private AudioClip _clip;
         [SerializeField] private float _volume;
-        public string Name => _name;   
+        public string Name => _name;
         public AudioClip Clip => _clip;
         public float Volume => _volume;
     }

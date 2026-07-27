@@ -15,6 +15,9 @@ namespace Title.Custom
         private const string ManifestFileName = "manifest.json";
         private const string FolderName = "CustomData";
 
+        /// <summary>
+        /// Manifestを読み込む
+        /// </summary>
         public async UniTask LoadManifest()
         {
             string manifestJson = "";
@@ -27,8 +30,6 @@ namespace Title.Custom
             }
 
             _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
-
-            //SongData => manifestの照合
 
             foreach (var filePath in _manifestData.FileName)
             {
@@ -43,7 +44,10 @@ namespace Title.Custom
             DontDestroyOnLoad(this.gameObject);
         }
 
-        public async UniTask<PatternJsonData[]> GetCustomPattern()
+        /// <summary>
+        /// すべてのカスタムデータを取得
+        /// </summary>
+        public async UniTask<PatternJsonData[]> GetAllCustomPattern()
         {
             var result = new PatternJsonData[_manifestData.FileName.Length];
             for (int i = 0; i < _manifestData.FileName.Length; i++)
@@ -59,6 +63,10 @@ namespace Title.Custom
             }
             return result;
         }
+
+        /// <summary>
+        /// パターンを追加
+        /// </summary>
         public async UniTask AddPattern(PatternJsonData patternData)
         {
             Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
@@ -72,6 +80,9 @@ namespace Title.Custom
             await UpdateManifestFile();
         }
 
+        /// <summary>
+        /// パターンを保存
+        /// </summary>
         public async UniTask SavePattern(PatternJsonData patternData)
         {
             string patternJson = JsonUtility.ToJson(patternData, true);

@@ -28,7 +28,7 @@ namespace InGame
             if (stageData == null)
                 Debug.LogError("[InGameFileLoad] StageData‚ª‚ ‚è‚Ü‚¹‚ñ");
 
-            ChartModifier.Modifier(nodeData.Nodes,SongPlayContext.I.PatternData.ChartPattern);
+            ChartModifier.Modify(nodeData.Nodes,SongPlayContext.I.PatternData.ChartPattern);
             ChartModifier.NormalizeLongNotes(nodeData.Nodes);
 
             _onNodeFileLoaded.OnNext(nodeData);

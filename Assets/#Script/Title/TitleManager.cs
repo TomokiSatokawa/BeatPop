@@ -29,7 +29,7 @@ namespace Title
 
             await UniTask.WhenAll(fade, bgmFade);
 
-            var patterns = await CustomDataLoader.I.GetCustomPattern();
+            var patterns = await CustomDataLoader.I.GetAllCustomPattern();
             var usePattern = patterns.Where(x => x.IsSelect).First();
             _songPlayLoader.CreatePlayManager(songSelectData, usePattern);
 

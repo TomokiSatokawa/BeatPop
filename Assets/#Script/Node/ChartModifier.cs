@@ -8,30 +8,48 @@ namespace InGame.Node
     /// </summary>
     public static class ChartModifier
     {
-        public static void Modifier(List<NodeData> Nodes,CustomChartPattern pattern)
+        public static void Modify(List<NodeData> nodes, CustomChartPattern pattern)
         {
-            for (int i = 0; i < Nodes.Count; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                NodeData node = Nodes[i];
+                NodeData node = nodes[i];
+                bool convertFlick = node.ConvertLevel > pattern.FlickConvertLevel;
+                bool convertHold = node.ConvertLevel > pattern.LongConvertLevel;
                 switch (node.PrefabType)
                 {
                     case PoolPrefabType.FlickNote:
-                        if (node.ConvertLevel > pattern.FlickConvertLevel)
+                        if (convertFlick)
                         {
                             node.PrefabType = PoolPrefabType.NormalNote;
                         }
                         break;
+
                     case PoolPrefabType.HoldNoteStart:
                     case PoolPrefabType.HoldNoteEnd:
-                    case PoolPrefabType.HoldFlickEnd:
-                        if (node.ConvertLevel > pattern.LongConvertLevel)
+                        if (convertHold)
                         {
                             node.PrefabType = PoolPrefabType.NormalNote;
-                            node.Connect = 0;
+                            node.Connect = -1;
+                        }
+                        break;
+
+                    case PoolPrefabType.HoldFlickEnd:
+                        if (convertFlick && convertHold)
+                        {
+                            node.PrefabType = PoolPrefabType.NormalNote;
+                            break;
+                        }
+                        if (convertFlick)
+                        {
+                            node.PrefabType = PoolPrefabType.HoldNoteEnd;
+                        }
+                        if (convertHold)
+                        {
+                            node.PrefabType = PoolPrefabType.FlickNote;
                         }
                         break;
                 }
-                Nodes[i] = node;
+                nodes[i] = node;
             }
         }
         public static void NormalizeLongNotes(List<NodeData> nodes)

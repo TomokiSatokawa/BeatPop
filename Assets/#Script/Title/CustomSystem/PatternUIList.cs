@@ -6,6 +6,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Title.Custom
 {
+    /// <summary>
+    /// パターンリスト
+    /// </summary>
     public class PatternUIList : ScrollViewBase
     {
         [SerializeField] private PatternUIControl _prefab;
@@ -19,12 +22,13 @@ namespace Title.Custom
 
         public PatternJsonData CurrentSelectData => _currentSelect.PatternData;
         public PatternJsonData UsePattern => _usePattern.PatternData;
+
         public async void ShowList()
         {
             if (!SongInfoControl.I.CurrentData.HasValue) return;
             int songID = SongInfoControl.I.CurrentData.Value.SongData.SongID;
             DeleteChildren();
-            var patternData = await CustomDataLoader.I.GetCustomPattern();
+            var patternData = await CustomDataLoader.I.GetAllCustomPattern();
             if (patternData == null)
             {
                 Debug.LogError($"SongID{songID} が無効または Patternが存在しません");
@@ -36,6 +40,7 @@ namespace Title.Custom
                 AddPatternUI(pattern);
             }
         }
+
         public void CreatePattern()
         {
             var newPattern = _patternLoader.GetDefaultPattern();
