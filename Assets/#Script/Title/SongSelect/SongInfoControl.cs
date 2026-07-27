@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Common;
 using Common.PlaySystem;
 using Common.UI;
@@ -26,6 +27,7 @@ namespace Title.SongSelect
         [SerializeField] private TextMeshProUGUI _bpmInfo;
         [SerializeField] private TextMeshProUGUI _secondInfo;
         [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private TextMeshProUGUI _nodeCount;
         [Header("Other")]
         [SerializeField] private DifficultyColor _difficultyColor;
         [SerializeField] private SongPlayLoader _playLoader;
@@ -57,7 +59,7 @@ namespace Title.SongSelect
             _songPreviewPlayer.PlayPreview(CurrentData.Value.SongData);
         }
 
-        private void UpdateInfoUI(SongSelectData data)
+        private async void UpdateInfoUI(SongSelectData data)
         {
             _nameText.text = data.SongData.SongName;
             _jacket.sprite = data.SongData.Jacket;
@@ -65,6 +67,7 @@ namespace Title.SongSelect
             _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
             _bpmInfo.text = data.SongData.BPM.ToString();
             _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
+            _nodeCount.text = (await NodeDataSerializer.DeserializeJson(data.GetNodeJson().text)).Nodes.Count.ToString();
         }
 
         public void OnChangeDifficulty(int value)

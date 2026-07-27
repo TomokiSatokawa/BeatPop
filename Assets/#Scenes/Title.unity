@@ -9689,6 +9689,7 @@ MonoBehaviour:
   _bpmInfo: {fileID: 1288403996}
   _secondInfo: {fileID: 1507939431}
   _levelText: {fileID: 574045275}
+  _nodeCount: {fileID: 1766861246}
   _difficultyColor: {fileID: 11400000, guid: 90575bdb9c762c04aabc1ce0862ca638, type: 2}
   _playLoader: {fileID: 1569844618}
   _sceneLoad: {fileID: 1569844619}
@@ -10044,7 +10045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.00015258789}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -22454,7 +22455,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.89276725
+  m_Size: 0.8927673
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
