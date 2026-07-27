@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace InGame.Node
@@ -56,7 +57,7 @@ namespace InGame.Node
 
         public bool ShowEarlyLateText { get; }
 
-        public Color TextColor { get; }
+        public TMP_ColorGradient TextColor { get; }
 
         public bool IsComboContinued { get; }
 
@@ -73,7 +74,7 @@ namespace InGame.Node
         public JudgementType Name;
         public float Value;
         public bool ShowEarlyLateText;
-        public Color TextColor;
+        public TMP_ColorGradient TextColor;
 
         public bool IsComboContinued;
         public bool IsAllPerfectContinued;
@@ -83,7 +84,7 @@ namespace InGame.Node
         JudgementType IReadOnlyJudgementData.Name => Name;
         float IReadOnlyJudgementData.Value => Value;
         bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
-        Color IReadOnlyJudgementData.TextColor => TextColor;
+        TMP_ColorGradient IReadOnlyJudgementData.TextColor => TextColor;
         bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
         bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
         float IReadOnlyJudgementData.ScoreMultiplier => ScoreMultiplier;
@@ -92,6 +93,6 @@ namespace InGame.Node
     }
     public enum JudgementType
     {
-        Perfect, Great, Good, Bad, Miss
+        PERFECT, GREAT, GOOD, BAD, MISS
     }
 }

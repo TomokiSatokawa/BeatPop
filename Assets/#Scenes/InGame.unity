@@ -3312,7 +3312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -220, y: 106}
+  m_AnchoredPosition: {x: -243, y: 106}
   m_SizeDelta: {x: 485.5266, y: 79.1291}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964780269
@@ -4808,7 +4808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033778938421704510, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 31.88
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3033778938421704510, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4829,6 +4829,14 @@ PrefabInstance:
     - target: {fileID: 4394643650509332182, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
       propertyPath: m_Name
       value: AddScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652086027934115516, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
+      propertyPath: m_fontSize
+      value: 52.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652086027934115516, guid: 9cd1dd72cb14c39468891ff5cb973e6d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 52.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5085,11 +5093,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
       propertyPath: m_fontSize
-      value: 174.4
+      value: 139.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
       propertyPath: m_fontSizeBase
-      value: 174.4
+      value: 139.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8487701392038341224, guid: 7cc4cac5b12cc194198df68ecfd4b558, type: 2}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048471429675768756, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7830307794548018142, guid: 9f22cd257d8baf24e9e17a3a5f0373ae, type: 3}
       propertyPath: m_Pivot.x

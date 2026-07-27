@@ -21,11 +21,11 @@ namespace Result.UI
             _sequence?.Kill(true);
             _sequence = DOTween.Sequence();
 
-            AddSequence(judgeCount, JudgementType.Perfect);
-            AddSequence(judgeCount, JudgementType.Great);
-            AddSequence(judgeCount, JudgementType.Good);
-            AddSequence(judgeCount, JudgementType.Bad);
-            AddSequence(judgeCount, JudgementType.Miss);
+            AddSequence(judgeCount, JudgementType.PERFECT);
+            AddSequence(judgeCount, JudgementType.GREAT);
+            AddSequence(judgeCount, JudgementType.GOOD);
+            AddSequence(judgeCount, JudgementType.BAD);
+            AddSequence(judgeCount, JudgementType.MISS);
 
             _sequence.Play();
         }

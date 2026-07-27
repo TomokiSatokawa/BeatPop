@@ -17,7 +17,6 @@ namespace InGame.Stage
         private Tween _tween;
         public override void Flash(float duration, float power)
         {
-            Debug.Log("Flash");
             _tween?.Kill();
             _particleSystemController.Play();
             _particleSystemController.SetEmission(true);

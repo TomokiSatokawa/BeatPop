@@ -34,10 +34,10 @@ namespace InGame.UI
             _text.alpha = 1f;
         }
 
-        public void PlayAnimation(string text, Color color)
+        public void PlayAnimation(string text, TMP_ColorGradient color)
         {
             _text.text = text;
-            _text.color = color;
+            _text.colorGradientPreset = color;
             _sequence.Restart();
         }
 

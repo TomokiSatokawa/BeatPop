@@ -28,7 +28,7 @@ namespace InGame.UI
         private void Initialize()
         {
             _sliderImage.fillAmount = 0;
-            _valueText.text = "0";
+            _valueText.text = "00000";
             _currentScore = 0;
         }
 
@@ -48,7 +48,7 @@ namespace InGame.UI
 
             _addScoreAnimation.Join(
                 DOVirtual.Int(startScore, score, _animationDuration,
-                    x => _valueText.text = x.ToString()));
+                    x => _valueText.text = x.ToString("D5")));
 
         }
 
