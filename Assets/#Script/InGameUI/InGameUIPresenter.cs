@@ -1,7 +1,9 @@
+using System;
 using InGame.Node;
 using InGame.Score;
 using R3;
 using Title.SongSelect;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.UI
@@ -22,11 +24,11 @@ namespace InGame.UI
 
         public void Start()
         {
-            SubscribeJudge();
-            SubscribeCombo();
-            SubscribeScore();
-            SubscribeClear();
-            SubscribePause();
+                SubscribeJudge();
+                SubscribeCombo();
+                SubscribeScore();
+                SubscribeClear();
+                SubscribePause();
         }
 
         private void SubscribeJudge()
@@ -49,7 +51,7 @@ namespace InGame.UI
         private void SubscribeScore()
         {
             //スコア表示
-            ScoreDataManager.ScoreData.Score.Subscribe(x =>
+            ScoreDataManager.ScoreData.Score.ThrottleLast(TimeSpan.FromMilliseconds(100)).Subscribe(x =>
             {
                 float scoreRate = 0;
                 if (x > 0)

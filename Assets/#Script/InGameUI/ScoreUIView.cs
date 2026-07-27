@@ -14,6 +14,7 @@ namespace InGame.UI
     {
         [SerializeField] private Image _sliderImage;
         [SerializeField] private TextMeshProUGUI _valueText;
+        [SerializeField] private AddScoreAnimation _addScore;
         [SerializeField] private float _animationDuration = 0.3f;
 
         private int _currentScore;
@@ -35,6 +36,7 @@ namespace InGame.UI
         public void UpdateScore(int score,float scoreRatio)
         {
             _addScoreAnimation?.Kill();
+            _addScore.Play(score - _currentScore);
 
             int startScore = _currentScore;
             _currentScore = score;
