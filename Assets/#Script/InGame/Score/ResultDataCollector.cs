@@ -11,15 +11,18 @@ namespace InGame.Score
     {
         /// <summary>ノード別ヒット数（打率）</summary>
         private readonly Dictionary<PoolPrefabType, HitData> _nodeHitCount = new();
+        public IReadOnlyDictionary<PoolPrefabType,HitData> NodeHitCount => _nodeHitCount;
 
-        /// <summary>Fast / Late の数値の合計</summary>
-        private float _sumDifferenceOffset = 0;
-        public float SumDifferenceOffset => _sumDifferenceOffset;
+        private int _fastCount;
+        public int FastCount => _fastCount; 
+        private int _lateCount;
+        public int LateCount => _lateCount;
 
         public void Initialize()
         {
             _nodeHitCount.Clear();
-            _sumDifferenceOffset = 0f;
+            _fastCount = 0;
+            _lateCount = 0;
         }
 
         /// <summary>
@@ -48,44 +51,53 @@ namespace InGame.Score
         /// <summary>
         /// タイミング加算 
         /// </summary>
-        public void AddDifferenceValue(NodeData nodeData, float difference)
+        public void AddDifferenceValue(IReadOnlyJudgementData judgementData, NodeData nodeData, float difference)
         {
             //ホールドは含まない
             if (nodeData.PrefabType == PoolPrefabType.HoldNoteFill)
                 return;
 
-            _sumDifferenceOffset += difference;
+            if (judgementData.Name == JudgementType.PERFECT
+                || judgementData.Name == JudgementType.MISS)
+                return;
+
+            if (difference > 0)
+                _fastCount++;
+            else
+                _lateCount++;
         }
 
-        /// <summary>
+
+    }   /// <summary>
         /// ノーツ別のHitカウンター
         /// </summary>
-        private class HitData
+    public class HitData
+    {
+        public int TotalCount { get; private set; }
+        public int HitCount { get; private set; }
+
+        public float Accuracy =>  TotalCount == 0 ? 0f : (float)HitCount / TotalCount * 100f;
+        public HitData()
         {
-            public int TotalCount { get; private set; }
-            public int HitCount { get; private set; }
+            HitCount = 0;
+            TotalCount = 0;
+        }
 
-            public HitData()
-            {
-                HitCount = 0;
-                TotalCount = 0;
-            }
+        public void AddHit()
+        {
+            HitCount++;
+            TotalCount++;
+        }
 
-            public void AddHit()
-            {
-                HitCount++;
-                TotalCount++;
-            }
-
-            public void AddMiss()
-            {
-                TotalCount++;
-            }
+        public void AddMiss()
+        {
+            TotalCount++;
         }
     }
     public interface IReadOnlyResultData
     {
-        public float SumDifferenceOffset { get; }
-        //TODO:Type別打率を取得する関数
+        public IReadOnlyDictionary<PoolPrefabType,HitData> NodeHitCount { get; }
+        public int FastCount     { get; }
+        public int LateCount     { get; }
     }
 }

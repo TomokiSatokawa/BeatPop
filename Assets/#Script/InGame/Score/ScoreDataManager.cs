@@ -46,7 +46,7 @@ namespace InGame.Score
             _judgementRecorder.AddJudgeCount(judgement);
 
             _resultDataCollector.AddNode(nodeData, judgement);
-            _resultDataCollector.AddDifferenceValue(nodeData,difference);
+            _resultDataCollector.AddDifferenceValue(judgement,nodeData, difference);
 
             return judgement;
         }
