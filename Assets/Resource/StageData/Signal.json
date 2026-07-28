@@ -26,7 +26,7 @@
         "PatternType": "InGame.Stage.BeatSyncLightPattern",
         "Time": 0.0,
         "Channel": 10,
-        "Division": 4,
+        "Division": 2,
         "Duration": 1.0,
         "Power": 0.8,
         "MainColor": {

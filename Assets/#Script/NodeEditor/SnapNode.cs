@@ -46,7 +46,7 @@ namespace Editor
         private void ChangeState(EditorSnapStateBase target)
         {
             _currentSnapState?.OnExit();
-            target?.OnExit();
+            target?.OnEnter();
             _currentSnapState = target;
             UpdatePointer(target);
         }

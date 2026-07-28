@@ -13,7 +13,11 @@ namespace InGame.Stage
         [SerializeField] private float _minPower;
         [SerializeField] private float _outThreshold;
         [SerializeField] private float _outPower;
+        [Header("MoveAnimation")]
+        [SerializeField] private float _angle;
+        [SerializeField,Range(0,1)] private float _durationDividend;
 
+        private Sequence _moveAnimation;
         private float _power;
         private Color _color;
         private Sequence _flash;
@@ -26,6 +30,8 @@ namespace InGame.Stage
         {
             _mpb = new MaterialPropertyBlock();
             Initialize();
+
+            
         }
 
         private void Initialize()
@@ -63,6 +69,11 @@ namespace InGame.Stage
 
             _flash = DOTween.Sequence()
                 .Append(DoLightPower(_maxPower * power, _minPower, duration));
+
+            _moveAnimation?.Kill(true);
+            _moveAnimation = DOTween.Sequence();
+            _moveAnimation.Append(transform.DORotate(new Vector3(_angle, 0, 0) ,duration * _durationDividend));
+            _moveAnimation.Append(transform.DORotate(new Vector3(-_angle, 0, 0), duration * (1 - _durationDividend)));
         }
         public void Wave(float duration, float power)
         {
