@@ -51,6 +51,8 @@ MonoBehaviour:
   _outThreshold: 5
   _outPower: -10
   _angle: -30
+  _randomDray: 0.05
+  _randomAngle: 10
   _durationDividend: 0.7
 --- !u!1 &8264582366810658771
 GameObject:

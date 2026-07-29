@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca581ea6b6080ba4a92d8a7d040c1462, type: 3}
-  m_Name: BeatLesson
+  m_Name: Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::SongData
   _songName: BeatLesson
-  _songID: 6
+  _songID: -1
   _bpm: 164
   _jacket: {fileID: 21300000, guid: 6c6a7685de7b0ae4bb7705b2b63c8104, type: 3}
   _charts:
     EasyLevel: 1
-    EasyJson: {fileID: 4900000, guid: 10380b09128968a45a879d0ade27a5f4, type: 3}
+    EasyJson: {fileID: 4900000, guid: cbe2e2b8b6bbcaf48bb8f63bbff2cf5e, type: 3}
     NormalLevel: 8
-    NormalJson: {fileID: 4900000, guid: e3dc45f89fdeea845b19fc40c617f930, type: 3}
+    NormalJson: {fileID: 0}
     HardLevel: 10
-    HardJson: {fileID: 4900000, guid: 972090a71d195d94a95542dd5e3962c1, type: 3}
+    HardJson: {fileID: 0}
     ExpertLevel: 21
-    ExpertJson: {fileID: 4900000, guid: 189e14709e055634dbfd07664b90f346, type: 3}
+    ExpertJson: {fileID: 0}
   _audioClip: {fileID: 8300000, guid: 1cd2057fc28fcc64299e04beb8c8065a, type: 3}
   _stageTimeOffSet: 0
   _editorTimeOffSet: -0.2
   _stageEffectData: {fileID: 4900000, guid: ef7e42564b2177a4fbff510e89c8aeb4, type: 3}
-  _showTutorial: 0
+  _showTutorial: 1

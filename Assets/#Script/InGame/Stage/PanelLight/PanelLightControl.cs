@@ -15,6 +15,8 @@ namespace InGame.Stage
         [SerializeField] private float _outPower;
         [Header("MoveAnimation")]
         [SerializeField] private float _angle;
+        [SerializeField] private float _randomDray;
+        [SerializeField] private float _randomAngle;
         [SerializeField,Range(0,1)] private float _durationDividend;
 
         private Sequence _moveAnimation;
@@ -72,8 +74,12 @@ namespace InGame.Stage
 
             _moveAnimation?.Kill(true);
             _moveAnimation = DOTween.Sequence();
-            _moveAnimation.Append(transform.DORotate(new Vector3(_angle, 0, 0) ,duration * _durationDividend));
-            _moveAnimation.Append(transform.DORotate(new Vector3(-_angle, 0, 0), duration * (1 - _durationDividend)));
+            Vector3 angle = new Vector3(_angle, 0, 0);
+            angle.x += Random.Range(-_randomAngle, _randomAngle);
+            angle.y += Random.Range(-_randomAngle, _randomAngle);
+            angle.z += Random.Range(-_randomAngle, _randomAngle);
+            _moveAnimation.Append(transform.DORotate(angle, duration * _durationDividend).SetDelay(Random.Range(0,_randomDray)));
+            _moveAnimation.Append(transform.DORotate(-angle, duration * (1 - _durationDividend)));
         }
         public void Wave(float duration, float power)
         {

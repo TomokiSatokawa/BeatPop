@@ -4,6 +4,7 @@ using Common.PlaySystem;
 using Cysharp.Threading.Tasks;
 using InGame;
 using InGame.Score;
+using InGame.UI;
 using Input;
 using R3;
 using Sound;
@@ -13,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private SceneTransition _sceneLoad;
     [SerializeField] private StageTimeController _stageTimeController;
+    [SerializeField] private TutorialUIControl _tutorialUIControl;
 
     private void Start()
     {
@@ -31,7 +33,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         InGameFileLoad.I?.OnNodeFileLoaded.Skip(1).Subscribe(async fileData =>
         {
-            LoadPlayAsync(fileData).Forget();
+            if (SongPlayContext.I.SongData.SongData.ShowTutorial)
+            {
+                _tutorialUIControl.OnClause += () => LoadPlayAsync(fileData).Forget();
+                _tutorialUIControl.ShowTutorial();
+            }
+            else
+            {
+                LoadPlayAsync(fileData).Forget();
+            }
         }).AddTo(this);
 
         await UniTask.Yield();
