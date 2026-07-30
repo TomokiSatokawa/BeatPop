@@ -65,7 +65,7 @@ namespace Title.SongSelect
             _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
             _bpmInfo.text = data.SongData.BPM.ToString();
             _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
-            _nodeCount.text = (await NodeDataSerializer.DeserializeJson(data.GetNodeJson().text)).Nodes.Count.ToString();
+            _nodeCount.text = (await NodeDataSerializer.DeserializeJson(data.GetNodeJson().text)).Nodes.Count.ToString();   
         }
 
         public void OnChangeDifficulty(int value)

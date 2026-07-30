@@ -9692,7 +9692,6 @@ MonoBehaviour:
   _nodeCount: {fileID: 1766861246}
   _difficultyColor: {fileID: 11400000, guid: 90575bdb9c762c04aabc1ce0862ca638, type: 2}
   _playLoader: {fileID: 1569844618}
-  _sceneLoad: {fileID: 1569844619}
   _segmentControl: {fileID: 1571923492}
   _songPreviewPlayer: {fileID: 1523306036}
 --- !u!114 &829016000
@@ -10045,7 +10044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00018310547}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -22456,7 +22455,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.89276725
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23549,7 +23548,7 @@ MonoBehaviour:
       - m_Target: {fileID: 964442128}
         m_TargetAssemblyTypeName: Common.UI.PanelControl, Assembly-CSharp
         m_MethodName: OnActive
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

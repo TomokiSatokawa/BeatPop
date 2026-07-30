@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca581ea6b6080ba4a92d8a7d040c1462, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::SongData
-  _songName: BeatLesson
+  _songName: "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB"
   _songID: -1
   _bpm: 164
-  _jacket: {fileID: 21300000, guid: 6c6a7685de7b0ae4bb7705b2b63c8104, type: 3}
+  _jacket: {fileID: 21300000, guid: 3a125fdbb54b78b45958ddd4295eaade, type: 3}
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 4900000, guid: cbe2e2b8b6bbcaf48bb8f63bbff2cf5e, type: 3}

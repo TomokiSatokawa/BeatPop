@@ -1,11 +1,12 @@
+using InGame.UI;
 using Result.UI;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private TimingSliderView _timingSliderView;
+    [SerializeField] private  ClearAnimationSwitcher _clearAnimationSwitcher;
     public void OnClick()
     {
-        _timingSliderView.OnAnimation(Random.Range(0, 100), Random.Range(0, 100));
+        _clearAnimationSwitcher.Play(ResultType.Clear);
     }
 }
