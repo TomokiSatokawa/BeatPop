@@ -11,7 +11,7 @@ namespace Title.SongSelect
     /// <summary>
     /// タイトルシーン内専用SoundController
     /// </summary>
-    public class SongPreviewPlayer : SingletonMonoBehaviour<SongPreviewPlayer>
+    public class TitleSoundController : SingletonMonoBehaviour<TitleSoundController>
     {
         [SerializeField] private float _fadeInDuration;
         [SerializeField] private float _playWaitTime;

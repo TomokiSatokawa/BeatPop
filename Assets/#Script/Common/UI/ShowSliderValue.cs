@@ -13,7 +13,7 @@ namespace Common.UI
         [SerializeField] private TextMeshProUGUI _text;
         void Start()
         {
-            if(_slider == null)
+            if (_slider == null)
             {
                 Debug.LogError("[SliderValue] Slider‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
                 enabled = false;

@@ -24,7 +24,7 @@ namespace Title
             _onStartPlay.OnNext(songSelectData);
 
             UniTask fade = _fadeImageControl.FadeOut(FadeType.White);
-            UniTask bgmFade = SongPreviewPlayer.I.WaitBGMFadeOut();
+            UniTask bgmFade = TitleSoundController.I.WaitBGMFadeOut();
 
             await UniTask.WhenAll(fade, bgmFade);
 

@@ -68,7 +68,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _stageTimeController.UpdateStageTime();
     }
 
-    public void OnPause()
+    public void Pause()
     {
         _stageTimeController.Pause();
         InputManager.SetInputEnabled(false);

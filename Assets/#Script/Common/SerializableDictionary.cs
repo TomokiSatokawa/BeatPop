@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// インスペクターで表示できるDictionary
+/// インスペクターに表示できるDictionary
 /// </summary>
 [Serializable]
 public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiver

@@ -12,17 +12,18 @@ namespace Common
     public class SceneTransition : MonoBehaviour
     {
         [SerializeField] private FadeImageControl _fadeImageControl;
-        [Range(0.0f, 0.9f)]
-        private float _loadCompleteProgress = 0.9f;
+        [SerializeField, Range(0.0f, 0.9f)] private float _loadCompleteProgress = 0.9f;
+
         private CancellationTokenSource _cancellation;
         private static bool _isLoading;
+
         public void ChangeScene(int sceneIndex)
         {
             string scenePath = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
 
             ChangeSceneAsync(scenePath).Forget();
         }
-        public void ChangeScene(string scenePath )
+        public void ChangeScene(string scenePath)
         {
             ChangeSceneAsync(scenePath).Forget();
         }

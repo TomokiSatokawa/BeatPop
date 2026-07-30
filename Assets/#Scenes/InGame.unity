@@ -1524,6 +1524,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.77254903
       objectReference: {fileID: 0}
+    - target: {fileID: 6618713239452069560, guid: f3ccfc2b585f6344f8ec13c711ca9878, type: 3}
+      propertyPath: _callbackWaitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7259567624154865203, guid: f3ccfc2b585f6344f8ec13c711ca9878, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1620,9 +1624,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8774078533844315419, guid: f3ccfc2b585f6344f8ec13c711ca9878, type: 3}
+      propertyPath: _callbackWaitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8980222366719460106, guid: f3ccfc2b585f6344f8ec13c711ca9878, type: 3}
       propertyPath: m_Name
       value: ClearAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049719037227003558, guid: f3ccfc2b585f6344f8ec13c711ca9878, type: 3}
+      propertyPath: _callbackWaitTime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8116,6 +8128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
   _fadeImageControl: {fileID: 2134767051}
+  _loadCompleteProgress: 0.9
 --- !u!1 &2115509218
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ namespace Common.UI
             if (_canvasGroup == null)
                 _canvasGroup = GetComponent<CanvasGroup>();
 
-            SetVisible(false,0);
+            SetVisible(false, 0);
         }
 
         public void OnActive(float duration = 0)
@@ -34,10 +34,10 @@ namespace Common.UI
         {
             _hiddenAction?.Invoke();
 
-           SetVisible(false,duration);
+            SetVisible(false, duration);
         }
-        
-        private void SetVisible(bool visible,float fadeDuration)
+
+        private void SetVisible(bool visible, float fadeDuration)
         {
             float alpha = visible ? 1f : 0f;
 
@@ -61,8 +61,8 @@ namespace Common.UI
         }
 
         private void OnDestroy()
-{
-    _fadeAnimation?.Kill();
-}
+        {
+            _fadeAnimation?.Kill();
+        }
     }
 }

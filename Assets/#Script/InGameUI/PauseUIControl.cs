@@ -42,7 +42,7 @@ namespace InGame.UI
             {
                 //ŠJ‚­
                 _panelControl.OnActive();
-                GameManager.I.OnPause();
+                GameManager.I.Pause();
             }
         }
         public void StartCountDown()

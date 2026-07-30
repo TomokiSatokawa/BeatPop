@@ -1,11 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using InGame.Node;
 using InGame;
+using InGame.Node;
 using UnityEngine;
-using System;
 
 /// <summary>
 /// NodeData‚ÆJson‚ð•ÏŠ·‚·‚é
@@ -118,7 +118,7 @@ public static class NodeDataSerializer
         }
     }
 
-    public static string SerializeJson(List<NodeData> nodes, List<float> sectionTime ,float bpm, int songIndex, string songName = "null")
+    public static string SerializeJson(List<NodeData> nodes, List<float> sectionTime, float bpm, int songIndex, string songName = "null")
     {
         for (int i = 0; i < nodes.Count; i++)
         {

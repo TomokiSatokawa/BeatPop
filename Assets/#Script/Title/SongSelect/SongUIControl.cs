@@ -24,8 +24,8 @@ namespace Title.SongSelect
         {
             _selectButton.onClick.AddListener(OnSelect);
 
-            _uIPointerHover.IsPointerOver.Where(x => x).Subscribe(_ => SongPreviewPlayer.I.PlayPreview(_songData.SongData));
-            _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => SongPreviewPlayer.I.StopPreview());
+            _uIPointerHover.IsPointerOver.Where(x => x).Subscribe(_ => TitleSoundController.I.PlayPreview(_songData.SongData));
+            _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => TitleSoundController.I.StopPreview());
         }
         public void SetData(SongSelectData data, Action<SongSelectData> onSelect)
         {

@@ -40,6 +40,7 @@ namespace InGame.Effect
             highlight.color = color;
             highlight.DOFade(0, _emptyClickDuration).SetEase(Ease.OutQuad);
         }
+
         public void PlayNodeClickEffect(int lane)
         {
             if (!IsValidLane(lane))
@@ -59,5 +60,4 @@ namespace InGame.Effect
             return false;
         }
     }
-
 }

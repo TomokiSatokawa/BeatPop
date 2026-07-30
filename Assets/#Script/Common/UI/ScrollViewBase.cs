@@ -38,7 +38,7 @@ namespace Common.UI
         /// </summary>
         protected T InstantiateContent<T>(T prefab) where T : MonoBehaviour
         {
-            return Instantiate(prefab,_content);
+            return Instantiate(prefab, _content);
         }
     }
 }
