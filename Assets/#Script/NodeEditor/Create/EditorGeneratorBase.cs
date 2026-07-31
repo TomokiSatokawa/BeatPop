@@ -24,7 +24,9 @@ namespace Editor
             UpdateInRange(minTime, maxTime);
             OnUpdate();
         }
+
         protected abstract void UpdateInRange(double minTime, double maxTime);
+
         protected virtual void OnUpdate() { }
     }
 }

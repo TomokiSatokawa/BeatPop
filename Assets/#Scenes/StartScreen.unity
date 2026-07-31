@@ -1445,6 +1445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _fastActive: {fileID: 200224914}
+  _startActive: {fileID: 200224914}
   _fadeDuration: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -8,6 +8,7 @@ namespace InGame.Node
     public class NodeObject : PoolObject
     {
         [SerializeField] private NodeObjectData _objectData;
+
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
         public NodeData NodeData { get; private set; }
 

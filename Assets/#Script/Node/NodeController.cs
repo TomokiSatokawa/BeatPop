@@ -11,7 +11,6 @@ namespace InGame.Node
     /// </summary>
     public class NodeController : MonoBehaviour
     {
-        [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private NodeHitExecutor _nodeHitExecutor;
 
         private readonly List<NodeObject> _nodes = new();
@@ -38,7 +37,7 @@ namespace InGame.Node
             _removeNodes.Clear();
 
             float stageTime = StageTimeController.StageTime;
-            float deleteTime = stageTime - _judgementTable.DeleteTime;
+            float deleteTime = stageTime - StageConfig.I.JudgementTable.DeleteTime;
 
             foreach (NodeObject node in _nodes)
             {
@@ -46,13 +45,13 @@ namespace InGame.Node
                 {
                     _removeNodes.Add(node);
                 }
-                float startTime = node.NodeData.Time - StageContext.I.ArrivalSeconds;
+                float startTime = node.NodeData.Time - StageConfig .I.ArrivalSeconds;
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
-                Vector3 startPosition = StageContext.I.GetClonePos(node.NodeData.Lane);
+                Vector3 startPosition = StageConfig .I.GetClonePos(node.NodeData.Lane);
                 Vector3 endPosition = startPosition;
-                endPosition.z = StageContext.I.StageLayout.GoalPos;
+                endPosition.z = StageConfig .I.StageLayout.GoalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
 
                 if(node.Type == PoolPrefabType.TickNode && TickNodeCheck(node))
@@ -128,7 +127,7 @@ namespace InGame.Node
 
             if (targetNode == null) return null;
 
-            if (bestDifference <= _judgementTable.ToleranceValue)
+            if (bestDifference <= StageConfig.I.JudgementTable.ToleranceValue)
             {
                 return targetNode;
             }

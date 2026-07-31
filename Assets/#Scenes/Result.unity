@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
   _fadeImageControl: {fileID: 957265883}
+  _loadCompleteProgress: 0.9
 --- !u!4 &89348881
 Transform:
   m_ObjectHideFlags: 0
@@ -4135,10 +4136,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1012390795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1600, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1360065621
 MonoBehaviour:
@@ -6496,6 +6497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _fastActive: {fileID: 79387970}
+  _startActive: {fileID: 79387970}
   _fadeDuration: 0
 --- !u!114 &2103821566
 MonoBehaviour:

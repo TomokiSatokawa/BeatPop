@@ -7550,7 +7550,8 @@ MonoBehaviour:
   _uIPointerHover: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
-  _ease: 27
+  _enterEase: 27
+  _exitEase: 6
 --- !u!114 &716483947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8934,14 +8935,18 @@ MonoBehaviour:
   _pos: {x: 0, y: -921}
   _animationDuration: 0.5
   _nameText: {fileID: 1744609445}
+  _jacket: {fileID: 0}
+  _difficultyImage: {fileID: 0}
   _clauseButton: {fileID: 1920405234}
   _backGroundArea: {fileID: 964413185}
   _bpmInfo: {fileID: 1288403996}
   _secondInfo: {fileID: 1507939431}
   _levelText: {fileID: 574045275}
+  _nodeCount: {fileID: 0}
+  _difficultyColor: {fileID: 0}
   _playLoader: {fileID: 1569844618}
-  _sceneLoad: {fileID: 1569844619}
   _segmentControl: {fileID: 1571923492}
+  _songPreviewPlayer: {fileID: 0}
 --- !u!114 &829016000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9217,7 +9222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000091552734}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -11142,6 +11147,7 @@ MonoBehaviour:
   _titlePrefab: {fileID: 4557633181371095652, guid: bc36b6516cd265c4585ab42f7919a76f, type: 3}
   _contentsListPrefab: {fileID: 1360254055465798315, guid: b702ef692bc8d3043849b7b204fc768b, type: 3}
   _listSongPrefab: {fileID: 4724775528831732003, guid: 274a05a21165fb746aa788fd84df9671, type: 3}
+  _songInfoControl: {fileID: 0}
 --- !u!1 &1034833893
 GameObject:
   m_ObjectHideFlags: 0
@@ -14389,6 +14395,7 @@ MonoBehaviour:
   _prefab: {fileID: 1229822027298472374, guid: 9454f34c926039049b19ac2a6f9b12db, type: 3}
   _patternLoader: {fileID: 1278408205}
   _sound: {fileID: 329494180}
+  _chart: {fileID: 0}
   _onPatternSelect:
     m_PersistentCalls:
       m_Calls:
@@ -17559,6 +17566,7 @@ MonoBehaviour:
   _fadeInDuration: 1
   _playWaitTime: 1
   _stopWaitTime: 1
+  _titleBGM: {fileID: 0}
 --- !u!1001 &1530591029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17978,6 +17986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoad
   _fadeImageControl: {fileID: 2005575151}
+  _loadCompleteProgress: 0.9
 --- !u!1 &1570107661
 GameObject:
   m_ObjectHideFlags: 0
@@ -19093,7 +19102,8 @@ MonoBehaviour:
   _uIPointerHover: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
-  _ease: 27
+  _enterEase: 27
+  _exitEase: 6
 --- !u!114 &1663931381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20480,7 +20490,8 @@ MonoBehaviour:
   _uIPointerHover: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
-  _ease: 27
+  _enterEase: 27
+  _exitEase: 6
 --- !u!114 &1779415529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21982,7 +21993,8 @@ MonoBehaviour:
   _uIPointerHover: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
-  _ease: 27
+  _enterEase: 27
+  _exitEase: 6
 --- !u!114 &1898934359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22635,7 +22647,8 @@ MonoBehaviour:
   _uIPointerHover: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
-  _ease: 27
+  _enterEase: 27
+  _exitEase: 6
 --- !u!114 &1920405238
 MonoBehaviour:
   m_ObjectHideFlags: 0

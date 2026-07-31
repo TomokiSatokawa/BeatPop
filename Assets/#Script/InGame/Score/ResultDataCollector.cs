@@ -11,10 +11,10 @@ namespace InGame.Score
     {
         /// <summary>ノード別ヒット数（打率）</summary>
         private readonly Dictionary<PoolPrefabType, HitData> _nodeHitCount = new();
-        public IReadOnlyDictionary<PoolPrefabType,HitData> NodeHitCount => _nodeHitCount;
+        public IReadOnlyDictionary<PoolPrefabType, HitData> NodeHitCount => _nodeHitCount;
 
         private int _fastCount;
-        public int FastCount => _fastCount; 
+        public int FastCount => _fastCount;
         private int _lateCount;
         public int LateCount => _lateCount;
 
@@ -68,15 +68,16 @@ namespace InGame.Score
         }
 
 
-    }   /// <summary>
-        /// ノーツ別のHitカウンター
-        /// </summary>
+    }
+    /// <summary>
+    /// ノーツ別のHitカウンター
+    /// </summary>
     public class HitData
     {
         public int TotalCount { get; private set; }
         public int HitCount { get; private set; }
 
-        public float Accuracy =>  TotalCount == 0 ? 0f : (float)HitCount / TotalCount * 100f;
+        public float Accuracy => TotalCount == 0 ? 0f : (float)HitCount / TotalCount * 100f;
         public HitData()
         {
             HitCount = 0;
@@ -96,8 +97,8 @@ namespace InGame.Score
     }
     public interface IReadOnlyResultData
     {
-        public IReadOnlyDictionary<PoolPrefabType,HitData> NodeHitCount { get; }
-        public int FastCount     { get; }
-        public int LateCount     { get; }
+        public IReadOnlyDictionary<PoolPrefabType, HitData> NodeHitCount { get; }
+        public int FastCount { get; }
+        public int LateCount { get; }
     }
 }

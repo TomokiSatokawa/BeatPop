@@ -18,6 +18,7 @@ namespace InGame.Node
 
         public InputType InputType => _inputType;
     }
+
     public interface IReadOnlyNodeObjectData
     {
         public PoolPrefabType TapEffect { get; }

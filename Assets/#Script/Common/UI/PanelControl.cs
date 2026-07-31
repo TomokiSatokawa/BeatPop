@@ -16,6 +16,7 @@ namespace Common.UI
 
         private Tween _fadeAnimation;
         public bool IsActive { get; private set; }
+
         private void Awake()
         {
             if (_canvasGroup == null)

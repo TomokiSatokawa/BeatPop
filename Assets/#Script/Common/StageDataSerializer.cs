@@ -21,7 +21,6 @@ namespace Common
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
 
-
         public static StageSaveData DeserializeJson(string json)
         {
             if (string.IsNullOrWhiteSpace(json))
@@ -50,7 +49,6 @@ namespace Common
                 return null;
             }
         }
-
 
         public static string SerializeJson(LightPatternBaseData[] patternBaseDatas, int songIndex)
         {
@@ -84,7 +82,6 @@ namespace Common
             }
         }
     }
-
 
     [Serializable]
     public class StageSaveData

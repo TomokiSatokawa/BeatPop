@@ -13,6 +13,7 @@ public class AutoRelease : PoolObject
     private void Update()
     {
         if (!IsPoolActive) return;
+
         _timer -= Time.deltaTime;
         
         if( _timer <= 0)

@@ -7,13 +7,13 @@ namespace Common.UI
     /// </summary>
     public class PanelManager : MonoBehaviour
     {
-        [SerializeField] private PanelControl _fastActive;
+        [SerializeField] private PanelControl _startActive;
         [SerializeField] private float _fadeDuration;
 
         private PanelControl _currentActive;
         private void Start()
         {
-            ChangeActivePanel(_fastActive);
+            ChangeActivePanel(_startActive);
         }
 
         public void ChangeActivePanel(PanelControl panel)

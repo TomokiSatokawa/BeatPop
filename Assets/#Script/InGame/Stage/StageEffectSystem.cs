@@ -31,7 +31,6 @@ namespace InGame.Stage
                 .Subscribe(_ => UpdateNextPattern())
                 .AddTo(this);
 
-            //TODOBeat
             BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
 
         }

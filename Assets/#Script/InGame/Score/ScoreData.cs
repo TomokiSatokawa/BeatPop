@@ -50,9 +50,10 @@ namespace InGame.Score
             _score.Value += GetScore(nodeJudgment,result);
         }
 
-        public void CalculateMaxScore(JudgementTable judgementTable, IReadOnlyList<NodeData> nodeDatas, float bpm)
+        public void CalculateMaxScore(IReadOnlyList<NodeData> nodeDatas, float bpm)
         {
             int maxScore = 0;
+            var judgementTable = StageConfig.I.JudgementTable;
             foreach (NodeData nodeData in nodeDatas)
             {
                 IReadOnlyNodeJudgement nodeJudgment = judgementTable.GetJudgementData(nodeData.PrefabType);
@@ -74,7 +75,7 @@ namespace InGame.Score
 
                 NodeData end = nodeDatas[start.Connect];
 
-                float intervalTime = (60f / bpm) * (4f / LongNoteDivisionInterval);
+                float intervalTime = (60f / bpm) * (4f / StageConfig.I.LongNoteDivisionInterval);
                 float duration = end.Time - start.Time;
                 int count = Mathf.FloorToInt(duration / intervalTime);
 

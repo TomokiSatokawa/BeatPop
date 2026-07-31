@@ -12,7 +12,6 @@ namespace InGame.Node
     public class HoldNodeFillManager : MonoBehaviour
     {
         [SerializeField] private Transform[] _lane;
-        [SerializeField]private JudgementTable _judgementTable;
 
         private Dictionary<NodeData, FillData> _activeFillData = new();
 
@@ -20,9 +19,9 @@ namespace InGame.Node
         {
             if (_activeFillData.ContainsKey(end)) return;
 
-            float clone = StageContext.I.GetClonePos(0).z;
-            float goal = StageContext.I.StageLayout.GoalPos;
-            float delete = StageContext.I.StageLayout.DeletePos;
+            float clone = StageConfig .I.GetClonePos(0).z;
+            float goal = StageConfig .I.StageLayout.GoalPos;
+            float delete = StageConfig .I.StageLayout.DeletePos;
 
             var fillData = new FillData(start, end, _lane[start.Lane], clone, goal, delete);
             fillData.SetNodeObject(start: startObject);
@@ -48,7 +47,7 @@ namespace InGame.Node
         {
             foreach (var fillData in _activeFillData.Values)
             {
-                if (fillData.StartNode.Lane == lane && fillData.StartNode.Time + _judgementTable.ToleranceValue <= StageTimeController.StageTime)
+                if (fillData.StartNode.Lane == lane && fillData.StartNode.Time + StageConfig.I.JudgementTable.ToleranceValue <= StageTimeController.StageTime)
                 {
                     return true;
                 }

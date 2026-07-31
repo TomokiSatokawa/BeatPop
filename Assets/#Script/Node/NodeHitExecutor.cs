@@ -21,7 +21,7 @@ namespace InGame.Node
 
         public void Start()
         {
-            BeatUpdateManager.BeatUpdate.Subscribe(8, 0, _ =>
+            BeatUpdateManager.BeatUpdate.Subscribe(StageConfig.I.LongNoteDivisionInterval, 0, _ =>
             {
                 ExecuteHoldJudge(0, InputManager.LeftLane.CurrentValue);
                 ExecuteHoldJudge(1, InputManager.RightLane.CurrentValue);
@@ -31,7 +31,7 @@ namespace InGame.Node
         public void HandleHit(NodeObject targetNode)
         {
             if (targetNode.NodeData.PrefabType == PoolPrefabType.HoldNoteEnd
-                ||targetNode.NodeData.PrefabType == PoolPrefabType.HoldFlickEnd)
+                || targetNode.NodeData.PrefabType == PoolPrefabType.HoldFlickEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);
             }
@@ -39,7 +39,7 @@ namespace InGame.Node
             //タップエフェクト
             var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.NodeObjData.TapEffect);
             Vector3 pos = targetNode.transform.position;
-            pos.z = StageContext.I.StageLayout.GoalPos;
+            pos.z = StageConfig.I.StageLayout.GoalPos;
             tapEffect.transform.position = pos;
 
             //ジャッチUI
@@ -56,7 +56,7 @@ namespace InGame.Node
         {
             ExecuteJudgeNode(targetNode.NodeData);
 
-            if (targetNode.Type == PoolPrefabType.HoldNoteEnd 
+            if (targetNode.Type == PoolPrefabType.HoldNoteEnd
                 || targetNode.Type == PoolPrefabType.HoldFlickEnd)
             {
                 _nodeFillManager.DeleteFill(targetNode.NodeData);

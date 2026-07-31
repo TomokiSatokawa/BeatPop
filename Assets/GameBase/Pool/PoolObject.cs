@@ -3,6 +3,7 @@ using UnityEngine;
 public class PoolObject : MonoBehaviour
 {
     public bool IsPoolActive { get; private set; }
+
     private PoolPrefabType _poolPrefabType;
     public PoolPrefabType Type => _poolPrefabType;
 

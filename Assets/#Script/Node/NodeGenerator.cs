@@ -23,7 +23,7 @@ namespace InGame.Node
         {
             InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x => _nodeDataList = x.Nodes).AddTo(this);
 
-            float arrivalSeconds = StageContext.I.ArrivalSeconds;
+            float arrivalSeconds = StageConfig .I.ArrivalSeconds;
             BeatUpdateManager.BeatUpdate.Subscribe(16, -arrivalSeconds, _ => GenerateNodes());
             BeatUpdateManager.BeatUpdate.Subscribe(4, -arrivalSeconds, x => CreateLines(x.Time));
         }
@@ -33,7 +33,7 @@ namespace InGame.Node
         /// </summary>
         private void CreateLines(float time)
         {
-            float lineTime = time + StageContext.I.ArrivalSeconds;
+            float lineTime = time + StageConfig .I.ArrivalSeconds;
             for (int lane = 0; lane < _clonePosition.Length; lane++)
             {
                 CreateNode(new NodeData
@@ -52,7 +52,7 @@ namespace InGame.Node
         {
             if (!StageTimeController.I.IsPlaying.CurrentValue) return;
 
-            double generateTime = StageTimeController.StageTime + StageContext.I.ArrivalSeconds;
+            double generateTime = StageTimeController.StageTime + StageConfig .I.ArrivalSeconds;
             double startSectionTime = StageTimeController.I.StartSectionTime;
 
             while (_nextNode < _nodeDataList.Count)

@@ -9,8 +9,6 @@ namespace InGame.Score
     /// </summary>
     public class ScoreDataManager : SingletonPersistent<ScoreDataManager>
     {
-        [SerializeField] private JudgementTable _judgementTable;
-
         private static readonly ScoreData _scoreData = new();
         public static IReadOnlyScoreData ScoreData => _scoreData;
 
@@ -32,21 +30,23 @@ namespace InGame.Score
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
                 var saveData = InGameFileLoad.I.OnNodeFileLoaded.CurrentValue;
-                _scoreData.CalculateMaxScore(_judgementTable,saveData.Nodes, StageTimeController.I.BPM);
+                _scoreData.CalculateMaxScore(saveData.Nodes, StageTimeController.I.BPM);
             }).AddTo(this);
         }
 
-        public IReadOnlyJudgementData RecordJudge(NodeData nodeData,float difference)
+        public IReadOnlyJudgementData RecordJudge(NodeData nodeData, float difference)
         {
-            var judgement = _judgementTable.GetJudgementResult(nodeData.PrefabType, difference);
-            var judgementData = _judgementTable.GetJudgementData(nodeData.PrefabType);
+            var judgementTable = StageConfig.I.JudgementTable;
+
+            var judgement = judgementTable.GetJudgementResult(nodeData.PrefabType, difference);
+            var judgementData = judgementTable.GetJudgementData(nodeData.PrefabType);
 
             _scoreData.AddScore(judgementData, judgement);
 
             _judgementRecorder.AddJudgeCount(judgement);
 
             _resultDataCollector.AddNode(nodeData, judgement);
-            _resultDataCollector.AddDifferenceValue(judgement,nodeData, difference);
+            _resultDataCollector.AddDifferenceValue(judgement, nodeData, difference);
 
             return judgement;
         }
