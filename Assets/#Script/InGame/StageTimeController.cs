@@ -1,5 +1,4 @@
 using Common.PlaySystem;
-using Cysharp.Threading.Tasks;
 using R3;
 using Sound;
 using UnityEngine;
@@ -34,14 +33,14 @@ namespace InGame
         public Observable<Unit> OnInitialized => _onInitialized;
         public Observable<Unit> OnGameClear => _onGameClear;
 
-
         public void Start()
         {
             IsInitialized = false;
         }
+
         public void SetPlayData(NodeSaveData fileData)
         {
-            float bpm  = fileData.BPM;
+            float bpm = fileData.BPM;
 
             float endTime = 0;
             if (fileData.Nodes.Count > 0)
@@ -60,7 +59,7 @@ namespace InGame
             SetPlayData(bpm, endTime, sectionTime);
         }
 
-        public void SetPlayData(float bpm,float endTime,float startSection)
+        public void SetPlayData(float bpm, float endTime, float startSection)
         {
             _bpm = bpm;
             EndTime = endTime;
@@ -86,7 +85,7 @@ namespace InGame
         public void UpdateStageTime()
         {
             if (!_isPlaying.CurrentValue) return;
-            
+
             StageTime = (float)(AudioSettings.dspTime - _startDspTime) + _timeOffset;
 
             if (StageTime >= EndTime + _resultDelay)

@@ -1,13 +1,8 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Common;
 using Common.UI;
 using Cysharp.Threading.Tasks;
-using InGame.Score;
-using Sound;
-using Title.SongSelect;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 namespace Result.UI
 {
@@ -34,11 +29,11 @@ namespace Result.UI
             UniTask bgmFade = _soundManager.FadeOut();
 
             await UniTask.WhenAll(fade, bgmFade);
-            await _sceneLoad.LoadSceneAsync("Title",new CancellationTokenSource().Token);
+            await _sceneLoad.LoadSceneAsync("Title", new CancellationTokenSource().Token);
         }
     }
     public enum ResultType
     {
-        Clear,FullCombo,AllPerfect
+        Clear, FullCombo, AllPerfect
     }
 }
