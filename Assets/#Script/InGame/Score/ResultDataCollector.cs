@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using InGame.Node;
 
@@ -14,8 +13,10 @@ namespace InGame.Score
         public IReadOnlyDictionary<PoolPrefabType, HitData> NodeHitCount => _nodeHitCount;
 
         private int _fastCount;
+        /// <summary>タイミングが早い数</summary>
         public int FastCount => _fastCount;
         private int _lateCount;
+        /// <summary>タイミングが遅い数</summary>
         public int LateCount => _lateCount;
 
         public void Initialize()
@@ -32,12 +33,14 @@ namespace InGame.Score
         {
             var type = node.PrefabType;
 
+            //存在しなかったら作成する
             if (!_nodeHitCount.TryGetValue(type, out var hitData))
             {
                 hitData = new HitData();
                 _nodeHitCount.Add(type, hitData);
             }
 
+            //コンボ継続するか
             if (judgementData.IsComboContinued)
             {
                 _nodeHitCount[type].AddHit();
@@ -57,10 +60,12 @@ namespace InGame.Score
             if (nodeData.PrefabType == PoolPrefabType.HoldNoteFill)
                 return;
 
+            //パーフェクト、ミスは含まない
             if (judgementData.Name == JudgementType.PERFECT
                 || judgementData.Name == JudgementType.MISS)
                 return;
 
+            //速い遅いを振り分ける
             if (difference > 0)
                 _fastCount++;
             else
@@ -77,7 +82,9 @@ namespace InGame.Score
         public int TotalCount { get; private set; }
         public int HitCount { get; private set; }
 
+        /// <summary>打率</summary>
         public float Accuracy => TotalCount == 0 ? 0f : (float)HitCount / TotalCount * 100f;
+
         public HitData()
         {
             HitCount = 0;
@@ -95,6 +102,7 @@ namespace InGame.Score
             TotalCount++;
         }
     }
+
     public interface IReadOnlyResultData
     {
         public IReadOnlyDictionary<PoolPrefabType, HitData> NodeHitCount { get; }

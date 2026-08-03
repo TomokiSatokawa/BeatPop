@@ -50,15 +50,21 @@ namespace InGame.Score
             _score.Value += GetScore(nodeJudgment,result);
         }
 
+        /// <summary>
+        /// 最大値スコアを計算する
+        /// </summary>
         public void CalculateMaxScore(IReadOnlyList<NodeData> nodeDatas, float bpm)
         {
             int maxScore = 0;
             var judgementTable = StageConfig.I.JudgementTable;
+
+            //ノーツごとの最大値を足す
             foreach (NodeData nodeData in nodeDatas)
             {
-                IReadOnlyNodeJudgement nodeJudgment = judgementTable.GetJudgementData(nodeData.PrefabType);
-                IReadOnlyJudgementData result = judgementTable.GetJudgementResult(nodeData.PrefabType, 0);
+                var nodeJudgment = judgementTable.GetJudgementData(nodeData.PrefabType);
+                var result = judgementTable.GetJudgementResult(nodeData.PrefabType, 0);
 
+                //最大スコアを加算
                 maxScore += GetScore(nodeJudgment,result);
 
                 if (nodeData.PrefabType != PoolPrefabType.HoldNoteStart)
@@ -67,6 +73,7 @@ namespace InGame.Score
                 //HoldFillの計算
                 NodeData start = nodeData;
 
+                //Fillの接続先があるか
                 if (start.Connect < 0 || start.Connect >= nodeDatas.Count)
                 {
                     Debug.LogError($"[Score] HoldNoteの接続先が不正です。Time={start.Time}, Connect={start.Connect}, NodeCount={nodeDatas.Count}");
@@ -75,18 +82,21 @@ namespace InGame.Score
 
                 NodeData end = nodeDatas[start.Connect];
 
+                //Fillの判定数を取得
                 float intervalTime = (60f / bpm) * (4f / StageConfig.I.LongNoteDivisionInterval);
                 float duration = end.Time - start.Time;
                 int count = Mathf.FloorToInt(duration / intervalTime);
 
-
-
+                //Fill分の最大スコアを加算
                 maxScore += GetScore(judgementTable.GetJudgementData(PoolPrefabType.HoldNoteFill), judgementTable.GetJudgementResult(PoolPrefabType.HoldNoteFill, 0)) * count;
             }
 
             _maxScore = maxScore;
         }
 
+        /// <summary>
+        /// 現在のリザルトタイプを取得
+        /// </summary>
         public ResultType GetResultType()
         {
             if (_isAllPerfect)
@@ -98,8 +108,12 @@ namespace InGame.Score
             return ResultType.Clear;
         }
 
+        /// <summary>
+        /// スコア計算
+        /// </summary>
         private static int GetScore(IReadOnlyNodeJudgement type, IReadOnlyJudgementData result)
         {
+            //スコア倍率0以下
             if(result.ScoreMultiplier <= 0)
             {
                 return 0;
@@ -110,9 +124,11 @@ namespace InGame.Score
 
         private void UpdateJudgeState(IReadOnlyJudgementData judgement)
         {
+            //オールパーフェクトを解除
             if (!judgement.IsAllPerfectContinued)
                 _isAllPerfect = false;
 
+            //コンボ
             if (judgement.IsComboContinued)
             {
                 _combo.Value++;

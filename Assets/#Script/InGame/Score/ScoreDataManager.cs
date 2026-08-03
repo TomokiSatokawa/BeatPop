@@ -9,12 +9,15 @@ namespace InGame.Score
     /// </summary>
     public class ScoreDataManager : SingletonPersistent<ScoreDataManager>
     {
+        /// <summary>スコアデータ</summary>
         private static readonly ScoreData _scoreData = new();
         public static IReadOnlyScoreData ScoreData => _scoreData;
 
+        /// <summary>判定記録</summary>
         private static readonly JudgementRecorder _judgementRecorder = new();
         public static IReadOnlyJudgementRecorder JudgementRecorder => _judgementRecorder;
 
+        /// <summary>リザルト用データ</summary>
         private static readonly ResultDataCollector _resultDataCollector = new();
         public static IReadOnlyResultData ResultDataCollector => _resultDataCollector;
 
@@ -27,6 +30,7 @@ namespace InGame.Score
 
         private void Start()
         {
+            //BPM設定後に最大スコアを計算する
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
                 var saveData = InGameFileLoad.I.OnNodeFileLoaded.CurrentValue;
@@ -34,6 +38,9 @@ namespace InGame.Score
             }).AddTo(this);
         }
 
+        /// <summary>
+        ///　ノーツを判定して記録する
+        /// </summary>
         public IReadOnlyJudgementData RecordJudge(NodeData nodeData, float difference)
         {
             var judgementTable = StageConfig.I.JudgementTable;

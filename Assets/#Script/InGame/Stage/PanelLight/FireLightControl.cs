@@ -10,11 +10,14 @@ namespace InGame.Stage
     public class FireLightControl : StageLightBase
     {
         [SerializeField] private ParticleSystemController _particleSystemController;
+
+        private Tween _tween;
+
         private void Start()
         {
             _particleSystemController.SetEmission(false);
         }
-        private Tween _tween;
+
         public override void Flash(float duration, float power)
         {
             _tween?.Kill();

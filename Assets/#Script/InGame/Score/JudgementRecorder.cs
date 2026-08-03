@@ -18,6 +18,9 @@ namespace InGame.Score
             _judgeDataCount.Clear();
         }
 
+        /// <summary>
+        /// ”»’è”‚ğ‘‚â‚·
+        /// </summary>
         public void AddJudgeCount(IReadOnlyJudgementData judgement)
         {
             _judgeDataCount[judgement] = _judgeDataCount.GetValueOrDefault(judgement) + 1;
