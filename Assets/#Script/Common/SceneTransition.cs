@@ -17,17 +17,27 @@ namespace Common
         private CancellationTokenSource _cancellation;
         private static bool _isLoading;
 
+        /// <summary>
+        /// ビルドインデックスのシーンへ遷移
+        /// </summary>
         public void ChangeScene(int sceneIndex)
         {
             string scenePath = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
 
             ChangeSceneAsync(scenePath).Forget();
         }
+
+        /// <summary>
+        /// シーンパスのシーンへ遷移
+        /// </summary>
         public void ChangeScene(string scenePath)
         {
             ChangeSceneAsync(scenePath).Forget();
         }
 
+        /// <summary>
+        /// フェードアウトを行った後、指定したシーンへ非同期で遷移
+        /// </summary>
         private async UniTask ChangeSceneAsync(string scenePath)
         {
             if (_isLoading)
@@ -55,6 +65,9 @@ namespace Common
             }
         }
 
+        /// <summary>
+        /// シーンを非同期で読み込み、読み込み完了後にシーンを切り替える
+        /// </summary>
         public async UniTask LoadSceneAsync(string scenePath, CancellationToken token)
         {
             var op = SceneManager.LoadSceneAsync(scenePath);

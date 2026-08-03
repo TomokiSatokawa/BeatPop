@@ -25,6 +25,7 @@ namespace InGame
             CustomSoundPattern soundPattern = SongPlayContext.I?.PatternData?.SoundPattern ?? _soundData.GetDefaultCustom();
 
             _nodeSE.Add(PoolPrefabType.NormalNote, _soundData.TapSE[soundPattern.NormalSE]);
+            _nodeSE.Add(PoolPrefabType.HighScoreNote, _soundData.TapSE[soundPattern.HighScore]);
             _nodeSE.Add(PoolPrefabType.FlickNote, _soundData.TapSE[soundPattern.FlickSE]);
             _nodeSE.Add(PoolPrefabType.HoldNoteStart, _soundData.TapSE[soundPattern.HoldStart]);
             _nodeSE.Add(PoolPrefabType.HoldNoteFill, _soundData.HoldSE[soundPattern.HoldFill]);

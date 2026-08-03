@@ -9,6 +9,7 @@ namespace Common.BeatUpdate
     /// </summary>
     public class BeatGroup
     {
+        /// <summary> BeatUpdateÉfÅ[É^ </summary>
         private readonly List<BeatUpdateHandle> _handles = new();
 
         public void Tick()
@@ -36,6 +37,9 @@ namespace Common.BeatUpdate
             }
         }
 
+        /// <summary>
+        /// BeatUpdateÇ…ìoò^Ç∑ÇÈ
+        /// </summary>
         public void Subscribe(int division, float timeOffset, Action<BeatData> callback)
         {
             if (division <= 0)
@@ -52,6 +56,7 @@ namespace Common.BeatUpdate
 
             var handle = new BeatUpdateHandle(division, timeOffset, callback);
             _handles.Add(handle);
+
             callback?.Invoke(default);
         }
 

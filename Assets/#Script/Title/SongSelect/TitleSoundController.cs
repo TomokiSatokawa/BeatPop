@@ -1,5 +1,4 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Common;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -59,7 +58,7 @@ namespace Title.SongSelect
 
         private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
         {
-            if (audio == null)return;
+            if (audio == null) return;
             _playAudio = audio;
             float waitTime = _playWaitTime;
             if (_playAudio != null)

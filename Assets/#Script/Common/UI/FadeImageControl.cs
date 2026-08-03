@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -57,6 +56,9 @@ namespace Common.UI
             await _tween.AsyncWaitForCompletion();
         }
 
+        /// <summary>
+        /// フェードの初期化
+        /// </summary>
         private void SetupFade(Color color, float alpha)
         {
             _fadeImage.gameObject.SetActive(true);
@@ -65,6 +67,9 @@ namespace Common.UI
             _fadeImage.color = color;
         }
 
+        /// <summary>
+        /// FadeTypeの色を返す
+        /// </summary>
         private Color TypeToColor(FadeType fadeType)
         {
             switch (fadeType)

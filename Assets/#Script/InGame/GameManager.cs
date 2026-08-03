@@ -33,6 +33,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         InGameFileLoad.I?.OnNodeFileLoaded.Skip(1).Subscribe(async fileData =>
         {
+            //チュートリアルを表示する
             if (SongPlayContext.I.SongData.SongData.ShowTutorial)
             {
                 _tutorialUIControl.OnClause += () => LoadPlayAsync(fileData).Forget();

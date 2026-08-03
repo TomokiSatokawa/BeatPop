@@ -10,6 +10,7 @@ namespace Title.Custom
         [SerializeField] private List<SEData> _holdSE;
         [SerializeField] private List<SEData> _tapSE;
         [SerializeField] public int _normalDefault;
+        [SerializeField] public int _highScoreDefault;
         [SerializeField] public int _flickDefault;
         [SerializeField] public int _longStartDefault;
         [SerializeField] public int _longFillDefault;
@@ -23,6 +24,7 @@ namespace Title.Custom
             var result = new CustomSoundPattern();
 
             result.NormalSE = _normalDefault;
+            result.HighScore = _highScoreDefault;
             result.FlickSE = _flickDefault;
             result.HoldStart = _longStartDefault;
             result.HoldFill = _longFillDefault;

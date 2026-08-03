@@ -21,6 +21,9 @@ namespace Common
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
 
+        /// <summary>
+        /// JsonをStageSaveDataに変換
+        /// </summary>
         public static StageSaveData DeserializeJson(string json)
         {
             if (string.IsNullOrWhiteSpace(json))
@@ -50,6 +53,9 @@ namespace Common
             }
         }
 
+        /// <summary>
+        /// StageSaveDataを作ってJsonに変換する
+        /// </summary>
         public static string SerializeJson(LightPatternBaseData[] patternBaseDatas, int songIndex)
         {
             if (patternBaseDatas == null)
@@ -68,7 +74,6 @@ namespace Common
                     LightData = patternBaseDatas,
                     SongDataIndex = songIndex
                 };
-
 
                 return JsonConvert.SerializeObject(
                     saveData,

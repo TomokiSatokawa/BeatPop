@@ -38,6 +38,9 @@ namespace Common.UI
             SetVisible(false, duration);
         }
 
+        /// <summary>
+        /// UIの表示・非表示を切り替える
+        /// </summary>
         private void SetVisible(bool visible, float fadeDuration)
         {
             float alpha = visible ? 1f : 0f;
@@ -55,6 +58,9 @@ namespace Common.UI
             IsActive = visible;
         }
 
+        /// <summary>
+        /// フェードアニメーション
+        /// </summary>
         private void Fade(float amount, float duration)
         {
             _fadeAnimation?.Kill();

@@ -26,6 +26,7 @@ namespace Common.BeatUpdate
         {
             float currentTime = StageTimeController.StageTime;
 
+            //ŽžŠÔ‚ª–ß‚Á‚½
             if (currentTime < _previousTime)
             {
                 FastBeatUpdate.UpdateAllNextTime();

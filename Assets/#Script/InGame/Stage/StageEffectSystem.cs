@@ -13,6 +13,7 @@ namespace InGame.Stage
     {
         [SerializeField] private LightGroupManager _frontUpperPanelLight;
         [SerializeField] private LightGroupManager _backUpperPanelLight;
+        [SerializeField] private LightGroupManager _backDownPanelLight;
         [SerializeField] private LightGroupManager _stageGradientLight;
         [SerializeField] private LightGroupManager _laneGradientLight;
         [SerializeField] private LightGroupManager _flamethrower;
@@ -66,6 +67,7 @@ namespace InGame.Stage
                     break;
                 case 1:
                     _backUpperPanelLight.ChangePattern(data);
+                    _backDownPanelLight.ChangePattern(data);
                     break;
                 case 2:
                     _stageGradientLight.ChangePattern(data);

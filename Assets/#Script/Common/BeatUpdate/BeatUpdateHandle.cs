@@ -27,6 +27,9 @@ namespace Common.BeatUpdate
             Refresh();
         }
 
+        /// <summary>
+        /// BPM更新時に再計算する
+        /// </summary>
         public void Refresh()
         {
             _interval = (60f / StageTimeController.I.BPM) * (4f / Division);
@@ -34,6 +37,9 @@ namespace Common.BeatUpdate
             UpdateNextTime();
         }
 
+        /// <summary>
+        /// 次呼ばれる時間を計算する
+        /// </summary>
         public void UpdateNextTime()
         {
             float beat = (StageTimeController.StageTime - SecondOffset) / _interval;
@@ -42,6 +48,7 @@ namespace Common.BeatUpdate
 
         public void Tick()
         {
+            //呼ばれる時間になった
             if (NextTime <= StageTimeController.StageTime)
             {
                 int beatIndex = Mathf.RoundToInt((NextTime - SecondOffset) / _baseDivisionInterval);

@@ -11,6 +11,7 @@ namespace Common.UI
         [SerializeField] private float _fadeDuration;
 
         private PanelControl _currentActive;
+
         private void Start()
         {
             ChangeActivePanel(_startActive);

@@ -102,7 +102,7 @@ namespace InGame.Node
 
             public void Tick(float deltaTime)
             {
-                UpdateFill();
+                UpdateFill(); https://qiita.com/takish/items/8608ba9070755da3ae6d
                 UpdateInput();
                 UpdateSound();
 

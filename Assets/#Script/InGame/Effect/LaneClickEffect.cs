@@ -27,6 +27,10 @@ namespace InGame.Effect
                 lane.Highlight.DOFade(0, 0);
             }
         }
+
+        /// <summary>
+        /// 指定したレーンのハイライト演出
+        /// </summary>
         public void PlayLaneHighlight(int lane,float alphaMultiplier = 1)
         {
             if (!IsValidLane(lane))
@@ -41,6 +45,10 @@ namespace InGame.Effect
             highlight.DOFade(0, _emptyClickDuration).SetEase(Ease.OutQuad);
         }
 
+        /// <summary>
+        /// 指定したレーンのノーツクリック演出
+        /// エフェクトを生成し、レーンのハイライト演出
+        /// </summary>
         public void PlayNodeClickEffect(int lane)
         {
             if (!IsValidLane(lane))
@@ -51,6 +59,9 @@ namespace InGame.Effect
             PlayLaneHighlight(lane, _nodeClickAlphaMultiplier);
         }
 
+        /// <summary>
+        /// 指定したレーン番号が有効か判定
+        /// </summary>
         private bool IsValidLane(int lane)
         {
             if ((uint)lane < (uint)_laneHighlight.Length)

@@ -11,7 +11,8 @@ namespace Common.UI
     {
         [SerializeField] private Slider _slider;
         [SerializeField] private TextMeshProUGUI _text;
-        void Start()
+
+        private void Start()
         {
             if (_slider == null)
             {

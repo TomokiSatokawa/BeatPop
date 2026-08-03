@@ -20,6 +20,7 @@ namespace Common.UI
             float left = sliderRect.rect.xMin;
             float right = sliderRect.rect.xMax;
 
+            //‚·‚×‚Ä‚Ìƒ‰ƒ“ƒN‚Ìü‚ğˆÚ“®‚³‚¹‚é
             for (int i = 0; i < _rankData.RankValue.Count && i < _rankLines.Length; i++)
             {
                 float t = Mathf.Clamp01((float)_rankData.RankValue[i].Rate);

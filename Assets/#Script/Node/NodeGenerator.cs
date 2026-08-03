@@ -90,6 +90,7 @@ namespace InGame.Node
                     return;
 
                 case PoolPrefabType.NormalNote:
+                case PoolPrefabType.HighScoreNote:
                 case PoolPrefabType.FlickNote:
                 case PoolPrefabType.Line:
                 case PoolPrefabType.TickNode:

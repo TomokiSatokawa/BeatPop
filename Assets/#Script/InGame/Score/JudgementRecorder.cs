@@ -23,6 +23,7 @@ namespace InGame.Score
             _judgeDataCount[judgement] = _judgeDataCount.GetValueOrDefault(judgement) + 1;
         }
     }
+
     public interface IReadOnlyJudgementRecorder
     {
         public IReadOnlyDictionary<IReadOnlyJudgementData, int> JudgeDataCount { get; }

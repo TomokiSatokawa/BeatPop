@@ -88,6 +88,7 @@ namespace Title.Custom
     public struct CustomSoundPattern
     {
         public int NormalSE;
+        public int HighScore;
         public int FlickSE;
         public int HoldStart;
         public int HoldFill;

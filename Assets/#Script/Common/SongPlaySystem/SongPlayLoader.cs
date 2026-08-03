@@ -14,6 +14,9 @@ namespace Common.PlaySystem
 
         [SerializeField] private SongPlayContext _managerPrefab;
 
+        /// <summary>
+        /// SongPlayContextÇê∂ê¨Ç∑ÇÈ
+        /// </summary>
         public void CreatePlayManager(SongSelectData songData,PatternJsonData patternJsonData)
         {
             if(_managerPrefab == null)

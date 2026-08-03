@@ -94,6 +94,9 @@ namespace Editor
                 case PoolPrefabType.HoldFlickEnd:
                     newNode.ChangeColor(Color.greenYellow);
                     break;
+                case PoolPrefabType.HighScoreNote:
+                    newNode.ChangeColor(Color.red);
+                    break;
                 case PoolPrefabType.TickNode:
                     newNode.ChangeColor(Color.skyBlue);
                     break;
