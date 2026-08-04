@@ -18,18 +18,23 @@ namespace InGame.UI
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _titleButton;
 
-        public event Action OnReStart;
-        public event Action OnStartCountDown;
-        public event Action OnRetry;
-        public event Action OnReturnTitle;
+        private readonly Subject<Unit> _onRetry = new(); 
+        private readonly Subject<Unit> _onReStart = new();
+        private readonly Subject<Unit> _onStartCountDown = new();
+        private readonly Subject<Unit> _onReturnTitle = new();
+
+        public Observable<Unit> OnRetry => _onRetry;
+        public Observable<Unit> OnReStart => _onReStart;
+        public Observable<Unit> OnStartCountDown => _onStartCountDown;
+        public Observable<Unit> OnReturnTitle => _onReturnTitle;
 
         private void Start()
         {
             InputManager.PauseButton.Where(b => b).Subscribe(_ => ChangeActive()).AddTo(this);
 
             _continueButton.onClick.AddListener(() => StartCountDown());
-            _retryButton.onClick.AddListener(() => OnRetry?.Invoke());
-            _titleButton.onClick.AddListener(() => OnReturnTitle?.Invoke());
+            _retryButton.onClick.AddListener(() => _onRetry.OnNext(Unit.Default));
+            _titleButton.onClick.AddListener(() => _onReturnTitle.OnNext(Unit.Default));
         }
 
         public void ChangeActive()
@@ -45,18 +50,19 @@ namespace InGame.UI
                 GameManager.I.Pause();
             }
         }
+
         public void StartCountDown()
         {
             _panelControl.OnHidden();
-            OnStartCountDown.Invoke();
-            _countDown.Play(OnReStart);
+            _onStartCountDown.OnNext(Unit.Default);
+            _countDown.Play(() => _onReStart.OnNext(Unit.Default));
         }
 
         private void OnDestroy()
         {
             _continueButton.onClick.RemoveListener(() => StartCountDown());
-            _retryButton.onClick.RemoveListener(() => OnRetry?.Invoke());
-            _titleButton.onClick.RemoveListener(() => OnReturnTitle?.Invoke());
+            _retryButton.onClick.RemoveListener(() => _onRetry.OnNext(Unit.Default));
+            _titleButton.onClick.RemoveListener(() => _onReturnTitle.OnNext(Unit.Default));
         }
     }
 }
