@@ -1,4 +1,4 @@
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// セクションステート

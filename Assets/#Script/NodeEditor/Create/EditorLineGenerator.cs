@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using InGame;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// ü‚Ì•\¦

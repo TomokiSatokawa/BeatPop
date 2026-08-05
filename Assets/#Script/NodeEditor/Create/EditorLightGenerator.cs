@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Editor.UI;
+using CustomEditor.UI;
 using InGame.Stage;
 using R3;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// ライトノードの表示

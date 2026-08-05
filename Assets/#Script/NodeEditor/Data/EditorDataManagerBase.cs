@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターのデータ管理ベースクラス

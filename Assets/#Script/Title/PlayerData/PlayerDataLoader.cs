@@ -24,11 +24,8 @@ namespace Title.PlayerData
             _info = await TryGetCreateFile<PlayerInfo>(InfoFileName);
             _records = await TryGetCreateFile<PlayerRecords>(RecordsFileName);
 
-            _records.OnUpdateData.Subscribe(_ =>
-            {
-                UpdateFile(RecordsFileName, _records).Forget();
-                Debug.Log("A");
-            });
+            _info.OnUpdateData.Subscribe(_ =>   UpdateFile(InfoFileName, _info).Forget());
+            _records.OnUpdateData.Subscribe(_ =>   UpdateFile(RecordsFileName, _records).Forget());
         }
 
         private async UniTask<T> TryGetCreateFile<T>(string fileName) where T : new()

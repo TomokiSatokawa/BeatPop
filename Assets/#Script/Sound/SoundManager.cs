@@ -92,6 +92,7 @@ namespace Sound
             public AudioClip Audio => _audioSource.clip;
             private readonly AudioSource _audioSource;
             private readonly SoundDataBase _soundDataBase;
+            public AudioSource AudioScore => _audioSource;
 
             private Tween _volumeFade;
 

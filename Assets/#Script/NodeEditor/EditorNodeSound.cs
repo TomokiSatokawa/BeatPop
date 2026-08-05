@@ -6,7 +6,7 @@ using R3;
 using Sound;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターでノーツの音を出す

@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Editor.UI
+namespace CustomEditor.UI
 {
     /// <summary>
     /// パターン設定のフィールドUI

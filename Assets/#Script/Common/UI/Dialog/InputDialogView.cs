@@ -10,20 +10,23 @@ namespace Common.UI
     public class InputDialogView : DialogBase
     {
         [SerializeField] private TMP_InputField _inputField;
+        [SerializeField] private TextMeshProUGUI _errorMessage;
 
         private Action<string> _confirmAction;
         private Action _cancelAction;
         private Func<string, string> _checkFunc;
 
-        public void ShowDialog(Action<string> confirm, Action cancel, Func<string, string> check, DialogSettings DialogSettings,InputFieldSettings inputSettings)
+        public void ShowDialog(Action<string> confirm, Action cancel, Func<string, string> check, DialogSettings dialogSettings,InputFieldSettings inputSettings)
         {
             _panelControl.OnActive();
 
             _confirmAction = confirm;
             _cancelAction = cancel;
             _checkFunc = check;
+            _errorMessage.text = "";
+            _inputField.text = inputSettings.DefaultValue;
 
-            DialogSetting(DialogSettings);
+          DialogSetting(dialogSettings);
         }
 
         protected override void OnCancel()
@@ -37,11 +40,9 @@ namespace Common.UI
             string inputValue = _inputField.text;
 
             string checkResult = _checkFunc?.Invoke(inputValue) ?? string.Empty;
+            _errorMessage.text = checkResult;
             if (!string.IsNullOrWhiteSpace(checkResult))
-            {
-                Debug.LogError(checkResult);
                 return;
-            }
 
             _panelControl.OnHidden();
             _confirmAction?.Invoke(inputValue);

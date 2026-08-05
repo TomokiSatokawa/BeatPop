@@ -1,4 +1,4 @@
-namespace Editor
+namespace CustomEditor
 {
     [System.Serializable]
     public class NodeSnapState : EditorSnapStateBase

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// クリックによるノーツ配置

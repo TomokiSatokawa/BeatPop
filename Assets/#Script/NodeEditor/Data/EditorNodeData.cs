@@ -6,7 +6,7 @@ using InGame.Node;
 using R3;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターでのノーツデータを管理

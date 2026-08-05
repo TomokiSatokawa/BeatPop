@@ -2,7 +2,7 @@ using InGame;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターの入力処理

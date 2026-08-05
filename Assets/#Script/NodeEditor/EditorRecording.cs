@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターでキー入力で書き込む

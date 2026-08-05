@@ -34,6 +34,8 @@ namespace Common.UI
 
             _titleText.text = settings.TitleText;
             _mainText.text = settings.MainText;
+
+            _cancelButton.gameObject.SetActive(settings.ShowCancelButton);
         }
 
         protected abstract void OnCancel();
@@ -46,13 +48,15 @@ namespace Common.UI
         public string MainText { get; }
         public string ConfirmText { get; }
         public string CancelText { get; }
+        public bool ShowCancelButton { get; }
 
-        public DialogSettings(string title = "タイトル", string main = "", string confirmButton = "OK", string cancelButton = "キャンセル")
+        public DialogSettings(string title = "タイトル", string main = "", string confirmButton = "OK", string cancelButton = "キャンセル",bool showCancel = true)
         {
             TitleText = title;
             MainText = main;
             ConfirmText = confirmButton;
             CancelText = cancelButton;
+            ShowCancelButton = showCancel;
         }
     }
 }

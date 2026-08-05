@@ -7,7 +7,7 @@ using InGame.Stage;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Editor.UI
+namespace CustomEditor.UI
 {
     /// <summary>
     /// ライトパターンのパラメータ設定UI

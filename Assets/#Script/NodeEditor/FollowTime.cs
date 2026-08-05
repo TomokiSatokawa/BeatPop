@@ -1,7 +1,7 @@
 using InGame;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// StageTimeに合わせてタイムライン上の位置を変える

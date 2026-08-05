@@ -1,7 +1,7 @@
 using InGame;
 using UnityEngine;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// エディターでの描画ベースクラス

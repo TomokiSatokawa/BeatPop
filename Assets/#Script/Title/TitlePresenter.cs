@@ -1,3 +1,5 @@
+using System;
+using Common.UI;
 using Title.PlayerData;
 using UnityEngine;
 
@@ -9,10 +11,34 @@ namespace Title.Common
     public class TitlePresenter : MonoBehaviour
     {
         [SerializeField] private PlayerInfoView _playerInfoView;
+        [SerializeField] private InputDialogView _inputDialogView;
 
         private void Start()
         {
             _playerInfoView.UpdateView();
+
+            if (string.IsNullOrWhiteSpace(PlayerDataLoader.Info.Name))
+            {
+                //ダイヤログを表示
+                var dialogSetting = new DialogSettings(title: "プレイヤー名",showCancel: false);
+                var inputSetting = new InputFieldSettings("");
+
+                Action<string> confirmAction = PlayerDataLoader.Info.UpdateName;
+                confirmAction += _ => _playerInfoView.UpdateView();
+
+                _inputDialogView.ShowDialog(confirmAction, null, x => PlayerNameValidator.IsValid(x), dialogSetting, inputSetting);
+            }
+        }
+
+        public void UpdatePlayerName()
+        {
+            var dialogSetting = new DialogSettings(title: "プレイヤー名");
+            var inputSetting = new InputFieldSettings(PlayerDataLoader.Info.Name);
+
+            Action<string> confirmAction = PlayerDataLoader.Info.UpdateName;
+            confirmAction += _ => _playerInfoView.UpdateView();
+
+            _inputDialogView.ShowDialog(confirmAction, null, x => PlayerNameValidator.IsValid(x), dialogSetting, inputSetting);
         }
     }
 }

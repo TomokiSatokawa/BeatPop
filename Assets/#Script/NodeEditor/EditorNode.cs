@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Editor
+namespace CustomEditor
 {
     /// <summary>
     /// ÉmÅ[ÉcUI
