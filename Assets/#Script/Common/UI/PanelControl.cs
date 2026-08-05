@@ -10,17 +10,21 @@ namespace Common.UI
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelControl : MonoBehaviour
     {
+        [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private UnityEvent _activeAction = new();
         [SerializeField] private UnityEvent _hiddenAction = new();
 
         private Tween _fadeAnimation;
         public bool IsActive { get; private set; }
+        public RectTransform Rect => _rectTransform;
 
         private void Awake()
         {
             if (_canvasGroup == null)
                 _canvasGroup = GetComponent<CanvasGroup>();
+            if(_rectTransform == null)
+                _rectTransform = GetComponent<RectTransform>();
 
             SetVisible(false, 0);
         }

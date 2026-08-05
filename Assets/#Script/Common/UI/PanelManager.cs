@@ -11,6 +11,7 @@ namespace Common.UI
         [SerializeField] private float _fadeDuration;
 
         private PanelControl _currentActive;
+        public PanelControl CurrentActive => _currentActive;
 
         private void Start()
         {
@@ -19,11 +20,16 @@ namespace Common.UI
 
         public void ChangeActivePanel(PanelControl panel)
         {
+            ChangeActivePanel(panel, _fadeDuration);
+        }
+
+        public void ChangeActivePanel(PanelControl panel, float fadeDuration)
+        {
             if (panel == null || _currentActive == panel)
                 return;
 
-            _currentActive?.OnHidden(_fadeDuration);
-            panel.OnActive(_fadeDuration);
+            _currentActive?.OnHidden(fadeDuration);
+            panel.OnActive(fadeDuration);
             _currentActive = panel;
         }
     }

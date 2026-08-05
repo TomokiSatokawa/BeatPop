@@ -1,4 +1,5 @@
 using Common.PlaySystem;
+using Common.UI;
 using InGame.Score;
 using Title.PlayerData;
 using Title.SongSelect;
@@ -11,6 +12,7 @@ namespace Result.UI
     /// </summary>
     public class ResultUIPresenter : MonoBehaviour
     {
+        [SerializeField] private PanelControl _playerPanel;
         [SerializeField] private JudgementCountView _judgementCount;
         [SerializeField] private ScoreUIView _scoreUIControl;
         [SerializeField] private RankUIControl _rankUIControl;
@@ -18,6 +20,7 @@ namespace Result.UI
         [SerializeField] private ResultBadgeView _badgeView;
         [SerializeField] private NodeAccuracyView _accuracyView;
         [SerializeField] private TimingSliderView _timingSliderView;
+        [SerializeField] private PanelSlider _panelSlider;
 
         private void Start()
         {
@@ -38,6 +41,11 @@ namespace Result.UI
             PlayerDataLoader.Records.SavePlayData(songData, score);
             PlayerDataLoader.Records.SaveHighScore(songData, score,out var highScore);
             Debug.Log(highScore);
+        }
+
+        public void ShowPlayerPanel()
+        {
+            _panelSlider.ChangePanel(_playerPanel);
         }
     }
 }
