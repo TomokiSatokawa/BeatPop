@@ -34,23 +34,34 @@ namespace Title.Custom
 
 #endif
 
-        public static string GetPath(string folderName,string fileName)
+        public static string GetPath(string folderName, string fileName)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
         return $"{Application.persistentDataPath}/{FolderName}/{fileName}";
 #else
             return Path.Combine(
                 Directory.GetParent(Application.dataPath)!.FullName,
-                RootFolder ,
+                RootFolder,
                 folderName,
                 fileName
             );
 #endif
         }
 
-        public static async UniTask<bool> TryGetText(string folderName,string fileName, Action<string> onSuccess)
+        public static string GetRootFolderPath()
         {
-            string path = GetPath(folderName,fileName);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        return $"{Application.persistentDataPath}/{FolderName}/{fileName}";
+#else
+            return Path.Combine(
+                Directory.GetParent(Application.dataPath)!.FullName,
+                RootFolder
+            );
+#endif
+        }
+        public static async UniTask<bool> TryGetText(string folderName, string fileName, Action<string> onSuccess)
+        {
+            string path = GetPath(folderName, fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -83,7 +94,7 @@ namespace Title.Custom
 
         public static async UniTask CreateFile(string folderName, string fileName, string text)
         {
-            string path = GetPath(folderName,fileName);
+            string path = GetPath(folderName, fileName);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
 
@@ -109,7 +120,7 @@ namespace Title.Custom
             }
 
 #endif
-}
+        }
 
         public static async UniTask<bool> UpdateFile(string folderName, string fileName, string text)
         {
@@ -144,7 +155,7 @@ namespace Title.Custom
 #endif
         }
 
-        public static async UniTask<bool> RenameFile(string  folderName ,string oldFileName, string newFileName)
+        public static async UniTask<bool> RenameFile(string folderName, string oldFileName, string newFileName)
         {
             string oldPath = GetPath(folderName, oldFileName);
             string newPath = GetPath(folderName, newFileName);
@@ -213,6 +224,33 @@ namespace Title.Custom
             File.Delete(path);
 
             return true;
+
+#endif
+        }
+
+        public static async UniTask DeleteAllFile()
+        {
+            string path = GetRootFolderPath();
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+
+    if (FS_DirectoryExists(path) == 0)
+        return false;
+
+    FS_DeleteDirectory(path, true); // true = çƒãAçÌèú
+    FS_Sync();
+
+    await UniTask.CompletedTask;
+    return true;
+
+#else
+
+            if (!Directory.Exists(path))
+                return;
+
+            Directory.Delete(path, true); // true = íÜêgÇ‡ä‹ÇﬂÇƒçÌèú
+
+            return;
 
 #endif
         }

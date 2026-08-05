@@ -12,6 +12,7 @@ namespace Title.Common
     {
         [SerializeField] private PlayerInfoView _playerInfoView;
         [SerializeField] private InputDialogView _inputDialogView;
+        [SerializeField] private ConfirmationDialogView _confirmationDialog;
 
         private void Start()
         {
@@ -39,6 +40,12 @@ namespace Title.Common
             confirmAction += _ => _playerInfoView.UpdateView();
 
             _inputDialogView.ShowDialog(confirmAction, null, x => PlayerNameValidator.IsValid(x), dialogSetting, inputSetting);
+        }
+
+        public void DeleteSaveData()
+        {
+            var dialogSetting = new DialogSettings(title: "セーブデータを削除しますか？",main:"この操作は取り消せません",confirmButton:"削除");
+            _confirmationDialog.ShowDialog(TitleManager.I.DeleteSaveData, null, dialogSetting);
         }
     }
 }

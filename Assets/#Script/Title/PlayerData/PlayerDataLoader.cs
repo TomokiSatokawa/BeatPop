@@ -14,10 +14,20 @@ namespace Title.PlayerData
         private const string InfoFileName = "PlayerInfo.json";
         private const string RecordsFileName = "PlayerRecords.json";
 
+        [SerializeField] private bool _isAutoLoad;
+
         private static PlayerInfo _info;
         public static IReadOnlyPlayerInfo Info => _info;
         private static PlayerRecords _records;
         public static IReadOnlyPlayerRecords Records => _records;
+
+        protected override void OnAwake()
+        {
+            if (_isAutoLoad)
+            {
+                LoadData().Forget();
+            }
+        }
 
         public async UniTask LoadData()
         {

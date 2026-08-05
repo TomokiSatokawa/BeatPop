@@ -7,13 +7,22 @@ namespace Title.Custom
     /// <summary>
     /// カスタムデータJsonの管理
     /// </summary>
-    public class CustomDataLoader : SingletonMonoBehaviour<CustomDataLoader>
+    public class CustomDataLoader : SingletonPersistent<CustomDataLoader>
     {
         [SerializeField] private CustomPatternLoader _patternLoader;
+        [SerializeField] private bool _isAutoLoad;
 
         private ManifestData _manifestData;
         private const string ManifestFileName = "manifest.json";
         private const string FolderName = "CustomData";
+
+        protected override void OnAwake()
+        {
+            if (_isAutoLoad)
+            {
+                LoadManifest().Forget();
+            }
+        }
 
         /// <summary>
         /// Manifestを読み込む
@@ -40,8 +49,6 @@ namespace Title.Custom
 
                 await UniTask.Yield();
             }
-
-            DontDestroyOnLoad(this.gameObject);
         }
 
         /// <summary>

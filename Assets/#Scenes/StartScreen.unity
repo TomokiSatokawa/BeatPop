@@ -435,7 +435,6 @@ GameObject:
   - component: {fileID: 200224912}
   - component: {fileID: 200224913}
   - component: {fileID: 200224914}
-  - component: {fileID: 200224915}
   m_Layer: 5
   m_Name: Main
   m_TagString: Untagged
@@ -497,25 +496,6 @@ MonoBehaviour:
   _hiddenAction:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &200224915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200224911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab3a5cf1e36ba84bb5d9823f983345d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
-  _manifestLoader: {fileID: 1012845166}
-  _playerDataLoader: {fileID: 227749956}
-  _fadeImageControl: {fileID: 67526974}
-  _sceneTransition: {fileID: 227749954}
-  _bgmFadeDuration: 1
-  _loadText: {fileID: 1024399295}
-  _titleBGM: {fileID: 8300000, guid: dbffacd6079e28d4c8b8f4176f64baae, type: 3}
 --- !u!1 &227749952
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +507,6 @@ GameObject:
   - component: {fileID: 227749953}
   - component: {fileID: 227749954}
   - component: {fileID: 227749955}
-  - component: {fileID: 227749956}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -573,22 +552,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 227749952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60332e6c70374974184a318ce4a6d839, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ab3a5cf1e36ba84bb5d9823f983345d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CustomPatternLoader
-  _customSoundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
---- !u!114 &227749956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227749952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e6c5dc38efafc6438b81fa19df06e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Title.PlayerData.PlayerDataLoader
+  m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
+  _manifestLoader: {fileID: 711698916924393091}
+  _playerDataLoader: {fileID: 1948391039}
+  _fadeImageControl: {fileID: 67526974}
+  _sceneTransition: {fileID: 227749954}
+  _bgmFadeDuration: 1
+  _loadText: {fileID: 1024399295}
+  _titleBGM: {fileID: 8300000, guid: dbffacd6079e28d4c8b8f4176f64baae, type: 3}
 --- !u!1 &281715675
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +923,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1012845167}
-  - component: {fileID: 1012845166}
   m_Layer: 0
   m_Name: Manifest
   m_TagString: Untagged
@@ -958,19 +930,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1012845166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012845165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ff47a589af7b1419dd557bf09c052b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CustomManifestLoader
-  _patternLoader: {fileID: 227749955}
 --- !u!4 &1012845167
 Transform:
   m_ObjectHideFlags: 0
@@ -1460,6 +1419,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
   _startActive: {fileID: 200224914}
   _fadeDuration: 0
+--- !u!114 &1948391039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 130697422265606474, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+  m_PrefabInstance: {fileID: 711698916924393087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6c5dc38efafc6438b81fa19df06e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Title.PlayerData.PlayerDataLoader
+--- !u!1001 &711698916924393087
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420749245259730702, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307520967297976822, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+      propertyPath: m_Name
+      value: Loader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+--- !u!114 &711698916924393091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2485201107499591085, guid: 42cb90f96f731e2439edc783900253bf, type: 3}
+  m_PrefabInstance: {fileID: 711698916924393087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ff47a589af7b1419dd557bf09c052b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomManifestLoader
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1471,3 +1509,4 @@ SceneRoots:
   - {fileID: 227749953}
   - {fileID: 1012845167}
   - {fileID: 672382100}
+  - {fileID: 711698916924393087}

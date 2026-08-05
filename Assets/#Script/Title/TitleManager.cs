@@ -6,6 +6,7 @@ using Common.UI;
 using Cysharp.Threading.Tasks;
 using R3;
 using Title.Custom;
+using Title.PlayerData;
 using Title.SongSelect;
 using UnityEngine;
 
@@ -33,6 +34,18 @@ namespace Title
             _songPlayLoader.CreatePlayManager(songSelectData, usePattern);
 
             await _sceneLoad.LoadSceneAsync("InGame", new CancellationTokenSource().Token);
+        }
+
+        public async void DeleteSaveData()
+        {
+            PlayerDataLoader.DisposeSingleton();
+            CustomDataLoader.DisposeSingleton();
+
+            UniTask delete = FileStorage.DeleteAllFile();
+            UniTask fade = _fadeImageControl.FadeOut(FadeType.White);
+
+            await UniTask.WhenAll(delete, fade);
+            await _sceneLoad.LoadSceneAsync("StartScreen", new CancellationTokenSource().Token);
 
         }
     }
