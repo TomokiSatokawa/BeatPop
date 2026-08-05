@@ -4,11 +4,12 @@
     "IsSelect": true,
     "SoundPattern": {
         "NormalSE": 0,
+        "HighScore": 3,
         "FlickSE": 1,
         "HoldStart": 2,
         "HoldFill": 0,
-        "HoldEnd": 3,
-        "TickNode": 0
+        "HoldEnd": 2,
+        "TickNode": 4
     },
     "ChartPattern": {
         "FlickConvertLevel": 0,

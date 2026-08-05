@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Common;
 using Title.Common;
+using Title.PlayerData;
 using UnityEngine;
 
 namespace Title.SongSelect
@@ -25,6 +26,25 @@ namespace Title.SongSelect
                     result.Add(new SongSelectData(songData, difficulty));
                 }
             }
+            return result;
+        }
+
+        public IReadOnlyList<SongSelectData> GetPlayHistory()
+        {
+            var result = new List<SongSelectData>();
+            var added = new HashSet<(int songIndex, Difficulty difficulty)>();
+
+            foreach (var history in PlayerDataLoader.Records.RecentPlayRecords)
+            {
+                var difficulty = (Difficulty)history.Difficulty;
+
+                if (!added.Add((history.SongIndex, difficulty)))
+                    continue;
+
+                var songData = _songListData.GetSongData(history.SongIndex);
+                result.Add(new SongSelectData(songData, difficulty));
+            }
+
             return result;
         }
 

@@ -20,6 +20,8 @@ namespace Title.SongSelect
             DeleteChildren();
             AddTitle("Ç®Ç∑Ç∑Çﬂ");
             AddContentsList(SongRecommender.I.GetRecommendation());
+            AddTitle("ç≈ãﬂÇÃÉvÉåÉC");
+            AddContentsList(SongRecommender.I.GetPlayHistory());
         }
 
         public void KeywordView(string keyword)

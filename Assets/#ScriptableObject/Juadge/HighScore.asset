@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NodeJudgement
   ToleranceValue: 0.2
   DeleteTime: 0.2
-  MaxScore: 9999
+  MaxScore: 20
   BaseScore: 9999
   JudgementDatas:
   - Name: 0

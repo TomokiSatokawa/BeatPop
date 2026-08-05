@@ -1,5 +1,6 @@
 using Common.PlaySystem;
 using InGame.Score;
+using Title.PlayerData;
 using Title.SongSelect;
 using UnityEngine;
 
@@ -22,17 +23,21 @@ namespace Result.UI
         {
             int score = ScoreDataManager.ScoreData.Score.CurrentValue;
             int maxScore = ScoreDataManager.ScoreData.MaxScore;
+            var songData = SongPlayContext.I.SongData;
+            var resultDataCollector = ScoreDataManager.ResultDataCollector;
             float rate = maxScore > 0 ? score / (float)maxScore : 0f;
 
             _judgementCount.OnAnimation(ScoreDataManager.JudgementRecorder.JudgeDataCount);
             _scoreUIControl.OnAnimation(score, maxScore);
             _rankUIControl.OnAnimation(rate, true);
-            _songInfo.ShowInfo(SongPlayContext.I.SongData);
+            _songInfo.ShowInfo(songData);
             _badgeView.ShowBadge(ScoreDataManager.ScoreData.GetResultType());
-
-            IReadOnlyResultData resultDataCollector = ScoreDataManager.ResultDataCollector;
             _accuracyView.OnAnimation(resultDataCollector.NodeHitCount);
             _timingSliderView.OnAnimation(resultDataCollector.FastCount, resultDataCollector.LateCount);
+
+            PlayerDataLoader.Records.SavePlayData(songData, score);
+            PlayerDataLoader.Records.SaveHighScore(songData, score,out var highScore);
+            Debug.Log(highScore);
         }
     }
 }

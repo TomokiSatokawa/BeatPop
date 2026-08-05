@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen.StartScreenControl
   _manifestLoader: {fileID: 1012845166}
+  _playerDataLoader: {fileID: 227749956}
   _fadeImageControl: {fileID: 67526974}
   _sceneTransition: {fileID: 227749954}
   _bgmFadeDuration: 1
@@ -526,6 +527,7 @@ GameObject:
   - component: {fileID: 227749953}
   - component: {fileID: 227749954}
   - component: {fileID: 227749955}
+  - component: {fileID: 227749956}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -575,6 +577,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomPatternLoader
   _customSoundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
+--- !u!114 &227749956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227749952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6c5dc38efafc6438b81fa19df06e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Title.PlayerData.PlayerDataLoader
 --- !u!1 &281715675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b06f9d9a550ac84da71ce6beb1cdcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelManager
-  _fastActive: {fileID: 200224914}
   _startActive: {fileID: 200224914}
   _fadeDuration: 0
 --- !u!1660057539 &9223372036854775807

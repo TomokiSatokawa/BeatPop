@@ -4,8 +4,8 @@ using Common.UI;
 using Cysharp.Threading.Tasks;
 using Sound;
 using Title.Custom;
+using Title.PlayerData;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace StartScreen
@@ -13,6 +13,7 @@ namespace StartScreen
     public class StartScreenControl : MonoBehaviour
     {
         [SerializeField] private CustomDataLoader _manifestLoader;
+        [SerializeField] private PlayerDataLoader _playerDataLoader;
         [SerializeField] private FadeImageControl _fadeImageControl;
         [SerializeField] private SceneTransition _sceneTransition;
         [SerializeField] private float _bgmFadeDuration;
@@ -30,6 +31,7 @@ namespace StartScreen
         {
             _loadText.gameObject.SetActive(true);
             await _manifestLoader.LoadManifest();
+            await _playerDataLoader.LoadData();
             _loadText.gameObject.SetActive(false);
         }
         private void Update()
