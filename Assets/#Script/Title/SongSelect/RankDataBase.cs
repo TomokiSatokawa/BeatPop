@@ -23,9 +23,14 @@ namespace Title.SongSelect
         [System.Serializable]
         public class RankData
         {
-           public Sprite Image;
+            public RankType RankType;
+            public Sprite Image;
             public AudioClip Clip;
             public float Rate;
         }
+    }
+    public enum RankType
+    {
+        S,A,B,C,D
     }
 }

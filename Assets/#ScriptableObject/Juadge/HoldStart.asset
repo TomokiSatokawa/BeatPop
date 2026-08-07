@@ -24,6 +24,7 @@ MonoBehaviour:
     IsComboContinued: 1
     IsAllPerfectContinued: 1
     ScoreMultiplier: 1
+    XpAmount: 20
     TapSEVolume: 1.5
   - Name: 1
     Value: 0.1
@@ -32,6 +33,7 @@ MonoBehaviour:
     IsComboContinued: 1
     IsAllPerfectContinued: 1
     ScoreMultiplier: 0.8
+    XpAmount: 13
     TapSEVolume: 1.2
   - Name: 2
     Value: 0.15
@@ -40,6 +42,7 @@ MonoBehaviour:
     IsComboContinued: 1
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0.7
+    XpAmount: 7
     TapSEVolume: 1
   - Name: 3
     Value: 0.2
@@ -48,6 +51,7 @@ MonoBehaviour:
     IsComboContinued: 1
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0.5
+    XpAmount: 2
     TapSEVolume: 0.8
   - Name: 4
     Value: 10
@@ -56,4 +60,5 @@ MonoBehaviour:
     IsComboContinued: 0
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0
+    XpAmount: 0
     TapSEVolume: 0

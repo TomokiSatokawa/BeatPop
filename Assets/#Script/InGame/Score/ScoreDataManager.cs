@@ -49,6 +49,7 @@ namespace InGame.Score
             var judgementData = judgementTable.GetJudgementData(nodeData.PrefabType);
 
             _scoreData.AddScore(judgementData, judgement);
+            _scoreData.AddXp(judgement);
 
             _judgementRecorder.AddJudgeCount(judgement);
 

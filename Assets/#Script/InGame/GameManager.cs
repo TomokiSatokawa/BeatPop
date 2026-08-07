@@ -90,6 +90,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void Retry()
     {
         ScoreDataManager.DisposeSingleton();
+        StageConfig.DisposeSingleton();
         SoundManager.BGM.PlayBGM(null);
         _sceneLoad.ChangeScene("InGame");
     }
@@ -109,5 +110,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         ScoreDataManager.DisposeSingleton();
         SongPlayContext.DisposeSingleton();
+        StageConfig.DisposeSingleton();
     }
 }

@@ -21,6 +21,8 @@ namespace Result.UI
         [SerializeField] private NodeAccuracyView _accuracyView;
         [SerializeField] private TimingSliderView _timingSliderView;
         [SerializeField] private PanelSlider _panelSlider;
+        [SerializeField] private LevelAnimation _levelAnimation;
+        [SerializeField] private XpSliderAnimation _xpSliderAnimation;
 
         private void Start()
         {
@@ -40,12 +42,14 @@ namespace Result.UI
 
             PlayerDataLoader.Records.SavePlayData(songData, score);
             PlayerDataLoader.Records.SaveHighScore(songData, score,out var highScore);
-            Debug.Log(highScore);
         }
 
         public void ShowPlayerPanel()
         {
             _panelSlider.ChangePanel(_playerPanel);
+
+            _xpSliderAnimation.Play(ResultManager.PreviousPlayerInfo, PlayerDataLoader.Info, _levelAnimation.Play);
         }
+
     }
 }

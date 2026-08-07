@@ -34,6 +34,17 @@ namespace Title.PlayerData
             _jewelryCount = 0;
         }
 
+        public PlayerInfo(string name, int level, int xp, int coinCount, int jewelryCount)
+        {
+            _name = name;
+            _level = level;
+            _xp = xp;
+            _coinCount = coinCount;
+            _jewelryCount = jewelryCount;
+        }
+
+
+
         /// <summary>
         ///プレイヤー名を変更する 
         /// </summary>
@@ -50,6 +61,24 @@ namespace Title.PlayerData
             _name = name;
             _onUpdateData.OnNext(Unit.Default);
         }
+
+        /// <summary>
+        /// LevelとXPを更新
+        /// </summary>
+        public void UpdateLevelXp(int level,int xp)
+        {
+            _level = level;
+            _xp = xp;
+            _onUpdateData.OnNext(Unit.Default);
+        }
+        
+        /// <summary>
+        /// コピーを取得
+        /// </summary>
+        public PlayerInfo Clone()
+        {
+            return new(_name, _level, _xp, _coinCount, _jewelryCount);
+        }
     }
 
     public interface IReadOnlyPlayerInfo
@@ -60,5 +89,7 @@ namespace Title.PlayerData
         public int CoinCount { get; }
         public int JewelryCount { get; }
         public void UpdateName(string name);
+        public void UpdateLevelXp(int level,int xp);
+        public PlayerInfo Clone();
     }
 }

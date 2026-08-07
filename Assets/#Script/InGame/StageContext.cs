@@ -1,4 +1,5 @@
 using InGame.Node;
+using Title.SongSelect;
 using UnityEngine;
 
 namespace InGame
@@ -6,16 +7,20 @@ namespace InGame
     /// <summary>
     ///  ステージに関する各種設定を提供する
     /// </summary>
-    public class StageConfig : SingletonMonoBehaviour<StageConfig>
+    public class StageConfig : SingletonPersistent<StageConfig>
     {
         [SerializeField] private StageLayoutData _stageLayoutData;
         [SerializeField] private JudgementTable _judgementTable;
+        [SerializeField] private ExperienceDatabase _experienceDatabase;
+        [SerializeField] private RankDataBase _rankDataBase;
         [SerializeField] private int _longNoteDivisionInterval = 8;
         [SerializeField] private Transform[] _clonePos;
         [SerializeField] private float _arrivalSeconds;
 
         public StageLayoutData StageLayout => _stageLayoutData;
         public JudgementTable JudgementTable => _judgementTable;
+        public ExperienceDatabase ExperienceDatabase => _experienceDatabase;
+        public RankDataBase RankDataBase => _rankDataBase;
         public int LongNoteDivisionInterval => _longNoteDivisionInterval;
         public float ArrivalSeconds => _arrivalSeconds;
 

@@ -24,6 +24,7 @@ MonoBehaviour:
     IsComboContinued: 1
     IsAllPerfectContinued: 1
     ScoreMultiplier: 0
+    XpAmount: 5
     TapSEVolume: 0.8
   - Name: 4
     Value: 10
@@ -32,4 +33,5 @@ MonoBehaviour:
     IsComboContinued: 0
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0
+    XpAmount: 0
     TapSEVolume: 0

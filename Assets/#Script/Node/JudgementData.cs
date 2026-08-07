@@ -16,6 +16,7 @@ namespace InGame.Node
         public bool IsComboContinued;
         public bool IsAllPerfectContinued;
         public float ScoreMultiplier;
+        public int XpAmount;
         public float TapSEVolume;
 
         JudgementType IReadOnlyJudgementData.Name => Name;
@@ -25,6 +26,7 @@ namespace InGame.Node
         bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
         bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
         float IReadOnlyJudgementData.ScoreMultiplier => ScoreMultiplier;
+        int IReadOnlyJudgementData.XpAmount => XpAmount;
         float IReadOnlyJudgementData.TapSEVolume => TapSEVolume;
 
     }
@@ -43,6 +45,7 @@ namespace InGame.Node
         public bool IsAllPerfectContinued { get; }
 
         public float ScoreMultiplier { get; }
+        public int XpAmount { get; }
 
         public float TapSEVolume { get; }
     }

@@ -11,8 +11,6 @@ namespace InGame.Score
     /// </summary>
     public class ScoreData : IReadOnlyScoreData
     {
-        //TODO:ScriptableObjectから一括変更できるようにする
-        private const int LongNoteDivisionInterval = 8;
         private int _maxScore;
         /// <summary>最大スコア</summary>
         int IReadOnlyScoreData.MaxScore => _maxScore;
@@ -32,6 +30,14 @@ namespace InGame.Score
         /// <summary>スコア</summary>
         ReadOnlyReactiveProperty<int> IReadOnlyScoreData.Score => _score;
 
+        private readonly ReactiveProperty<int> _xp = new();
+        ReadOnlyReactiveProperty<int> IReadOnlyScoreData.XP => _xp;
+
+
+        /// <summary>最大コンボ</summary>
+        private int _maxCombo;
+        /// <summary>ノーツ数</summary>
+        private int _nodeCount;
         public void Initialize()
         {
             _isAllPerfect = true;
@@ -39,15 +45,37 @@ namespace InGame.Score
             _combo.Value = 0;
             _score.Value = 0;
             _maxScore = 0;
+            _maxCombo = 0;
         }
 
         /// <summary>
         /// スコア加算
         /// </summary>
-        public void AddScore( IReadOnlyNodeJudgement nodeJudgment, IReadOnlyJudgementData result)
+        public void AddScore(IReadOnlyNodeJudgement nodeJudgment, IReadOnlyJudgementData result)
         {
             UpdateJudgeState(result);
-            _score.Value += GetScore(nodeJudgment,result);
+            _score.Value += GetScore(nodeJudgment, result);
+        }
+
+        /// <summary>
+        /// 経験値加算
+        /// </summary>
+        public void AddXp(IReadOnlyJudgementData result)
+        {
+            int nodeXP = result.XpAmount;
+            _xp.Value += nodeXP;
+        }
+
+        /// <summary>
+        /// 最終的な経験値を計算する
+        /// </summary>
+        public int GetXP()
+        {
+            var rank = StageConfig.I.RankDataBase.GetRank(_score.Value / _maxScore).RankType;
+            int rankBonus = StageConfig.I.ExperienceDatabase.GetRankBonus(rank);
+            float comboXP = StageConfig.I.ExperienceDatabase.ComboBonus * (_maxCombo / (float)_nodeCount);
+
+            return _xp.Value + rankBonus + Mathf.FloorToInt(comboXP);
         }
 
         /// <summary>
@@ -57,6 +85,7 @@ namespace InGame.Score
         {
             int maxScore = 0;
             var judgementTable = StageConfig.I.JudgementTable;
+            _nodeCount = 0;
 
             //ノーツごとの最大値を足す
             foreach (NodeData nodeData in nodeDatas)
@@ -65,7 +94,8 @@ namespace InGame.Score
                 var result = judgementTable.GetJudgementResult(nodeData.PrefabType, 0);
 
                 //最大スコアを加算
-                maxScore += GetScore(nodeJudgment,result);
+                maxScore += GetScore(nodeJudgment, result);
+                _nodeCount++;
 
                 if (nodeData.PrefabType != PoolPrefabType.HoldNoteStart)
                     continue;
@@ -89,6 +119,7 @@ namespace InGame.Score
 
                 //Fill分の最大スコアを加算
                 maxScore += GetScore(judgementTable.GetJudgementData(PoolPrefabType.HoldNoteFill), judgementTable.GetJudgementResult(PoolPrefabType.HoldNoteFill, 0)) * count;
+                _nodeCount += count;
             }
 
             _maxScore = maxScore;
@@ -102,7 +133,7 @@ namespace InGame.Score
             if (_isAllPerfect)
                 return ResultType.AllPerfect;
 
-            if(_isFullCombo) 
+            if (_isFullCombo)
                 return ResultType.FullCombo;
 
             return ResultType.Clear;
@@ -114,7 +145,7 @@ namespace InGame.Score
         private static int GetScore(IReadOnlyNodeJudgement type, IReadOnlyJudgementData result)
         {
             //スコア倍率0以下
-            if(result.ScoreMultiplier <= 0)
+            if (result.ScoreMultiplier <= 0)
             {
                 return 0;
             }
@@ -138,6 +169,12 @@ namespace InGame.Score
                 _combo.OnNext(0);
                 _isFullCombo = false;
             }
+
+            //最大コンボを更新
+            if (_combo.Value > _maxCombo)
+            {
+                _maxCombo = _combo.Value;
+            }
         }
 
     }
@@ -149,7 +186,9 @@ namespace InGame.Score
         public bool IsFullCombo { get; }
         public ReadOnlyReactiveProperty<int> Combo { get; }
         public ReadOnlyReactiveProperty<int> Score { get; }
+        public ReadOnlyReactiveProperty<int> XP { get; }
 
         public ResultType GetResultType();
+        public int GetXP();
     }
 }
