@@ -1,7 +1,9 @@
 using System.Threading;
 using Common;
+using Common.PlaySystem;
 using Common.UI;
 using Cysharp.Threading.Tasks;
+using InGame;
 using InGame.Score;
 using Title.PlayerData;
 using UnityEngine;
@@ -17,6 +19,7 @@ namespace Result.UI
         [SerializeField] private FadeImageControl _fadeImageControl;
         [SerializeField] private ResultSoundManager _soundManager;
         [SerializeField] private LevelData _levelData;
+        [SerializeField] private ResultRewardData _rewardData;
 
         private static PlayerInfo _previousPlayerInfo;
         public static IReadOnlyPlayerInfo PreviousPlayerInfo => _previousPlayerInfo;
@@ -28,10 +31,26 @@ namespace Result.UI
 
             _previousPlayerInfo = PlayerDataLoader.Info.Clone();
 
-            var addXp = ScoreDataManager.ScoreData.GetXP();
-            _levelData.LevelUp(_previousPlayerInfo.Level,_previousPlayerInfo.XP,addXp,out var endLevel,out var endXp);
+            LevelUp();
+            AddCoin();
+        }
 
-            PlayerDataLoader.Info.UpdateLevelXp(endLevel,endXp);
+        private void LevelUp()
+        {
+            var addXp = ScoreDataManager.ScoreData.GetXP();
+            _levelData.LevelUp(_previousPlayerInfo.Level, _previousPlayerInfo.XP, addXp, out var endLevel, out var endXp);
+
+            PlayerDataLoader.Info.UpdateLevelXp(endLevel, endXp);
+        }
+
+        private void AddCoin()
+        {
+            var difficulty = SongPlayContext.I.SongData.Difficulty;
+            var resultType = ScoreDataManager.ScoreData.GetResultType();
+            var rankType = StageConfig.I.RankDataBase.GetRank(ScoreDataManager.ScoreData.ScoreRate).RankType;
+
+            int coinCount = _rewardData.GetCoinCount(difficulty, rankType, resultType);
+            PlayerDataLoader.Info.AddCoin(coinCount);
         }
 
         public async void ReturnTitle()

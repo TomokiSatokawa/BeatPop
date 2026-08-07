@@ -14,6 +14,7 @@ namespace InGame.Score
         private int _maxScore;
         /// <summary>最大スコア</summary>
         int IReadOnlyScoreData.MaxScore => _maxScore;
+        public float ScoreRate => _score.Value / (float)_maxScore;
 
         private bool _isAllPerfect;
         /// <summary>オールパーフェクトが続いているか</summary>
@@ -184,6 +185,7 @@ namespace InGame.Score
         public int MaxScore { get; }
         public bool IsAllPerfect { get; }
         public bool IsFullCombo { get; }
+        public float ScoreRate { get; }
         public ReadOnlyReactiveProperty<int> Combo { get; }
         public ReadOnlyReactiveProperty<int> Score { get; }
         public ReadOnlyReactiveProperty<int> XP { get; }

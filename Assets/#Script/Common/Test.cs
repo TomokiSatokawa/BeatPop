@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private  ClearAnimationSwitcher _clearAnimationSwitcher;
-    [SerializeField] private LevelAnimation _SlevelAnimation;
-    [SerializeField] private XpSliderAnimation _xpSliderAnimation;
+    [SerializeField] private ItemAddView _itemAddView;
+    [SerializeField] private ItemAddView _itemAddView2;
     public void OnClick()
     {
-        //_xpSliderAnimation.Play(1, 0, 5, 50, _SlevelAnimation.Play);
+        _itemAddView.Play(100, 200);
+        _itemAddView2.Play(100, 200);
     }
 }

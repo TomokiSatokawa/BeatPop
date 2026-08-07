@@ -23,6 +23,14 @@ namespace Result.UI
         [SerializeField] private PanelSlider _panelSlider;
         [SerializeField] private LevelAnimation _levelAnimation;
         [SerializeField] private XpSliderAnimation _xpSliderAnimation;
+        [SerializeField] private ItemAddView _coinAdd;
+        [SerializeField] private ItemAddView _jewelryAdd;
+
+        private void Awake()
+        {
+            _coinAdd.SetValue(PlayerDataLoader.Info.CoinCount);
+            _jewelryAdd.SetValue(PlayerDataLoader.Info.JewelryCount);
+        }
 
         private void Start()
         {
@@ -49,6 +57,8 @@ namespace Result.UI
             _panelSlider.ChangePanel(_playerPanel);
 
             _xpSliderAnimation.Play(ResultManager.PreviousPlayerInfo, PlayerDataLoader.Info, _levelAnimation.Play);
+            _coinAdd.Play(ResultManager.PreviousPlayerInfo.CoinCount, PlayerDataLoader.Info.CoinCount);
+            _jewelryAdd.Play(ResultManager.PreviousPlayerInfo.JewelryCount, PlayerDataLoader.Info.JewelryCount);
         }
 
     }

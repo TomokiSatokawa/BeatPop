@@ -71,7 +71,15 @@ namespace Title.PlayerData
             _xp = xp;
             _onUpdateData.OnNext(Unit.Default);
         }
-        
+
+        /// <summary>
+        /// コインを増やす
+        /// </summary>
+        public void AddCoin(int count)
+        {
+            _coinCount += count;
+        }
+
         /// <summary>
         /// コピーを取得
         /// </summary>
@@ -90,6 +98,7 @@ namespace Title.PlayerData
         public int JewelryCount { get; }
         public void UpdateName(string name);
         public void UpdateLevelXp(int level,int xp);
+        public void AddCoin(int count);
         public PlayerInfo Clone();
     }
 }
