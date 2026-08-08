@@ -176,7 +176,7 @@ public class QuickPlay : EditorWindow
             ChartPattern = default
         };
 
-        songPlayData.SetData(songSelectData, pattern, _startSection);
+        songPlayData.SetData(songSelectData, pattern, _startSection,true);
 
         await UniTask.DelayFrame(3);
 

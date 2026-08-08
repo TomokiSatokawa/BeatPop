@@ -14,12 +14,14 @@ namespace Common.PlaySystem
         public PatternJsonData PatternData { get; private set; }
         /// <summary> 開始セクション </summary>
         public int StartSection { get; private set; }
+        public bool IsAutoPlay { get; private set; }
 
-        public void SetData(SongSelectData songData,PatternJsonData patternData,int section)
+        public void SetData(SongSelectData songData,PatternJsonData patternData,int section,bool isAutoPlay = false)
         {
             SongData = songData;
             PatternData = patternData;
             StartSection = section;
+            IsAutoPlay = isAutoPlay;
         }
     }
 }

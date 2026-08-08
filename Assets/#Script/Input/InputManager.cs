@@ -1,4 +1,6 @@
 using System;
+using Common.PlaySystem;
+using InGame;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +18,7 @@ namespace Input
         [SerializeField] private float _flickInterval;
 
         private static GameInputs _gameInputs;
+        private static AutoPlayInput _autoPlayInput;
         private static TouchState[] _touchState;
 
         private readonly InputEvent _rightMainEvent = new();
@@ -59,6 +62,25 @@ namespace Input
             RegisterTouchAction(_gameInputs.Player.Touch_3, 3);
 
             _gameInputs.Enable();
+        }
+
+        public void Start()
+        {
+            InGameFileLoad.I.OnNodeFileLoaded.Skip(1).Subscribe(x =>
+            {
+                if (!SongPlayContext.I.IsAutoPlay)
+                    return;
+
+                Debug.Log("AutoPlayStart");
+                _autoPlayInput = new(x.Nodes);
+
+                _autoPlayInput.LeftMain += b => _leftLane.Value = b;
+                _autoPlayInput.RightMain += b => _rightLane.Value = b;
+                _autoPlayInput.RightFlick += b => _onRightFlick.OnNext(b);
+                _autoPlayInput.LeftFlick += b => _onleftFlick.OnNext(b);
+
+                _gameInputs.Player.Disable();
+            }).AddTo(this);
         }
 
         private void RegisterAction(InputAction input, Action<InputAction.CallbackContext> action)
