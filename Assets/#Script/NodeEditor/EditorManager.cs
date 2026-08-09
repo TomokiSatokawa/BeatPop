@@ -29,8 +29,8 @@ namespace CustomEditor
 
         private void Start()
         {
-            EditorNodeData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
-            EditorLightData.I?.LoadedFile.Subscribe(x => Initialize(x)).AddTo(this);
+            EditorNodeData.I?.LoadedFile.Skip(1).Subscribe(x => Initialize(x)).AddTo(this);
+            EditorLightData.I?.LoadedFile.Skip(1).Subscribe(x => Initialize(x)).AddTo(this);
             StageTimeController.I.IsPlaying.Subscribe(x => _scrollBar.interactable = !x).AddTo(this);
 
             ChangeDivisionCount(4);

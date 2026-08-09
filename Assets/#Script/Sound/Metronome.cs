@@ -17,7 +17,7 @@ namespace InGame.Sound
         {
             BeatUpdateManager.BeatUpdate.Subscribe(4, 0, x =>
             {
-                if (x.Division == 1)
+                if (x.Division <= 1)
                 {
                     SoundManager.SE.PlaySE(_firstBeatClip);
                 }

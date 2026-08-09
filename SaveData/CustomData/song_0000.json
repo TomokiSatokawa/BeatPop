@@ -4,7 +4,7 @@
     "IsSelect": true,
     "SoundPattern": {
         "NormalSE": 0,
-        "HighScore": 3,
+        "HighScore": 1,
         "FlickSE": 1,
         "HoldStart": 2,
         "HoldFill": 0,

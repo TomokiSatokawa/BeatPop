@@ -1,7 +1,7 @@
 {
-    "_name": "Player1",
-    "_level": 26,
-    "_xp": 6648,
-    "_coinCount": 0,
+    "_name": "player",
+    "_level": 3,
+    "_xp": 5029,
+    "_coinCount": 330,
     "_jewelryCount": 0
 }
