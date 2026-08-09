@@ -16,10 +16,12 @@ public class QuickPlay : EditorWindow
     private const string SoundDataKey = "QuickPlay_SoundData";
     private const string FoldoutKey = "QuickPlay_Foldout";
     private const string SectionKey = "QuickPlay_Section";
+    private const string AutoPlayKey = "QuickPlay_AutoPlay";
 
     private SongData _songData;
     private int _levelIndex;
     private string _errorMessage;
+    private bool _autoPlay;
 
     private int _startSection;
 
@@ -62,6 +64,8 @@ public class QuickPlay : EditorWindow
         {
             _soundData = (CustomSoundData)EditorGUILayout.ObjectField("カスタムサウンド", _soundData, typeof(CustomSoundData), true);
         }
+
+        _autoPlay = EditorGUILayout.Toggle("オートプレイ", _autoPlay);
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -176,7 +180,7 @@ public class QuickPlay : EditorWindow
             ChartPattern = default
         };
 
-        songPlayData.SetData(songSelectData, pattern, _startSection,true);
+        songPlayData.SetData(songSelectData, pattern, _startSection, _autoPlay);
 
         await UniTask.DelayFrame(3);
 
