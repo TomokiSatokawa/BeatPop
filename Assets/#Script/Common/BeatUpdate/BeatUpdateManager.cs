@@ -1,14 +1,18 @@
 using InGame;
 using R3;
+using UnityEngine;
 
 namespace Common.BeatUpdate
 {
     public class BeatUpdateManager : SingletonMonoBehaviour<BeatUpdateManager>
     {
+        [Header("ŒÅ’è’l‚ðÄŒvŽZ‚·‚é")]
+        [SerializeField] private bool _updateRefresh;
         public static readonly BeatGroup FastBeatUpdate = new();
         public static readonly BeatGroup BeatUpdate = new();
         public static readonly BeatGroup LateBeatUpdate = new();
 
+        public bool UpdateRefresh => _updateRefresh;
         private float _previousTime;
 
         private void Start()

@@ -54,7 +54,7 @@ namespace Common.BeatUpdate
                 return;
             }
 
-            var handle = new BeatUpdateHandle(division, timeOffset, callback);
+            var handle = new BeatUpdateHandle(division, timeOffset, callback,BeatUpdateManager.I.UpdateRefresh);
             _handles.Add(handle);
 
             callback?.Invoke(default);

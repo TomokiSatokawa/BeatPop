@@ -17,12 +17,14 @@ namespace Common.BeatUpdate
 
         private float _baseDivisionInterval;
         private float _interval;
+        private bool _updateRefresh;
 
-        public BeatUpdateHandle(int division, float offset, Action<BeatData> callback)
+        public BeatUpdateHandle(int division, float offset, Action<BeatData> callback, bool updateRefresh)
         {
             Division = division;
             SecondOffset = offset;
             Callback = callback;
+            _updateRefresh = updateRefresh;
 
             Refresh();
         }
@@ -34,7 +36,6 @@ namespace Common.BeatUpdate
         {
             _interval = (60f / StageTimeController.I.BPM) * (4f / Division);
             _baseDivisionInterval = (60f / StageTimeController.I.BPM) * (4f / MaxDivision);
-            UpdateNextTime();
         }
 
         /// <summary>
@@ -42,6 +43,9 @@ namespace Common.BeatUpdate
         /// </summary>
         public void UpdateNextTime()
         {
+            if (_updateRefresh)
+                Refresh();
+
             float beat = (StageTimeController.StageTime - SecondOffset) / _interval;
             NextTime = (Mathf.Floor(beat) + 1) * _interval + SecondOffset;
         }
