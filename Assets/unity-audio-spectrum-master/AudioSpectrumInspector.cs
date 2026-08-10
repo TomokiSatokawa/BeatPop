@@ -1,4 +1,5 @@
-﻿// Audio spectrum component
+﻿#if UNITY_EDITOR
+// Audio spectrum component
 // By Keijiro Takahashi, 2013
 // https://github.com/keijiro/unity-audio-spectrum
 using UnityEngine;
@@ -76,3 +77,4 @@ public class AudioSpectrumInspector : Editor
     }
     #endregion
 }
+#endif

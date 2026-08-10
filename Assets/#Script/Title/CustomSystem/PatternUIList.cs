@@ -25,17 +25,15 @@ namespace Title.Custom
 
         public async void ShowList()
         {
-            if (!SongInfoControl.CurrentData.HasValue) return;
-            int songID = SongInfoControl.CurrentData.Value.SongData.SongID;
             DeleteChildren();
-            var patternData = await CustomDataLoader.I.GetAllCustomPattern();
-            if (patternData == null)
+            var patternDataList = await CustomDataLoader.I.GetAllCustomPattern();
+            if (patternDataList == null)
             {
-                Debug.LogError($"SongID{songID} が無効または Patternが存在しません");
+                Debug.LogError($"[PatternUIList] パターンリストがありません。");
                 return;
             }
 
-            foreach (var pattern in patternData)
+            foreach (var pattern in patternDataList)
             {
                 AddPatternUI(pattern);
             }

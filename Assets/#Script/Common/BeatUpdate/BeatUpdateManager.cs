@@ -25,7 +25,7 @@ namespace Common.BeatUpdate
                 LateBeatUpdate.RefreshAll();
             }).AddTo(this);
         }
-   
+
         private void Update()
         {
             float currentTime = StageTimeController.StageTime;
@@ -47,8 +47,8 @@ namespace Common.BeatUpdate
 
         protected override void OnDestroy()
         {
-            base.OnDestroy(); 
-            
+            base.OnDestroy();
+
             FastBeatUpdate.Clear();
             BeatUpdate.Clear();
             LateBeatUpdate.Clear();

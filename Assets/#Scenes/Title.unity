@@ -10413,12 +10413,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1154123604}
-        m_TargetAssemblyTypeName: Common.UI.PanelManager, Assembly-CSharp
-        m_MethodName: ChangeActivePanel
+      - m_Target: {fileID: 1337337630}
+        m_TargetAssemblyTypeName: Common.UI.PanelBackStack, Assembly-CSharp
+        m_MethodName: ShowPanel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1337337628}
+          m_ObjectArgument: {fileID: 1909526570}
           m_ObjectArgumentAssemblyTypeName: Common.UI.PanelControl, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -12514,7 +12514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00018310547}
+  m_AnchoredPosition: {x: 0, y: 0.000091552734}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &884756573
@@ -19479,7 +19479,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1337337630}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Common.UI.PanelBackStack, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 884756575}
+    - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Common.UI.PanelControl, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3624142421138198103, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_Name
@@ -20233,6 +20257,7 @@ GameObject:
   - component: {fileID: 1337337627}
   - component: {fileID: 1337337629}
   - component: {fileID: 1337337628}
+  - component: {fileID: 1337337630}
   m_Layer: 5
   m_Name: Pattern
   m_TagString: Untagged
@@ -20292,7 +20317,19 @@ MonoBehaviour:
         m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: SavePattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &1337337629
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -20305,6 +20342,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1337337630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337337626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274d98048f57da346a20e3f3460ae99b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelBackStack
+  _panelManager: {fileID: 1154123604}
+  _panelControl: {fileID: 1337337628}
 --- !u!1 &1337607328
 GameObject:
   m_ObjectHideFlags: 0
@@ -23156,21 +23207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1154123604}
-        m_TargetAssemblyTypeName: Common.UI.PanelManager, Assembly-CSharp
-        m_MethodName: ChangeActivePanel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1909526570}
-          m_ObjectArgumentAssemblyTypeName: Common.UI.PanelControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1278408204}
-        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
-        m_MethodName: SavePattern
+      - m_Target: {fileID: 1337337630}
+        m_TargetAssemblyTypeName: Common.UI.PanelBackStack, Assembly-CSharp
+        m_MethodName: BackPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27146,7 +27185,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 769656815}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8927673
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
