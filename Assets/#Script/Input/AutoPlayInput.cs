@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Common.BeatUpdate;
+using Common.PlaySystem;
 using InGame;
 using InGame.Node;
 using R3;
@@ -28,7 +29,7 @@ namespace Input
 
             StageTimeController.I.OnInitialized.Subscribe(_ =>
             {
-                BeatUpdateManager.LateBeatUpdate.Subscribe(16, 0, _ => BeatUpdate());
+                BeatUpdateManager.LateBeatUpdate.Subscribe(16, SongPlayContext.I.AutoPlaySetting.AutoPlayOffset, _ => BeatUpdate());
             });
         }
 

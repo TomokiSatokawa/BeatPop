@@ -17,11 +17,13 @@ public class QuickPlay : EditorWindow
     private const string FoldoutKey = "QuickPlay_Foldout";
     private const string SectionKey = "QuickPlay_Section";
     private const string AutoPlayKey = "QuickPlay_AutoPlay";
+    private const string AutoPlaySettingKey = "QuickPlay_AutoPlaySetting";
 
     private SongData _songData;
     private int _levelIndex;
     private string _errorMessage;
     private bool _autoPlay;
+    private AutoPlaySetting _autoPlaySetting;
 
     private int _startSection;
 
@@ -66,6 +68,10 @@ public class QuickPlay : EditorWindow
         }
 
         _autoPlay = EditorGUILayout.Toggle("オートプレイ", _autoPlay);
+        if (_autoPlay)
+        {
+            _autoPlaySetting.AutoPlayOffset = EditorGUILayout.DelayedFloatField("開始セクション", _autoPlaySetting.AutoPlayOffset);
+        }
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -180,7 +186,8 @@ public class QuickPlay : EditorWindow
             ChartPattern = default
         };
 
-        songPlayData.SetData(songSelectData, pattern, _startSection, _autoPlay);
+        songPlayData.SetData(songSelectData, pattern, _startSection);
+        songPlayData.SetAutoPlay(_autoPlay, _autoPlaySetting);
 
         await UniTask.DelayFrame(3);
 

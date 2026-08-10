@@ -1,8 +1,7 @@
 using Common.UI;
-using UnityEngine;
-using Title.SongSelect;
-using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Title.Custom
 {
@@ -43,21 +42,22 @@ namespace Title.Custom
         {
             var newPattern = _patternLoader.GetDefaultPattern();
             AddPatternUI(newPattern);
-            CustomDataLoader.I.AddPattern( newPattern).Forget();
+            CustomDataLoader.I.AddPattern(newPattern).Forget();
         }
 
         private void AddPatternUI(PatternJsonData pattern)
         {
             var patternUI = InstantiateContent(_prefab);
 
-            patternUI.SetData(pattern,uiData => {
+            patternUI.SetData(pattern, uiData =>
+            {
                 SelectPattern(uiData);
                 _onPatternSelect?.Invoke();
             });
             if (pattern.IsSelect)
             {
                 SelectPattern(patternUI);
-                _usePattern = patternUI;         
+                _usePattern = patternUI;
             }
             patternUI.ShowSetPattern(pattern.IsSelect);
         }
