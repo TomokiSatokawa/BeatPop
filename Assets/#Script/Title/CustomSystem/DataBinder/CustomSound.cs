@@ -62,7 +62,7 @@ namespace Title.Custom
         }
         public override CustomSoundPattern GetCustom()
         {
-            var result = new CustomSoundPattern();
+            var result = _soundData.GetDefaultCustom();
 
             result.NormalSE = _normalNotes.value;
             result.FlickSE = _flickNotes.value;
