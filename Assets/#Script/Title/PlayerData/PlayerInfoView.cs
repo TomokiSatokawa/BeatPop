@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace Title.PlayerData
 {
     /// <summary>
@@ -9,6 +10,8 @@ namespace Title.PlayerData
     public class PlayerInfoView : MonoBehaviour
     {
         [SerializeField] private LevelData _levelData;
+        [SerializeField] private PlayerIconDatabase _playerIconDatabase;
+        [SerializeField] private Image _playerIcon;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _coinCountText;
@@ -17,12 +20,23 @@ namespace Title.PlayerData
 
         public void UpdateView()
         {
-            _nameText.text = PlayerDataLoader.Info.Name;
-            _levelText.text = $"Lv.{PlayerDataLoader.Info.Level}";
-            _coinCountText.text = $"{PlayerDataLoader.Info.CoinCount}";
-            _jewelryCountText.text = $"{PlayerDataLoader.Info.JewelryCount}";
+            if (_playerIcon != null)
+                _playerIcon.sprite = _playerIconDatabase.GetIcon(PlayerDataLoader.Info.IconImageId);
 
-            _xpSlider.fillAmount = PlayerDataLoader.Info.XP / (float)_levelData.GetLevelUpXp(PlayerDataLoader.Info.Level);
+            if (_nameText != null)
+                _nameText.text = PlayerDataLoader.Info.Name;
+
+            if (_levelText != null)
+                _levelText.text = $"{PlayerDataLoader.Info.Level}";
+
+            if (_coinCountText != null)
+                _coinCountText.text = $"{PlayerDataLoader.Info.CoinCount}";
+
+            if (_jewelryCountText != null)
+                _jewelryCountText.text = $"{PlayerDataLoader.Info.JewelryCount}";
+
+            if (_xpSlider != null)
+                _xpSlider.fillAmount = PlayerDataLoader.Info.XP / (float)_levelData.GetLevelUpXp(PlayerDataLoader.Info.Level);
         }
     }
 }

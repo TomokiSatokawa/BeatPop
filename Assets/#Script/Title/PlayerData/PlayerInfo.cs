@@ -10,6 +10,7 @@ namespace Title.PlayerData
     public class PlayerInfo : IReadOnlyPlayerInfo
     {
         [SerializeField] private string _name;
+        [SerializeField] private int _iconImageId;
         [SerializeField] private int _level;
         [SerializeField] private int _xp;
         [SerializeField] private int _coinCount;
@@ -20,6 +21,7 @@ namespace Title.PlayerData
         public Observable<Unit> OnUpdateData => _onUpdateData;
 
         public string Name => _name;
+        public int IconImageId => _iconImageId;
         public int Level => _level;
         public int XP => _xp;
         public int CoinCount => _coinCount;
@@ -28,15 +30,17 @@ namespace Title.PlayerData
         public PlayerInfo()
         {
             _name = "";
+            _iconImageId = 0;
             _level = 1;
             _xp = 0;
             _coinCount = 0;
             _jewelryCount = 0;
         }
 
-        public PlayerInfo(string name, int level, int xp, int coinCount, int jewelryCount)
+        public PlayerInfo(string name,int icon, int level, int xp, int coinCount, int jewelryCount)
         {
             _name = name;
+            _iconImageId = icon;
             _level = level;
             _xp = xp;
             _coinCount = coinCount;
@@ -81,17 +85,26 @@ namespace Title.PlayerData
         }
 
         /// <summary>
+        /// アイコンを変更する
+        /// </summary>
+        public void SetIconID(int iconId)
+        {
+            _iconImageId = iconId;
+        }
+
+        /// <summary>
         /// コピーを取得
         /// </summary>
         public PlayerInfo Clone()
         {
-            return new(_name, _level, _xp, _coinCount, _jewelryCount);
+            return new(_name,_iconImageId, _level, _xp, _coinCount, _jewelryCount);
         }
     }
 
     public interface IReadOnlyPlayerInfo
     {
         public string Name { get; }
+        public int IconImageId { get; }
         public int Level { get; }
         public int XP { get; }
         public int CoinCount { get; }
@@ -99,6 +112,7 @@ namespace Title.PlayerData
         public void UpdateName(string name);
         public void UpdateLevelXp(int level,int xp);
         public void AddCoin(int count);
+        public void SetIconID(int iconId);
         public PlayerInfo Clone();
     }
 }

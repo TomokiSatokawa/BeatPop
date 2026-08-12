@@ -48,8 +48,9 @@ namespace Result.UI
             _accuracyView.OnAnimation(resultDataCollector.NodeHitCount);
             _timingSliderView.OnAnimation(resultDataCollector.FastCount, resultDataCollector.LateCount);
 
-            PlayerDataLoader.Records.SavePlayData(songData, score);
+            PlayerDataLoader.Records.SaveAddPlayData(songData, score,ScoreDataManager.ScoreData.GetResultType());
             PlayerDataLoader.Records.SaveHighScore(songData, score,out var highScore);
+            PlayerDataLoader.Records.SavePlayResult(songData, score, ScoreDataManager.ScoreData.GetResultType());
         }
 
         public void ShowPlayerPanel()

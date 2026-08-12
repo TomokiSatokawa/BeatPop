@@ -1,4 +1,5 @@
 using R3;
+using Result.UI;
 using System.Collections.Generic;
 using Title.SongSelect;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Title.PlayerData
         private const int RecordsCount = 10;
         [SerializeField] private List<PlayRecord> _highScores = new();
         [SerializeField] private List<PlayRecord> _recentPlayRecords = new();
-        public IReadOnlyList<PlayRecord> HighScores => _highScores;
+        public IReadOnlyList<PlayRecord> HighScores => _highScores;//TODO:用途が変わったので名前を変える
         public IReadOnlyList<PlayRecord> RecentPlayRecords => _recentPlayRecords;
 
         private Subject<Unit> _onUpdateData = new();
@@ -36,7 +37,7 @@ namespace Title.PlayerData
             //ハイスコアがない
             if (highScoreIndex == -1)
             {
-                _highScores.Add(new(songIndex, difficulty, score));
+                _highScores.Add(new(songIndex, difficulty, score,ResultType.Clear));
                 highScore = score;
                 _onUpdateData.OnNext(Unit.Default);
                 return true;
@@ -56,14 +57,34 @@ namespace Title.PlayerData
         }
 
         /// <summary>
-        /// プレイ履歴を保存する
+        /// プレイ記録を追加する
         /// </summary>
-        public void SavePlayData(SongSelectData selectData, int score)
+        public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType)
         {
             int songIndex = selectData.SongData.SongID;
             int difficulty = (int)selectData.Difficulty;
 
-            _recentPlayRecords.Add(new(songIndex, difficulty, score));
+            //ハイスコアを探す
+            int highScoreIndex = _highScores.FindIndex(x => x.SongIndex == songIndex && x.Difficulty == difficulty);
+
+            if (highScoreIndex == -1)
+            {
+                SaveAddPlayData(selectData, score, resultType);
+                return;
+            }
+
+            _highScores[highScoreIndex].AddResult(resultType);
+        }
+
+        /// <summary>
+        /// プレイ履歴を保存する
+        /// </summary>
+        public void SaveAddPlayData(SongSelectData selectData, int score,ResultType resultType)
+        {
+            int songIndex = selectData.SongData.SongID;
+            int difficulty = (int)selectData.Difficulty;
+
+            _recentPlayRecords.Add(new(songIndex, difficulty, score, resultType));
             TrimHead(RecordsCount);
             _onUpdateData.OnNext(Unit.Default);
         }
@@ -85,7 +106,8 @@ namespace Title.PlayerData
         public IReadOnlyList<PlayRecord> HighScores { get; }
         public IReadOnlyList<PlayRecord> RecentPlayRecords { get; }
         public bool SaveHighScore(SongSelectData selectData, int score, out int highScore);
-        public void SavePlayData(SongSelectData selectData, int score);
+        public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType);
+        public void SaveAddPlayData(SongSelectData selectData, int score, ResultType resultType);
     }
 
     /// <summary>
@@ -97,16 +119,22 @@ namespace Title.PlayerData
         [SerializeField] private int _songIndex;
         [SerializeField] private int _difficulty;
         [SerializeField] private int _score;
+        [SerializeField] private bool _fullCombo;
+        [SerializeField] private bool _allPerfect;
 
         public int SongIndex => _songIndex;
         public int Difficulty => _difficulty;
         public int Score => _score;
+        public bool FullCombo => _fullCombo;
+        public bool AllPerfect => _allPerfect;
 
-        public PlayRecord(int songIndex, int difficulty, int score)
+        public PlayRecord(int songIndex, int difficulty, int score,ResultType resultType)
         {
             _songIndex = songIndex;
             _difficulty = difficulty;
             _score = score;
+            _fullCombo = resultType == ResultType.FullCombo;
+            _allPerfect = resultType == ResultType.AllPerfect;
         }
 
         /// <summary>
@@ -115,6 +143,15 @@ namespace Title.PlayerData
         public void UpdateScore(int score)
         {
             _score = score;
+        }
+
+        /// <summary>
+        /// 結果を追加する
+        /// </summary>
+        public void AddResult(ResultType resultType)
+        {
+            _fullCombo |= resultType == ResultType.FullCombo;
+            _allPerfect |= resultType == ResultType.AllPerfect;
         }
     }
 }

@@ -10,13 +10,13 @@ namespace Title.Common
     /// </summary>
     public class TitlePresenter : MonoBehaviour
     {
-        [SerializeField] private PlayerInfoView _playerInfoView;
+        [SerializeField] private PlayerInfoView[] _playerInfoView;
         [SerializeField] private InputDialogView _inputDialogView;
         [SerializeField] private ConfirmationDialogView _confirmationDialog;
 
         private void Start()
         {
-            _playerInfoView.UpdateView();
+            UpdateInfo();   
 
             if (string.IsNullOrWhiteSpace(PlayerDataLoader.Info.Name))
             {
@@ -25,19 +25,19 @@ namespace Title.Common
                 var inputSetting = new InputFieldSettings("");
 
                 Action<string> confirmAction = PlayerDataLoader.Info.UpdateName;
-                confirmAction += _ => _playerInfoView.UpdateView();
+                confirmAction += _ => UpdateInfo();
 
                 _inputDialogView.ShowDialog(confirmAction, null, x => PlayerNameValidator.IsValid(x), dialogSetting, inputSetting);
             }
         }
 
-        public void UpdatePlayerName()
+        public void ChangePlayerName()
         {
             var dialogSetting = new DialogSettings(title: "プレイヤー名");
             var inputSetting = new InputFieldSettings(PlayerDataLoader.Info.Name);
 
             Action<string> confirmAction = PlayerDataLoader.Info.UpdateName;
-            confirmAction += _ => _playerInfoView.UpdateView();
+            confirmAction += _ => UpdateInfo();
 
             _inputDialogView.ShowDialog(confirmAction, null, x => PlayerNameValidator.IsValid(x), dialogSetting, inputSetting);
         }
@@ -46,6 +46,14 @@ namespace Title.Common
         {
             var dialogSetting = new DialogSettings(title: "セーブデータを削除しますか？",main:"この操作は取り消せません",confirmButton:"削除");
             _confirmationDialog.ShowDialog(TitleManager.I.DeleteSaveData, null, dialogSetting);
+        }
+
+        private void UpdateInfo()
+        {
+            foreach(var info in _playerInfoView)
+            {
+                info.UpdateView();
+            }
         }
     }
 }

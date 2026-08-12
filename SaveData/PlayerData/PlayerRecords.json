@@ -1,46 +1,41 @@
 {
     "_highScores": [
         {
-            "_songIndex": 7,
-            "_difficulty": 3,
-            "_score": 8918
-        },
-        {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 7822
+            "_score": 8190,
+            "_fullCombo": false,
+            "_allPerfect": true
         },
-        {
-            "_songIndex": 5,
-            "_difficulty": 3,
-            "_score": 8747
+          {
+            "_songIndex": 6,
+            "_difficulty": 2,
+            "_score": 8190,
+            "_fullCombo": false,
+            "_allPerfect": true
         }
     ],
     "_recentPlayRecords": [
         {
-            "_songIndex": 7,
+            "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 8918
+            "_score": 8190,
+            "_fullCombo": false,
+            "_allPerfect": true
         },
         {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 7822
-        },
-        {
-            "_songIndex": 5,
-            "_difficulty": 3,
-            "_score": 8747
+            "_score": 8190,
+            "_fullCombo": false,
+            "_allPerfect": true
         },
         {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 7678
-        },
-        {
-            "_songIndex": 7,
-            "_difficulty": 3,
-            "_score": 9385
+            "_score": 8190,
+            "_fullCombo": false,
+            "_allPerfect": true
         }
     ]
 }

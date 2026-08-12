@@ -60,6 +60,7 @@ namespace Title.Custom
             _longEndNotes.value = customSound.HoldEnd;
             _enablePreview = true;
         }
+
         public override CustomSoundPattern GetCustom()
         {
             var result = _soundData.GetDefaultCustom();
@@ -72,6 +73,7 @@ namespace Title.Custom
 
             return result;
         }
+
         public override void OnDefault()
         {
             _enablePreview = false;
