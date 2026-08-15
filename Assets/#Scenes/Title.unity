@@ -13647,7 +13647,7 @@ MonoBehaviour:
         m_MethodName: ShowPanel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1909526570}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Common.UI.PanelControl, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -15859,7 +15859,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829015997}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 1
@@ -16397,7 +16397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000091552734}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &879957397
@@ -17848,7 +17848,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -4.9}
-  m_SizeDelta: {x: 1776, y: 1000}
+  m_SizeDelta: {x: 1558.36, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964442126
 MonoBehaviour:
@@ -21547,8 +21547,8 @@ RectTransform:
   - {fileID: 884756574}
   - {fileID: 1909526569}
   - {fileID: 1337337627}
-  - {fileID: 1610325441}
   - {fileID: 326236069}
+  - {fileID: 1610325441}
   - {fileID: 2005575150}
   - {fileID: 652698386938462783}
   - {fileID: 677330283}
@@ -25839,7 +25839,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337337626}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -28151,7 +28151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.58431375}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -32577,8 +32577,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -36763,7 +36763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1909526569}
   - component: {fileID: 1909526571}
-  - component: {fileID: 1909526570}
+  - component: {fileID: 1909526573}
   - component: {fileID: 1909526572}
   m_Layer: 5
   m_Name: SongSelect
@@ -36795,50 +36795,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1909526570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909526568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe5c48c53a8092c40b187b464ec173c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.PanelControl
-  _rectTransform: {fileID: 0}
-  _canvasGroup: {fileID: 1909526571}
-  _activeAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1029242492}
-        m_TargetAssemblyTypeName: Title.SongSelect.SongSelectGenerator, Assembly-CSharp
-        m_MethodName: InitialView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _hiddenAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1278408204}
-        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
-        m_MethodName: SavePattern
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!225 &1909526571
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -36847,7 +36803,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909526568}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -36866,6 +36822,52 @@ MonoBehaviour:
   _songListData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _difficultyFilter: {fileID: 512070435}
   _bgmRangeFilter: {fileID: 1561458887}
+--- !u!114 &1909526573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909526568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b09c9c7bfcbe64f94a45c8fa2ec326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ParentPanelControl
+  _rectTransform: {fileID: 1909526569}
+  _canvasGroup: {fileID: 1909526571}
+  _activeAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1029242492}
+        m_TargetAssemblyTypeName: Title.SongSelect.SongSelectGenerator, Assembly-CSharp
+        m_MethodName: UpdateSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _hiddenAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1523306036}
+        m_TargetAssemblyTypeName: Title.SongSelect.TitleSoundController, Assembly-CSharp
+        m_MethodName: StopPreview
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _parentPanel:
+  - {fileID: 829016000}
 --- !u!1 &1909981057
 GameObject:
   m_ObjectHideFlags: 0
@@ -42295,7 +42297,7 @@ PrefabInstance:
     - target: {fileID: 3507618112854934190, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 1909526570}
+      objectReference: {fileID: 1909526573}
     - target: {fileID: 3624142421138198103, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
       propertyPath: m_Name
       value: Select

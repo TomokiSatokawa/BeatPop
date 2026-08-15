@@ -23,19 +23,19 @@ namespace Common.UI
         {
             if (_canvasGroup == null)
                 _canvasGroup = GetComponent<CanvasGroup>();
-            if(_rectTransform == null)
+            if (_rectTransform == null)
                 _rectTransform = GetComponent<RectTransform>();
 
             SetVisible(false, 0);
         }
 
-        public void OnActive(float duration = 0)
+        public virtual void OnActive(float duration = 0)
         {
             _activeAction?.Invoke();
 
             SetVisible(true, duration);
         }
-        public void OnHidden(float duration = 0)
+        public virtual void OnHidden(float duration = 0)
         {
             _hiddenAction?.Invoke();
 
