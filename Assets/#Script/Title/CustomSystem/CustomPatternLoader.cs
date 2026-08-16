@@ -8,10 +8,12 @@ namespace Title.Custom
     public class CustomPatternLoader : MonoBehaviour
     {
         [SerializeField] private CustomSoundData _customSoundData;
+        [SerializeField] private CustomColorData _customColorData;
         public PatternJsonData GetDefaultPattern()
         {
             PatternJsonData pattern = new();
             pattern.SoundPattern = _customSoundData.GetDefaultCustom();
+            pattern.ColorPattern = _customColorData.GetDefault();
             pattern.ChartPattern = default;
             return pattern;
         }
@@ -24,5 +26,6 @@ namespace Title.Custom
         public bool IsSelect;
         public CustomSoundPattern SoundPattern;
         public CustomChartPattern ChartPattern;
+        public CustomColorPattern ColorPattern;
     }
 }

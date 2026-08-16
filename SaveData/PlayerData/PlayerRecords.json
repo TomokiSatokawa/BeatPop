@@ -1,81 +1,18 @@
 {
     "_highScores": [
         {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 8190,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 2,
-            "_score": 8190,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 5,
-            "_difficulty": 3,
-            "_score": 8754,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
             "_songIndex": 7,
             "_difficulty": 3,
-            "_score": 9296,
+            "_score": 8903,
             "_fullCombo": false,
             "_allPerfect": false
         }
     ],
     "_recentPlayRecords": [
         {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 8190,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 8190,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 8190,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 7773,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 5,
-            "_difficulty": 3,
-            "_score": 8754,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
             "_songIndex": 7,
             "_difficulty": 3,
-            "_score": 9296,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 4312,
+            "_score": 8903,
             "_fullCombo": false,
             "_allPerfect": false
         }

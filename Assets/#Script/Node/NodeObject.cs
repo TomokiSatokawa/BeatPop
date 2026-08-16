@@ -14,9 +14,9 @@ namespace InGame.Node
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
         public NodeData NodeData { get; private set; }
 
-        public void Awake()
+        public void Start()
         {
-            SetColor(_objectData.NodeColor);
+            SetColor(InGameCustomColorData.I.GetNodeColor(Type));
         }
 
         public void SetColor(Color color)

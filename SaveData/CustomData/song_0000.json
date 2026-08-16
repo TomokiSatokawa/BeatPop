@@ -12,7 +12,15 @@
         "TickNode": 4
     },
     "ChartPattern": {
-        "FlickConvertLevel": 0,
+        "FlickConvertLevel": -2,
         "LongConvertLevel": 0
+    },
+    "ColorPattern": {
+        "NormalColor": 11,
+        "FlickColor": 2,
+        "LongColor": 5,
+        "LongFlickColor": 5,
+        "HighScoreColor": 2,
+        "TickColor": 6
     }
 }
