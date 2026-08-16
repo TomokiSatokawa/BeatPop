@@ -37,10 +37,11 @@ namespace InGame.Node
             }
 
             //タップエフェクト
-            var tapEffect = PoolManager.I.Get<PoolObject>(targetNode.NodeObjData.TapEffect);
+            var tapEffect = PoolManager.I.Get<TapEffect>(targetNode.NodeObjData.TapEffect);
             Vector3 pos = targetNode.transform.position;
             pos.z = StageConfig.I.StageLayout.GoalPos;
             tapEffect.transform.position = pos;
+            tapEffect.SetColor(targetNode.NodeObjData.NodeColor);
 
             //ジャッチUI
             var judgeData = ExecuteJudgeNode(targetNode.NodeData);

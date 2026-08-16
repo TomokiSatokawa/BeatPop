@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5933952954539953635}
-  - component: {fileID: 1841960236145613977}
+  - component: {fileID: 2491880705223333046}
   m_Layer: 0
   m_Name: TapEffect
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 3623119744165957825}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1841960236145613977
+--- !u!114 &2491880705223333046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,10 +46,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3192091203978619728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd5dd5171b442342b55cead07d5cc54, type: 3}
+  m_Script: {fileID: 11500000, guid: 974a64ae8cf0ad84bad9a0fb8349c2b3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AutoRelease
+  m_EditorClassIdentifier: Assembly-CSharp::InGame.Effect.TapEffect
   _duration: 1
+  _particleSystem:
+  - {fileID: 6817716172798823649}
+  - {fileID: 7936139066658748043}
+  - {fileID: 8289232314121845456}
+  - {fileID: 3673498525754172647}
+  - {fileID: 8322136858185912433}
 --- !u!1001 &993903601036361886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,6 +116,11 @@ PrefabInstance:
 --- !u!4 &4813054191314613820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5692665680088938146, guid: 64d390b09e0890143856b3ce7328f7eb, type: 3}
+  m_PrefabInstance: {fileID: 993903601036361886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8289232314121845456 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9133945252534221390, guid: 64d390b09e0890143856b3ce7328f7eb, type: 3}
   m_PrefabInstance: {fileID: 993903601036361886}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2097953152026823563
@@ -174,6 +185,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9004832551655359083, guid: a5653a41193c1734583a5c29ae4676dd, type: 3}
   m_PrefabInstance: {fileID: 2097953152026823563}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &7936139066658748043 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8304559826754813184, guid: a5653a41193c1734583a5c29ae4676dd, type: 3}
+  m_PrefabInstance: {fileID: 2097953152026823563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3362708688152537393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,6 +247,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 016b4d4c87a40a3408f3bf5eaf13b5eb, type: 3}
+--- !u!198 &3673498525754172647 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2040234872169827798, guid: 016b4d4c87a40a3408f3bf5eaf13b5eb, type: 3}
+  m_PrefabInstance: {fileID: 3362708688152537393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4549579759800384481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1263795241866416848, guid: 016b4d4c87a40a3408f3bf5eaf13b5eb, type: 3}
@@ -298,6 +319,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2060033585429866759, guid: d33aa700dd6ee7343aec55714456f841, type: 3}
   m_PrefabInstance: {fileID: 4000935275983015526}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &6817716172798823649 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7573728370103419527, guid: d33aa700dd6ee7343aec55714456f841, type: 3}
+  m_PrefabInstance: {fileID: 4000935275983015526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5063249764190737677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,5 +384,10 @@ PrefabInstance:
 --- !u!4 &3623119744165957825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8359717625493456332, guid: 6341d8b6bd349004989a2eafc7b43f48, type: 3}
+  m_PrefabInstance: {fileID: 5063249764190737677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8322136858185912433 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3835498656143771004, guid: 6341d8b6bd349004989a2eafc7b43f48, type: 3}
   m_PrefabInstance: {fileID: 5063249764190737677}
   m_PrefabAsset: {fileID: 0}
