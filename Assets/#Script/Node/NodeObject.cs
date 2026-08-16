@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace InGame.Node
 {
@@ -11,6 +13,23 @@ namespace InGame.Node
 
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
         public NodeData NodeData { get; private set; }
+
+        public void Awake()
+        {
+            SetColor(_objectData.NodeColor);
+        }
+
+        public void SetColor(Color color)
+        {
+            foreach (var material in _objectData.MeshRenderer.materials)
+            {
+                // ベースカラー
+                material.SetColor("_BaseColor", color);
+
+                // エミッションカラー
+                material.SetColor("_EmissionColor", color * _objectData.EmissionPower);
+            }
+        }
 
         public void SetNodeData(NodeData data)
         {

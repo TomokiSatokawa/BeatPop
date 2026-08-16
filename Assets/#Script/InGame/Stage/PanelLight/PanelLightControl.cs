@@ -61,7 +61,6 @@ namespace InGame.Stage
 
             // HDRカラー
             _mpb.SetColor(EmissionColorID, _color * _power);
-
             _renderer.SetPropertyBlock(_mpb);
         }
 

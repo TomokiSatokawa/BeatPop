@@ -107,7 +107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeObject
   _objectData:
     _tapEffect: 14
-    _nodeColor: {r: 0, g: 0, b: 0, a: 0}
+    _nodeColor: {r: 1, g: 0.84313726, b: 0, a: 1}
+    _emissionPower: 100
+    _meshRenderer: {fileID: 2433944783158208087}
     _inputType: 3
 --- !u!1001 &8466162343392602981
 PrefabInstance:

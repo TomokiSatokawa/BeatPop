@@ -106,5 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NodeObject
   _objectData:
     _tapEffect: 16
-    _nodeColor: {r: 0, g: 0, b: 0, a: 0}
+    _nodeColor: {r: 0, g: 1, b: 0.43529412, a: 1}
+    _emissionPower: 100
+    _meshRenderer: {fileID: 6953547109632478476}
     _inputType: 1
