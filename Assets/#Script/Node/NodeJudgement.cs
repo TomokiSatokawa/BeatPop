@@ -17,7 +17,7 @@ namespace InGame.Node
         float IReadOnlyNodeJudgement.MaxScore => MaxScore;
         float IReadOnlyNodeJudgement.BaseScore => BaseScore;
 
-        public IReadOnlyJudgementData GetJudgement(float difference)
+        public IReadOnlyJudgementData GetJudgement(float difference,float judgeLevel)
         {
             if (JudgementDatas == null || JudgementDatas.Length == 0)
             {

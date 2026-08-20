@@ -1,3 +1,5 @@
+using Common.PlaySystem;
+using Title.Custom;
 using UnityEngine;
 
 namespace InGame.Node
@@ -22,7 +24,8 @@ namespace InGame.Node
                 Debug.LogError($"[JudgementTable] Judgement is not found. Type:{type}");
                 return null;
             }
-            return judgementData.GetJudgement(difference);
+            var judgeLevel = SongPlayContext.I?.PatternData.JudgePattern.GetLevel(CustomJudge.PoolPrefabToCutomJudge(type)) ?? 0;
+            return judgementData.GetJudgement(difference, judgeLevel);
         }
 
         public IReadOnlyNodeJudgement GetJudgementData(PoolPrefabType type)

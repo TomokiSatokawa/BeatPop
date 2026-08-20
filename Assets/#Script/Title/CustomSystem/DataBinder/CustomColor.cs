@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ namespace Title.Custom
                 options.Add(new(colorData.Name, _optionImage, colorData.Color));
 
             //Option‘ã“ü
-            foreach (var kv in _dropdowns.Items) 
+            foreach (var kv in _dropdowns.Items)
                 kv.Value.options = options;
 
         }
@@ -117,6 +116,6 @@ namespace Title.Custom
 
     public enum CustomColorType
     {
-        Normal, Flick, Long, LongFlick, HighScore,Tick
+        Normal, Flick, Long, LongFlick, HighScore, Tick
     }
 }

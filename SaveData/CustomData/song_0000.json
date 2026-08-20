@@ -20,7 +20,15 @@
         "FlickColor": 2,
         "LongColor": 5,
         "LongFlickColor": 5,
-        "HighScoreColor": 2,
-        "TickColor": 6
+        "HighScoreColor": 1,
+        "TickColor": 7
+    },
+    "JudgePattern": {
+        "_normalJudgeLevel": 0.0,
+        "_flickJudgeLevel": 0.0,
+        "_longStartJudgeLevel": 0.0,
+        "_longEndJudgeLevel": 0.0,
+        "_longFlickJudgeLevel": 0.0,
+        "_highScoreJudgeLevel": 0.0
     }
 }

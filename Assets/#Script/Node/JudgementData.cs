@@ -10,6 +10,7 @@ namespace InGame.Node
     {
         public JudgementType Name;
         public float Value;
+        public float VariationRange;
         public bool ShowEarlyLateText;
         public TMP_ColorGradient TextColor;
 
@@ -21,6 +22,7 @@ namespace InGame.Node
 
         JudgementType IReadOnlyJudgementData.Name => Name;
         float IReadOnlyJudgementData.Value => Value;
+        float IReadOnlyJudgementData.VariationRange => VariationRange;
         bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
         TMP_ColorGradient IReadOnlyJudgementData.TextColor => TextColor;
         bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
@@ -35,6 +37,8 @@ namespace InGame.Node
     {
         public JudgementType Name { get; }
         public float Value { get; }
+
+        public float VariationRange { get; }
 
         public bool ShowEarlyLateText { get; }
 

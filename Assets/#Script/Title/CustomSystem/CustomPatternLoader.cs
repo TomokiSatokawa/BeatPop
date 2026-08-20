@@ -15,6 +15,7 @@ namespace Title.Custom
             pattern.SoundPattern = _customSoundData.GetDefaultCustom();
             pattern.ColorPattern = _customColorData.GetDefault();
             pattern.ChartPattern = default;
+            pattern.JudgePattern = default;
             return pattern;
         }
     }
@@ -27,5 +28,6 @@ namespace Title.Custom
         public CustomSoundPattern SoundPattern;
         public CustomChartPattern ChartPattern;
         public CustomColorPattern ColorPattern;
+        public CustomJudgePattern JudgePattern;
     }
 }
