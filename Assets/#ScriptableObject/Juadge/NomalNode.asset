@@ -19,41 +19,51 @@ MonoBehaviour:
   JudgementDatas:
   - Name: 0
     Value: 0.04
+    VariationRange: 0.05
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: cdf322c50d3173b4f91e60670f8f405a, type: 2}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
     ScoreMultiplier: 1
+    XpAmount: 0
     TapSEVolume: 1.5
   - Name: 1
     Value: 0.1
+    VariationRange: 0.05
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: 20754f003752f4d479c8091bc68faea0, type: 2}
     IsComboContinued: 1
     IsAllPerfectContinued: 1
     ScoreMultiplier: 0.8
+    XpAmount: 0
     TapSEVolume: 1.2
   - Name: 2
     Value: 0.15
+    VariationRange: 0.05
     ShowEarlyLateText: 1
     TextColor: {fileID: 11400000, guid: 726b0881afaf43e4bb7d1a9b4a9dcf4a, type: 2}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0.7
+    XpAmount: 0
     TapSEVolume: 1
   - Name: 3
     Value: 0.2
-    ShowEarlyLateText: 1
+    VariationRange: 0
+    ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: 5f2ef192fa93eaa4c8085739dac044d6, type: 2}
     IsComboContinued: 1
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0.5
+    XpAmount: 0
     TapSEVolume: 0.8
   - Name: 4
     Value: 10
+    VariationRange: 0
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: 49c1666b02319ea4fb2b6fe5b91971c9, type: 2}
     IsComboContinued: 0
     IsAllPerfectContinued: 0
     ScoreMultiplier: 0
+    XpAmount: 0
     TapSEVolume: 0

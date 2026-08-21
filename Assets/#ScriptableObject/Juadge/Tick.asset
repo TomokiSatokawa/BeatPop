@@ -19,6 +19,7 @@ MonoBehaviour:
   JudgementDatas:
   - Name: 0
     Value: 0.05
+    VariationRange: 0.02
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: cdf322c50d3173b4f91e60670f8f405a, type: 2}
     IsComboContinued: 1
@@ -28,6 +29,7 @@ MonoBehaviour:
     TapSEVolume: 0.8
   - Name: 4
     Value: 10
+    VariationRange: 0.03
     ShowEarlyLateText: 0
     TextColor: {fileID: 11400000, guid: 49c1666b02319ea4fb2b6fe5b91971c9, type: 2}
     IsComboContinued: 0

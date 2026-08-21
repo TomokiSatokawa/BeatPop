@@ -12,7 +12,7 @@
         "TickNode": 4
     },
     "ChartPattern": {
-        "FlickConvertLevel": -2,
+        "FlickConvertLevel": 0,
         "LongConvertLevel": 0
     },
     "ColorPattern": {
@@ -20,8 +20,8 @@
         "FlickColor": 2,
         "LongColor": 5,
         "LongFlickColor": 5,
-        "HighScoreColor": 1,
-        "TickColor": 7
+        "HighScoreColor": 2,
+        "TickColor": 6
     },
     "JudgePattern": {
         "_normalJudgeLevel": 0.0,
@@ -30,5 +30,9 @@
         "_longEndJudgeLevel": 0.0,
         "_longFlickJudgeLevel": 0.0,
         "_highScoreJudgeLevel": 0.0
+    },
+    "SpeedPattern": {
+        "NodeSpeed": 1.0,
+        "JudgeOffset": 1.0
     }
 }

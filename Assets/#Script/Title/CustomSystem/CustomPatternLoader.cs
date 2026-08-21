@@ -16,6 +16,7 @@ namespace Title.Custom
             pattern.ColorPattern = _customColorData.GetDefault();
             pattern.ChartPattern = default;
             pattern.JudgePattern = default;
+            pattern.SpeedPattern = default;
             return pattern;
         }
     }
@@ -29,5 +30,6 @@ namespace Title.Custom
         public CustomChartPattern ChartPattern;
         public CustomColorPattern ColorPattern;
         public CustomJudgePattern JudgePattern;
+        public CustomStagePattern SpeedPattern;
     }
 }

@@ -16,6 +16,7 @@ namespace Title.Custom
         [SerializeField] private CustomChart _chart;
         [SerializeField] private CustomColor _color;
         [SerializeField] private CustomJudge _judge;
+        [SerializeField] private CustomStage _stage;
         [SerializeField] private UnityEvent _onPatternSelect;
 
         private PatternUIControl _currentSelect;
@@ -79,6 +80,7 @@ namespace Title.Custom
             _chart.SetCustom(patternUI.PatternData.ChartPattern);
             _color.SetCustom(patternUI.PatternData.ColorPattern);
             _judge.SetCustom(patternUI.PatternData.JudgePattern);
+            _stage.SetCustom(patternUI.PatternData.SpeedPattern);
         }
 
         public async void SetPattern()
@@ -101,6 +103,7 @@ namespace Title.Custom
             _currentSelect.PatternData.ChartPattern = _chart.GetCustom();
             _currentSelect.PatternData.ColorPattern = _color.GetCustom();
             _currentSelect.PatternData.JudgePattern = _judge.GetCustom();
+            _currentSelect.PatternData.SpeedPattern = _stage.GetCustom();
             await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
     }

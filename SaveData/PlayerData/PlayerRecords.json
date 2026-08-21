@@ -1,20 +1,4 @@
 {
-    "_highScores": [
-        {
-            "_songIndex": 7,
-            "_difficulty": 3,
-            "_score": 8903,
-            "_fullCombo": false,
-            "_allPerfect": false
-        }
-    ],
-    "_recentPlayRecords": [
-        {
-            "_songIndex": 7,
-            "_difficulty": 3,
-            "_score": 8903,
-            "_fullCombo": false,
-            "_allPerfect": false
-        }
-    ]
+    "_highScores": [],
+    "_recentPlayRecords": []
 }
