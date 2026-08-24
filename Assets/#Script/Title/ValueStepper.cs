@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace Title
@@ -17,6 +18,8 @@ namespace Title
 
         private float _value;
         public float Value => _value;
+        public float MinValue => _minValue;
+        public float MaxValue => _maxValue;
         public float StartValue => _startValue;
 
         public void Start()
@@ -27,6 +30,11 @@ namespace Title
             }
 
             SetValue(_startValue);
+        }
+
+        public void SetInterpolationFactor(float factor)
+        {
+            SetValue(Mathf.Lerp(_minValue, _maxValue, factor));
         }
 
         public void SetValue(float value)
@@ -76,8 +84,16 @@ namespace Title
                 _addButton.onClick.AddListener(() => onClick.Invoke(_amount));
                 _removeButton.onClick.AddListener(() => onClick.Invoke(-_amount));
             }
+
+          
         }
 
-
+        public static float GetInterpolationFactor(ValueStepper valueStepper, float value)
+        {
+            return Mathf.InverseLerp(
+     valueStepper.MinValue,
+     valueStepper.MaxValue,
+     value);
+        }
     }
 }

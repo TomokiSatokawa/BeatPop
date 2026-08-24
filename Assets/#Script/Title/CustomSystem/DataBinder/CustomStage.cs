@@ -11,22 +11,26 @@ namespace Title.Custom
 
         public override CustomStagePattern GetCustom()
         {
-            return _customStageData.GetDefault();
+            return new CustomStagePattern()
+            {
+                NodeSpeed = ValueStepper.GetInterpolationFactor(_nodeSpeed, _nodeSpeed.Value),
+                JudgeOffset = ValueStepper.GetInterpolationFactor(_judgeOffset, _judgeOffset.Value)
+            };
         }
 
         public override void OnDefault()
         {
             SetCustom(new CustomStagePattern()
             {
-                NodeSpeed = _nodeSpeed.StartValue,
-                JudgeOffset = _judgeOffset.StartValue
+                NodeSpeed = ValueStepper.GetInterpolationFactor(_nodeSpeed,_nodeSpeed.StartValue),
+                JudgeOffset = ValueStepper.GetInterpolationFactor(_judgeOffset, _judgeOffset.StartValue)
             });
         }
 
         public override void SetCustom(CustomStagePattern data)
         {
-            _nodeSpeed.SetValue(data.NodeSpeed);
-            _judgeOffset.SetValue(data.JudgeOffset);
+            _nodeSpeed.SetInterpolationFactor(data.NodeSpeed);
+            _judgeOffset.SetInterpolationFactor(data.JudgeOffset);
         }
     }
 

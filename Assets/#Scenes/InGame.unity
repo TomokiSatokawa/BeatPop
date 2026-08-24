@@ -4721,11 +4721,11 @@ MonoBehaviour:
   _judgementTable: {fileID: 11400000, guid: d1220a05c286b954999aae57dec64ad0, type: 2}
   _experienceDatabase: {fileID: 11400000, guid: 9a70dde9ebf6c28498c2cda8cc7468d5, type: 2}
   _rankDataBase: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
+  _customStageData: {fileID: 11400000, guid: abd22bdd6a601984290adf155ba2a3f0, type: 2}
   _longNoteDivisionInterval: 8
   _clonePos:
   - {fileID: 840021716}
   - {fileID: 1032196361}
-  _arrivalSeconds: 1
 --- !u!4 &1433451111
 Transform:
   m_ObjectHideFlags: 0

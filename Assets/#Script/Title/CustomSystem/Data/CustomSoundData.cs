@@ -34,6 +34,7 @@ namespace Title.Custom
             return result;
         }
     }
+
     [System.Serializable]
     public class SEData
     {

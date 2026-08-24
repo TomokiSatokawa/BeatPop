@@ -11,7 +11,8 @@ namespace Title.Common
         [SerializeField] private Color _onColor;
         [SerializeField] private Color _offColor;
         public bool[] IsOn => _isOn;
-        void Start()
+
+        private void Start()
         {
             if (_isOn.Length != _buttons.Length)
             {

@@ -1,4 +1,6 @@
+using Common.PlaySystem;
 using InGame.Node;
+using Title.Custom;
 using Title.SongSelect;
 using UnityEngine;
 
@@ -13,9 +15,9 @@ namespace InGame
         [SerializeField] private JudgementTable _judgementTable;
         [SerializeField] private ExperienceDatabase _experienceDatabase;
         [SerializeField] private RankDataBase _rankDataBase;
+        [SerializeField] private CustomStageData _customStageData;
         [SerializeField] private int _longNoteDivisionInterval = 8;
         [SerializeField] private Transform[] _clonePos;
-        [SerializeField] private float _arrivalSeconds;
 
         public StageLayoutData StageLayout => _stageLayoutData;
         public JudgementTable JudgementTable => _judgementTable;
@@ -24,6 +26,12 @@ namespace InGame
         public int LongNoteDivisionInterval => _longNoteDivisionInterval;
         public float ArrivalSeconds => _arrivalSeconds;
 
+        private float _arrivalSeconds;
+        
+        protected override void OnAwake()
+        {
+            _arrivalSeconds = _customStageData.GetSpeedSecond(SongPlayContext.I.PatternData.SpeedPattern.NodeSpeed);
+        }
         public Vector3 GetClonePos(int lane)
         {
             if (_clonePos == null || 0 > lane || lane >= _clonePos.Length)

@@ -3,6 +3,7 @@ using Common;
 using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
+using Title.PlayerData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ namespace Title.SongSelect
         [SerializeField] private Button _clauseButton;
         [SerializeField] private Button _backGroundArea;
         [SerializeField] private TextMeshProUGUI _bpmInfo;
+        [SerializeField] private TextMeshProUGUI _highScoreInfo;
         [SerializeField] private TextMeshProUGUI _secondInfo;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _nodeCount;
@@ -51,6 +53,7 @@ namespace Title.SongSelect
             {
                 bool isExist = data.SongData.Charts.GetChart(difficulty) != null;
                 _segmentControl.SetButtonActive((int)difficulty, isExist);
+                _segmentControl.SetButtonLevel((int)difficulty,data.SongData.Charts.GetLevel(difficulty));
             }
             _segmentControl.OnClick((int)data.Difficulty);
 
@@ -59,11 +62,14 @@ namespace Title.SongSelect
 
         private async void UpdateInfoUI(SongSelectData data)
         {
+            if (data.Equals(default)) return;
+
             _nameText.text = data.SongData.SongName;
             _jacket.sprite = data.SongData.Jacket;
             _difficultyImage.color = _difficultyColor.GetDifficultyColor(data.Difficulty);
             _levelText.text = data.SongData.Charts.GetLevel(data.Difficulty).ToString();
             _bpmInfo.text = data.SongData.BPM.ToString();
+            _highScoreInfo.text = PlayerDataLoader.Records.TryGetHighScore(data, out int highScrore) ? highScrore.ToString() : "-----";
             _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
             _nodeCount.text = (await NodeDataSerializer.DeserializeJson(data.GetNodeJson().text)).Nodes.Count.ToString();   
         }

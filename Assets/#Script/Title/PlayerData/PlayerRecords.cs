@@ -32,7 +32,7 @@ namespace Title.PlayerData
             int difficulty = (int)selectData.Difficulty;
 
             //ハイスコアを探す
-            int highScoreIndex = _highScores.FindIndex(x => x.SongIndex == songIndex && x.Difficulty == difficulty);
+            int highScoreIndex = FindHighScoreIndex(selectData);
 
             //ハイスコアがない
             if (highScoreIndex == -1)
@@ -61,11 +61,7 @@ namespace Title.PlayerData
         /// </summary>
         public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType)
         {
-            int songIndex = selectData.SongData.SongID;
-            int difficulty = (int)selectData.Difficulty;
-
-            //ハイスコアを探す
-            int highScoreIndex = _highScores.FindIndex(x => x.SongIndex == songIndex && x.Difficulty == difficulty);
+            int highScoreIndex = FindHighScoreIndex(selectData);
 
             if (highScoreIndex == -1)
             {
@@ -74,6 +70,34 @@ namespace Title.PlayerData
             }
 
             _highScores[highScoreIndex].AddResult(resultType);
+        }
+
+        /// <summary>
+        /// ハイスコアを検索
+        /// </summary>
+        public bool TryGetHighScore(SongSelectData selectData, out int highScore)
+        {
+            highScore = 0;
+            var highsScoreIndex = FindHighScoreIndex(selectData);
+
+            if (highsScoreIndex == -1)
+                return false;
+
+            highScore = _highScores[highsScoreIndex].Score;
+            return true;
+        }
+
+        /// <summary>
+        /// ハイスコアIndexを探す
+        /// </summary>
+        private int FindHighScoreIndex(SongSelectData selectData)
+        {
+            int songIndex = selectData.SongData.SongID;
+            int difficulty = (int)selectData.Difficulty;
+
+            //ハイスコアを探す
+            int highScoreIndex = _highScores.FindIndex(x => x.SongIndex == songIndex && x.Difficulty == difficulty);
+            return highScoreIndex;
         }
 
         /// <summary>
@@ -108,6 +132,7 @@ namespace Title.PlayerData
         public bool SaveHighScore(SongSelectData selectData, int score, out int highScore);
         public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType);
         public void SaveAddPlayData(SongSelectData selectData, int score, ResultType resultType);
+        public bool TryGetHighScore(SongSelectData sle, out int highScore);
     }
 
     /// <summary>
