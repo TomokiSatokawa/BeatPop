@@ -9,6 +9,7 @@ public class DifficultyButtonControl : MonoBehaviour
     [SerializeField] private Image _fillImage;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private Color _invalidColor;
 
     public Button MainButton => _mainButton;
 
@@ -38,5 +39,11 @@ public class DifficultyButtonControl : MonoBehaviour
         _fillImage.gameObject.SetActive(b);
         _levelText.color  = b ? _selectedColor : _unselectedColor;
         _nameText.color = b ? _mainColor : _unselectedColor;
+    }
+
+    public void SetInteractable(bool b)
+    {
+        _levelText.gameObject.SetActive(b);
+        _mainButton.interactable = b;
     }
 }

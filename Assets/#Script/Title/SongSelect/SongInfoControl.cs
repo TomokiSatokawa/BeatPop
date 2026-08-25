@@ -32,7 +32,7 @@ namespace Title.SongSelect
         [Header("Other")]
         [SerializeField] private DifficultyColor _difficultyColor;
         [SerializeField] private SongPlayLoader _playLoader;
-        [SerializeField] private SegmentedControl _segmentControl;
+        [SerializeField] private DifficultyButtonSegmented _segmentControl;
         [SerializeField] private TitleSoundController _songPreviewPlayer;
 
         private static SongSelectData? _currentData;
