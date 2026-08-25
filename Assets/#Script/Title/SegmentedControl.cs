@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 namespace Title
 {
-
+    /// <summary>
+    /// SegmentedUI
+    /// </summary>
     public class SegmentedControl : MonoBehaviour
     {
         [SerializeField] protected Button[] _buttons;

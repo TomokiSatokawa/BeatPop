@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Title
 {
+    /// <summary>
+    /// “ïˆÕ“xê—pSegmentedUI
+    /// </summary>
     public class DifficultyButtonSegmented : SegmentedControl
     {
         [SerializeField] private DifficultyColor _buttonColor;

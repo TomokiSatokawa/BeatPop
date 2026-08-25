@@ -12,7 +12,7 @@ namespace Title.BackGround
     {
         [Header("éQè∆")]
         [SerializeField] private AnimateBackgroundShapes _animateShapes = new();
-        [SerializeField] private Canvas _backGroundCanvas;
+        [SerializeField] private Transform _parent;
         [SerializeField] private Sprite _shapeSprite;
         [SerializeField] private Image _prefab;
         [Header("ê∂ê¨")]
@@ -84,7 +84,7 @@ namespace Title.BackGround
         {
             if (_pool.Count == 0)
             {
-                Image clonedImage = Instantiate(_prefab, _backGroundCanvas.transform);
+                Image clonedImage = Instantiate(_prefab, _parent);
                 clonedImage.sprite = _shapeSprite;
                 return clonedImage;
             }

@@ -3,7 +3,14 @@
         {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 0,
+            "_score": 7549,
+            "_fullCombo": false,
+            "_allPerfect": false
+        },
+        {
+            "_songIndex": -1,
+            "_difficulty": 0,
+            "_score": 2282,
             "_fullCombo": false,
             "_allPerfect": false
         }
@@ -12,16 +19,16 @@
         {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 0,
+            "_score": 7549,
             "_fullCombo": false,
             "_allPerfect": false
         },
         {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 560,
+            "_songIndex": -1,
+            "_difficulty": 0,
+            "_score": 2282,
             "_fullCombo": false,
-            "_allPerfect": true
+            "_allPerfect": false
         }
     ]
 }
