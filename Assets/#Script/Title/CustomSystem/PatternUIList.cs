@@ -1,3 +1,4 @@
+using System;
 using Common.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Title.Custom
     {
         [SerializeField] private PatternUIControl _prefab;
         [SerializeField] private CustomPatternLoader _patternLoader;
+        [SerializeField] private PatternOptionMenuControl _optionMenu;
         [SerializeField] private CustomSound _sound;
         [SerializeField] private CustomChart _chart;
         [SerializeField] private CustomColor _color;
@@ -52,11 +54,13 @@ namespace Title.Custom
         {
             var patternUI = InstantiateContent(_prefab);
 
-            patternUI.SetData(pattern, uiData =>
-            {
-                SelectPattern(uiData);
-                _onPatternSelect?.Invoke();
-            });
+            Action<PatternUIControl> onSelect = uiData =>
+              {
+                  SelectPattern(uiData);
+                  _onPatternSelect?.Invoke();
+              };
+
+            patternUI.SetData(pattern, onSelect, _optionMenu.Open);
             if (pattern.IsSelect)
             {
                 SelectPattern(patternUI);

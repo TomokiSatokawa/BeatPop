@@ -702,6 +702,7 @@ MonoBehaviour:
   _patternName: {fileID: 8174108987410620943}
   _selectLine: {fileID: 5575997542463429495}
   _selectButton: {fileID: 473937227105384351}
+  _settingsButton: {fileID: 1471257308453296812}
   _setPattern: {fileID: 2434042915039882983}
 --- !u!1 &8882696985087501572
 GameObject:

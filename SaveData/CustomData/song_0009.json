@@ -1,7 +1,7 @@
 {
     "PatternName": "デフォルト",
-    "FileName": "song_0000.json",
-    "IsSelect": true,
+    "FileName": "song_0009.json",
+    "IsSelect": false,
     "SoundPattern": {
         "NormalSE": 0,
         "HighScore": 3,
@@ -16,7 +16,7 @@
         "LongConvertLevel": 0
     },
     "ColorPattern": {
-        "NormalColor": 11,
+        "NormalColor": 12,
         "FlickColor": 2,
         "LongColor": 5,
         "LongFlickColor": 5,
@@ -33,6 +33,6 @@
     },
     "SpeedPattern": {
         "NodeSpeed": 0.0,
-        "JudgeOffset": 1.0
+        "JudgeOffset": 0.0
     }
 }
