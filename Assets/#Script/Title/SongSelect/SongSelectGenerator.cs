@@ -18,11 +18,18 @@ namespace Title.SongSelect
         public void InitialView()
         {
             DeleteChildren();
-            AddTitle("おすすめ");
-            AddContentsList(SongRecommender.I.GetRecommendation());
-            AddTitle("最近のプレイ");
-            AddContentsList(SongRecommender.I.GetPlayHistory());
+            AddContents("おすすめ", SongRecommender.I.GetRecommendation());
+            AddContents("最近のプレイ", SongRecommender.I.GetPlayHistory());
         }
+
+        private void AddContents(string title , IReadOnlyList<SongSelectData> songSelectDatas)
+        {
+            if (songSelectDatas == null || songSelectDatas.Count == 0) return;
+
+            AddTitle(title);
+            AddContentsList(songSelectDatas);
+        }
+
 
         public void KeywordView(string keyword)
         {
