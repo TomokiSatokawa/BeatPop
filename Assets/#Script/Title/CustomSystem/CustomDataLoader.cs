@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Title.Custom
@@ -99,6 +101,15 @@ namespace Title.Custom
             }
         }
 
+        /// <summary>
+        /// ÉpÉ^Å[ÉìçÌèú
+        /// </summary>
+        public async UniTask DeletePattern(PatternJsonData patternData)
+        {
+            await FileStorage.DeleteFile(FolderName,patternData.FileName);
+            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
+        }
+
         private async UniTask UpdateManifestFile()
         {
             string manifestJson = JsonUtility.ToJson(_manifestData, true);
@@ -120,6 +131,7 @@ namespace Title.Custom
                 PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
                 patternJsonData.IsSelect = true;
                 patternJsonData.FileName = fileName;
+                patternJsonData.IsDefault = true;
                 string patternJson = JsonUtility.ToJson(patternJsonData, true);
                 await FileStorage.CreateFile(FolderName, fileName, patternJson);
             }

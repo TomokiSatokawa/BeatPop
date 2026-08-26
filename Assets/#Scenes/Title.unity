@@ -8920,6 +8920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title.Custom.PatternOptionMenuControl
   _panelControl: {fileID: 422932486}
+  _inputDialog: {fileID: 8016548255677305272}
+  _confirmationDialog: {fileID: 677330282}
   _panel: {fileID: 1827547774}
   _rename: {fileID: 654104478}
   _setPattern: {fileID: 616784782}
@@ -8930,13 +8932,49 @@ MonoBehaviour:
     _max: 709
   _onRename:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: RenamePattern
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onSetPattern:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: SetPattern
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onDelete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: DeletePattern
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &432732171
 GameObject:
   m_ObjectHideFlags: 0

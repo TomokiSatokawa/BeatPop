@@ -26,6 +26,7 @@ namespace Title.Custom
         public string PatternName = "デフォルト";
         public string FileName;
         public bool IsSelect;
+        public bool IsDefault = false;
         public CustomSoundPattern SoundPattern;
         public CustomChartPattern ChartPattern;
         public CustomColorPattern ColorPattern;

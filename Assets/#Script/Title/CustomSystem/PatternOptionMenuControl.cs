@@ -12,13 +12,15 @@ namespace Title.Custom
     public class PatternOptionMenuControl : MonoBehaviour
     {
         [SerializeField] private PanelControl _panelControl;
+        [SerializeField] private InputDialogView _inputDialog;
+        [SerializeField] private ConfirmationDialogView _confirmationDialog;
         [SerializeField] private RectTransform _panel;
         [SerializeField] private Button _rename;
         [SerializeField] private Button _setPattern;
         [SerializeField] private Button _delete;
         [SerializeField] private Vector2 _offSet;
         [SerializeField] private FloatRange _showRangeY;
-        [SerializeField] private UnityEvent<PatternJsonData> _onRename;
+        [SerializeField] private UnityEvent<PatternJsonData,string> _onRename;
         [SerializeField] private UnityEvent<PatternJsonData> _onSetPattern;
         [SerializeField] private UnityEvent<PatternJsonData> _onDelete;
 
@@ -44,11 +46,17 @@ namespace Title.Custom
 
             _panel.transform.position = pos;
             _panelControl.OnActive();
+            _patternJsonData = pattern;
+
+            //初期パターンは削除できない
+            _delete.interactable = !pattern.IsDefault;
         }
 
         private void OnRename()
         {
-            _onRename?.Invoke(_patternJsonData);
+            var dialogSettings = new DialogSettings(title:"名前を変更");
+            var input = new InputFieldSettings(_patternJsonData.PatternName);
+            _inputDialog.ShowDialog(x => _onRename?.Invoke(_patternJsonData, x), null, x => "", dialogSettings,input);
             _panelControl.OnHidden();
         }
 
@@ -59,7 +67,8 @@ namespace Title.Custom
         }
         private void OnDelete()
         {
-            _onDelete?.Invoke(_patternJsonData);
+            var dialogSettings = new DialogSettings(title: "本当に削除しますか？",confirmButton:"削除");
+            _confirmationDialog.ShowDialog(() => _onDelete?.Invoke(_patternJsonData),null, dialogSettings);;
             _panelControl.OnHidden();
         }
     }

@@ -2,6 +2,7 @@
     "PatternName": "デフォルト",
     "FileName": "song_0001.json",
     "IsSelect": false,
+    "IsDefault": false,
     "SoundPattern": {
         "NormalSE": 0,
         "HighScore": 3,

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Common.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -21,6 +23,7 @@ namespace Title.Custom
         [SerializeField] private CustomStage _stage;
         [SerializeField] private UnityEvent _onPatternSelect;
 
+        private List<PatternUIControl> _clonedUI = new();
         private PatternUIControl _currentSelect;
         private PatternUIControl _usePattern;
 
@@ -43,6 +46,12 @@ namespace Title.Custom
             }
         }
 
+        protected override void OnDeletedChildren()
+        {
+            base.OnDeletedChildren();
+            _clonedUI.Clear();
+        }
+
         public void CreatePattern()
         {
             var newPattern = _patternLoader.GetDefaultPattern();
@@ -50,15 +59,39 @@ namespace Title.Custom
             CustomDataLoader.I.AddPattern(newPattern).Forget();
         }
 
+        public void DeletePattern(PatternJsonData pattern)
+        {
+            //¶¬Ï‚İUI‚ğŒŸõ
+            if (!TryFindPatternUI(pattern, out var patternUI)) return;
+
+            //UI‚ğíœ
+            _clonedUI.Remove(patternUI);
+            Destroy(patternUI.gameObject);
+
+            if (patternUI.PatternData.IsSelect)
+            {
+                SetPattern(_clonedUI[0]);
+            }
+
+            //ƒtƒ@ƒCƒ‹‚ğíœ
+            CustomDataLoader.I.DeletePattern(pattern).Forget();
+        }
+
         private void AddPatternUI(PatternJsonData pattern)
         {
             var patternUI = InstantiateContent(_prefab);
 
+            InitializePatternUI(pattern, patternUI);
+            _clonedUI.Add(patternUI);
+        }
+
+        private void InitializePatternUI(PatternJsonData pattern, PatternUIControl patternUI)
+        {
             Action<PatternUIControl> onSelect = uiData =>
-              {
-                  SelectPattern(uiData);
-                  _onPatternSelect?.Invoke();
-              };
+            {
+                SelectPattern(uiData);
+                _onPatternSelect?.Invoke();
+            };
 
             patternUI.SetData(pattern, onSelect, _optionMenu.Open);
             if (pattern.IsSelect)
@@ -87,17 +120,32 @@ namespace Title.Custom
             _stage.SetCustom(patternUI.PatternData.SpeedPattern);
         }
 
-        public async void SetPattern()
+        public async void SetPattern(PatternUIControl patternUI)
         {
-            if (_usePattern == _currentSelect) return;
+            if (_usePattern == patternUI) return;
             _usePattern?.ShowSetPattern(false);
             _usePattern.PatternData.IsSelect = false;
             await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
 
-            _usePattern = _currentSelect;
+            _usePattern = patternUI;
             _usePattern.PatternData.IsSelect = true;
             await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
             _usePattern.ShowSetPattern(true);
+
+            InitializePatternUI(patternUI.PatternData,patternUI);
+        }
+
+        public void SetPattern()
+        {
+            SetPattern(_currentSelect); 
+        }
+
+        public void SetPattern(PatternJsonData patternData)
+        {
+            //¶¬Ï‚İUI‚ğŒŸõ
+            if (!TryFindPatternUI(patternData, out var patternUI)) return;
+
+            SetPattern(patternUI);
         }
 
         public async void SavePattern()
@@ -109,6 +157,22 @@ namespace Title.Custom
             _currentSelect.PatternData.JudgePattern = _judge.GetCustom();
             _currentSelect.PatternData.SpeedPattern = _stage.GetCustom();
             await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
+        }
+
+        public void RenamePattern(PatternJsonData patternData,string newName)
+        {
+            patternData.PatternName = newName;
+            CustomDataLoader.I.SavePattern(patternData).Forget();
+
+            if (!TryFindPatternUI(patternData,out var patternUI)) return;
+
+            InitializePatternUI(patternData, patternUI);
+        }
+
+        private  bool TryFindPatternUI(PatternJsonData patternData,out PatternUIControl patternUI)
+        {
+            patternUI = _clonedUI.FirstOrDefault(x => x.PatternData == patternData);
+            return patternUI != null;
         }
     }
 }
