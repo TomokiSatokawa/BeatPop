@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// ÉmÅ[ÉcUI

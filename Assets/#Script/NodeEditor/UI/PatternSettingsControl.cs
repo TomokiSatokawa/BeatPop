@@ -7,7 +7,7 @@ using InGame.Stage;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CustomEditor.UI
+namespace JsonEditor.UI
 {
     /// <summary>
     /// ライトパターンのパラメータ設定UI

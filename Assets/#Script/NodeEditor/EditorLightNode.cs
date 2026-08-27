@@ -4,7 +4,7 @@ using InGame;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// ライトパターンのノーツUI

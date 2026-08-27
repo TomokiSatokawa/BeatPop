@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using InGame;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// ü‚Ì•\¦

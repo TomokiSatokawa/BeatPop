@@ -2,7 +2,7 @@ using InGame;
 using R3;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディター専用の曲サウンド

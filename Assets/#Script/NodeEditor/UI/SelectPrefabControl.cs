@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace CustomEditor.UI
+namespace JsonEditor.UI
 {
     /// <summary>
     /// パターン設定UIのドロップダウンUI

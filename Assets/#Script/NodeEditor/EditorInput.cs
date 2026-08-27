@@ -2,7 +2,7 @@ using InGame;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターの入力処理

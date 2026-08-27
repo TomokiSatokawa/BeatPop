@@ -6,7 +6,7 @@ using InGame.Stage;
 using R3;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターでのライトパターンデータを管理

@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターのマネージャー

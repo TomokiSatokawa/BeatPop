@@ -6,7 +6,7 @@ using R3;
 using Sound;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターでノーツの音を出す

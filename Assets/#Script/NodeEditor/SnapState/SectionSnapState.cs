@@ -1,4 +1,4 @@
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// セクションステート

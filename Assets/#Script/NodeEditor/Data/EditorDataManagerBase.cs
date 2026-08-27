@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターのデータ管理ベースクラス

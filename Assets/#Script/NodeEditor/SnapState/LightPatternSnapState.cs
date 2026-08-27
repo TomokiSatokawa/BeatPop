@@ -1,8 +1,8 @@
-using CustomEditor.UI;
+using JsonEditor.UI;
 using InGame.Stage;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// ライトパターンステート

@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace CustomEditor.UI
+namespace JsonEditor.UI
 {
     /// <summary>
     /// パターン設定のフィールドUI

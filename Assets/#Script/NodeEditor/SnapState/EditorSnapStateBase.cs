@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// スナップステートのベースクラス

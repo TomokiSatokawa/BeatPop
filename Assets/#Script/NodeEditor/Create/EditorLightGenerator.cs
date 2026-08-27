@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using CustomEditor.UI;
+using JsonEditor.UI;
 using InGame.Stage;
 using R3;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// ライトノードの表示

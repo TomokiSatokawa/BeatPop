@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 7236900580305376282}
   - component: {fileID: 1362371921876108645}
   - component: {fileID: 7389969896432624120}
-  - component: {fileID: 4897714637960779764}
+  - component: {fileID: 6904758994476064633}
   m_Layer: 5
   m_Name: None
   m_TagString: Untagged
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4897714637960779764
+--- !u!114 &6904758994476064633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,9 +360,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1933308511155759235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 65ed1812f62e3c446a834e4abdc4ddd8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.TextButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -395,6 +395,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _text: {fileID: 7430481946027710118}
 --- !u!1 &2484753401046152142
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,12 +491,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title.SegmentedControl
   _buttons:
-  - {fileID: 4897714637960779764}
-  - {fileID: 4426775654644307671}
-  - {fileID: 7150866895358680477}
-  - {fileID: 2964005806864903731}
+  - {fileID: 6904758994476064633}
+  - {fileID: 7044334843349323926}
+  - {fileID: 8803402955096483443}
+  - {fileID: 1448074791815762092}
   _selectColor: {r: 1, g: 0.8486492, b: 0.435849, a: 1}
   _unSelectColor: {r: 0.8415094, g: 0.8415094, b: 0.8415094, a: 1}
+  _selectTextColor: {r: 1, g: 1, b: 1, a: 1}
+  _unSelectTextColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectSprite: {fileID: 0}
+  _unSelectSprite: {fileID: 0}
   _startIndex: 2
   _onValueChanged:
     m_PersistentCalls:
@@ -511,7 +516,7 @@ GameObject:
   - component: {fileID: 4937552878972905771}
   - component: {fileID: 1517561773998355611}
   - component: {fileID: 8556792627417976834}
-  - component: {fileID: 7150866895358680477}
+  - component: {fileID: 8803402955096483443}
   m_Layer: 5
   m_Name: Normal
   m_TagString: Untagged
@@ -577,7 +582,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7150866895358680477
+--- !u!114 &8803402955096483443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,9 +591,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4546665622760386425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 65ed1812f62e3c446a834e4abdc4ddd8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.TextButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -621,6 +626,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _text: {fileID: 7965076083525489352}
 --- !u!1 &6603875039595898652
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +638,7 @@ GameObject:
   - component: {fileID: 4005782253992007892}
   - component: {fileID: 9149146056092489049}
   - component: {fileID: 1421212860515107914}
-  - component: {fileID: 2964005806864903731}
+  - component: {fileID: 1448074791815762092}
   m_Layer: 5
   m_Name: High
   m_TagString: Untagged
@@ -698,7 +704,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2964005806864903731
+--- !u!114 &1448074791815762092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -707,9 +713,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6603875039595898652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 65ed1812f62e3c446a834e4abdc4ddd8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.TextButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -742,6 +748,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _text: {fileID: 5485152463382751790}
 --- !u!1 &7345368800079678654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1034,7 @@ GameObject:
   - component: {fileID: 7468050025313331162}
   - component: {fileID: 2626587477113426664}
   - component: {fileID: 1274647043289107040}
-  - component: {fileID: 4426775654644307671}
+  - component: {fileID: 7044334843349323926}
   m_Layer: 5
   m_Name: Low
   m_TagString: Untagged
@@ -1093,7 +1100,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4426775654644307671
+--- !u!114 &7044334843349323926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1102,9 +1109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7934826739108661165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 65ed1812f62e3c446a834e4abdc4ddd8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.TextButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -1137,3 +1144,4 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _text: {fileID: 3067061367547512770}

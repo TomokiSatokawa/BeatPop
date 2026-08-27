@@ -1,7 +1,7 @@
 using InGame;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// エディターでの描画ベースクラス

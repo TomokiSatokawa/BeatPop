@@ -1,3 +1,4 @@
+using Common.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -9,9 +10,13 @@ namespace Title
     /// </summary>
     public class SegmentedControl : MonoBehaviour
     {
-        [SerializeField] protected Button[] _buttons;
+        [SerializeField] protected TextButton[] _buttons;
         [SerializeField] protected Color _selectColor;
         [SerializeField] protected Color _unSelectColor;
+        [SerializeField] protected Color _selectTextColor;
+        [SerializeField] protected Color _unSelectTextColor;
+        [SerializeField] protected Sprite _selectSprite;
+        [SerializeField] protected Sprite _unSelectSprite;
         [SerializeField] protected int _startIndex;
         [SerializeField] protected UnityEvent<int> _onValueChanged;
         protected int _currentIndex = -1;
@@ -36,13 +41,20 @@ namespace Title
         {
             _buttons[index].onClick.AddListener(() => OnClick(index));
             _buttons[index].image.color = _unSelectColor;
+            _buttons[index].Text.color = _unSelectTextColor;
         }
 
         public virtual void OnClick(int i)
         {
-            //ButtonÇÃêFïœçX
+            //ButtonÇÃå©ÇΩñ⁄ïœçX
             _buttons[_currentIndex].image.color = _unSelectColor;
+            _buttons[_currentIndex].image.sprite = _unSelectSprite;
+            _buttons[_currentIndex].Text.color = _unSelectTextColor;
+
             _buttons[i].image.color = _selectColor;
+            _buttons[i].image.sprite = _selectSprite;
+            _buttons[i].Text.color = _selectTextColor;
+
 
             _currentIndex = i;
             _onValueChanged?.Invoke(i);

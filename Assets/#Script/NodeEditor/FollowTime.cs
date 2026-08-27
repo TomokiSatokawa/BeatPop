@@ -1,7 +1,7 @@
 using InGame;
 using UnityEngine;
 
-namespace CustomEditor
+namespace JsonEditor
 {
     /// <summary>
     /// StageTimeに合わせてタイムライン上の位置を変える
