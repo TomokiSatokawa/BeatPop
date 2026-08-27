@@ -4,15 +4,15 @@
     "IsSelect": true,
     "IsDefault": false,
     "SoundPattern": {
-        "UsePreset": false,
-        "_preset": 0,
-        "_normal": 4,
-        "_highScore": 3,
-        "_flick": 1,
-        "_holdStart": 2,
+        "UsePreset": true,
+        "_preset": 1,
+        "_normal": 5,
+        "_highScore": 5,
+        "_flick": 5,
+        "_holdStart": 5,
         "_holdFill": 0,
-        "_holdEnd": 2,
-        "_tickNode": 4
+        "_holdEnd": 5,
+        "_tickNode": 5
     },
     "ChartPattern": {
         "FlickConvertLevel": 0,

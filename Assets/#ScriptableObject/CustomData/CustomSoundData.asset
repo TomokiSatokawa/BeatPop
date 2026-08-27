@@ -12,28 +12,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c4a33b85040ae4284c6680cd4503d6, type: 3}
   m_Name: CustomSoundData
   m_EditorClassIdentifier: Assembly-CSharp::CustomSoundData
+  _presetDatas:
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F3 "
+    _value:
+      _items:
+      - Key: 1
+        Value: 0
+      - Key: 2
+        Value: 1
+      - Key: 3
+        Value: 2
+      - Key: 4
+        Value: 0
+      - Key: 5
+        Value: 2
+      - Key: 6
+        Value: 4
+      - Key: 7
+        Value: 3
+  - _name: "\u30AF\u30E9\u30C3\u30D7"
+    _value:
+      _items:
+      - Key: 1
+        Value: 5
+      - Key: 2
+        Value: 7
+      - Key: 3
+        Value: 8
+      - Key: 4
+        Value: 1
+      - Key: 5
+        Value: 5
+      - Key: 6
+        Value: 9
+      - Key: 7
+        Value: 7
   _holdSE:
   - _name: Hold1
     _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
     _volume: 10
-  - _name: Hold1
+  - _name: "\u306A\u3057"
     _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
-    _volume: 10
+    _volume: 0
   _tapSE:
-  - _name: Tap1
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F31"
     _clip: {fileID: 8300000, guid: ca203f76c4c49314da9ee8d58852b6e7, type: 3}
     _volume: 10
-  - _name: Tap2
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F32"
     _clip: {fileID: 8300000, guid: ea13e5c2d40c8e74f8dcbbd2382ed845, type: 3}
     _volume: 10
-  - _name: Tap3
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F33"
     _clip: {fileID: 8300000, guid: eeb62268f0b984a4dae7b38f04e4c765, type: 3}
     _volume: 10
-  - _name: Tap4
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F34"
     _clip: {fileID: 8300000, guid: 0f71c7eef5401044398682168e92393c, type: 3}
     _volume: 10
-  - _name: Tap5
+  - _name: "\u30BF\u30F3\u30D0\u30EA\u30F35"
     _clip: {fileID: 8300000, guid: 525d70ff6e5e9de498fd60abb3947d94, type: 3}
+    _volume: 10
+  - _name: "\u30AF\u30E9\u30C3\u30D71"
+    _clip: {fileID: 8300000, guid: 0316993024a195e4c881819a103ec57b, type: 3}
+    _volume: 5
+  - _name: "\u30AF\u30E9\u30C3\u30D72"
+    _clip: {fileID: 8300000, guid: ec08452ff2dff724eb9b273a5bc053e7, type: 3}
+    _volume: 5
+  - _name: "\u30AF\u30E9\u30C3\u30D73"
+    _clip: {fileID: 8300000, guid: 8177d2319197c694486ae85acd068628, type: 3}
+    _volume: 5
+  - _name: "\u30AF\u30E9\u30C3\u30D74"
+    _clip: {fileID: 8300000, guid: 87cd5438b681c2a4aa64f8702dea41f4, type: 3}
+    _volume: 5
+  - _name: "\u30AF\u30E9\u30C3\u30D75"
+    _clip: {fileID: 8300000, guid: ecd609068c3582f43906754ddd5c4316, type: 3}
     _volume: 10
   _uesDefaultPreset: 1
   _defaultValue:

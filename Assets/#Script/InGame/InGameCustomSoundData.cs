@@ -24,7 +24,7 @@ namespace InGame
         private void Initialize()
         {
             CustomSoundPattern soundPattern = SongPlayContext.I?.PatternData?.SoundPattern ?? _soundData.GetDefault();
-                 var presetData = _soundData.PresetDatas[soundPattern.GetData(CustomSoundType.Preset)].Value;
+            var presetData = _soundData.PresetDatas[soundPattern.GetData(CustomSoundType.Preset)].Value;
 
             foreach (CustomSoundType type in Enum.GetValues(typeof(CustomSoundType)))
             {
@@ -32,7 +32,7 @@ namespace InGame
 
                 int index;
                 if (soundPattern.UsePreset)
-                    index = presetData[type];   
+                    index = presetData[type];
                 else
                     index = soundPattern.GetData(type);
 
