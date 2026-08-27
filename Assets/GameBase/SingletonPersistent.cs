@@ -27,6 +27,7 @@ public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T
         if (I != null)
         {
             Destroy(I.gameObject);
+            I = null;
         }
     }
 }

@@ -52,7 +52,7 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
     _volume: 10
   - _name: "\u306A\u3057"
-    _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
+    _clip: {fileID: 0}
     _volume: 0
   _tapSE:
   - _name: "\u30BF\u30F3\u30D0\u30EA\u30F31"
@@ -80,10 +80,10 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 8177d2319197c694486ae85acd068628, type: 3}
     _volume: 5
   - _name: "\u30AF\u30E9\u30C3\u30D74"
-    _clip: {fileID: 8300000, guid: 87cd5438b681c2a4aa64f8702dea41f4, type: 3}
+    _clip: {fileID: 8300000, guid: 5f1ba608e19b0a54dafbfb34102b2ff0, type: 3}
     _volume: 5
   - _name: "\u30AF\u30E9\u30C3\u30D75"
-    _clip: {fileID: 8300000, guid: ecd609068c3582f43906754ddd5c4316, type: 3}
+    _clip: {fileID: 8300000, guid: 854e2005d029adf4caf34d0c95e59d0e, type: 3}
     _volume: 10
   _uesDefaultPreset: 1
   _defaultValue:

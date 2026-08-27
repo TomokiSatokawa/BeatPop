@@ -4386,7 +4386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e89c500cce62d4db704a93fedd32c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.Node.NodeController
-  _nodeHitExecutor: {fileID: 1252056269}
 --- !u!114 &1252056267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4429,6 +4428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee52720584fae54c92b14b60f1a01bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeHitExecutor
+  _nodeController: {fileID: 1252056266}
   _nodeFillManager: {fileID: 1252056267}
   _laneClick: {fileID: 1946836279}
 --- !u!114 &1252056270

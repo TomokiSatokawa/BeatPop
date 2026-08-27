@@ -9,6 +9,7 @@ namespace Title.Custom
     {
         [SerializeField] private CustomSoundData _customSoundData;
         [SerializeField] private CustomColorData _customColorData;
+        [SerializeField] private CustomStageData _customStageData;
         public PatternJsonData GetDefaultPattern()
         {
             PatternJsonData pattern = new();
@@ -16,7 +17,7 @@ namespace Title.Custom
             pattern.ColorPattern = _customColorData.GetDefault();
             pattern.ChartPattern = default;
             pattern.JudgePattern = default;
-            pattern.SpeedPattern = default;
+            pattern.SpeedPattern = _customStageData.GetDefault();
             return pattern;
         }
     }

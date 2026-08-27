@@ -13,6 +13,7 @@ namespace InGame.Node
     /// </summary>
     public class NodeHitExecutor : MonoBehaviour
     {
+        [SerializeField] private NodeController _nodeController;
         [SerializeField] private HoldNodeFillManager _nodeFillManager;
         [SerializeField] private LaneClickEffect _laneClick;
 
@@ -26,6 +27,9 @@ namespace InGame.Node
                 ExecuteHoldJudge(0, InputManager.LeftLane.CurrentValue);
                 ExecuteHoldJudge(1, InputManager.RightLane.CurrentValue);
             });
+
+            _nodeController.OnRemoveNode.Subscribe(HandleRemove).AddTo(this);
+            _nodeController.OnHitNode.Subscribe(HandleHit).AddTo(this);
         }
 
         public void HandleHit(NodeObject targetNode)

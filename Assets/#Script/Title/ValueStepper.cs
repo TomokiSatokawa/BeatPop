@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Title
@@ -15,6 +15,7 @@ namespace Title
         [SerializeField] private float _startValue;
         [SerializeField] private int _displayDigitCount;
         [SerializeField] private TextMeshProUGUI _textValue;
+        [SerializeField] private UnityEvent<float> _onValueChange;
 
         private float _value;
         public float Value => _value;
@@ -47,6 +48,7 @@ namespace Title
         private void OnClick(float amount)
         {
             SetValue(_value + amount);
+            _onValueChange?.Invoke(_value);
         }
 
         private void UpdateInteractable()
@@ -85,7 +87,7 @@ namespace Title
                 _removeButton.onClick.AddListener(() => onClick.Invoke(-_amount));
             }
 
-          
+
         }
 
         public static float GetInterpolationFactor(ValueStepper valueStepper, float value)

@@ -139,3 +139,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomPatternLoader
   _customSoundData: {fileID: 11400000, guid: daaffa28af7676f418eb95b1a71f2173, type: 2}
   _customColorData: {fileID: 11400000, guid: d94bdf745ea10b14596cb852761c9739, type: 2}
+  _customStageData: {fileID: 11400000, guid: abd22bdd6a601984290adf155ba2a3f0, type: 2}

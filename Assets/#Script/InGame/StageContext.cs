@@ -27,10 +27,11 @@ namespace InGame
         public float ArrivalSeconds => _arrivalSeconds;
 
         private float _arrivalSeconds;
-        
+
         protected override void OnAwake()
         {
-            _arrivalSeconds = _customStageData.GetSpeedSecond(SongPlayContext.I.PatternData.SpeedPattern.NodeSpeed);
+            if (SongPlayContext.I != null)
+                _arrivalSeconds = _customStageData.GetSpeedSecond(SongPlayContext.I.PatternData.SpeedPattern.NodeSpeed);
         }
         public Vector3 GetClonePos(int lane)
         {
@@ -41,6 +42,10 @@ namespace InGame
             }
 
             return _clonePos[lane].position;
+        }
+        public void ChangeArrivalSeconds(float arrivalSeconds)
+        {
+            _arrivalSeconds = arrivalSeconds;
         }
     }
 }

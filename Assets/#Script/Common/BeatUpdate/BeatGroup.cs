@@ -40,24 +40,31 @@ namespace Common.BeatUpdate
         /// <summary>
         /// BeatUpdate‚É“o˜^‚·‚é
         /// </summary>
-        public void Subscribe(int division, float timeOffset, Action<BeatData> callback)
+        public IDisposableBeat Subscribe(int division, float timeOffset, Action<BeatData> callback)
         {
             if (division <= 0)
             {
                 Debug.LogError($"[BeatUpdate] Division‚ª•s³‚Å‚· : {division}");
-                return;
+                return null;
             }
 
             if (callback == null)
             {
                 Debug.LogError("[BeatUpdate] callback‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-                return;
+                return null;
             }
 
             var handle = new BeatUpdateHandle(division, timeOffset, callback,BeatUpdateManager.I.UpdateRefresh);
-            _handles.Add(handle);
+            var disposable = new DisposableBeat(() => Unsubscribe(handle));
 
+            _handles.Add(handle);
             callback?.Invoke(default);
+            return disposable;
+        }
+
+        private void Unsubscribe(BeatUpdateHandle handle)
+        {
+            _handles.Remove(handle);
         }
 
         public void Clear()

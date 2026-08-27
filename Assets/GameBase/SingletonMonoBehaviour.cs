@@ -24,4 +24,12 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
             I = null;
         }
     }
+    public static void Depose()
+    {
+        if (I != null)
+        {
+            Destroy(I);
+            I = null;
+        }
+    }
 }

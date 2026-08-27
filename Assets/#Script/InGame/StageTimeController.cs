@@ -59,12 +59,21 @@ namespace InGame
             SetPlayData(bpm, endTime, sectionTime);
         }
 
-        public void SetPlayData(float bpm, float endTime, float startSection)
+        public void SetPlayData(float bpm, float endTime, float startSection, AudioClip clip = null, float timeOffset = 0)
         {
             _bpm = bpm;
             EndTime = endTime;
-            SongClip = SongPlayContext.I.SongData.SongData.Audio;
-            _timeOffset = SongPlayContext.I.SongData.SongData.StageTimeOffSet;
+
+            if (SongPlayContext.I == null)
+            {
+                SongClip = clip;
+                _timeOffset = timeOffset;
+            }
+            else
+            {
+                SongClip = SongPlayContext.I.SongData.SongData.Audio;
+                _timeOffset = SongPlayContext.I.SongData.SongData.StageTimeOffSet;
+            }
 
             StartSectionTime = startSection;
         }
@@ -74,11 +83,17 @@ namespace InGame
             float dray = Mathf.Max(0, _waitSeconds - StartSectionTime);
             float time = StartSectionTime - (_waitSeconds - dray);
 
-            SoundManager.BGM.PlayDspBGM(SongClip, dray, time);
+            if (SongClip != null)
+                SoundManager.BGM.PlayDspBGM(SongClip, dray, time);
             _startDspTime = AudioSettings.dspTime + _waitSeconds - StartSectionTime;
             StageTime = -_waitSeconds;
-            _isPlaying.Value = true;
-            _onInitialized.OnNext(Unit.Default);
+
+            if (!_isPlaying.Value)
+            {
+                _isPlaying.Value = true;
+                _onInitialized.OnNext(Unit.Default);
+            }
+
             IsInitialized = true;
         }
 

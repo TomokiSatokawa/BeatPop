@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e9ddccde87be347abe6bc5585d85e5, type: 3}
   m_Name: CustomStageData
   m_EditorClassIdentifier: Assembly-CSharp::Title.Custom.CustomStageData
-  _defaultNodeSpeedValue: 5
-  _maxNodeSpeedSecond: 0.1
-  _minNodeSpeedSecond: 2
+  _defaultNodeSpeedValue: 0.5
+  _maxNodeSpeedSecond: 0.65
+  _minNodeSpeedSecond: 5

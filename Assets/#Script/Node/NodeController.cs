@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Input;
+using R3;
 using UnityEngine;
 
 namespace InGame.Node
@@ -11,12 +11,14 @@ namespace InGame.Node
     /// </summary>
     public class NodeController : MonoBehaviour
     {
-        [SerializeField] private NodeHitExecutor _nodeHitExecutor;
-
         private readonly List<NodeObject> _nodes = new();
         private readonly List<NodeObject> _removeNodes = new();
         private readonly List<NodeObject> _tickNodeHit = new();
+        private readonly Subject<NodeObject> _onRemoveNode = new();
+        private readonly Subject<NodeObject> _onHitNode = new();
 
+        public Observable<NodeObject> OnRemoveNode => _onRemoveNode;
+        public Observable<NodeObject> OnHitNode => _onHitNode;
 
         public void AddNode(NodeObject node)
         {
@@ -25,7 +27,7 @@ namespace InGame.Node
 
         private void Update()
         {
-            if (!StageTimeController.I.IsPlaying.CurrentValue) return;
+            if (!StageTimeController.I?.IsPlaying.CurrentValue ?? true) return;
 
             UpdateNodes();
             ClickHitNode();
@@ -41,31 +43,32 @@ namespace InGame.Node
 
             foreach (NodeObject node in _nodes)
             {
+                Debug.Log(node);
                 if (node.NodeData.Time <= deleteTime)
                 {
                     _removeNodes.Add(node);
                 }
-                float startTime = node.NodeData.Time - StageConfig .I.ArrivalSeconds;
+                float startTime = node.NodeData.Time - StageConfig.I.ArrivalSeconds;
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
-                Vector3 startPosition = StageConfig .I.GetClonePos(node.NodeData.Lane);
+                Vector3 startPosition = StageConfig.I.GetClonePos(node.NodeData.Lane);
                 Vector3 endPosition = startPosition;
-                endPosition.z = StageConfig .I.StageLayout.GoalPos;
+                endPosition.z = StageConfig.I.StageLayout.GoalPos;
                 node.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, progress);
 
-                if(node.Type == PoolPrefabType.TickNode && TickNodeCheck(node))
+                if (node.Type == PoolPrefabType.TickNode && TickNodeCheck(node))
                 {
-                   _tickNodeHit.Add(node);
+                    _tickNodeHit.Add(node);
                 }
             }
         }
 
         private void ClickHitNode()
         {
-            foreach(NodeObject node in _tickNodeHit)
+            foreach (NodeObject node in _tickNodeHit)
             {
-               ClickNode(node);
+                ClickNode(node);
             }
             _tickNodeHit.Clear();
         }
@@ -76,7 +79,7 @@ namespace InGame.Node
             {
                 if (node.Type != PoolPrefabType.Line)
                 {
-                    _nodeHitExecutor.HandleRemove(node);
+                    _onRemoveNode.OnNext(node);
                 }
                 node.Release();
                 _nodes.Remove(node);
@@ -85,7 +88,7 @@ namespace InGame.Node
 
         private bool TickNodeCheck(NodeObject node)
         {
-            if(node.NodeData.Time <= StageTimeController.StageTime)
+            if (node.NodeData.Time <= StageTimeController.StageTime)
             {
                 if (node.NodeData.Lane == 0 && InputManager.LeftLane.CurrentValue)
                 {
@@ -138,7 +141,7 @@ namespace InGame.Node
         {
             targetNode.Release();
             _nodes.Remove(targetNode);
-            _nodeHitExecutor.HandleHit(targetNode);
+            _onHitNode.OnNext(targetNode);
         }
 
         public NodeObject GetClonedNode(int nodeID)

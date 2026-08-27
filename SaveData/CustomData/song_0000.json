@@ -1,30 +1,30 @@
 {
     "PatternName": "デフォルト",
     "FileName": "song_0000.json",
-    "IsSelect": false,
+    "IsSelect": true,
     "IsDefault": true,
     "SoundPattern": {
-        "UsePreset": false,
+        "UsePreset": true,
         "_preset": 0,
-        "_normal": 4,
-        "_highScore": 0,
-        "_flick": 0,
-        "_holdStart": 0,
+        "_normal": 0,
+        "_highScore": 3,
+        "_flick": 1,
+        "_holdStart": 2,
         "_holdFill": 0,
         "_holdEnd": 2,
-        "_tickNode": 0
+        "_tickNode": 4
     },
     "ChartPattern": {
         "FlickConvertLevel": 0,
         "LongConvertLevel": 0
     },
     "ColorPattern": {
-        "NormalColor": 0,
-        "FlickColor": 0,
-        "LongColor": 0,
-        "LongFlickColor": 0,
-        "HighScoreColor": 0,
-        "TickColor": 0
+        "NormalColor": 11,
+        "FlickColor": 2,
+        "LongColor": 5,
+        "LongFlickColor": 5,
+        "HighScoreColor": 2,
+        "TickColor": 6
     },
     "JudgePattern": {
         "_normalJudgeLevel": 0.0,
@@ -35,7 +35,7 @@
         "_highScoreJudgeLevel": 0.0
     },
     "SpeedPattern": {
-        "NodeSpeed": 0.4444444477558136,
-        "JudgeOffset": 0.0
+        "NodeSpeed": 0.5,
+        "JudgeOffset": 1.0
     }
 }
