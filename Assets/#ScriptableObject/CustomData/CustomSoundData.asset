@@ -16,6 +16,9 @@ MonoBehaviour:
   - _name: Hold1
     _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
     _volume: 10
+  - _name: Hold1
+    _clip: {fileID: 8300000, guid: acf6559d59a1e294cb1c2032dcc62c1f, type: 3}
+    _volume: 10
   _tapSE:
   - _name: Tap1
     _clip: {fileID: 8300000, guid: ca203f76c4c49314da9ee8d58852b6e7, type: 3}
@@ -32,10 +35,22 @@ MonoBehaviour:
   - _name: Tap5
     _clip: {fileID: 8300000, guid: 525d70ff6e5e9de498fd60abb3947d94, type: 3}
     _volume: 10
-  _normalDefault: 0
-  _highScoreDefault: 3
-  _flickDefault: 1
-  _longStartDefault: 2
-  _longFillDefault: 0
-  _longEndDefault: 2
-  _tickDefault: 4
+  _uesDefaultPreset: 1
+  _defaultValue:
+    _items:
+    - Key: 0
+      Value: 0
+    - Key: 1
+      Value: 0
+    - Key: 2
+      Value: 1
+    - Key: 3
+      Value: 2
+    - Key: 4
+      Value: 0
+    - Key: 5
+      Value: 2
+    - Key: 6
+      Value: 4
+    - Key: 7
+      Value: 3

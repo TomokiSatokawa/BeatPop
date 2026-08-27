@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Title.Custom;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 [CreateAssetMenu(fileName = "CustomColorData", menuName = "Scriptable Objects/CustomColorData")]
 public class CustomColorData : ScriptableObject
@@ -33,7 +32,7 @@ public class CustomColorData : ScriptableObject
     {
         var result = new CustomColorPattern();
 
-        foreach(var value in _defaultValue.Items)
+        foreach (var value in _defaultValue.Items)
         {
             result.SetData(value.Key, value.Value);
         }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SongListDataBase
   m_EditorClassIdentifier: Assembly-CSharp::SongListDataBase
   _songDatas:
-  - {fileID: 11400000, guid: be73e53f3ceff924b80078c66598e8b0, type: 2}
   - {fileID: 11400000, guid: 29dda3cc50b456046a14ed730a3eeec7, type: 2}
   - {fileID: 11400000, guid: ed3c487dd992f4d428fdc878c5ec87f6, type: 2}
   - {fileID: 11400000, guid: 7771e672bb4638d47b66b5a9fdcffcf0, type: 2}

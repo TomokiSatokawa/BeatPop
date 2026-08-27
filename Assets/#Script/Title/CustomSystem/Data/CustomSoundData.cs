@@ -6,30 +6,25 @@ namespace Title.Custom
     [CreateAssetMenu(fileName = "CustomSoundData", menuName = "Scriptable Objects/CustomSoundData")]
     public class CustomSoundData : ScriptableObject
     {
-        //TODO:ÉmÅ[Écï SEÇ…ïœçXÇ∑ÇÈ
+        [SerializeField] private List<PresetData> _presetDatas;
         [SerializeField] private List<SEData> _holdSE;
         [SerializeField] private List<SEData> _tapSE;
-        [SerializeField] public int _normalDefault;
-        [SerializeField] public int _highScoreDefault;
-        [SerializeField] public int _flickDefault;
-        [SerializeField] public int _longStartDefault;
-        [SerializeField] public int _longFillDefault;
-        [SerializeField] public int _longEndDefault;
-        [SerializeField] public int _tickDefault;
+        [SerializeField] private bool _uesDefaultPreset = true;
+        [SerializeField] private SerializableDictionary<CustomSoundType, int> _defaultValue = new();
+        public IReadOnlyList<PresetData> PresetDatas => _presetDatas;
         public IReadOnlyList<SEData> TapSE => _tapSE;
         public IReadOnlyList<SEData> HoldSE => _holdSE;
 
-        public CustomSoundPattern GetDefaultCustom()
+        public CustomSoundPattern GetDefault()
         {
             var result = new CustomSoundPattern();
 
-            result.NormalSE = _normalDefault;
-            result.HighScore = _highScoreDefault;
-            result.FlickSE = _flickDefault;
-            result.HoldStart = _longStartDefault;
-            result.HoldFill = _longFillDefault;
-            result.HoldEnd = _longEndDefault;
-            result.TickNode = _tickDefault;
+            result.UsePreset = _uesDefaultPreset;
+
+            foreach (var kv in _defaultValue.Items)
+            {
+                result.SetData(kv.Key, kv.Value);
+            }
 
             return result;
         }
@@ -44,5 +39,14 @@ namespace Title.Custom
         public string Name => _name;
         public AudioClip Clip => _clip;
         public float Volume => _volume;
+    }
+
+    [System.Serializable]
+    public class PresetData
+    {
+        [SerializeField] private string _name;
+        [SerializeField] private SerializableDictionary<CustomSoundType, int> _value = new();
+        public string Name => _name;
+        public IReadOnlyDictionary<CustomSoundType, int> Value => _value.ToDictionary();
     }
 }

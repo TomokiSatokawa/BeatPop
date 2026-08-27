@@ -64,6 +64,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
 
     public Dictionary<TKey, TValue> ToDictionary()
     {
+        OnAfterDeserialize();
         return new Dictionary<TKey, TValue>(_dictionary);
     }
 

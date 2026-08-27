@@ -12,7 +12,7 @@ namespace Title.Custom
         public PatternJsonData GetDefaultPattern()
         {
             PatternJsonData pattern = new();
-            pattern.SoundPattern = _customSoundData.GetDefaultCustom();
+            pattern.SoundPattern = _customSoundData.GetDefault();
             pattern.ColorPattern = _customColorData.GetDefault();
             pattern.ChartPattern = default;
             pattern.JudgePattern = default;

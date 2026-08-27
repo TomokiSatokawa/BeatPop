@@ -1,18 +1,18 @@
 {
-    "PatternName": "デフォルト",
-    "FileName": "song_0001.json",
-    "IsSelect": false,
+    "PatternName": "Test",
+    "FileName": "song_0002.json",
+    "IsSelect": true,
     "IsDefault": false,
     "SoundPattern": {
         "UsePreset": false,
         "_preset": 0,
-        "_normal": 0,
-        "_highScore": 0,
-        "_flick": 0,
-        "_holdStart": 0,
+        "_normal": 4,
+        "_highScore": 3,
+        "_flick": 1,
+        "_holdStart": 2,
         "_holdFill": 0,
         "_holdEnd": 2,
-        "_tickNode": 0
+        "_tickNode": 4
     },
     "ChartPattern": {
         "FlickConvertLevel": 0,
@@ -36,6 +36,6 @@
     },
     "SpeedPattern": {
         "NodeSpeed": 0.0,
-        "JudgeOffset": 1.0
+        "JudgeOffset": 0.0
     }
 }

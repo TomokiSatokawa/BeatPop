@@ -14,6 +14,7 @@ public class QuickPlay : EditorWindow
     private const string SongDataKey = "QuickPlay_SongData";
     private const string LevelKey = "QuickPlay_Level";
     private const string SoundDataKey = "QuickPlay_SoundData";
+    private const string ColorDataKey = "QuickPlay_ColorData";
     private const string FoldoutKey = "QuickPlay_Foldout";
     private const string SectionKey = "QuickPlay_Section";
     private const string AutoPlayKey = "QuickPlay_AutoPlay";
@@ -28,6 +29,7 @@ public class QuickPlay : EditorWindow
     private int _startSection;
 
     private CustomSoundData _soundData;
+    private CustomColorData _colorData;
     private bool foldout = false;
 
     private string _previousScenePath;
@@ -65,6 +67,7 @@ public class QuickPlay : EditorWindow
         if (foldout)
         {
             _soundData = (CustomSoundData)EditorGUILayout.ObjectField("カスタムサウンド", _soundData, typeof(CustomSoundData), true);
+            _colorData = (CustomColorData)EditorGUILayout.ObjectField("カスタムカラー", _colorData, typeof(CustomColorData), true);
         }
 
         _autoPlay = EditorGUILayout.Toggle("オートプレイ", _autoPlay);
@@ -113,9 +116,11 @@ public class QuickPlay : EditorWindow
         _levelIndex = EditorPrefs.GetInt(LevelKey, 0);
 
         string soundPath = EditorPrefs.GetString(SoundDataKey, "");
+        string colorPath = EditorPrefs.GetString(ColorDataKey, "");
         if (!string.IsNullOrEmpty(soundPath))
         {
             _soundData = AssetDatabase.LoadAssetAtPath<CustomSoundData>(soundPath);
+            _colorData = AssetDatabase.LoadAssetAtPath<CustomColorData>(colorPath);
         }
 
         foldout = EditorPrefs.GetBool(FoldoutKey, false);
@@ -182,7 +187,8 @@ public class QuickPlay : EditorWindow
         var pattern = new PatternJsonData
         {
             PatternName = "QuickPlay",
-            SoundPattern = _soundData.GetDefaultCustom(),
+            SoundPattern = _soundData.GetDefault(),
+            ColorPattern = _colorData.GetDefault(),
             ChartPattern = default
         };
 
