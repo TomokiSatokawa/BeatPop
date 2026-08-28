@@ -101,7 +101,6 @@ public class AudioSpectrum : MonoBehaviour
     {
         await UniTask.Yield();
         bgmSource = SoundManager.BGM.AudioScore;
-        Debug.Log(bgmSource);
     }
 
     void Update()

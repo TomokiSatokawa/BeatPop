@@ -71,7 +71,6 @@ namespace Input
                 if (!SongPlayContext.I.IsAutoPlay)
                     return;
 
-                Debug.Log("AutoPlayStart");
                 _autoPlayInput = new(x.Nodes);
 
                 _autoPlayInput.LeftMain += b => _leftLane.Value = b;

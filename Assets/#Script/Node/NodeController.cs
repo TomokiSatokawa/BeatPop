@@ -43,7 +43,6 @@ namespace InGame.Node
 
             foreach (NodeObject node in _nodes)
             {
-                Debug.Log(node);
                 if (node.NodeData.Time <= deleteTime)
                 {
                     _removeNodes.Add(node);

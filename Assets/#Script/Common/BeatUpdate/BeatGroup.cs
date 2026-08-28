@@ -43,7 +43,6 @@ namespace Common.BeatUpdate
         /// </summary>
         public IDisposableBeat Subscribe(int division, float timeOffset, Action<BeatData> callback)
         {
-            Debug.Log(callback.ToString());
             if (division <= 0)
             {
                 Debug.LogError($"[BeatUpdate] Division‚ª•s³‚Å‚· : {division}");

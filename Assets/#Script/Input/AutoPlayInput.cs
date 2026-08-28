@@ -43,7 +43,6 @@ namespace Input
                 if (node.Time > StageTimeController.StageTime)
                     break;
 
-                Debug.Log(node.PrefabType);
                 OnInput(node);
                 _nextNode++;
             }
