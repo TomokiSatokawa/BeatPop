@@ -4874,7 +4874,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205246447}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -17896,7 +17896,7 @@ MonoBehaviour:
   - {fileID: 303579402}
   _startPos: 1994
   _duration: 0.3
-  _interval: 0.3
+  _interval: 0.2
   _moveStartDirection: 2
   _startScale: 0.9
   _useFade: 1
