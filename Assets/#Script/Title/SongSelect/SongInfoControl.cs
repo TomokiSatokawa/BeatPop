@@ -34,6 +34,8 @@ namespace Title.SongSelect
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private DifficultyButtonSegmented _segmentControl;
         [SerializeField] private TitleSoundController _songPreviewPlayer;
+        [Header("Debug")]
+        [SerializeField] private Toggle _autoPlay;
 
         private static SongSelectData? _currentData;
         public static SongSelectData? CurrentData => _currentData;
@@ -41,6 +43,7 @@ namespace Title.SongSelect
         {
             _clauseButton.onClick.AddListener(OnClause);
             _backGroundArea.onClick.AddListener(OnClause);
+            _autoPlay?.gameObject.SetActive(Debug.isDebugBuild);
         }
 
         public void ShowInfo(SongSelectData data)
@@ -115,7 +118,7 @@ namespace Title.SongSelect
         public void OnPlay()
         {
             if (!_currentData.HasValue) return;
-            TitleManager.I.StartPlay(CurrentData.Value);
+            TitleManager.I.StartPlay(CurrentData.Value,Debug.isDebugBuild ? _autoPlay.isOn : false);
         }
     }
 }

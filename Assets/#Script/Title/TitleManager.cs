@@ -20,7 +20,7 @@ namespace Title
         private Subject<SongSelectData> _onStartPlay = new();
         public Observable<SongSelectData> OnStartPlay => _onStartPlay;
 
-        public async void StartPlay(SongSelectData songSelectData)
+        public async void StartPlay(SongSelectData songSelectData,bool autoPlay = false)
         {
             _onStartPlay.OnNext(songSelectData);
 
@@ -31,7 +31,7 @@ namespace Title
 
             var patterns = await CustomDataLoader.I.GetAllCustomPattern();
             var usePattern = patterns.Where(x => x.IsSelect).First();
-            _songPlayLoader.CreatePlayManager(songSelectData, usePattern);
+            _songPlayLoader.CreatePlayManager(songSelectData, usePattern,autoPlay);
 
             await _sceneLoad.LoadSceneAsync("InGame", new CancellationTokenSource().Token);
         }

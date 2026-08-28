@@ -17,7 +17,7 @@ namespace Common.PlaySystem
         /// <summary>
         /// SongPlayContextÇê∂ê¨Ç∑ÇÈ
         /// </summary>
-        public void CreatePlayManager(SongSelectData songData,PatternJsonData patternJsonData)
+        public void CreatePlayManager(SongSelectData songData,PatternJsonData patternJsonData,bool autoPlay = false)
         {
             if(_managerPrefab == null)
             {
@@ -32,6 +32,7 @@ namespace Common.PlaySystem
 
             var playManager = Instantiate(_managerPrefab);
             playManager.SetData(songData,patternJsonData, StartSection);
+            playManager.SetAutoPlay(autoPlay);
         }
     }
 }
