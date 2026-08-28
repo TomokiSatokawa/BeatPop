@@ -16,6 +16,7 @@ namespace InGame.UI
         [SerializeField] private TextMeshProUGUI _valueText;
         [SerializeField] private AddScoreAnimation _addScore;
         [SerializeField] private float _animationDuration = 0.3f;
+        [SerializeField] private int _displayDigitCount = 6;
 
         private int _currentScore;
         private Sequence _addScoreAnimation;
@@ -28,7 +29,7 @@ namespace InGame.UI
         private void Initialize()
         {
             _sliderImage.fillAmount = 0;
-            _valueText.text = "00000";
+            _valueText.text = 0.ToString("D" + _displayDigitCount);
             _currentScore = 0;
         }
 
@@ -48,7 +49,7 @@ namespace InGame.UI
 
             _addScoreAnimation.Join(
                 DOVirtual.Int(startScore, score, _animationDuration,
-                    x => _valueText.text = x.ToString("D5")));
+                    x => _valueText.text = x.ToString("D" + _displayDigitCount)));
 
         }
 
