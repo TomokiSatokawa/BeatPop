@@ -113,7 +113,7 @@ namespace InGame.Node
             newObject.transform.position = startPosition;
             newObject.transform.rotation = Quaternion.identity;
 
-            newObject.SetNodeData(nodeData);
+            newObject.SetNodeData(nodeData,nodeData.Time - StageConfig.I.ArrivalSeconds);
             _nodeController.AddNode(newObject);
             return newObject;
         }

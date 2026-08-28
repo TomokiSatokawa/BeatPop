@@ -48,7 +48,7 @@ namespace InGame.Node
                 {
                     _removeNodes.Add(node);
                 }
-                float startTime = node.NodeData.Time - StageConfig.I.ArrivalSeconds;
+                float startTime = node.StartTime;
 
                 float progress = (stageTime - startTime) / (node.NodeData.Time - startTime);
 
@@ -147,6 +147,18 @@ namespace InGame.Node
         public NodeObject GetClonedNode(int nodeID)
         {
             return _nodes.FirstOrDefault(x => x.NodeData.NodeID == nodeID);
+        }
+
+        /// <summary>
+        /// ‚·‚×‚Äƒm[ƒc‚ğíœ‚·‚é
+        /// </summary>
+        public void ReleaseAll()
+        {
+            foreach(var node in _nodes)
+            {
+                node.Release();
+            }
+            _nodes.Clear();
         }
     }
 }

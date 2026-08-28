@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Title.Custom
@@ -34,7 +33,7 @@ namespace Title.Custom
             string manifestJson = "";
 
             //manifest‚ðì‚é
-            if (!await FileStorage.TryGetText(FolderName,ManifestFileName, t => manifestJson = t))
+            if (!await FileStorage.TryGetText(FolderName, ManifestFileName, t => manifestJson = t))
             {
                 manifestJson = await CreateDefaultManifest();
                 await FileStorage.CreateFile(FolderName, ManifestFileName, manifestJson);
@@ -47,7 +46,7 @@ namespace Title.Custom
                 if (!await FileStorage.TryGetText(FolderName, filePath, null))
                 {
                     Debug.LogError($"ƒtƒ@ƒCƒ‹”j‘¹ {filePath}");
-                }   
+                }
 
                 await UniTask.Yield();
             }
@@ -106,7 +105,7 @@ namespace Title.Custom
         /// </summary>
         public async UniTask DeletePattern(PatternJsonData patternData)
         {
-            await FileStorage.DeleteFile(FolderName,patternData.FileName);
+            await FileStorage.DeleteFile(FolderName, patternData.FileName);
             _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
         }
 

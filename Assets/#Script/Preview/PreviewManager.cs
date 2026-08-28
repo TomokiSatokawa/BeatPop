@@ -21,8 +21,6 @@ namespace Preview
 
         private void Start()
         {
-            _stageTimeController.SetPlayData(_bpm, float.MaxValue, 0);
-            _stageTimeController.StartSongPlay();
             _stageTimeController.OnGameClear.Subscribe(_ => _stageTimeController.StartSongPlay()).AddTo(this);
         }
 
@@ -33,10 +31,18 @@ namespace Preview
 
         public void OnChangeValue(float speed)
         {
+            Debug.Log($"change {speed}");
+            if (!_stageTimeController.IsInitialized)
+            {
+                _stageTimeController.SetPlayData(_bpm, float.MaxValue, 0);
+                _stageTimeController.StartSongPlay();
+            }
+
             float second = _customStageData.GetSpeedSecond(speed);
             _previewNodeGenerator.Initialize(second);
             _stageConfig.ChangeArrivalSeconds(second);
         }
+
         public static void DontDestroyRelease()
         {
             ScoreDataManager.DisposeSingleton();

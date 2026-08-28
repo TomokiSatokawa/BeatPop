@@ -9,21 +9,25 @@ namespace InGame.Sound
     /// </summary>
     public class Metronome : MonoBehaviour
     {
-        [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _firstBeatClip;
         [SerializeField] private AudioClip _subBeatClip;
+        [SerializeField] private AudioClip _tickClip;
 
         private void Start()
         {
-            BeatUpdateManager.BeatUpdate.Subscribe(4, 0, x =>
+            BeatUpdateManager.BeatUpdate.Subscribe(8, 0, x =>
             {
                 if (x.Division <= 1)
                 {
                     SoundManager.SE.PlaySE(_firstBeatClip);
                 }
-                else
+                else if (x.Division <= 4)
                 {
                     SoundManager.SE.PlaySE(_subBeatClip);
+                }
+                else
+                {
+                    SoundManager.SE.PlaySE(_tickClip);
                 }
             });
         }

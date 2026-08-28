@@ -7,6 +7,7 @@ namespace Common.BeatUpdate
     /// <summary>
     /// BeatUpdateに登録する1個単位のデータ
     /// </summary>
+    [System.Serializable]
     public class BeatUpdateHandle
     {
         private  const int MaxDivision = 64;

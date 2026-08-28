@@ -7,6 +7,7 @@ namespace Common.BeatUpdate
     /// <summary>
     /// BeatUpdateでのBeatUpdateHandleのグループ
     /// </summary>
+    [System.Serializable]
     public class BeatGroup
     {
         /// <summary> BeatUpdateデータ </summary>
@@ -42,6 +43,7 @@ namespace Common.BeatUpdate
         /// </summary>
         public IDisposableBeat Subscribe(int division, float timeOffset, Action<BeatData> callback)
         {
+            Debug.Log(callback.ToString());
             if (division <= 0)
             {
                 Debug.LogError($"[BeatUpdate] Divisionが不正です : {division}");
@@ -58,7 +60,7 @@ namespace Common.BeatUpdate
             var disposable = new DisposableBeat(() => Unsubscribe(handle));
 
             _handles.Add(handle);
-            callback?.Invoke(default);
+            //callback?.Invoke(default);
             return disposable;
         }
 

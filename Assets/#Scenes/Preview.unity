@@ -904,16 +904,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3616543104272650505, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3616543104272650505, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-      propertyPath: _subBeatClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c2ed4afab48137549a4ee5767443cdbc, type: 3}
-    - target: {fileID: 3616543104272650505, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
-      propertyPath: _firstBeatClip
-      value: 
-      objectReference: {fileID: 8300000, guid: edea962c2b5a989418f618dfee03ec75, type: 3}
     - target: {fileID: 5979149741678687714, guid: b2f46b9045a247344b459926fd14fec8, type: 3}
       propertyPath: m_Name
       value: Sound

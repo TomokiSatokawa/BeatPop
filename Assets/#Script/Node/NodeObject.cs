@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace InGame.Node
 {
@@ -13,6 +11,7 @@ namespace InGame.Node
 
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
         public NodeData NodeData { get; private set; }
+        public float StartTime { get; private set; }
 
         public void Start()
         {
@@ -31,9 +30,10 @@ namespace InGame.Node
             }
         }
 
-        public void SetNodeData(NodeData data)
+        public void SetNodeData(NodeData data, float startTime)
         {
             NodeData = data;
+            StartTime = startTime;
         }
 
         public virtual void Update() { }

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Title;
 using Title.Custom;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Preview
         [SerializeField] private ValueStepper _nodeSpeed;
         [SerializeField] private string _previewScene;
         [SerializeField] private GameObject _previewImage;
+
         private void Start()
         {
             _previewImage.SetActive(false);
@@ -23,6 +25,7 @@ namespace Preview
         {
             await SceneManager.LoadSceneAsync(_previewScene, LoadSceneMode.Additive);
             _previewImage.gameObject.SetActive(true);
+            await UniTask.WaitForSeconds(1f);
             PreviewManager.I.OnChangeValue(_patternUIList.CurrentSelectData.SpeedPattern.NodeSpeed);
         }
 

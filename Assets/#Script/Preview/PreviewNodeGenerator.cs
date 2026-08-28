@@ -1,7 +1,5 @@
 using Common.BeatUpdate;
-using InGame;
 using InGame.Node;
-using R3;
 using UnityEngine;
 
 namespace Preview
@@ -25,23 +23,28 @@ namespace Preview
             _nodeColor = _colorData.GetColor(index).Color;
         }
 
-        private void GeneratorNode(float time)
+        private void GeneratorNode(int division,float time)
         {
+            if (division > 1) return;
+
             var node = PoolManager.I.Get<NodeObject>(PoolPrefabType.NormalNote, _nodeRoot);
             node.SetColor(_nodeColor);
             node.SetNodeData(new NodeData()
             {
                 Time = time + _offSet,
-            });
+                PrefabType = PoolPrefabType.NormalNote,
+                Lane = 0,
+            },time);
             node.transform.position = _clonePos.position;
             _nodeController.AddNode(node);
         }
 
         public void Initialize(float offset)
         {
+            _nodeController.ReleaseAll();
             _disposableBeat?.Dispose();
-            _offSet  = offset;
-            _disposableBeat = BeatUpdateManager.BeatUpdate.Subscribe(1, offset, x => GeneratorNode(x.Time));
+            _offSet = offset;
+            _disposableBeat = BeatUpdateManager.BeatUpdate.Subscribe(8, offset, x => GeneratorNode(x.Division, x.Time));
         }
     }
 }

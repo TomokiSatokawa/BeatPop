@@ -22,7 +22,7 @@ namespace Title.Custom
         {
             SetCustom(new CustomStagePattern()
             {
-                NodeSpeed = ValueStepper.GetInterpolationFactor(_nodeSpeed,_nodeSpeed.StartValue),
+                NodeSpeed = ValueStepper.GetInterpolationFactor(_nodeSpeed, _nodeSpeed.StartValue),
                 JudgeOffset = ValueStepper.GetInterpolationFactor(_judgeOffset, _judgeOffset.StartValue)
             });
         }

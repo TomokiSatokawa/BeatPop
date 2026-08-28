@@ -743,7 +743,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1286324519}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4862,34 +4862,10 @@ MonoBehaviour:
   _canvasGroup: {fileID: 205246450}
   _activeAction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 205246455}
-        m_TargetAssemblyTypeName: Preview.PreviewLoader, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _hiddenAction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 205246455}
-        m_TargetAssemblyTypeName: Preview.PreviewLoader, Assembly-CSharp
-        m_MethodName: Unload
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!225 &205246450
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7822,9 +7798,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 205246455}
+        m_TargetAssemblyTypeName: Preview.PreviewLoader, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 205246455}
+        m_TargetAssemblyTypeName: Preview.PreviewLoader, Assembly-CSharp
+        m_MethodName: Unload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &326236071
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -11300,7 +11300,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 175727993}
   m_HandleRect: {fileID: 175727992}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -26453,8 +26453,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1887127831}
   m_HandleRect: {fileID: 1887127830}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.5
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -31763,7 +31763,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2129949730}
   m_HandleRect: {fileID: 2129949729}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -35459,7 +35459,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 266844658}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3058864
+  m_Size: 0.30588642
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -43074,7 +43074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1954178289
@@ -46549,8 +46549,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1697646409}
   m_HandleRect: {fileID: 1697646408}
   m_Direction: 0
-  m_Value: 0.50006104
-  m_Size: 0.9994458
+  m_Value: 0.5
+  m_Size: 0.9994457
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
