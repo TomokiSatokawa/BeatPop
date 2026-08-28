@@ -15,8 +15,8 @@
         "_tickNode": 4
     },
     "ChartPattern": {
-        "FlickConvertLevel": 0,
-        "LongConvertLevel": 0
+        "FlickConvertLevel": 1,
+        "LongConvertLevel": 1
     },
     "ColorPattern": {
         "NormalColor": 11,
@@ -35,7 +35,7 @@
         "_highScoreJudgeLevel": 0.0
     },
     "SpeedPattern": {
-        "NodeSpeed": 0.45363667607307436,
-        "JudgeOffset": 1.0
+        "NodeSpeed": 0.9881820678710938,
+        "JudgeOffset": 0.0
     }
 }

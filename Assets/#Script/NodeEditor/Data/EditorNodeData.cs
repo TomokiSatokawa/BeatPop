@@ -23,7 +23,7 @@ namespace JsonEditor
         public Observable<NodeData> OnRemove => _onRemove;
         public ReadOnlyReactiveProperty<NodeSaveData> LoadedFile => _loadedFile;
 
-        public void AddNode(PoolPrefabType prefab, double time, int lean,int convertLevel = 0)
+        public void AddNode(PoolPrefabType prefab, double time, int lean, int convertLevel = 0)
         {
             if (_nodes.Exists(x => Math.Abs(x.Time - time) < Epsilon && x.Lane == lean)) return;
 
@@ -75,60 +75,10 @@ namespace JsonEditor
         {
             List<NodeData> result = nodes.OrderBy(x => x.Time).ToList();
 
-            AssignNodeIds(result);
-            ConnectHoldNotes(result);
+            ChartModifier.AssignNodeIds(result);
+            ChartModifier.ConnectHoldNotes(result);
 
             return result;
-        }
-
-        private void ConnectHoldNotes(List<NodeData> result)
-        {
-            // Hold接続
-            for (int i = 0; i < result.Count; i++)
-            {
-                var startNode = result[i];
-
-                if (startNode.PrefabType != PoolPrefabType.HoldNoteStart)
-                    continue;
-
-                for (int j = i + 1; j < result.Count; j++)
-                {
-                    var targetNode = result[j];
-
-                    // 他レーンとTickは無視
-                    if (targetNode.Lane != startNode.Lane 
-                        || targetNode.PrefabType == PoolPrefabType.TickNode)
-                        continue;
-
-                    // 同レーンの終点発見
-                    if (targetNode.PrefabType == PoolPrefabType.HoldNoteEnd
-                        ||targetNode.PrefabType == PoolPrefabType.HoldFlickEnd)
-                    {
-                        startNode.Connect = targetNode.NodeID;
-
-                        targetNode.Connect = startNode.NodeID;
-                        result[j] = targetNode;
-
-                        break;
-                    }
-
-                    // 同レーンに別ノーツがあったら接続失敗
-                    break;
-                }
-
-                result[i] = startNode;
-            }
-        }
-
-        private void AssignNodeIds(List<NodeData> result)
-        {
-            // NodeID振り直し
-            for (int i = 0; i < result.Count; i++)
-            {
-                var node = result[i];
-                node.NodeID = i;
-                result[i] = node;
-            }
         }
 
         private List<float> FinalizeSection(List<float> section)

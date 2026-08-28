@@ -15,6 +15,20 @@
             "_score": 8192,
             "_fullCombo": false,
             "_allPerfect": false
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 6978,
+            "_fullCombo": false,
+            "_allPerfect": false
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 7423,
+            "_fullCombo": false,
+            "_allPerfect": false
         }
     ]
 }
