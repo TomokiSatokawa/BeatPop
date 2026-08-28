@@ -36,6 +36,6 @@
     },
     "SpeedPattern": {
         "NodeSpeed": 0.45363667607307436,
-        "JudgeOffset": 0.0
+        "JudgeOffset": 1.0
     }
 }
