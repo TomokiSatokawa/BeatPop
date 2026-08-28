@@ -62,6 +62,9 @@ namespace Title
 
         private bool IsClamp(float value)
         {
+            float pow = Mathf.Pow(10, _displayDigitCount + 1);
+            value = Mathf.Floor(value * pow) / pow;
+            Debug.Log(value);
             return value <= _maxValue && value >= _minValue;
         }
 
@@ -92,10 +95,7 @@ namespace Title
 
         public static float GetInterpolationFactor(ValueStepper valueStepper, float value)
         {
-            return Mathf.InverseLerp(
-     valueStepper.MinValue,
-     valueStepper.MaxValue,
-     value);
+            return Mathf.InverseLerp(valueStepper.MinValue, valueStepper.MaxValue, value);
         }
     }
 }
