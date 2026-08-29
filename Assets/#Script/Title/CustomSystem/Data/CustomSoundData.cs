@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Title.Custom
 {
-    [CreateAssetMenu(fileName = "CustomSoundData", menuName = "Scriptable Objects/CustomSoundData")]
+    [CreateAssetMenu(fileName = "CustomColorData", menuName = "Scriptable Objects/Custom/CustomSoundData")]
     public class CustomSoundData : ScriptableObject
     {
         [SerializeField] private List<PresetData> _presetDatas;

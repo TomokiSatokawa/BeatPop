@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Title.Custom;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CustomColorData", menuName = "Scriptable Objects/CustomColorData")]
+[CreateAssetMenu(fileName = "CustomColorData", menuName = "Scriptable Objects/Custom/CustomColorData")]
 public class CustomColorData : ScriptableObject
 {
     [SerializeField] private ColorData[] _colorPallet;

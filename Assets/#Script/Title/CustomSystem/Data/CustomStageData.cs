@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Title.Custom
 {
 
-    [CreateAssetMenu(fileName = "CustomStageData", menuName = "Scriptable Objects/CustomStageData")]
+    [CreateAssetMenu(fileName = "CustomColorData", menuName = "Scriptable Objects/Custom/CustomStageData")]
     public class CustomStageData : ScriptableObject
     {
         [SerializeField] private float _defaultNodeSpeedValue;

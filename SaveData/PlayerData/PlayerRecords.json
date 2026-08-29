@@ -71,6 +71,13 @@
             "_score": 8470,
             "_fullCombo": false,
             "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 7779,
+            "_fullCombo": false,
+            "_allPerfect": false
         }
     ]
 }
