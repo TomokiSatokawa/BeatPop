@@ -48,8 +48,8 @@ namespace Title.Custom
 public enum CustomOtherType
 {
     None = 0,
-    FieldEffect = 1 << 0,
-    TapEffect = 1 << 1,
+    TapEffect = 1 << 0,
+    HitEffect = 1 << 1,
     StagePerformance = 1 << 2,
     MissPerformance = 1 << 3,
 }

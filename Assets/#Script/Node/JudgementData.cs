@@ -12,7 +12,6 @@ namespace InGame.Node
         public float Value;
         public float VariationRange;
         public bool ShowEarlyLateText;
-        public TMP_ColorGradient TextColor;
 
         public bool IsComboContinued;
         public bool IsAllPerfectContinued;
@@ -24,7 +23,6 @@ namespace InGame.Node
         float IReadOnlyJudgementData.Value => Value;
         float IReadOnlyJudgementData.VariationRange => VariationRange;
         bool IReadOnlyJudgementData.ShowEarlyLateText => ShowEarlyLateText;
-        TMP_ColorGradient IReadOnlyJudgementData.TextColor => TextColor;
         bool IReadOnlyJudgementData.IsComboContinued => IsComboContinued;
         bool IReadOnlyJudgementData.IsAllPerfectContinued => IsAllPerfectContinued;
         float IReadOnlyJudgementData.ScoreMultiplier => ScoreMultiplier;
@@ -41,8 +39,6 @@ namespace InGame.Node
         public float VariationRange { get; }
 
         public bool ShowEarlyLateText { get; }
-
-        public TMP_ColorGradient TextColor { get; }
 
         public bool IsComboContinued { get; }
 

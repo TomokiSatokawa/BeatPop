@@ -8666,6 +8666,10 @@ MonoBehaviour:
       Value: {fileID: 1949187433}
     - Key: 2
       Value: {fileID: 490458888}
+    - Key: 4
+      Value: {fileID: 1878880306}
+    - Key: 8
+      Value: {fileID: 1487977898}
 --- !u!114 &346309224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33481,6 +33485,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4949299888400859693, guid: da6170dcd9e5a8a44a5bbc7de3ce863d, type: 3}
   m_PrefabInstance: {fileID: 1487977895}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1487977898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7037275415956869208, guid: da6170dcd9e5a8a44a5bbc7de3ce863d, type: 3}
+  m_PrefabInstance: {fileID: 1487977895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a9e2abf865cdc429e5fe754b5eda35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.DoubleToggle
 --- !u!1 &1490500203
 GameObject:
   m_ObjectHideFlags: 0
@@ -42867,6 +42882,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4949299888400859693, guid: da6170dcd9e5a8a44a5bbc7de3ce863d, type: 3}
   m_PrefabInstance: {fileID: 1878880303}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878880306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7037275415956869208, guid: da6170dcd9e5a8a44a5bbc7de3ce863d, type: 3}
+  m_PrefabInstance: {fileID: 1878880303}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a9e2abf865cdc429e5fe754b5eda35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.DoubleToggle
 --- !u!1 &1879707931
 GameObject:
   m_ObjectHideFlags: 0

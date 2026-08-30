@@ -35,7 +35,7 @@ namespace InGame.UI
         private void SubscribeJudge()
         {
             //”»’è
-            _nodeHitExecutor.ShowJudge.Subscribe(data => _judgeUIControl.PlayAnimation(data.Judge.Name.ToString(), data.Judge.TextColor)).AddTo(this);
+            _nodeHitExecutor.ShowJudge.Subscribe(data => _judgeUIControl.PlayAnimation(data.Judge.Name)).AddTo(this);
         }
 
         private void SubscribeCombo()

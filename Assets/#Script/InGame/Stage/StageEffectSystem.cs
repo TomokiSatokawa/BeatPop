@@ -11,6 +11,7 @@ namespace InGame.Stage
     /// </summary>
     public class StageEffectSystem : MonoBehaviour
     {
+        [SerializeField] private GameObject _filter;
         [SerializeField] private LightGroupManager _frontUpperPanelLight;
         [SerializeField] private LightGroupManager _backUpperPanelLight;
         [SerializeField] private LightGroupManager _backDownPanelLight;
@@ -34,6 +35,13 @@ namespace InGame.Stage
 
             BeatUpdateManager.FastBeatUpdate.Subscribe(32, _startOffset, _ => NextPattern());
 
+            InitializeFilter();
+        }
+        private void InitializeFilter()
+        {
+            if (_filter == null) return;
+
+            _filter.gameObject.SetActive(!InGameCustomOtherData.HasFlag(CustomOtherType.StagePerformance));
         }
 
         public void NextPattern()

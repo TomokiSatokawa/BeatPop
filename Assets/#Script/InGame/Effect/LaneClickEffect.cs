@@ -33,7 +33,12 @@ namespace InGame.Effect
         /// </summary>
         public void PlayLaneHighlight(int lane,float alphaMultiplier = 1)
         {
+            //無効なレーン
             if (!IsValidLane(lane))
+                return;
+
+            //カスタムにより無効
+            if (InGameCustomOtherData.HasFlag(CustomOtherType.TapEffect))
                 return;
 
             Color color = Color.white;
@@ -54,9 +59,15 @@ namespace InGame.Effect
             if (!IsValidLane(lane))
                 return;
 
+            PlayLaneHighlight(lane, _nodeClickAlphaMultiplier);
+
+            //カスタムにより無効
+            if (InGameCustomOtherData.HasFlag(CustomOtherType.HitEffect))
+                return;
+
             var effect = PoolManager.I.Get<PoolObject>(PoolPrefabType.LaneEffect);
             effect.transform.position = _laneHighlight[lane].EffectPosition;
-            PlayLaneHighlight(lane, _nodeClickAlphaMultiplier);
+
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 {
     "PatternName": "デフォルト",
     "FileName": "song_0000.json",
-    "IsSelect": true,
+    "IsSelect": false,
     "IsDefault": true,
     "SoundPattern": {
         "UsePreset": true,
@@ -39,6 +39,6 @@
         "JudgeOffset": 1.0
     },
     "OtherPattern": {
-        "Flags": 0
+        "Flags": 11
     }
 }

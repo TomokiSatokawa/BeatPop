@@ -1,7 +1,7 @@
 {
     "PatternName": "デフォルト",
     "FileName": "song_0001.json",
-    "IsSelect": false,
+    "IsSelect": true,
     "IsDefault": false,
     "SoundPattern": {
         "UsePreset": true,

@@ -32,6 +32,9 @@ namespace InGame.UI
 
         public void PlayAnimation()
         {
+            if (InGameCustomOtherData.HasFlag(CustomOtherType.MissPerformance)) 
+                return;
+            
             _sequence.Restart();
         }
 
