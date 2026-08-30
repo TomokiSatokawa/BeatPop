@@ -17,8 +17,8 @@ namespace InGame.UI
         [SerializeField] private float _backgroundAlpha = 0.75f;
 
         [Header("Text")]
-        [SerializeField] private TextMeshProUGUI _title;
-        [SerializeField] private TextMeshProUGUI _subTitle;
+        [SerializeField] private Image _leftImage;
+        [SerializeField] private Image _rightImage;
         [SerializeField] private Ease _textEase;
 
         [Header("Animation")]
@@ -37,8 +37,8 @@ namespace InGame.UI
         public void SetActive(bool active)
         {
             _backGround.gameObject.SetActive(active);
-            _title.gameObject.SetActive(active);
-            _subTitle.gameObject.SetActive(active);
+            _leftImage.gameObject.SetActive(active);
+            _rightImage.gameObject.SetActive(active);
         }
 
         public void StartAnimation(Action onComplete = null)
@@ -50,17 +50,17 @@ namespace InGame.UI
 
             _backGround.color = new Color(0, 0, 0, 0);
 
-            InitText(_title);
-            InitText(_subTitle);
+            InitText(_leftImage);
+            InitText(_rightImage);
 
-            Vector2 titleTarget = _title.rectTransform.anchoredPosition;
-            Vector2 subTarget = _subTitle.rectTransform.anchoredPosition;
+            Vector2 titleTarget = _leftImage.rectTransform.anchoredPosition;
+            Vector2 subTarget = _rightImage.rectTransform.anchoredPosition;
 
             // 中央から開始
-            _title.rectTransform.anchoredPosition =
+            _leftImage.rectTransform.anchoredPosition =
                 new Vector2(0, titleTarget.y);
 
-            _subTitle.rectTransform.anchoredPosition =
+            _rightImage.rectTransform.anchoredPosition =
                 new Vector2(0, subTarget.y);
 
             // 背景（アニメーション開始と同時）
@@ -72,24 +72,24 @@ namespace InGame.UI
             // タイトル（アニメーション開始から _textStartDelay 秒後）
             _sequence.Insert(
                 _textStartDelay,
-                _title.DOFade(1, _textFadeDuration)
+                _leftImage.DOFade(1, _textFadeDuration)
                 .SetEase(_textEase));
 
             _sequence.Insert(
                 _textStartDelay,
-                _title.rectTransform
+                _leftImage.rectTransform
                     .DOAnchorPosX(titleTarget.x, _textFadeDuration)
                     .SetEase(_textEase));
 
             // サブタイトル（アニメーション開始から _textStartDelay 秒後）
             _sequence.Insert(
                 _textStartDelay,
-                _subTitle.DOFade(1, _textFadeDuration)
+                _rightImage.DOFade(1, _textFadeDuration)
                   .SetEase(_textEase));
 
             _sequence.Insert(
                 _textStartDelay,
-                _subTitle.rectTransform
+                _rightImage.rectTransform
                     .DOAnchorPosX(subTarget.x, _textFadeDuration)
                     .SetEase(_textEase));
 
@@ -97,10 +97,12 @@ namespace InGame.UI
                 _textStartDelay + _callbackWaitTime, () => onComplete?.Invoke());
         }
 
-        private void InitText(TextMeshProUGUI text)
+        private void InitText(Image image)
         {
-            text.alpha = 0;
-            text.rectTransform.localScale = Vector3.one;
+            Color color = image.color;
+            color.a = 0f;
+            image.color = color;
+            image.rectTransform.localScale = Vector3.one;
         }
 
         private void OnDestroy()

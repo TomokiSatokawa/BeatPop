@@ -35,8 +35,8 @@
         "_highScoreJudgeLevel": 0.0
     },
     "SpeedPattern": {
-        "NodeSpeed": 0.5,
-        "JudgeOffset": 1.0
+        "NodeSpeed": 0.9545454382896423,
+        "JudgeOffset": 0.0
     },
     "OtherPattern": {
         "Flags": 0
