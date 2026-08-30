@@ -33,5 +33,6 @@ namespace Title.Custom
         public CustomColorPattern ColorPattern;
         public CustomJudgePattern JudgePattern;
         public CustomStagePattern SpeedPattern;
+        public CustomOtherPattern OtherPattern;
     }
 }

@@ -1,8 +1,8 @@
 {
     "PatternName": "デフォルト",
-    "FileName": "song_0000.json",
-    "IsSelect": true,
-    "IsDefault": true,
+    "FileName": "song_0001.json",
+    "IsSelect": false,
+    "IsDefault": false,
     "SoundPattern": {
         "UsePreset": true,
         "_preset": 0,
@@ -35,7 +35,7 @@
         "_highScoreJudgeLevel": 0.0
     },
     "SpeedPattern": {
-        "NodeSpeed": 0.8063638806343079,
+        "NodeSpeed": 0.5,
         "JudgeOffset": 1.0
     },
     "OtherPattern": {

@@ -21,6 +21,7 @@ namespace Title.Custom
         [SerializeField] private CustomColor _color;
         [SerializeField] private CustomJudge _judge;
         [SerializeField] private CustomStage _stage;
+        [SerializeField] private CustomOther _other;
         [SerializeField] private UnityEvent _onPatternSelect;
 
         private List<PatternUIControl> _clonedUI = new();
@@ -118,6 +119,7 @@ namespace Title.Custom
             _color.SetCustom(patternUI.PatternData.ColorPattern);
             _judge.SetCustom(patternUI.PatternData.JudgePattern);
             _stage.SetCustom(patternUI.PatternData.SpeedPattern);
+            _other.SetCustom(patternUI.PatternData.OtherPattern);
         }
 
         public async void SetPattern(PatternUIControl patternUI)
@@ -156,6 +158,7 @@ namespace Title.Custom
             _currentSelect.PatternData.ColorPattern = _color.GetCustom();
             _currentSelect.PatternData.JudgePattern = _judge.GetCustom();
             _currentSelect.PatternData.SpeedPattern = _stage.GetCustom();
+            _currentSelect.PatternData.OtherPattern = _other.GetCustom();
             await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
 
