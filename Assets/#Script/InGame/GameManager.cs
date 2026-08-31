@@ -59,14 +59,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         UniTask seLoad = SoundManager.I.LoadAudioClipAsync(InGameCustomSoundData.I.NodeSE.Values.Select(x => x.Clip).ToArray());
         UniTask poolClone = PoolManager.I.ClonePoolObject();
 
-        //await UniTask.WhenAll(songLoad, seLoad, poolClone);
-        Debug.Log("AAAA");
-        await songLoad;
-        Debug.Log("B");
-        await seLoad;
-        Debug.Log("C");
-        await poolClone;
-        Debug.Log("D");
+        await UniTask.WhenAll(songLoad, seLoad, poolClone);
 
         _stageTimeController.StartSongPlay();
     }

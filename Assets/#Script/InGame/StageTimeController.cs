@@ -14,6 +14,7 @@ namespace InGame
         [SerializeField] private float _resultDelay;
         [SerializeField] private float _timeOffset;
         [SerializeField] private float _bpm;
+        [SerializeField] private bool _isCompleteStop;
 
         public float BPM => _bpm;
         public float StartSectionTime { get; private set; }
@@ -105,7 +106,9 @@ namespace InGame
 
             if (StageTime >= EndTime + _resultDelay)
             {
-                //_isPlaying.Value = false;
+                if (_isCompleteStop)
+                    _isPlaying.Value = false;
+
                 _onGameClear.OnNext(Unit.Default);
             }
         }

@@ -5450,6 +5450,7 @@ MonoBehaviour:
   _resultDelay: 3
   _timeOffset: 0
   _bpm: 0
+  _isCompleteStop: 1
 --- !u!114 &1946836285
 MonoBehaviour:
   m_ObjectHideFlags: 0

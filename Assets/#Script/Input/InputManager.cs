@@ -52,7 +52,7 @@ namespace Input
             RegisterAction(_gameInputs.Player.LeftKey, OnLeftKey);
             RegisterAction(_gameInputs.Player.RightFlick, OnFlickRightKey);
             RegisterAction(_gameInputs.Player.LeftFlick, OnFlickLeftKey);
-            RegisterAction(_gameInputs.Player.Pause, OnPauseKey);
+            RegisterAction(_gameInputs.UI.Pause, OnPauseKey);
 
             _touchState = new TouchState[4];
 

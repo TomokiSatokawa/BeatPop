@@ -6,13 +6,11 @@ public abstract class SingletonPersistent<T> : SingletonMonoBehaviour<T> where T
     {
         if (I == null)
         {
-            Debug.Log("this");
             I = this as T;
         }
 
         if (I != this)
         {
-            Debug.Log("des");
             Destroy(this.gameObject);
             return;
         }

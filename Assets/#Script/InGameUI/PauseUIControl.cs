@@ -39,6 +39,9 @@ namespace InGame.UI
 
         public void ChangeActive()
         {
+            //ポーズ時間外はポーズ不可
+            if (StageTimeController.StageTime < 0 || !StageTimeController.I.IsPlaying.CurrentValue) return;
+
             if (_panelControl.IsActive)
             {
                 StartCountDown();
