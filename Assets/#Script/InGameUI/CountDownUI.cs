@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -27,24 +26,34 @@ namespace InGame.UI
         {
             gameObject.SetActive(true);
 
+            _currentTween?.Kill();
+            _currentTween = DOTween.Sequence();
+
             for (int i = _startCount; i >= 1; i--)
             {
-                _text.text = i.ToString();
+                int titleText = i;
+                _currentTween.AppendCallback(() => _text.text = titleText.ToString());
 
                 _text.transform.localScale = Vector3.zero;
                 _text.color = new Color(1, 1, 1, 0);
-
-                _currentTween?.Kill();
-
-                _currentTween = DOTween.Sequence();
                 _currentTween.Append(_text.transform.DOScale(1f, _duration * _scaleDurationRatio)
                     .SetEase(Ease.OutBack));
 
-                 _currentTween.Join(_text.DOFade(1f, _duration * _fadeDurationRatio))
-                    .AppendInterval(_duration * _waitDurationRatio)
-                    .Append(_text.DOFade(0f, _duration * _fadeDurationRatio));
+                _currentTween.Join(_text.DOFade(1f, _duration * _fadeDurationRatio))
+                   .AppendInterval(_duration * _waitDurationRatio)
+                   .Append(_text.DOFade(0f, _duration * _fadeDurationRatio));
             }
-            _currentTween.AppendCallback(() => onComplete());
+
+            _currentTween.AppendCallback(() =>
+            {
+                onComplete();
+                gameObject.SetActive(false);
+            });
+        }
+
+        public void Stop()
+        {
+            _currentTween?.Kill(false);
             gameObject.SetActive(false);
         }
 

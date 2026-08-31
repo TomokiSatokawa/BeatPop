@@ -46,13 +46,6 @@
     "_recentPlayRecords": [
         {
             "_songIndex": 6,
-            "_difficulty": 2,
-            "_score": 6067,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
             "_difficulty": 3,
             "_score": 7641,
             "_fullCombo": false,
@@ -113,6 +106,13 @@
             "_score": 560,
             "_fullCombo": false,
             "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 7798,
+            "_fullCombo": false,
+            "_allPerfect": false
         }
     ]
 }

@@ -36,7 +36,7 @@
     },
     "SpeedPattern": {
         "NodeSpeed": 0.9090907573699951,
-        "JudgeOffset": 0.0
+        "JudgeOffset": 1.0
     },
     "OtherPattern": {
         "Flags": 0
