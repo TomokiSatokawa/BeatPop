@@ -11,7 +11,6 @@ namespace InGame.UI
     /// </summary>
     public class CountDownUI : MonoBehaviour
     {
-
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private int _startCount = 3;
         [SerializeField] private float _duration = 0.8f;
@@ -19,23 +18,12 @@ namespace InGame.UI
         [SerializeField] private float _waitDurationRatio = 0.3f;
         [SerializeField] private float _fadeDurationRatio = 0.2f;
 
-        private Tween _currentTween;
+        private Sequence _currentTween;
 
         /// <summary>
         /// コールバック版
         /// </summary>
         public void Play(Action onComplete = null)
-        {
-            PlayAsync().ContinueWith(() =>
-            {
-                onComplete?.Invoke();
-            }).Forget(Debug.LogException);
-        }
-
-        /// <summary>
-        /// await版
-        /// </summary>
-        public async UniTask PlayAsync()
         {
             gameObject.SetActive(true);
 
@@ -48,16 +36,15 @@ namespace InGame.UI
 
                 _currentTween?.Kill();
 
-                _currentTween = DOTween.Sequence()
-                    .Append(_text.transform.DOScale(1f, _duration * _scaleDurationRatio)
-                    .SetEase(Ease.OutBack))
+                _currentTween = DOTween.Sequence();
+                _currentTween.Append(_text.transform.DOScale(1f, _duration * _scaleDurationRatio)
+                    .SetEase(Ease.OutBack));
 
-                    .Join(_text.DOFade(1f, _duration * _fadeDurationRatio))
+                 _currentTween.Join(_text.DOFade(1f, _duration * _fadeDurationRatio))
                     .AppendInterval(_duration * _waitDurationRatio)
                     .Append(_text.DOFade(0f, _duration * _fadeDurationRatio));
-
-                await _currentTween.AsyncWaitForCompletion();
             }
+            _currentTween.AppendCallback(() => onComplete());
             gameObject.SetActive(false);
         }
 

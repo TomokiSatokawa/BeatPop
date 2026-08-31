@@ -64,7 +64,6 @@ namespace Title
         {
             float pow = Mathf.Pow(10, _displayDigitCount + 1);
             value = Mathf.Floor(value * pow) / pow;
-            Debug.Log(value);
             return value <= _maxValue && value >= _minValue;
         }
 

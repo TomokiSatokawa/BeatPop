@@ -24,7 +24,7 @@ namespace Sound
         private readonly static List<SoundSection> _laneSE = new();
         public static IReadOnlyList<SoundSection> LaneSE => _laneSE;
 
-        public void Start()
+        protected override void OnAwake()
         {
             SE = new(_seSource, _soundDataBase);
             BGM = new(_bgmSource, _soundDataBase);
