@@ -19,7 +19,6 @@ namespace Title
         [SerializeField] private FadeImageControl _fadeImageControl;
         private Subject<SongSelectData> _onStartPlay = new();
         public Observable<SongSelectData> OnStartPlay => _onStartPlay;
-
         public async void StartPlay(SongSelectData songSelectData,bool autoPlay = false)
         {
             _onStartPlay.OnNext(songSelectData);

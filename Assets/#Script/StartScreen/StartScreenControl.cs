@@ -23,9 +23,31 @@ namespace StartScreen
         private bool _isLoading;
         private void Start()
         {
+#if UNITY_STANDALONE_WIN
+            SetWindowResolution(1170, 2532);
+#endif
             _isLoading = false;
             SoundManager.BGM.PlayBGM(_titleBGM);
             _loadText.gameObject.SetActive(false);
+        }
+        private void SetWindowResolution(int targetWidth, int targetHeight)
+        {
+            Resolution maxResolution = Screen.currentResolution;
+
+            float scale = Mathf.Min(
+                (float)maxResolution.width / targetWidth,
+                (float)maxResolution.height / targetHeight,
+                1f // Œ³‚ÌƒTƒCƒY‚æ‚è‘å‚«‚­‚µ‚È‚¢
+            );
+
+            int width = Mathf.RoundToInt(targetWidth * scale);
+            int height = Mathf.RoundToInt(targetHeight * scale);
+
+            Screen.SetResolution(
+                width,
+                height,
+                FullScreenMode.Windowed
+            );
         }
         private async UniTask LoadSaveData()
         {

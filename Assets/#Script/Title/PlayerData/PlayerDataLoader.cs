@@ -13,13 +13,16 @@ namespace Title.PlayerData
         private const string FolderName = "PlayerData";
         private const string InfoFileName = "PlayerInfo.json";
         private const string RecordsFileName = "PlayerRecords.json";
+        private const string SettingsFileName = "Settings.json";
 
         [SerializeField] private bool _isAutoLoad;
 
         private static PlayerInfo _info;
-        public static IReadOnlyPlayerInfo Info => _info;
         private static PlayerRecords _records;
+        private static SettingsData _settingsData;
+        public static IReadOnlyPlayerInfo Info => _info;
         public static IReadOnlyPlayerRecords Records => _records;
+        public static IReadOnlySettingsData Settings => _settingsData;
 
         protected override void OnAwake()
         {
@@ -33,9 +36,11 @@ namespace Title.PlayerData
         {
             _info = await TryGetCreateFile<PlayerInfo>(InfoFileName);
             _records = await TryGetCreateFile<PlayerRecords>(RecordsFileName);
+            _settingsData = await TryGetCreateFile<SettingsData>(SettingsFileName);
 
             _info.OnUpdateData.Subscribe(_ =>   UpdateFile(InfoFileName, _info).Forget());
             _records.OnUpdateData.Subscribe(_ =>   UpdateFile(RecordsFileName, _records).Forget());
+            _settingsData.OnUpdateData.Subscribe(_ =>   UpdateFile(SettingsFileName, _settingsData).Forget());
         }
 
         private async UniTask<T> TryGetCreateFile<T>(string fileName) where T : new()
