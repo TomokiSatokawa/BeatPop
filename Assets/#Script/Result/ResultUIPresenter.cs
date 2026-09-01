@@ -25,6 +25,7 @@ namespace Result.UI
         [SerializeField] private XpSliderAnimation _xpSliderAnimation;
         [SerializeField] private ItemAddView _coinAdd;
         [SerializeField] private ItemAddView _jewelryAdd;
+        [SerializeField] private HighScoreView _highScoreView;
 
         private void Awake()
         {
@@ -48,9 +49,14 @@ namespace Result.UI
             _accuracyView.OnAnimation(resultDataCollector.NodeHitCount);
             _timingSliderView.OnAnimation(resultDataCollector.FastCount, resultDataCollector.LateCount);
 
-            PlayerDataLoader.Records.SaveAddPlayData(songData, score,ScoreDataManager.ScoreData.GetResultType());
-            PlayerDataLoader.Records.SaveHighScore(songData, score,out var highScore);
+            PlayerDataLoader.Records.SaveAddPlayData(songData, score, ScoreDataManager.ScoreData.GetResultType());
+            PlayerDataLoader.Records.SaveHighScore(songData, score, out var highScore);
             PlayerDataLoader.Records.SavePlayResult(songData, score, ScoreDataManager.ScoreData.GetResultType());
+
+            if (highScore == score)
+                _highScoreView.ShowHighScore();
+            else
+                _highScoreView.HiddenHighScore();
         }
 
         public void ShowPlayerPanel()

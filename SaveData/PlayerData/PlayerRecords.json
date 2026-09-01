@@ -47,48 +47,6 @@
         {
             "_songIndex": 6,
             "_difficulty": 3,
-            "_score": 7897,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 7862,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 7652,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 8230,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 7825,
-            "_fullCombo": false,
-            "_allPerfect": false
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
-            "_score": 560,
-            "_fullCombo": false,
-            "_allPerfect": true
-        },
-        {
-            "_songIndex": 6,
-            "_difficulty": 3,
             "_score": 7798,
             "_fullCombo": false,
             "_allPerfect": false
@@ -112,6 +70,48 @@
             "_difficulty": 3,
             "_score": 7893,
             "_fullCombo": true,
+            "_allPerfect": false
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 560,
+            "_fullCombo": false,
+            "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 516,
+            "_fullCombo": false,
+            "_allPerfect": false
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 560,
+            "_fullCombo": false,
+            "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 560,
+            "_fullCombo": false,
+            "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 8230,
+            "_fullCombo": false,
+            "_allPerfect": true
+        },
+        {
+            "_songIndex": 6,
+            "_difficulty": 3,
+            "_score": 498,
+            "_fullCombo": false,
             "_allPerfect": false
         }
     ]

@@ -29,7 +29,7 @@ namespace Result.UI
             _sequence.Join(DOVirtual.Int(0, score, _animationDuration,
                 x => _scoreValue.text = x.ToString()));
 
-            _sequence.Play();
+            _sequence.Play();   
         }
     }
 }
