@@ -20,7 +20,7 @@ namespace InGame.Node
                     case PoolPrefabType.FlickNote:
                         if (convertFlick)
                         {
-                            node.PrefabType = PoolPrefabType.NormalNote;
+                            node.PrefabType = PoolPrefabType.HighScoreNote;
                         }
                         break;
 
