@@ -34,13 +34,21 @@ namespace Title.PlayerData
 
         public async UniTask LoadData()
         {
+#if UNITY_IOS && !UNITY_EDITOR
+            // iOS実機環境ではストレージを読み書きせず、メモリ上にインスタンスを保持する
+            _info = new PlayerInfo();
+            _records = new PlayerRecords();
+            _settingsData = new SettingsData();
+            await UniTask.CompletedTask;
+#else
             _info = await TryGetCreateFile<PlayerInfo>(InfoFileName);
             _records = await TryGetCreateFile<PlayerRecords>(RecordsFileName);
             _settingsData = await TryGetCreateFile<SettingsData>(SettingsFileName);
 
-            _info.OnUpdateData.Subscribe(_ =>   UpdateFile(InfoFileName, _info).Forget());
-            _records.OnUpdateData.Subscribe(_ =>   UpdateFile(RecordsFileName, _records).Forget());
-            _settingsData.OnUpdateData.Subscribe(_ =>   UpdateFile(SettingsFileName, _settingsData).Forget());
+            _info.OnUpdateData.Subscribe(_ => UpdateFile(InfoFileName, _info).Forget());
+            _records.OnUpdateData.Subscribe(_ => UpdateFile(RecordsFileName, _records).Forget());
+            _settingsData.OnUpdateData.Subscribe(_ => UpdateFile(SettingsFileName, _settingsData).Forget());
+#endif
         }
 
         private async UniTask<T> TryGetCreateFile<T>(string fileName) where T : new()
@@ -53,6 +61,7 @@ namespace Title.PlayerData
 
             return JsonUtility.FromJson<T>(infoFile);
         }
+
         private async UniTask<T> CreateFile<T>(string fileName) where T : new()
         {
             T fileData = new();
@@ -63,8 +72,13 @@ namespace Title.PlayerData
 
         private async UniTask UpdateFile<T>(string fileName, T data)
         {
+#if UNITY_IOS && !UNITY_EDITOR
+            // iOS実機ではファイル保存を行わない
+            await UniTask.CompletedTask;
+#else
             string json = JsonUtility.ToJson(data, true);
             await FileStorage.UpdateFile(FolderName, fileName, json);
+#endif
         }
     }
 }

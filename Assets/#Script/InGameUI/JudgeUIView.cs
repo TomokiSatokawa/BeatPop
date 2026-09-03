@@ -11,7 +11,7 @@ namespace InGame.UI
     public class JudgeUIView : MonoBehaviour
     {
         [Header("Animation")]
-        [SerializeField] private Image _image;
+        [SerializeField] private SpriteRenderer _sprite;
         [SerializeField] private SerializableDictionary<JudgementType, Sprite> _judgeSprite;
         [SerializeField] private float _popScale = 1.2f;
         [SerializeField] private float _popDuration = 0.08f;
@@ -24,17 +24,17 @@ namespace InGame.UI
         private void Awake()
         {
             _sequence = DOTween.Sequence()
-                .Append(_image.rectTransform.DOScale(_popScale, _popDuration).SetEase(Ease.OutBack))
-                .Append(_image.rectTransform.DOScale(_defaultSize, _returnDuration).SetEase(Ease.OutQuad))
-                .Join(_image.DOFade(0f, _fadeDuration).SetDelay(_fadeDelay))
+                .Append(_sprite.transform.DOScale(_popScale, _popDuration).SetEase(Ease.OutBack))
+                .Append(_sprite.transform.DOScale(_defaultSize, _returnDuration).SetEase(Ease.OutQuad))
+                .Join(_sprite.DOFade(0f, _fadeDuration).SetDelay(_fadeDelay))
                 .SetAutoKill(false)
                 .Pause();
         }
 
         private void OnEnable()
         {
-            _image.rectTransform.localScale = Vector3.one;
-            _image.DOFade(1, 0);
+            _sprite.transform.localScale = Vector3.one * _defaultSize;
+            _sprite.DOFade(1, 0);
         }
 
         public void PlayAnimation(JudgementType type)
@@ -45,7 +45,7 @@ namespace InGame.UI
                 Debug.LogError($"[JudgeUIView] JudgementType JudgeImage is not found typ{type}]");
                 return;
             }
-            _image.sprite = sprite;
+            _sprite.sprite = sprite;
             _sequence.Restart();
         }
 

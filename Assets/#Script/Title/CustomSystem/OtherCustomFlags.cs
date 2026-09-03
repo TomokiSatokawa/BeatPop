@@ -2,7 +2,6 @@ using System;
 
 namespace Title.Custom
 {
-
     public struct OtherCustomFlags
     {
         private CustomOtherType _flags;
@@ -52,4 +51,6 @@ public enum CustomOtherType
     HitEffect = 1 << 1,
     StagePerformance = 1 << 2,
     MissPerformance = 1 << 3,
+    UsePostProcess = 1 << 4,
+    PlayStagePerformance = 1 << 5,
 }

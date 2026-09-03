@@ -42,7 +42,7 @@ namespace InGame.Node
 
             bool isNextFlick = node?.NodeObjData.InputType == InputType.DownFlick;
 
-            if (isClick && !isNextFlick)
+            if (isClick && !isFlick && !isNextFlick)
                 EmptyClick(lane);
         }
 

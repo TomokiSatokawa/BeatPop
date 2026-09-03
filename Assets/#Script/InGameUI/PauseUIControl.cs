@@ -49,10 +49,15 @@ namespace InGame.UI
             else
             {
                 //ŠJ‚­
-                _panelControl.OnActive();
-                _countDown.Stop();
-                GameManager.I.Pause();
+                OnOpen();
             }
+        }
+
+        public void OnOpen()
+        {
+            _panelControl.OnActive();
+            _countDown.Stop();
+            GameManager.I.Pause();
         }
 
         public void StartCountDown()

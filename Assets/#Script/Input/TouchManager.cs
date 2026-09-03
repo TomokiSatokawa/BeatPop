@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace Input
@@ -46,7 +45,7 @@ namespace Input
     {
         public float Min { get; }
         public float Max { get; }
-        public FloatRange(float min , float max)
+        public FloatRange(float min, float max)
         {
             if (min > max)
                 (min, max) = (max, min);

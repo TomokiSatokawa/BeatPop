@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Common.BeatUpdate;
+using Common.PlaySystem;
 using JsonEditor;
 using R3;
+using Title.Custom;
 using UnityEngine;
 
 namespace InGame.Stage
@@ -26,6 +28,16 @@ namespace InGame.Stage
 
         private void Start()
         {
+            if (SongPlayContext.I)
+            {
+                var flag = OtherCustomFlags.Create(SongPlayContext.I.PatternData.OtherPattern.Flags);
+                if (flag.Has(CustomOtherType.PlayStagePerformance))
+                {
+                    this.enabled = false;
+                    return;
+                }
+            }
+
             StageTimeController.I.OnInitialized.Subscribe(_ => LoadPatternData()).AddTo(this);
 
             StageTimeController.I.IsPlaying
@@ -44,7 +56,7 @@ namespace InGame.Stage
             _filter.gameObject.SetActive(!InGameCustomOtherData.HasFlag(CustomOtherType.StagePerformance));
         }
 
-        public void NextPattern()
+        private void NextPattern()
         {
             if (_patternList == null || _patternList.Count == 0)
                 return;
@@ -66,7 +78,7 @@ namespace InGame.Stage
         }
 
 
-        public void ApplyPattern(LightPatternBaseData data)
+        private void ApplyPattern(LightPatternBaseData data)
         {
             switch (data.Channel)
             {
@@ -81,16 +93,13 @@ namespace InGame.Stage
                     _stageGradientLight.ChangePattern(data);
                     _laneGradientLight.ChangePattern(data);
                     break;
-                case 9:
-                    _flamethrower.ChangePattern(data);
-                    break;
                 case 10:
                     _penLight.ChangePattern(data);
                     break;
             }
         }
 
-        public void UpdateNextPattern()
+        private void UpdateNextPattern()
         {
             if (_patternList == null || _patternList.Count == 0)
                 return;
