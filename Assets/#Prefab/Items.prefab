@@ -54,7 +54,7 @@ MonoBehaviour:
   _totalCount: {fileID: 4706356243355406921}
   _addCount: {fileID: 59709545069359640}
   _digitCount: 5
-  _delay: 0.5
+  _delay: 1
   _addFadeDuration: 0.25
   _addFadeInEase: 9
   _addFadeOutEase: 8
@@ -609,7 +609,7 @@ MonoBehaviour:
   _totalCount: {fileID: 2406653920778875709}
   _addCount: {fileID: 7726585239527681525}
   _digitCount: 5
-  _delay: 0
+  _delay: 1
   _addFadeDuration: 0.25
   _addFadeInEase: 9
   _addFadeOutEase: 8

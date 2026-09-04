@@ -40,6 +40,7 @@ namespace Result.UI
         private void Start()
         {
             _addTextStartPosition = _addCount.rectTransform.anchoredPosition;
+            _addCount.text = "";
         }
 
         public void SetValue(int count)
