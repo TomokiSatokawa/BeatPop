@@ -427,7 +427,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79387968}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -698,7 +698,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164408164}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 0.95
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -10495,8 +10495,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Result.UI.XpSliderAnimation
   _levelData: {fileID: 11400000, guid: e49059ca522448a46bdb49763443adc9, type: 2}
   _slider: {fileID: 1830203568}
+  _waitDuration: 1
   _duration: 0.5
   _sliderValueText: {fileID: 1103385918}
+  _addXpValueText: {fileID: 528161024}
   _levelUpValueText: {fileID: 1621297}
   _singleEase: 10
   _startEase: 10
