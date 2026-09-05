@@ -27,7 +27,9 @@ namespace Title.PlayerData
 
         public void UpdateView()
         {
-           var highScores = PlayerDataLoader.Records.HighScores;
+            Debug.Log("ViewTable");
+
+            var highScores = PlayerDataLoader.Records.HighScores;
             var difficultyDic = highScores.GroupBy(x => x.Difficulty).ToDictionary(x => (Difficulty)x.Key, x => x.ToArray());
 
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
