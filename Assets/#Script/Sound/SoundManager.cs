@@ -67,9 +67,9 @@ namespace Sound
             }
         }
 
-        public static void CrossFadeBGM(SoundSection targetSection, SoundSection fadeOutSection, AudioClip audio, float fadeDuration, float time = 0f, bool isLoop = false)
+        public static void CrossFadeBGM(SoundSection targetSection, SoundSection fadeOutSection, AudioClip audio, float fadeDuration, float time = 0f, bool isLoop = false,bool rejectSameSong = true)
         {
-            if (targetSection.Audio == audio)
+            if (rejectSameSong && targetSection.Audio == audio)
             {
                 targetSection.VolumeFade(1, fadeDuration);
                 return;
@@ -132,8 +132,10 @@ namespace Sound
                     return;
                 }
 
+                Debug.Log(time);
                 _volumeFade?.Kill();
 
+                _audioSource.Stop();
                 _audioSource.clip = clip;
                 _audioSource.loop = isLoop;
                 _audioSource.volume = volume;

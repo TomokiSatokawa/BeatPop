@@ -3,6 +3,7 @@ using Common;
 using Cysharp.Threading.Tasks;
 using R3;
 using Sound;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Title.SongSelect
@@ -17,6 +18,7 @@ namespace Title.SongSelect
         [SerializeField] private float _stopWaitTime;
         [SerializeField] private AudioClip _titleBGM;
 
+        private IReadOnlySongData _playSongData;
         private AudioClip _playAudio;
         private float _titleBGMTime;
         private CancellationTokenSource _cancellation;
@@ -32,12 +34,32 @@ namespace Title.SongSelect
             SoundManager.BGM.PlayBGM(null);
             StopPreview();
         }
-        public void PlayPreview(IReadOnlySongData songData)
+
+        private void Update()
+        {
+            if (_playSongData == null) return;
+
+            //Preview”ÍˆÍ‚ð’´‰ß
+            if (SoundManager.BGM.Time >= _playSongData.PreviewTime.Max)
+            {
+                Debug.Log("’´‰ß");
+                FadeChangeBGM(_playSongData.Audio, _playSongData.PreviewTime.Min,false);
+            }
+        }
+
+        public void WaitPlayPreview(IReadOnlySongData songData)
         {
             CancelToken();
             _cancellation = new CancellationTokenSource();
 
-            WaitPlayPreviewAsync(songData.Audio, _cancellation.Token).Forget();
+            WaitPlayPreviewAsync(songData, _cancellation.Token).Forget();
+        }
+
+        public void PlayPreview(IReadOnlySongData songData)
+        {
+            _playAudio = songData.Audio;
+            _playSongData = songData;
+            FadeChangeBGM(songData.Audio, songData.PreviewTime.Min);
         }
 
         public async UniTask WaitBGMFadeOut()
@@ -56,8 +78,10 @@ namespace Title.SongSelect
             }
         }
 
-        private async UniTask WaitPlayPreviewAsync(AudioClip audio, CancellationToken token)
+        private async UniTask WaitPlayPreviewAsync(IReadOnlySongData songData, CancellationToken token)
         {
+            AudioClip audio = songData.Audio;
+
             if (audio == null) return;
             _playAudio = audio;
             float waitTime = _playWaitTime;
@@ -85,17 +109,18 @@ namespace Title.SongSelect
                     return;
             }
 
-            FadeChangeBGM(audio);
+            FadeChangeBGM(audio,songData.PreviewTime.Min);
+            _playSongData = songData;
         }
 
-        public void FadeChangeBGM(AudioClip audio)
+        public void FadeChangeBGM(AudioClip audio,float time = 0f,bool rejectSameSong = true)
         {
             if (SoundManager.BGM.Audio == _titleBGM)
             {
                 _titleBGMTime = SoundManager.BGM.Time;
             }
 
-            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration);
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration,time: time , rejectSameSong: rejectSameSong);
         }
 
         public void StopPreview()
@@ -117,6 +142,7 @@ namespace Title.SongSelect
             SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, _titleBGM, _fadeInDuration, _titleBGMTime, true);
             await UniTask.WaitForSeconds(_fadeInDuration, cancellationToken: token);
             _playAudio = _titleBGM;
+            _playSongData = null;
         }
     }
 }

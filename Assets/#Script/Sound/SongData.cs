@@ -22,6 +22,8 @@ namespace Common
         [SerializeField] private TextAsset _stageEffectData;
         [Space(10)]
         [SerializeField] private bool _showTutorial;
+        [Space(10)]
+        [SerializeField] private FloatRange _previewTime;
 
         public string SongName => _songName;
         public int SongID => _songID;
@@ -33,6 +35,7 @@ namespace Common
         public float EditorTimeOffSet => _editorTimeOffSet;
         public TextAsset StageEffectData => _stageEffectData;
         public bool ShowTutorial => _showTutorial;
+        public FloatRange PreviewTime => _previewTime;
     }
     public interface IReadOnlySongData
     {
@@ -46,6 +49,7 @@ namespace Common
         public float EditorTimeOffSet { get; }
         public TextAsset StageEffectData { get; }
         public bool ShowTutorial { get; }
+        public FloatRange PreviewTime { get; }
     }
 
     [System.Serializable]

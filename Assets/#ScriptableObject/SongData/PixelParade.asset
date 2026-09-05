@@ -29,3 +29,7 @@ MonoBehaviour:
   _stageTimeOffSet: 0
   _editorTimeOffSet: 0.015
   _stageEffectData: {fileID: 4900000, guid: c87b9446f9e55414ca42c5ccb222e7f8, type: 3}
+  _showTutorial: 0
+  _previewTime:
+    _min: 8.5
+    _max: 33
