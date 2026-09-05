@@ -33,6 +33,7 @@ namespace Result.UI
 
             LevelUp();
             AddCoin();
+            AddJewelry();
         }
 
         private void LevelUp()
@@ -51,6 +52,12 @@ namespace Result.UI
 
             int coinCount = _rewardData.GetCoinCount(difficulty, rankType, resultType);
             PlayerDataLoader.Info.AddCoin(coinCount);
+        }
+
+        private void AddJewelry()
+        {
+            int jewelryCount = _rewardData.GetJewelryCount(_previousPlayerInfo.Level, PlayerDataLoader.Info.Level);
+            PlayerDataLoader.Info.AddJewelry(jewelryCount);
         }
 
         public async void ReturnTitle()

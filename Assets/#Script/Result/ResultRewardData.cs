@@ -12,6 +12,7 @@ namespace Result
     {
         [SerializeField] private SerializableDictionary<Difficulty, int> _difficultyCoin;
         [SerializeField] private SerializableDictionary<RankType, float> _rankCoinMultiplier;
+        [SerializeField] private int[] _rankUpJewelryCount;
         [SerializeField] private SerializableDictionary<ResultType, float> _comboMultiplier;
 
         public int GetCoinCount(Difficulty difficulty, RankType rank, ResultType resultType)
@@ -35,6 +36,24 @@ namespace Result
             }
 
             return Mathf.FloorToInt(baseCoin * rankMultiplier * comboMultiplier);
+        }
+
+        public int GetJewelryCount(int start, int end)
+        {
+            int result = 0;
+            for(int i = start -1 ; i < end; i++)
+            {
+                int index = i;
+                if (i < 0 || i >= _rankUpJewelryCount.Length)
+                {
+                    Debug.LogError($"[ResultRewardData] “ü—Í‚³‚ê‚Ä‚¢‚È‚¢ƒŒƒxƒ‹‚ğæ“¾‚µ‚æ‚¤‚Æ‚µ‚Ü‚µ‚½B  level:{i + 1}");
+                    continue;
+                }
+
+                result += _rankUpJewelryCount[index];
+            }
+
+            return result;  
         }
     }
 }

@@ -84,6 +84,11 @@ namespace Title.PlayerData
             _coinCount += count;
         }
 
+        public void AddJewelry(int count)
+        {
+            _jewelryCount += count; 
+        }
+
         /// <summary>
         /// アイコンを変更する
         /// </summary>
@@ -112,6 +117,7 @@ namespace Title.PlayerData
         public void UpdateName(string name);
         public void UpdateLevelXp(int level,int xp);
         public void AddCoin(int count);
+        public void AddJewelry(int count);
         public void SetIconID(int iconId);
         public PlayerInfo Clone();
     }
