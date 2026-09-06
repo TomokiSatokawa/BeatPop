@@ -1,7 +1,9 @@
 using System;
 using DG.Tweening;
 using R3;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Title.Common
 {
@@ -12,6 +14,7 @@ namespace Title.Common
     public class ButtonHoverAnimation : MonoBehaviour
     {
         [SerializeField] private UIPointerHover _uIPointerHover;
+        [SerializeField] private Button _button;
         [SerializeField] private float _hoverScale = 1.1f;
         [SerializeField] private float _duration = 0.15f;
         [SerializeField] private Ease _enterEase = Ease.OutBack;
@@ -41,6 +44,8 @@ namespace Title.Common
 
         private void OnPointerEnter()
         {
+            if (!_button?.interactable ?? false) return;
+
             _tween?.Kill();
             _tween = transform.DOScale(_defaultScale * _hoverScale, _duration)
                 .SetEase(_enterEase);
