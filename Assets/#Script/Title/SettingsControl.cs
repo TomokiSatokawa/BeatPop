@@ -1,3 +1,4 @@
+using Common.UI;
 using Sound;
 using Title.PlayerData;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Title
         [SerializeField] private Slider _masterVolume;
         [SerializeField] private Slider _bgmVolume;
         [SerializeField] private Slider _seVolume;
+        [SerializeField] private SliderValueChanged _seSliderChanged;
         [SerializeField] private SESoundType _testSE;
 
         private const string MasterKey = "Master";
@@ -28,6 +30,7 @@ namespace Title
             _masterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
             _bgmVolume.onValueChanged.AddListener(OnBGMVolumeChanged);
             _seVolume.onValueChanged.AddListener(OnSEVolumeChanged);
+            _seSliderChanged.OnValueChanged.AddListener(_ => PreviewSE());
 
             // ï€ë∂ÉfÅ[É^ÇUîΩâf
             _masterVolume.value = PlayerDataLoader.Settings.MasterVolume;
@@ -53,8 +56,12 @@ namespace Title
         private void OnSEVolumeChanged(float value)
         {
             SetMixerVolume(SEKey, value);
-            SoundManager.SE.PlaySE(_testSE);
             PlayerDataLoader.Settings.SetSEVolume(value);
+        }
+
+        private void PreviewSE()
+        {
+            SoundManager.SE.PlaySE(_testSE);
         }
 
         /// <summary>
