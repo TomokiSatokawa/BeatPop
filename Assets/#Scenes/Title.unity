@@ -1175,7 +1175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &43003939
@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1869766172}
   m_HandleRect: {fileID: 1869766171}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9382,7 +9382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &401317856
@@ -10366,6 +10366,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456411059}
   m_CullTransparentMesh: 1
+--- !u!1 &457663392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3766263031443299053, guid: 66f6300e8cca4074484a9e23a369d0ab, type: 3}
+  m_PrefabInstance: {fileID: 664586415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &462805475
 GameObject:
   m_ObjectHideFlags: 0
@@ -12036,7 +12041,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 175727993}
   m_HandleRect: {fileID: 175727992}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15988,7 +15993,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3766263031443299053, guid: 66f6300e8cca4074484a9e23a369d0ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1132177850}
   m_SourcePrefab: {fileID: 100100000, guid: 66f6300e8cca4074484a9e23a369d0ab, type: 3}
 --- !u!1 &669678555
 GameObject:
@@ -17110,6 +17118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27
@@ -20875,7 +20884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00024414062}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &879468724
@@ -26632,12 +26641,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3425949971553064503, guid: 66f6300e8cca4074484a9e23a369d0ab, type: 3}
   m_PrefabInstance: {fileID: 664586415}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 457663392}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!114 &1132177850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457663392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7161f0291ff1f8478371eac098a4e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.SliderValueChanged
+  _slider: {fileID: 1132177849}
+  OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1135443274 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8690617257747734380, guid: deef9dfdf9de0ee4ca682f6eafbc1aac, type: 3}
@@ -28555,7 +28580,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1887127830}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -31879,7 +31904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1323120011
@@ -35463,6 +35488,7 @@ MonoBehaviour:
   _masterVolume: {fileID: 1571891506}
   _bgmVolume: {fileID: 935536415}
   _seVolume: {fileID: 1132177849}
+  _seSliderChanged: {fileID: 1132177850}
   _testSE: 1
 --- !u!1 &1518103143
 GameObject:
@@ -38963,6 +38989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27
@@ -41892,6 +41919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27
@@ -44299,7 +44327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00027003846}
+  m_AnchoredPosition: {x: 0, y: 0.00020751638}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1879707933
@@ -44802,6 +44830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27
@@ -45593,6 +45622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27

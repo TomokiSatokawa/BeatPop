@@ -26,6 +26,8 @@ namespace Preview
             await SceneManager.LoadSceneAsync(_previewScene, LoadSceneMode.Additive);
             _previewImage.gameObject.SetActive(true);
             await UniTask.WaitForSeconds(1f);
+
+            if (PreviewManager.I == null) return;
             PreviewManager.I.OnChangeValue(_patternUIList.CurrentSelectData.SpeedPattern.NodeSpeed);
         }
 

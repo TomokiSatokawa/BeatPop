@@ -61,6 +61,7 @@ namespace Title
 
         private void PreviewSE()
         {
+            Debug.Log("Preview");
             SoundManager.SE.PlaySE(_testSE);
         }
 

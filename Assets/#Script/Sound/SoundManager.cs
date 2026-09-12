@@ -132,7 +132,6 @@ namespace Sound
                     return;
                 }
 
-                Debug.Log(time);
                 _volumeFade?.Kill();
 
                 _audioSource.Stop();
