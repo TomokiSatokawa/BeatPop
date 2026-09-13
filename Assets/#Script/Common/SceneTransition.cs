@@ -12,6 +12,7 @@ namespace Common
     public class SceneTransition : MonoBehaviour
     {
         [SerializeField] private FadeImageControl _fadeImageControl;
+        [SerializeField] private LoadingSliderView _loadingSliderView;
         [SerializeField, Range(0.0f, 0.9f)] private float _loadCompleteProgress = 0.9f;
 
         private CancellationTokenSource _cancellation;
@@ -78,8 +79,18 @@ namespace Common
                 Debug.LogError($"[SceneLoad] Sceneƒ[ƒhŽ¸”s : {scenePath}");
                 return;
             }
+            _loadingSliderView.gameObject.SetActive(true);
 
-            await UniTask.WaitUntil(() => op.progress >= _loadCompleteProgress, cancellationToken: token);
+            while (!op.isDone)
+            {
+                _loadingSliderView.UpdateValue(op.progress);
+                if (op.progress >= _loadCompleteProgress)
+                    break;
+
+                await UniTask.Yield(cancellationToken: token);
+            }
+
+            _loadingSliderView.gameObject.SetActive(false);
 
             op.allowSceneActivation = true;
             await op.ToUniTask(cancellationToken: token);
