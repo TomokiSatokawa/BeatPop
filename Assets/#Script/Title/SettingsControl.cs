@@ -10,13 +10,15 @@ namespace Title
     /// <summary>
     /// 設定UI
     /// </summary>
-    public class SettingsControl : MonoBehaviour        
+    public class SettingsControl : MonoBehaviour
     {
         [SerializeField] private AudioMixer _audioMixer;
 
         [SerializeField] private Slider _masterVolume;
         [SerializeField] private Slider _bgmVolume;
         [SerializeField] private Slider _seVolume;
+        [SerializeField] private SliderValueChanged _masterSliderChanged;
+        [SerializeField] private SliderValueChanged _bgmSliderChanged;
         [SerializeField] private SliderValueChanged _seSliderChanged;
         [SerializeField] private SESoundType _testSE;
 
@@ -30,7 +32,17 @@ namespace Title
             _masterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
             _bgmVolume.onValueChanged.AddListener(OnBGMVolumeChanged);
             _seVolume.onValueChanged.AddListener(OnSEVolumeChanged);
-            _seSliderChanged.OnValueChanged.AddListener(_ => PreviewSE());
+
+            //セーブ
+            _masterSliderChanged.OnValueChanged.AddListener(_ => SaveVolume());
+            _bgmSliderChanged.OnValueChanged.AddListener(_ => SaveVolume());
+            _seSliderChanged.OnValueChanged.AddListener(_ =>
+            {
+                SaveVolume();
+                SoundManager.SE.PlaySE(_testSE);
+            });
+
+
 
             // 保存データをU反映
             _masterVolume.value = PlayerDataLoader.Settings.MasterVolume;
@@ -44,25 +56,24 @@ namespace Title
         private void OnMasterVolumeChanged(float value)
         {
             SetMixerVolume(MasterKey, value);
-            PlayerDataLoader.Settings.SetMasterVolume(value);
         }
 
         private void OnBGMVolumeChanged(float value)
         {
             SetMixerVolume(BgmKey, value);
-            PlayerDataLoader.Settings.SetBGMVolume(value);
         }
 
         private void OnSEVolumeChanged(float value)
         {
             SetMixerVolume(SEKey, value);
-            PlayerDataLoader.Settings.SetSEVolume(value);
         }
 
-        private void PreviewSE()
+        private void SaveVolume()
         {
-            Debug.Log("Preview");
-            SoundManager.SE.PlaySE(_testSE);
+            Debug.Log("Ｓａｖｅ");
+            PlayerDataLoader.Settings.SetMasterVolume(_masterVolume.value);
+            PlayerDataLoader.Settings.SetBGMVolume(_bgmVolume.value);
+            PlayerDataLoader.Settings.SetSEVolume(_seVolume.value);
         }
 
         /// <summary>

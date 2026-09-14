@@ -78,6 +78,16 @@ namespace Title.Custom
             CustomDataLoader.I.DeletePattern(pattern).Forget();
         }
 
+        public void ResetPattern()
+        {
+            _sound.OnDefault();
+            _chart.OnDefault();
+            _color.OnDefault();
+            _judge.OnDefault();
+            _stage.OnDefault();
+            _other.OnDefault();
+        }
+
         private void AddPatternUI(PatternJsonData pattern)
         {
             var patternUI = InstantiateContent(_prefab);
@@ -134,12 +144,12 @@ namespace Title.Custom
             await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
             _usePattern.ShowSetPattern(true);
 
-            InitializePatternUI(patternUI.PatternData,patternUI);
+            InitializePatternUI(patternUI.PatternData, patternUI);
         }
 
         public void SetPattern()
         {
-            SetPattern(_currentSelect); 
+            SetPattern(_currentSelect);
         }
 
         public void SetPattern(PatternJsonData patternData)
@@ -162,17 +172,17 @@ namespace Title.Custom
             await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
 
-        public void RenamePattern(PatternJsonData patternData,string newName)
+        public void RenamePattern(PatternJsonData patternData, string newName)
         {
             patternData.PatternName = newName;
             CustomDataLoader.I.SavePattern(patternData).Forget();
 
-            if (!TryFindPatternUI(patternData,out var patternUI)) return;
+            if (!TryFindPatternUI(patternData, out var patternUI)) return;
 
             InitializePatternUI(patternData, patternUI);
         }
 
-        private  bool TryFindPatternUI(PatternJsonData patternData,out PatternUIControl patternUI)
+        private bool TryFindPatternUI(PatternJsonData patternData, out PatternUIControl patternUI)
         {
             patternUI = _clonedUI.FirstOrDefault(x => x.PatternData == patternData);
             return patternUI != null;

@@ -71,5 +71,6 @@ namespace Sound
         ScoreCount,
         BadgeView,
         StageClear,
+        ButtonClick,
     }
 }

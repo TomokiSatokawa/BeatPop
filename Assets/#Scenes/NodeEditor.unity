@@ -2667,6 +2667,7 @@ MonoBehaviour:
   _resultDelay: 0
   _timeOffset: 0
   _bpm: 0
+  _isCompleteStop: 0
 --- !u!114 &781383609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2691,7 +2692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b5ee6be1105de4c8d851a7f70bfc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.BeatUpdateManager
-  _updateRefresh: 0
+  _updateRefresh: 1
 --- !u!114 &781383611
 MonoBehaviour:
   m_ObjectHideFlags: 0
