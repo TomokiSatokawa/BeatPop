@@ -15,6 +15,7 @@ public class CustomColorData : ScriptableObject
     {
         public Color Color;
         public string Name;
+        public string UITextName;
     }
 
     public ColorData GetColor(int index)

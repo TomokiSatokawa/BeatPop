@@ -17,7 +17,7 @@ namespace Common.UI
             _button?.onClick.AddListener(() => SoundManager.SE.PlaySE(SESoundType.ButtonClick));
         }
 
-        public void Reset()
+        public void Reset() 
         {
             GetButtonComponent();
         }

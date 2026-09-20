@@ -20,11 +20,14 @@ namespace Title.Custom
 
             //OptionçÏê¨
             foreach (var colorData in _customColorData.ColorPallet)
-                options.Add(new(colorData.Name, _optionImage, colorData.Color));
+                options.Add(new(colorData.UITextName, _optionImage, colorData.Color));
 
-            //Optionë„ì¸
+            //DropDownÇÃê›íË
             foreach (var kv in _dropdowns.Items)
+            {
+                kv.Value.captionImage.sprite= _optionImage;
                 kv.Value.options = options;
+            }
 
         }
 

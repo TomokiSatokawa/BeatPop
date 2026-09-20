@@ -15,28 +15,40 @@ MonoBehaviour:
   _colorPallet:
   - Color: {r: 1, g: 0, b: 0, a: 1}
     Name: Red
+    UITextName: "\u8D64"
   - Color: {r: 1, g: 0.27058825, b: 0, a: 1}
     Name: Orange
+    UITextName: "\u30AA\u30EC\u30F3\u30B8"
   - Color: {r: 1, g: 0.84313726, b: 0, a: 1}
     Name: Yellow
+    UITextName: "\u9EC4"
   - Color: {r: 0, g: 1, b: 0.43529412, a: 1}
     Name: Lime
+    UITextName: "\u30E9\u30A4\u30E0"
   - Color: {r: 0.49803922, g: 1, b: 0, a: 1}
     Name: Green
+    UITextName: "\u7DD1"
   - Color: {r: 0, g: 0.80784315, b: 0.81960785, a: 1}
     Name: Turquoise
+    UITextName: "\u9752\u7DD1"
   - Color: {r: 0, g: 1, b: 0.8352941, a: 1}
     Name: Mint
+    UITextName: "\u30DF\u30F3\u30C8"
   - Color: {r: 0, g: 0.7490196, b: 1, a: 1}
     Name: SkyBlue
+    UITextName: "\u6C34\u8272"
   - Color: {r: 0.11764706, g: 0.5647059, b: 1, a: 1}
     Name: Blue
+    UITextName: "\u9752"
   - Color: {r: 0.5647059, g: 0, b: 0.827451, a: 1}
     Name: Violet
+    UITextName: "\u7D2B"
   - Color: {r: 1, g: 0.078431375, b: 0.4509804, a: 1}
     Name: Pink
+    UITextName: "\u30D4\u30F3\u30AF"
   - Color: {r: 1, g: 1, b: 1, a: 1}
     Name: White
+    UITextName: "\u767D"
   _defaultValue:
     _items:
     - Key: 0

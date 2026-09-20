@@ -21,10 +21,10 @@ MonoBehaviour:
     EasyJson: {fileID: 0}
     NormalLevel: 0
     NormalJson: {fileID: 0}
-    HardLevel: 0
-    HardJson: {fileID: 0}
-    ExpertLevel: 23
-    ExpertJson: {fileID: 4900000, guid: 7102b21373f80e94a83f05ffe8b339b3, type: 3}
+    HardLevel: 21
+    HardJson: {fileID: 4900000, guid: 7102b21373f80e94a83f05ffe8b339b3, type: 3}
+    ExpertLevel: 40
+    ExpertJson: {fileID: 4900000, guid: d02898b4d8a39db4a8a5e974858b29be, type: 3}
   _audioClip: {fileID: 8300000, guid: 098be452c47a0d643a6c3f874ca1a6df, type: 3}
   _stageTimeOffSet: 0
   _editorTimeOffSet: 0
