@@ -71,6 +71,10 @@ namespace Sound
         ScoreCount,
         BadgeView,
         StageClear,
-        ButtonClick,
+        ButtonClickMain,
+        ButtonClickSub,
+        SEVolumeTest,
+        PlayStart
+
     }
 }

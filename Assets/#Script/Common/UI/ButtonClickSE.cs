@@ -10,11 +10,16 @@ namespace Common.UI
     public class ButtonClickSE : MonoBehaviour
     {
         [SerializeField] private Button _button;
+        [SerializeField] private bool _isMainButton;
+
+        private SESoundType _type;
 
         private void Start()
         {
             GetButtonComponent();
-            _button?.onClick.AddListener(() => SoundManager.SE.PlaySE(SESoundType.ButtonClick));
+            _type = _isMainButton ? SESoundType.ButtonClickMain : SESoundType.ButtonClickSub;
+
+            _button?.onClick.AddListener(PlaySE);
         }
 
         public void Reset() 
@@ -28,6 +33,10 @@ namespace Common.UI
             {
                 _button = GetComponent<Button>();
             }
+        }
+        public void PlaySE()
+        {
+            SoundManager.SE.PlaySE(_type);
         }
     }
 }

@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1510924421190262156}
   - component: {fileID: 2802634133993892448}
   - component: {fileID: 8342128079153671363}
+  - component: {fileID: 4838733903518174333}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -408,6 +409,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4838733903518174333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814265090943445155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 8342128079153671363}
+  _isMainButton: 1
 --- !u!1 &4656819440520287801
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 4349503628775895649}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27

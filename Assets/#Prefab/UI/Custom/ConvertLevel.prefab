@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 1362371921876108645}
   - component: {fileID: 7389969896432624120}
   - component: {fileID: 6904758994476064633}
+  - component: {fileID: 4453916241278902373}
   m_Layer: 5
   m_Name: None
   m_TagString: Untagged
@@ -396,6 +397,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _text: {fileID: 7430481946027710118}
+--- !u!114 &4453916241278902373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933308511155759235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 6904758994476064633}
+  _isMainButton: 0
 --- !u!1 &2484753401046152142
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +532,7 @@ GameObject:
   - component: {fileID: 1517561773998355611}
   - component: {fileID: 8556792627417976834}
   - component: {fileID: 8803402955096483443}
+  - component: {fileID: 6821548713425242072}
   m_Layer: 5
   m_Name: Normal
   m_TagString: Untagged
@@ -627,6 +643,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _text: {fileID: 7965076083525489352}
+--- !u!114 &6821548713425242072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546665622760386425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 8803402955096483443}
+  _isMainButton: 0
 --- !u!1 &6603875039595898652
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +669,7 @@ GameObject:
   - component: {fileID: 9149146056092489049}
   - component: {fileID: 1421212860515107914}
   - component: {fileID: 1448074791815762092}
+  - component: {fileID: 9128075331598670715}
   m_Layer: 5
   m_Name: High
   m_TagString: Untagged
@@ -749,6 +780,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _text: {fileID: 5485152463382751790}
+--- !u!114 &9128075331598670715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603875039595898652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 1448074791815762092}
+  _isMainButton: 0
 --- !u!1 &7345368800079678654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1080,7 @@ GameObject:
   - component: {fileID: 2626587477113426664}
   - component: {fileID: 1274647043289107040}
   - component: {fileID: 7044334843349323926}
+  - component: {fileID: 6710729500699005016}
   m_Layer: 5
   m_Name: Low
   m_TagString: Untagged
@@ -1145,3 +1191,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _text: {fileID: 3067061367547512770}
+--- !u!114 &6710729500699005016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7934826739108661165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 7044334843349323926}
+  _isMainButton: 0

@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 3507618112854934190}
   - component: {fileID: 6952275758637220680}
   - component: {fileID: 2068342852574824958}
+  - component: {fileID: 157890892383524387}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.57254905, g: 0.8862745, b: 1, a: 1}
+  m_Color: {r: 0.2, g: 0.77254903, b: 0.9098039, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
   _uIPointerHover: {fileID: 0}
+  _button: {fileID: 0}
   _hoverScale: 1.1
   _duration: 0.15
   _enterEase: 27
@@ -304,6 +306,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
+--- !u!114 &157890892383524387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624142421138198103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 3507618112854934190}
+  _isMainButton: 1
 --- !u!1 &4821140975650114741
 GameObject:
   m_ObjectHideFlags: 0

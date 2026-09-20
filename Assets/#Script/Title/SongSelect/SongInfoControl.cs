@@ -3,6 +3,7 @@ using Common;
 using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
+using Sound;
 using Title.PlayerData;
 using TMPro;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace Title.SongSelect
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private DifficultyButtonSegmented _segmentControl;
         [SerializeField] private TitleSoundController _songPreviewPlayer;
+        [Header("SE")]
+        [SerializeField] private SESoundType _playStartSE;
         [Header("Debug")]
         [SerializeField] private Toggle _autoPlay;
 
@@ -118,6 +121,7 @@ namespace Title.SongSelect
         public void OnPlay()
         {
             if (!_currentData.HasValue) return;
+            SoundManager.SE.PlaySE(_playStartSE);
             TitleManager.I.StartPlay(CurrentData.Value,Debug.isDebugBuild ? _autoPlay.isOn : false);
         }
     }

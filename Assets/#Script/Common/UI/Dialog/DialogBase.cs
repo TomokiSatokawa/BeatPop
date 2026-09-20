@@ -19,10 +19,7 @@ namespace Common.UI
 
         private void Start()
         {
-            _cancelButton.onClick.RemoveAllListeners();
             _cancelButton.onClick.AddListener(OnCancel);
-
-            _confirmButton.onClick.RemoveAllListeners();
             _confirmButton.onClick.AddListener(OnConfirm);
         }
 

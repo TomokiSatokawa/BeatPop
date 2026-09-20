@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 4751952875621391553}
   - component: {fileID: 2402019514345789813}
   - component: {fileID: 473937227105384351}
+  - component: {fileID: 1972618506128562738}
   m_Layer: 5
   m_Name: Select (1)
   m_TagString: Untagged
@@ -469,6 +470,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1972618506128562738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605883383346380550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 473937227105384351}
+  _isMainButton: 0
 --- !u!1 &7886499499247770778
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +731,7 @@ GameObject:
   - component: {fileID: 6815023549885294556}
   - component: {fileID: 2924732351137663050}
   - component: {fileID: 1471257308453296812}
+  - component: {fileID: 454630881640964090}
   m_Layer: 5
   m_Name: Setteings
   m_TagString: Untagged
@@ -825,3 +841,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &454630881640964090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882696985087501572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 1471257308453296812}
+  _isMainButton: 0
