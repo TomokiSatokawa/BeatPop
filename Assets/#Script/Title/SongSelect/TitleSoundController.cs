@@ -17,6 +17,7 @@ namespace Title.SongSelect
         [SerializeField] private float _playWaitTime;
         [SerializeField] private float _stopWaitTime;
         [SerializeField] private AudioClip _titleBGM;
+        [SerializeField, Range(0f, 1f)] private float _previewVolume;
 
         private IReadOnlySongData _playSongData;
         private AudioClip _playAudio;
@@ -120,7 +121,7 @@ namespace Title.SongSelect
                 _titleBGMTime = SoundManager.BGM.Time;
             }
 
-            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration,time: time , rejectSameSong: rejectSameSong);
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration,time: time , rejectSameSong: rejectSameSong,volume:_previewVolume);
         }
 
         public void StopPreview()

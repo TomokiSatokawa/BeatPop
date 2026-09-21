@@ -36714,6 +36714,7 @@ MonoBehaviour:
   _playWaitTime: 0.8
   _stopWaitTime: 0.5
   _titleBGM: {fileID: 8300000, guid: a073ab7dba68a44418eb3223c7a931e7, type: 3}
+  _previewVolume: 0.6
 --- !u!1 &1526194018
 GameObject:
   m_ObjectHideFlags: 0
