@@ -2,6 +2,8 @@ using System;
 using Common.PlaySystem;
 using R3;
 using Title.Custom;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace InGame
@@ -26,6 +28,7 @@ namespace InGame
                 PoolPrefabType.NormalNote => CustomColorType.Normal,
                 PoolPrefabType.FlickNote => CustomColorType.Flick,
                 PoolPrefabType.HoldNoteStart=> CustomColorType.Long,
+                PoolPrefabType.HoldNoteFill => CustomColorType.Long,
                 PoolPrefabType.HoldNoteEnd=> CustomColorType.Long,
                 PoolPrefabType.HoldFlickEnd=> CustomColorType.LongFlick,
                 PoolPrefabType.HighScoreNote=> CustomColorType.HighScore,
@@ -33,7 +36,17 @@ namespace InGame
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
 
-            return _customColorData.GetColor(customData.GetColorIndex(colorType)).Color;
+                var color =  _customColorData.GetColor(customData.GetColorIndex(colorType)).Color;
+
+            if(type == PoolPrefabType.HoldNoteFill)
+                return GetFillColor(color);
+
+            return color;
+        }
+        private Color GetFillColor(Color color)
+        {
+            color.a = _customColorData.FillNodeAlpha;
+            return color;
         }
     }
 }

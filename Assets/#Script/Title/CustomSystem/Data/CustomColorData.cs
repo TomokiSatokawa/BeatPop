@@ -7,6 +7,8 @@ public class CustomColorData : ScriptableObject
 {
     [SerializeField] private ColorData[] _colorPallet;
     [SerializeField] private SerializableDictionary<CustomColorType, int> _defaultValue;
+    [SerializeField, Range(0f, 1f)] private float _fillNodeAlpha;
+    public float FillNodeAlpha => _fillNodeAlpha;
 
     public IReadOnlyList<ColorData> ColorPallet => _colorPallet;
 

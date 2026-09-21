@@ -32,7 +32,7 @@ MonoBehaviour:
     Prefab: {fileID: 6731787771697468245, guid: 7da3f661a705a22488c3779c066abbc1, type: 3}
     StartCloneCount: 5
   - Type: 4
-    Prefab: {fileID: 7635352183370393811, guid: 7a2e1283819bf354c848674cedb78aea, type: 3}
+    Prefab: {fileID: 8665767503398566718, guid: 7a2e1283819bf354c848674cedb78aea, type: 3}
     StartCloneCount: 3
   - Type: 5
     Prefab: {fileID: 5351719247677405752, guid: 58672e0681e2435488248568201bbbb2, type: 3}
