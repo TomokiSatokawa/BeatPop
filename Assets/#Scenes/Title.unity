@@ -22930,7 +22930,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964442124}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -45966,7 +45966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
   _button: {fileID: 1898934355}
-  _isMainButton: 0
+  _isMainButton: 1
 --- !u!1 &1900230805
 GameObject:
   m_ObjectHideFlags: 0
