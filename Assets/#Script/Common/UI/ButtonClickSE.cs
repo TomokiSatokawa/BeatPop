@@ -13,6 +13,7 @@ namespace Common.UI
         [SerializeField] private bool _isMainButton;
 
         private SESoundType _type;
+        private float _ignoreTime = 1f;
 
         private void Start()
         {
@@ -36,6 +37,9 @@ namespace Common.UI
         }
         public void PlaySE()
         {
+            //èâä˙ílÇÃSEñhé~
+            if (Time.time < _ignoreTime) return;
+
             SoundManager.SE.PlaySE(_type);
         }
     }
