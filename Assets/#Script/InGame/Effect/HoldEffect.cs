@@ -10,6 +10,11 @@ namespace InGame.Effect
     {
         [SerializeField] private ParticleSystemController _particleController;
 
+        public void Start()
+        {
+            _particleController.SetColor(InGameCustomColorData.I.GetNodeColor(PoolPrefabType.HoldNoteFill));
+        }
+
         public void SetEmission(bool enable)
         {
             _particleController.SetEmission(enable);

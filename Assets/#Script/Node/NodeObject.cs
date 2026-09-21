@@ -34,6 +34,8 @@ namespace InGame.Node
             {
                 renderer.color = color;
             }
+
+            _objectData.SetNodeColor(color);
         }
 
         public void SetNodeData(NodeData data, float startTime)

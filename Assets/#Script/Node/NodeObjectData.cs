@@ -20,6 +20,11 @@ namespace InGame.Node
         public float EmissionPower => _emissionPower;
 
         public InputType InputType => _inputType;
+
+        public void SetNodeColor (Color nodeColor)
+        {
+            _nodeColor = nodeColor;
+        }
     }
 
     public interface IReadOnlyNodeObjectData

@@ -10,6 +10,24 @@ namespace Common.Effect
         [SerializeField] private ParticleSystem[] _particleSystems;
 
         /// <summary>
+        /// エフェクトの色を設定する
+        /// </summary>
+        public void SetColor(Color color)
+        {
+            foreach (var particle in _particleSystems)
+            {
+                var main = particle.main;
+
+                Color startColor = main.startColor.color;
+                startColor.r = color.r;
+                startColor.g = color.g;
+                startColor.b = color.b;
+
+                main.startColor = startColor;
+            }
+        }
+
+        /// <summary>
         /// すべてのParticleSystemのEmissionの有効・無効にする
         /// </summary>
         public void SetEmission(bool enable)
