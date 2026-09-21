@@ -15,14 +15,13 @@ MonoBehaviour:
   _songName: Signal
   _songID: 4
   _bpm: 130
-  _maxScore: 10520
   _jacket: {fileID: 21300000, guid: 9513ae17ce0776344956ba3fa32be689, type: 3}
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 4900000, guid: 2963bb232c6da5e4f994144c1d55dd7c, type: 3}
     NormalLevel: 8
     NormalJson: {fileID: 4900000, guid: 2573d4647932e6441aeb489fe5ecbc81, type: 3}
-    HardLevel: 10
+    HardLevel: 13
     HardJson: {fileID: 4900000, guid: 9315a79cbcd5c5b40bbd7695c10d7897, type: 3}
     ExpertLevel: 21
     ExpertJson: {fileID: 4900000, guid: cb5c974f39251fe4f806e6257956353e, type: 3}
@@ -30,3 +29,7 @@ MonoBehaviour:
   _stageTimeOffSet: 0
   _editorTimeOffSet: -0.2
   _stageEffectData: {fileID: 4900000, guid: c87b9446f9e55414ca42c5ccb222e7f8, type: 3}
+  _showTutorial: 0
+  _previewTime:
+    _min: 0
+    _max: 0

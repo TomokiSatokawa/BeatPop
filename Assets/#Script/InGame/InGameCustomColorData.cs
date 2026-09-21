@@ -17,6 +17,10 @@ namespace InGame
         {
             var customData = SongPlayContext.I?.PatternData?.ColorPattern ?? _customColorData.GetDefault();
 
+            //¬ßü
+            if(type == PoolPrefabType.Line)
+                return Color.white;
+
             var colorType  = type switch
             {
                 PoolPrefabType.NormalNote => CustomColorType.Normal,
@@ -26,7 +30,6 @@ namespace InGame
                 PoolPrefabType.HoldFlickEnd=> CustomColorType.LongFlick,
                 PoolPrefabType.HighScoreNote=> CustomColorType.HighScore,
                 PoolPrefabType.TickNode=> CustomColorType.Tick,
-                PoolPrefabType.Line=> CustomColorType.Normal,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
 

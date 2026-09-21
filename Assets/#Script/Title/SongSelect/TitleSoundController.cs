@@ -3,7 +3,6 @@ using Common;
 using Cysharp.Threading.Tasks;
 using R3;
 using Sound;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Title.SongSelect
@@ -44,7 +43,7 @@ namespace Title.SongSelect
             if (SoundManager.BGM.Time >= _playSongData.PreviewTime.Max)
             {
                 Debug.Log("’´‰ß");
-                FadeChangeBGM(_playSongData.Audio, _playSongData.PreviewTime.Min,false);
+                FadeChangeBGM(_playSongData.Audio, _playSongData.PreviewTime.Min, false);
             }
         }
 
@@ -117,18 +116,18 @@ namespace Title.SongSelect
                     return;
             }
 
-            FadeChangeBGM(audio,songData.PreviewTime.Min);
+            FadeChangeBGM(audio, songData.PreviewTime.Min);
             _playSongData = songData;
         }
 
-        public void FadeChangeBGM(AudioClip audio,float time = 0f,bool rejectSameSong = true)
+        public void FadeChangeBGM(AudioClip audio, float time = 0f, bool rejectSameSong = true)
         {
             if (SoundManager.BGM.Audio == _titleBGM)
             {
                 _titleBGMTime = SoundManager.BGM.Time;
             }
 
-            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration,time: time , rejectSameSong: rejectSameSong,volume:_previewVolume);
+            SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration, time: time, rejectSameSong: rejectSameSong, volume: _previewVolume);
         }
 
         public void UnselectedPreview()
@@ -153,9 +152,9 @@ namespace Title.SongSelect
         {
             await UniTask.WaitForSeconds(_stopWaitTime, cancellationToken: token);
             SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, _titleBGM, _fadeInDuration, _titleBGMTime, true);
+            _playSongData = null;
             await UniTask.WaitForSeconds(_fadeInDuration, cancellationToken: token);
             _playAudio = _titleBGM;
-            _playSongData = null;
         }
     }
 }
