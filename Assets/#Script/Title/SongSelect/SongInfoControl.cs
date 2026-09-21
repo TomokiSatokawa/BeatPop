@@ -99,7 +99,7 @@ namespace Title.SongSelect
         {
             _currentData = null;
             OnHiddenAnimation();
-            _songPreviewPlayer.StopPreview();
+            _songPreviewPlayer.UnselectedPreview();
         }
 
         private void OnActiveAnimation()

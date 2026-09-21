@@ -33,7 +33,7 @@ namespace Title.SongSelect
 
 
             SoundManager.BGM.PlayBGM(null);
-            StopPreview();
+            UnselectedPreview();
         }
 
         private void Update()
@@ -54,6 +54,13 @@ namespace Title.SongSelect
             _cancellation = new CancellationTokenSource();
 
             WaitPlayPreviewAsync(songData, _cancellation.Token).Forget();
+        }
+
+        public void ReloadPreview()
+        {
+            if (!SongInfoControl.CurrentData.HasValue) return;
+
+            PlayPreview(SongInfoControl.CurrentData.Value.SongData);
         }
 
         public void PlayPreview(IReadOnlySongData songData)
@@ -124,12 +131,17 @@ namespace Title.SongSelect
             SoundManager.CrossFadeBGM(SoundManager.BGM, SoundManager.BGMSub, audio, _fadeInDuration,time: time , rejectSameSong: rejectSameSong,volume:_previewVolume);
         }
 
-        public void StopPreview()
+        public void UnselectedPreview()
         {
             if (SongInfoControl.CurrentData.HasValue
                 && SongInfoControl.CurrentData.Value.SongData.Audio == _playAudio)
                 return;
 
+            StopPreview();
+        }
+
+        public void StopPreview()
+        {
             CancelToken();
 
             _cancellation = new CancellationTokenSource();
