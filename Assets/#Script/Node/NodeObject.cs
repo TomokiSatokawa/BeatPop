@@ -8,6 +8,7 @@ namespace InGame.Node
     public class NodeObject : PoolObject
     {
         [SerializeField] private NodeObjectData _objectData;
+        [SerializeField] private SpriteRenderer[] _otherObjects;
 
         public IReadOnlyNodeObjectData NodeObjData => _objectData;
         public NodeData NodeData { get; private set; }
@@ -27,6 +28,11 @@ namespace InGame.Node
 
                 // エミッションカラー
                 material.SetColor("_EmissionColor", color * _objectData.EmissionPower);
+            }
+
+            foreach(var renderer in _otherObjects)
+            {
+                renderer.color = color;
             }
         }
 

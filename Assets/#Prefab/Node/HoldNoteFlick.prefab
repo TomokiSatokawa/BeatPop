@@ -111,6 +111,9 @@ MonoBehaviour:
     _emissionPower: 100
     _meshRenderer: {fileID: 805465930330628248}
     _inputType: 5
+  _otherObjects:
+  - {fileID: 3345137612145416527}
+  - {fileID: 7610250170623760673}
 --- !u!1001 &1610899297133909525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,8 +195,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 086f3311855af9b41aa62ee9c499e453, type: 3}
+--- !u!212 &3345137612145416527 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4050777374616063834, guid: 086f3311855af9b41aa62ee9c499e453, type: 3}
+  m_PrefabInstance: {fileID: 1610899297133909525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6009510417779086005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4989145622925575328, guid: 086f3311855af9b41aa62ee9c499e453, type: 3}
+  m_PrefabInstance: {fileID: 1610899297133909525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7610250170623760673 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9207075443288919860, guid: 086f3311855af9b41aa62ee9c499e453, type: 3}
   m_PrefabInstance: {fileID: 1610899297133909525}
   m_PrefabAsset: {fileID: 0}
