@@ -44,10 +44,11 @@ namespace Title.PlayerData
             _info = await TryGetCreateFile<PlayerInfo>(InfoFileName);
             _records = await TryGetCreateFile<PlayerRecords>(RecordsFileName);
             _settingsData = await TryGetCreateFile<SettingsData>(SettingsFileName);
+            await FileStorage.Save();
 
-            _info.OnUpdateData.Subscribe(_ => UpdateFile(InfoFileName, _info).Forget());
-            _records.OnUpdateData.Subscribe(_ => UpdateFile(RecordsFileName, _records).Forget());
-            _settingsData.OnUpdateData.Subscribe(_ => UpdateFile(SettingsFileName, _settingsData).Forget());
+            _info.OnUpdateData.Subscribe(_ => UpdateFile(InfoFileName, _info));
+            _records.OnUpdateData.Subscribe(_ => UpdateFile(RecordsFileName, _records));
+            _settingsData.OnUpdateData.Subscribe(_ => UpdateFile(SettingsFileName, _settingsData));
 #endif
         }
 
@@ -56,29 +57,24 @@ namespace Title.PlayerData
             string infoFile = "";
             if (!await FileStorage.TryGetText(FolderName, fileName, t => infoFile = t))
             {
-                return await CreateFile<T>(fileName);
+                return CreateFile<T>(fileName);
             }
 
             return JsonUtility.FromJson<T>(infoFile);
         }
 
-        private async UniTask<T> CreateFile<T>(string fileName) where T : new()
+        private T CreateFile<T>(string fileName) where T : new()
         {
             T fileData = new();
             string json = JsonUtility.ToJson(fileData, true);
-            await FileStorage.CreateFile(FolderName, fileName, json);
+            FileStorage.CreateFile(FolderName, fileName, json);
             return fileData;
         }
 
-        private async UniTask UpdateFile<T>(string fileName, T data)
+        private void UpdateFile<T>(string fileName, T data)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // iOS実機ではファイル保存を行わない
-            await UniTask.CompletedTask;
-#else
             string json = JsonUtility.ToJson(data, true);
-            await FileStorage.UpdateFile(FolderName, fileName, json);
-#endif
+             FileStorage.UpdateFile(FolderName, fileName, json);
         }
     }
 }

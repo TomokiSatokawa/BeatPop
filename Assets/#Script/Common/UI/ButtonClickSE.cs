@@ -13,14 +13,16 @@ namespace Common.UI
         [SerializeField] private bool _isMainButton;
 
         private SESoundType _type;
-        private float _ignoreTime = 1f;
+        private const float IgnoreTime = 1f;
+        private float _sceneStartTime;
 
-        private void Start()
+        private void Awake()
         {
             GetButtonComponent();
             _type = _isMainButton ? SESoundType.ButtonClickMain : SESoundType.ButtonClickSub;
 
             _button?.onClick.AddListener(PlaySE);
+            _sceneStartTime = Time.time;
         }
 
         public void Reset() 
@@ -38,7 +40,7 @@ namespace Common.UI
         public void PlaySE()
         {
             //èâä˙ílÇÃSEñhé~
-            if (Time.time < _ignoreTime) return;
+            if (Time.time - _sceneStartTime < IgnoreTime) return;
 
             SoundManager.SE.PlaySE(_type);
         }

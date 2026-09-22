@@ -1,6 +1,7 @@
 using System.Threading;
 using Common.UI;
 using Cysharp.Threading.Tasks;
+using Title.Custom;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,6 +71,13 @@ namespace Common
         /// シーンを非同期で読み込み、読み込み完了後にシーンを切り替える
         /// </summary>
         public async UniTask LoadSceneAsync(string scenePath, CancellationToken token)
+        {
+            var load =  LoadAsync(scenePath, token);
+            var save = FileStorage.Save();
+            await UniTask.WhenAll(load, save);
+        }
+
+        private async UniTask LoadAsync(string scenePath, CancellationToken token)
         {
             var op = SceneManager.LoadSceneAsync(scenePath);
             op.allowSceneActivation = false;

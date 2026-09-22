@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ namespace Title.Custom
     public static class FileStorage
     {
         private const string RootFolder = "SaveData";
+        private static readonly List<FileOperationRequest> _requests = new();
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         [DllImport("__Internal")]
@@ -29,6 +30,17 @@ namespace Title.Custom
         [DllImport("__Internal")]
         private static extern void FS_Sync();
 #endif
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize()
+        {
+            Application.quitting += OnApplicationQuitting;
+        }
+
+        private static async void OnApplicationQuitting()
+        {
+            await Save();
+        }
 
         public static string GetPath(string folderName, string fileName)
         {
@@ -88,34 +100,13 @@ namespace Title.Custom
 #endif
         }
 
-        public static async UniTask CreateFile(string folderName, string fileName, string text)
+        public static void CreateFile(string folderName, string fileName, string text)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // iOSではストレージ保存を行わない
-            await UniTask.CompletedTask;
-#elif UNITY_WEBGL && !UNITY_EDITOR
             string path = GetPath(folderName, fileName);
-            FS_WriteFile(path, text);
-            FS_Sync();
-            await UniTask.CompletedTask;
-#else
-            string path = GetPath(folderName, fileName);
-            string dir = Path.GetDirectoryName(path);
-
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-            try
-            {
-                await File.WriteAllTextAsync(path, text);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FileStorage] {ex}");
-            }
-#endif
+            _requests.Add(FileOperationRequest.Create(OperationType.CreateOrUpdate, path, text));
         }
 
-        public static async UniTask<bool> UpdateFile(string folderName, string fileName, string text)
+        public static void UpdateFile(string folderName, string fileName, string text)
         {
 #if UNITY_IOS && !UNITY_EDITOR
             // メモリ上のみで完結させるため、処理成功として扱う
@@ -133,92 +124,22 @@ namespace Title.Custom
             return true;
 #else
             string path = GetPath(folderName, fileName);
-            if (!File.Exists(path))
-                return false;
-            try
-            {
-                await File.WriteAllTextAsync(path, text);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FileStorage] {ex}");
-                return false;
-            }
-            return true;
+            _requests.Add(FileOperationRequest.Create(OperationType.CreateOrUpdate, path, text));
 #endif
         }
 
-        public static async UniTask<bool> RenameFile(string folderName, string oldFileName, string newFileName)
+        public static void RenameFile(string folderName, string oldFileName, string newFileName)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            await UniTask.CompletedTask;
-            return true;
-#elif UNITY_WEBGL && !UNITY_EDITOR
             string oldPath = GetPath(folderName, oldFileName);
             string newPath = GetPath(folderName, newFileName);
 
-            if (FS_FileExists(oldPath) == 0)
-                return false;
-
-            if (FS_FileExists(newPath) == 1)
-                return false;
-
-            FS_RenameFile(oldPath, newPath);
-            FS_Sync();
-
-            await UniTask.CompletedTask;
-            return true;
-#else
-            string oldPath = GetPath(folderName, oldFileName);
-            string newPath = GetPath(folderName, newFileName);
-
-            if (!File.Exists(oldPath))
-                return false;
-
-            if (File.Exists(newPath))
-                return false;
-
-            string dir = Path.GetDirectoryName(newPath);
-
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-            try
-            {
-                File.Move(oldPath, newPath);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FileStorage] {ex}");
-                return false;
-            }
-
-            return true;
-#endif
+            _requests.Add(FileOperationRequest.Create(OperationType.Rename, oldPath, newPath));
         }
 
-        public static async UniTask<bool> DeleteFile(string folderName, string fileName)
+        public static void DeleteFile(string folderName, string fileName)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            await UniTask.CompletedTask;
-            return true;
-#elif UNITY_WEBGL && !UNITY_EDITOR
             string path = GetPath(folderName, fileName);
-            if (FS_FileExists(path) == 0)
-                return false;
-
-            FS_DeleteFile(path);
-            FS_Sync();
-
-            await UniTask.CompletedTask;
-            return true;
-#else
-            string path = GetPath(folderName, fileName);
-            if (!File.Exists(path))
-                return false;
-
-            File.Delete(path);
-            return true;
-#endif
+            _requests.Add(FileOperationRequest.Create(OperationType.Delete, path, ""));
         }
 
         public static async UniTask DeleteAllFile()
@@ -241,6 +162,125 @@ namespace Title.Custom
 
             Directory.Delete(path, true);
 #endif
+        }
+
+        public static async UniTask Save()
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            _requests.Clear();
+            return;
+#endif
+            async UniTask Create(FileOperationRequest req)
+            {
+                string dir = Path.GetDirectoryName(req.Path);
+
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+                try
+                {
+                    await File.WriteAllTextAsync(req.Path, req.Text);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[FileStorage] {ex}");
+                }
+            }
+
+            async UniTask Update(FileOperationRequest req)
+            {
+                if (!File.Exists(req.Path))
+                    return;
+                try
+                {
+                    await File.WriteAllTextAsync(req.Path, req.Text);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[FileStorage] {ex}");
+                }
+            }
+            async UniTask Delete(FileOperationRequest req)
+            {
+                if (!File.Exists(req.Path))
+                    return;
+
+                File.Delete(req.Path);
+            }
+            async UniTask Rename(FileOperationRequest req)
+            {
+                if (!File.Exists(req.Path))
+                    return;
+
+                if (File.Exists(req.Text))
+                    return;
+
+                string dir = Path.GetDirectoryName(req.Path);
+
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+                try
+                {
+                    File.Move(req.Path, req.Text);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[FileStorage] {ex}");
+                }
+            }
+
+
+            foreach (var req in _requests)
+            {
+                switch (req.Type)
+                {
+                    case OperationType.CreateOrUpdate:
+                        if (File.Exists(req.Path))
+                            await Update(req);
+                        else
+                            await Create(req);
+                        break;
+                    case OperationType.Delete:
+                        await Delete(req);
+                        break;
+                    case OperationType.Rename:
+                        await Rename(req);
+                        break;
+
+                }
+                Debug.Log(req);
+            }
+            _requests.Clear();
+        }
+
+        private struct FileOperationRequest
+        {
+            public readonly OperationType Type;
+            public readonly string Path;
+            public readonly string Text;
+
+            private FileOperationRequest(OperationType type, string path, string text)
+            {
+                this.Type = type;
+                this.Path = path;
+                this.Text = text;
+            }
+
+            public static FileOperationRequest Create(OperationType type, string path, string text)
+            {
+                return new FileOperationRequest(type, path, text);
+            }
+
+            public override string ToString()
+            {
+                return $"Type {Type.ToString()} Path{Path} Text {Text}";
+            }
+        }
+
+        private enum OperationType
+        {
+            CreateOrUpdate,
+            Delete,
+            Rename
         }
     }
 }

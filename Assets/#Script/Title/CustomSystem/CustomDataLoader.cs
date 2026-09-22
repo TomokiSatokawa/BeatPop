@@ -49,7 +49,7 @@ namespace Title.Custom
             if (!await FileStorage.TryGetText(FolderName, ManifestFileName, t => manifestJson = t))
             {
                 manifestJson = await CreateDefaultManifest();
-                await FileStorage.CreateFile(FolderName, ManifestFileName, manifestJson);
+                FileStorage.CreateFile(FolderName, ManifestFileName, manifestJson);
             }
 
             _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
@@ -107,12 +107,12 @@ namespace Title.Custom
             patternData.FileName = filName;
 
             string patternJson = JsonUtility.ToJson(patternData, true);
-            await FileStorage.CreateFile(FolderName, filName, patternJson);
-            await UpdateManifestFile();
+            FileStorage.CreateFile(FolderName, filName, patternJson);
+            UpdateManifestFile();
 #endif
         }
 
-        public async UniTask SavePattern(PatternJsonData patternData)
+        public void SavePattern(PatternJsonData patternData)
         {
 #if UNITY_IOS && !UNITY_EDITOR
             int index = _inMemoryPatterns.FindIndex(x => x.FileName == patternData.FileName);
@@ -120,39 +120,32 @@ namespace Title.Custom
             {
                 _inMemoryPatterns[index] = patternData;
             }
-            await UniTask.CompletedTask;
+            return;
 #else
             string patternJson = JsonUtility.ToJson(patternData, true);
-            if (!await FileStorage.UpdateFile(FolderName, patternData.FileName, patternJson))
-            {
-                Debug.LogError($"パターンセーブ失敗 {patternData.PatternName} {patternData.FileName}");
-            }
+            FileStorage.UpdateFile(FolderName, patternData.FileName, patternJson);
 #endif
         }
 
-        public async UniTask DeletePattern(PatternJsonData patternData)
+        public void DeletePattern(PatternJsonData patternData)
         {
 #if UNITY_IOS && !UNITY_EDITOR
             _inMemoryPatterns.RemoveAll(x => x.FileName == patternData.FileName);
             _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
-            await UniTask.CompletedTask;
+           return;
 #else
-            await FileStorage.DeleteFile(FolderName, patternData.FileName);
+            FileStorage.DeleteFile(FolderName, patternData.FileName);
             _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
 #endif
         }
 
-        private async UniTask UpdateManifestFile()
+        private void UpdateManifestFile()
         {
 #if UNITY_IOS && !UNITY_EDITOR
             await UniTask.CompletedTask;
 #else
             string manifestJson = JsonUtility.ToJson(_manifestData, true);
-            if (!await FileStorage.UpdateFile(FolderName, ManifestFileName, manifestJson))
-            {
-                Debug.LogError("manifest更新失敗");
-                return;
-            }
+            FileStorage.UpdateFile(FolderName, ManifestFileName, manifestJson);
 #endif
         }
 
@@ -169,7 +162,7 @@ namespace Title.Custom
                 patternJsonData.FileName = fileName;
                 patternJsonData.IsDefault = true;
                 string patternJson = JsonUtility.ToJson(patternJsonData, true);
-                await FileStorage.CreateFile(FolderName, fileName, patternJson);
+                FileStorage.CreateFile(FolderName, fileName, patternJson);
             }
 
             manifestData.FileName = new string[1];

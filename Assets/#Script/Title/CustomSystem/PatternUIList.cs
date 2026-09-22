@@ -75,7 +75,7 @@ namespace Title.Custom
             }
 
             //ƒtƒ@ƒCƒ‹‚ğíœ
-            CustomDataLoader.I.DeletePattern(pattern).Forget();
+            CustomDataLoader.I.DeletePattern(pattern);
         }
 
         public void ResetPattern()
@@ -132,16 +132,16 @@ namespace Title.Custom
             _other.SetCustom(patternUI.PatternData.OtherPattern);
         }
 
-        public async void SetPattern(PatternUIControl patternUI)
+        public void SetPattern(PatternUIControl patternUI)
         {
             if (_usePattern == patternUI) return;
             _usePattern?.ShowSetPattern(false);
             _usePattern.PatternData.IsSelect = false;
-            await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
+            CustomDataLoader.I.SavePattern(_usePattern.PatternData);
 
             _usePattern = patternUI;
             _usePattern.PatternData.IsSelect = true;
-            await CustomDataLoader.I.SavePattern(_usePattern.PatternData);
+            CustomDataLoader.I.SavePattern(_usePattern.PatternData);
             _usePattern.ShowSetPattern(true);
 
             InitializePatternUI(patternUI.PatternData, patternUI);
@@ -160,7 +160,7 @@ namespace Title.Custom
             SetPattern(patternUI);
         }
 
-        public async void SavePattern()
+        public void SavePattern()
         {
             if (_currentSelect == null) return;
             _currentSelect.PatternData.SoundPattern = _sound.GetCustom();
@@ -169,13 +169,13 @@ namespace Title.Custom
             _currentSelect.PatternData.JudgePattern = _judge.GetCustom();
             _currentSelect.PatternData.SpeedPattern = _stage.GetCustom();
             _currentSelect.PatternData.OtherPattern = _other.GetCustom();
-            await CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
+            CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
         }
 
         public void RenamePattern(PatternJsonData patternData, string newName)
         {
             patternData.PatternName = newName;
-            CustomDataLoader.I.SavePattern(patternData).Forget();
+            CustomDataLoader.I.SavePattern(patternData);
 
             if (!TryFindPatternUI(patternData, out var patternUI)) return;
 
