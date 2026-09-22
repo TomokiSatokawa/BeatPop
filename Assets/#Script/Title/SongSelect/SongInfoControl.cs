@@ -77,7 +77,12 @@ namespace Title.SongSelect
             _bpmInfo.text = data.SongData.BPM.ToString();
             _highScoreInfo.text = PlayerDataLoader.Records.TryGetHighScore(data, out int highScrore) ? highScrore.ToString() : "-----";
             _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
-            _nodeCount.text = (await NodeDataSerializer.DeserializeJson(data.GetNodeJson().text)).Nodes.Count.ToString();       
+
+            var textAsset = data.GetNodeJson();
+            if (textAsset != null)
+            {
+                _nodeCount.text = (await NodeDataSerializer.DeserializeJson(textAsset.text)).Nodes.Count.ToString();
+            }
         }
 
         public void OnChangeDifficulty(int value)

@@ -26,7 +26,7 @@ namespace Title.PlayerData
         /// ハイスコアを更新する
         /// </summary>
         /// <returns>ハイスコアだったか</returns>
-        public bool SaveHighScore(SongSelectData selectData, int score, out int highScore)
+        public bool SaveHighScore(SongSelectData selectData, int score, out int highScore, ResultType resultType)
         {
             int songIndex = selectData.SongData.SongID;
             int difficulty = (int)selectData.Difficulty;
@@ -37,7 +37,7 @@ namespace Title.PlayerData
             //ハイスコアがない
             if (highScoreIndex == -1)
             {
-                _highScores.Add(new(songIndex, difficulty, score,ResultType.Clear));
+                _highScores.Add(new(songIndex, difficulty, score, resultType));
                 highScore = score;
                 _onUpdateData.OnNext(Unit.Default);
                 return true;
@@ -52,24 +52,9 @@ namespace Title.PlayerData
                 return true;
             }
 
+            _highScores[highScoreIndex].AddResult(resultType);
             highScore = _highScores[highScoreIndex].Score;
             return false;
-        }
-
-        /// <summary>
-        /// プレイ記録を追加する
-        /// </summary>
-        public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType)
-        {
-            int highScoreIndex = FindHighScoreIndex(selectData);
-
-            if (highScoreIndex == -1)
-            {
-                SaveAddPlayData(selectData, score, resultType);
-                return;
-            }
-
-            _highScores[highScoreIndex].AddResult(resultType);
         }
 
         /// <summary>
@@ -129,8 +114,7 @@ namespace Title.PlayerData
     {
         public IReadOnlyList<PlayRecord> HighScores { get; }
         public IReadOnlyList<PlayRecord> RecentPlayRecords { get; }
-        public bool SaveHighScore(SongSelectData selectData, int score, out int highScore);
-        public void SavePlayResult(SongSelectData selectData, int score, ResultType resultType);
+        public bool SaveHighScore(SongSelectData selectData, int score, out int highScore, ResultType resultType);
         public void SaveAddPlayData(SongSelectData selectData, int score, ResultType resultType);
         public bool TryGetHighScore(SongSelectData sle, out int highScore);
     }
@@ -175,7 +159,7 @@ namespace Title.PlayerData
         /// </summary>
         public void AddResult(ResultType resultType)
         {
-            _fullCombo |= resultType == ResultType.FullCombo;
+            _fullCombo |= resultType is ResultType.FullCombo or ResultType.AllPerfect;
             _allPerfect |= resultType == ResultType.AllPerfect;
         }
     }

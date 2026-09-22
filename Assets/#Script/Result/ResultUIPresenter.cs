@@ -45,13 +45,14 @@ namespace Result.UI
             _scoreUIControl.OnAnimation(score, maxScore);
             _rankUIControl.OnAnimation(rate, true);
             _songInfo.ShowInfo(songData);
-            _badgeView.ShowBadge(ScoreDataManager.ScoreData.GetResultType());
+
+            var resultType = ScoreDataManager.ScoreData.GetResultType();
+            _badgeView.ShowBadge(resultType);
             _accuracyView.OnAnimation(resultDataCollector.NodeHitCount);
             _timingSliderView.OnAnimation(resultDataCollector.FastCount, resultDataCollector.LateCount);
 
-            PlayerDataLoader.Records.SaveAddPlayData(songData, score, ScoreDataManager.ScoreData.GetResultType());
-            PlayerDataLoader.Records.SaveHighScore(songData, score, out var highScore);
-            PlayerDataLoader.Records.SavePlayResult(songData, score, ScoreDataManager.ScoreData.GetResultType());
+            PlayerDataLoader.Records.SaveAddPlayData(songData, score, resultType);
+            PlayerDataLoader.Records.SaveHighScore(songData, score, out var highScore, resultType);
 
             if (highScore == score)
                 _highScoreView.ShowHighScore();
