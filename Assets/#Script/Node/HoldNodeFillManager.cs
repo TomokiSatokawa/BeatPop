@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using InGame.Effect;
 using Input;
 using Sound;
+using UnityEditor;
 using UnityEngine;
 
 namespace InGame.Node
@@ -102,7 +103,9 @@ namespace InGame.Node
 
             public void Tick(float deltaTime)
             {
-                UpdateFill(); https://qiita.com/takish/items/8608ba9070755da3ae6d
+                if (!StageTimeController.I.IsPlaying.CurrentValue) return;
+
+                UpdateFill();
                 UpdateInput();
                 UpdateSound();
 

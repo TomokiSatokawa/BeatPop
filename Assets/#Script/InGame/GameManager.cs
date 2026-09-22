@@ -72,6 +72,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void Pause()
     {
         _stageTimeController.Pause();
+
+        foreach (var lane in SoundManager.LaneSE)
+            lane.SetVolume(0f);
+
         InputManager.SetInputEnabled(false);
         SoundManager.BGM.IsPause(true);
     }
@@ -79,6 +83,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void ReStartStage()
     {
         _stageTimeController.ReStart();
+
+        foreach (var lane in SoundManager.LaneSE)
+            lane.SetVolume(1f);
+
         SoundManager.BGM.IsPause(false);
     }
 
@@ -92,12 +100,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         ScoreDataManager.DisposeSingleton();
         StageConfig.DisposeSingleton();
         SoundManager.BGM.PlayBGM(null);
+
+
+        foreach (var lane in SoundManager.LaneSE)
+            lane.StopBGM();
         _sceneLoad.ChangeScene("InGame");
     }
 
     public void ReturnTitle()
     {
         DontDestroyRelease();
+
+        foreach (var lane in SoundManager.LaneSE)
+            lane.StopBGM();
         _sceneLoad.ChangeScene("Title");
     }
 
