@@ -18,7 +18,6 @@ namespace InGame.Stage
 
         private void Start ()
         {
-            //TODOBeat
             BeatUpdateManager.BeatUpdate.Subscribe(16, 0, x => BeatUpdate(x.Division));
         }
 

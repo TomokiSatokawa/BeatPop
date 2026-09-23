@@ -7297,6 +7297,14 @@ PrefabInstance:
       propertyPath: _filter
       value: 
       objectReference: {fileID: 1971735687}
+    - target: {fileID: 3390362020847264421, guid: f6d452da4be8d0a4d9c5842b868b6b81, type: 3}
+      propertyPath: _startOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390362020847264421, guid: f6d452da4be8d0a4d9c5842b868b6b81, type: 3}
+      propertyPath: _flamethrower
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3452513631002889127, guid: f6d452da4be8d0a4d9c5842b868b6b81, type: 3}
       propertyPath: m_IsActive
       value: 0
