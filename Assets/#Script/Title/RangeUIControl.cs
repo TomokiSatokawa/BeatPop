@@ -14,6 +14,8 @@ namespace Title.Common
         [SerializeField] private TextMeshProUGUI _minText;
         [SerializeField] private TextMeshProUGUI _maxText;
         [SerializeField] private RectTransform _fillImage;
+        [SerializeField] private RectTransform _minHandleRect;
+        [SerializeField] private RectTransform _maxHandleRect;
 
         [SerializeField] private int _minValue;
         [SerializeField] private int _maxValue;
@@ -93,7 +95,9 @@ namespace Title.Common
             }
             _rangeValueMin = minValue;
 
+            UpdateFill();
         }
+
         public void ChangeMaxValue(int value)
         {
             int maxValue = ClampRangeValue(value);
@@ -118,10 +122,48 @@ namespace Title.Common
             }
             _rangeValueMax = maxValue;
 
+            UpdateFill();
         }
+
         private int ClampRangeValue(int value)
         {
             return Mathf.Clamp(value, _minValue, _maxValue);
+        }
+
+        private void UpdateFill()
+        {
+            if (_fillImage == null || _minSlider == null || _maxSlider == null)
+            {
+                return;
+            }
+
+            RectTransform sliderRect = _minSlider.GetComponent<RectTransform>();
+
+            float minNormalized = Mathf.InverseLerp(
+                _minSlider.minValue,
+                _minSlider.maxValue,
+                _minSlider.value);
+
+            float maxNormalized = Mathf.InverseLerp(
+                _maxSlider.minValue,
+                _maxSlider.maxValue,
+                _maxSlider.value);
+
+            float width = sliderRect.rect.width;
+
+            float minX = Mathf.Lerp(-width * 0.5f, width * 0.5f, minNormalized);
+            float maxX = Mathf.Lerp(-width * 0.5f, width * 0.5f, maxNormalized);
+
+            float left = Mathf.Min(minX, maxX);
+            float right = Mathf.Max(minX, maxX);
+
+            _fillImage.anchoredPosition = new Vector2(
+                (left + right) * 0.5f,
+                _fillImage.anchoredPosition.y);
+
+            _fillImage.sizeDelta = new Vector2(
+                right - left,
+                _fillImage.sizeDelta.y);
         }
     }
 }

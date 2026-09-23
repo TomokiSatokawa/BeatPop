@@ -1,3 +1,4 @@
+using Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Title.Common
         [SerializeField] private Button[] _buttons;
         [SerializeField] private bool[] _isOn;
 
-        [SerializeField] private Color _onColor;
+        [SerializeField] private DifficultyColor _onColor;
         [SerializeField] private Color _offColor;
         public bool[] IsOn => _isOn;
 
@@ -27,14 +28,14 @@ namespace Title.Common
                     OnClick(index);
                 });
 
-                _buttons[i].image.color = _isOn[i] ? _onColor : _offColor;
+                _buttons[i].image.color = _isOn[i] ? _onColor.GetDifficultyColor((Difficulty)i) : _offColor;
             }
         }
 
         public void OnClick(int buttonNum)
         {
             _isOn[buttonNum] = !_isOn[buttonNum];
-            _buttons[buttonNum].image.color = _isOn[buttonNum] ? _onColor : _offColor;
+            _buttons[buttonNum].image.color = _isOn[buttonNum] ? _onColor.GetDifficultyColor((Difficulty)buttonNum) : _offColor;
         }
     }
 }
