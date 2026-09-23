@@ -28,7 +28,7 @@ MonoBehaviour:
   _audioClip: {fileID: 8300000, guid: a25ffad7ecacfc446b70bc84d782e35c, type: 3}
   _stageTimeOffSet: 0
   _editorTimeOffSet: 0
-  _stageEffectData: {fileID: 4900000, guid: ef7e42564b2177a4fbff510e89c8aeb4, type: 3}
+  _stageEffectData: {fileID: 4900000, guid: 09ac44f3d8a7fed4aa4fa83f5acb906f, type: 3}
   _showTutorial: 0
   _previewTime:
     _min: 38

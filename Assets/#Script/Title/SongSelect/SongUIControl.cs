@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Title.SongSelect
-{   
+{
     public class SongUIControl : MonoBehaviour
     {
         [SerializeField] private UIPointerHover _uIPointerHover;
@@ -20,6 +20,7 @@ namespace Title.SongSelect
 
         private Action<SongSelectData> _onSelect;
         private SongSelectData _songData;
+
         private void Start()
         {
             _selectButton.onClick.AddListener(OnSelect);
@@ -27,8 +28,11 @@ namespace Title.SongSelect
             _uIPointerHover.IsPointerOver.Where(x => x).Subscribe(_ => TitleSoundController.I.WaitPlayPreview(_songData.SongData));
             _uIPointerHover.IsPointerOver.Where(x => !x).Subscribe(_ => TitleSoundController.I.UnselectedPreview());
         }
+
         public void SetData(SongSelectData data, Action<SongSelectData> onSelect)
         {
+            if (data.SongData == null) return;
+
             _songData = data;
             _nameText.text = data.SongData.SongName;
             _levelImage.color = _difficultyColor.GetDifficultyColor(data.Difficulty);
@@ -36,6 +40,7 @@ namespace Title.SongSelect
             _jacketImage.sprite = data.SongData.Jacket;
             _onSelect = onSelect;
         }
+
         public void OnSelect()
         {
             _onSelect.Invoke(_songData);

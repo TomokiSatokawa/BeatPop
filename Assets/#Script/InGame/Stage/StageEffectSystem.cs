@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Common.BeatUpdate;
 using Common.PlaySystem;
+using InGame.Node;
 using JsonEditor;
 using R3;
 using Title.Custom;
@@ -28,7 +29,7 @@ namespace InGame.Stage
 
         private void Start()
         {
-            if (SongPlayContext.I)
+            if (SongPlayContext.I != null && SongPlayContext.I.PatternData != null)
             {
                 var flag = OtherCustomFlags.Create(SongPlayContext.I.PatternData.OtherPattern.Flags);
                 if (flag.Has(CustomOtherType.PlayStagePerformance))
