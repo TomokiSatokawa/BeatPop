@@ -19,7 +19,6 @@ namespace Title.Profile
         
         private void Start()
         {
-            _selectButton.onClick.RemoveAllListeners();
             _selectButton.onClick.AddListener(() => _onSelect?.Invoke(_iconId));
         }
 
