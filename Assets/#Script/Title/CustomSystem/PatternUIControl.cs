@@ -17,7 +17,7 @@ namespace Title.Custom
         [SerializeField] private GameObject _setPattern;
         private PatternJsonData _patternData;
         public PatternJsonData PatternData => _patternData;
-        public void SetData(PatternJsonData pattern, Action<PatternUIControl> onSelect, Action<Vector2, PatternJsonData> onSettings)
+        public void SetData(PatternJsonData pattern, Action<PatternUIControl> onSelect, Action<Vector3, PatternJsonData> onSettings)
         {
             _patternData = pattern;
             _selectButton.onClick.AddListener(() =>

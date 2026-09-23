@@ -145,6 +145,7 @@ namespace Title.Custom
             _usePattern.ShowSetPattern(true);
 
             InitializePatternUI(patternUI.PatternData, patternUI);
+            OnSave();
         }
 
         public void SetPattern()
@@ -180,6 +181,11 @@ namespace Title.Custom
             if (!TryFindPatternUI(patternData, out var patternUI)) return;
 
             InitializePatternUI(patternData, patternUI);
+        }
+
+        public void OnSave()
+        {
+            FileStorage.Save().Forget();
         }
 
         private bool TryFindPatternUI(PatternJsonData patternData, out PatternUIControl patternUI)

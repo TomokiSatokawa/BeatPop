@@ -247,7 +247,6 @@ namespace Title.Custom
                         break;
 
                 }
-                Debug.Log(req);
             }
             _requests.Clear();
         }

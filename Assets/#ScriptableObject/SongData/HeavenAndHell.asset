@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: "\u5929\u56FD\u3068\u5730\u7344"
   _songID: 9
   _bpm: 172
-  _jacket: {fileID: 0}
+  _jacket: {fileID: 21300000, guid: 428820e561733ca4fb5e9406980d1181, type: 3}
   _charts:
     EasyLevel: 0
     EasyJson: {fileID: 0}

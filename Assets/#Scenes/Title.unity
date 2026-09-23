@@ -9947,6 +9947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91e4099429d8604ab25bbc15eab2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title.Custom.PatternOptionMenuControl
+  _canvasRect: {fileID: 1154123603}
   _panelControl: {fileID: 422932486}
   _inputDialog: {fileID: 8016548255677305272}
   _confirmationDialog: {fileID: 677330282}
@@ -9954,10 +9955,10 @@ MonoBehaviour:
   _rename: {fileID: 654104478}
   _setPattern: {fileID: 616784782}
   _delete: {fileID: 1476880340}
-  _offSet: {x: -100, y: 245}
+  _offSet: {x: -100, y: -350}
   _showRangeY:
-    _min: -1208
-    _max: 709
+    _min: 500
+    _max: 3000
   _onRename:
     m_PersistentCalls:
       m_Calls:
@@ -33096,6 +33097,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: OnSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _hiddenAction:
     m_PersistentCalls:
       m_Calls:
@@ -33115,6 +33128,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Common.UI.PanelControl, Assembly-CSharp
         m_MethodName: OnHidden
         m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1278408204}
+        m_TargetAssemblyTypeName: Title.Custom.PatternUIList, Assembly-CSharp
+        m_MethodName: OnSave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

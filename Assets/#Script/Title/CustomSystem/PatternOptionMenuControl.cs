@@ -11,6 +11,7 @@ namespace Title.Custom
     /// </summary>
     public class PatternOptionMenuControl : MonoBehaviour
     {
+        [SerializeField] private RectTransform _canvasRect;
         [SerializeField] private PanelControl _panelControl;
         [SerializeField] private InputDialogView _inputDialog;
         [SerializeField] private ConfirmationDialogView _confirmationDialog;
@@ -33,10 +34,11 @@ namespace Title.Custom
             _delete.onClick.AddListener(OnDelete);
         }
 
-        public void Open(Vector2 openButtonPos,PatternJsonData pattern)
+        public void Open(Vector3 worldPosition, PatternJsonData pattern)
         {
-            Debug.Log(openButtonPos);
+            var openButtonPos = GetCanvasPosition(worldPosition);
             Vector2 pos = openButtonPos + _offSet;
+            Debug.Log(pos);
 
             //範囲外だった場合OffSetYを反転
             if (!_showRangeY.Contains(pos.y))
@@ -44,12 +46,23 @@ namespace Title.Custom
                 pos.y = openButtonPos.y - _offSet.y;
             }
 
-            _panel.transform.position = pos;
+            SetCanvasPosition(_panel, pos);
             _panelControl.OnActive();
             _patternJsonData = pattern;
 
             //初期パターンは削除できない
             _delete.interactable = !pattern.IsDefault;
+        }
+
+        private Vector2 GetCanvasPosition(Vector3 worldPosition)
+        {
+            Vector2 localPosition = _canvasRect.InverseTransformPoint(worldPosition);
+            return localPosition + _canvasRect.rect.size * 0.5f;
+        }
+        private void SetCanvasPosition(RectTransform target, Vector2 canvasPosition)
+        {
+            Vector2 localPosition = canvasPosition - _canvasRect.rect.size * 0.5f;
+            target.position = _canvasRect.TransformPoint(localPosition);
         }
 
         private void OnRename()

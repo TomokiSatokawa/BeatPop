@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: Skyforge
   _songID: 7
   _bpm: 162.01
-  _jacket: {fileID: 0}
+  _jacket: {fileID: 21300000, guid: ebfac5e0821e82546a970141612d2904, type: 3}
   _charts:
     EasyLevel: 0
     EasyJson: {fileID: 0}
