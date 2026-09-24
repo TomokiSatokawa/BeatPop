@@ -21,7 +21,7 @@ namespace Title.Custom
         [SerializeField] private Button _delete;
         [SerializeField] private Vector2 _offSet;
         [SerializeField] private FloatRange _showRangeY;
-        [SerializeField] private UnityEvent<PatternJsonData,string> _onRename;
+        [SerializeField] private UnityEvent<PatternJsonData, string> _onRename;
         [SerializeField] private UnityEvent<PatternJsonData> _onSetPattern;
         [SerializeField] private UnityEvent<PatternJsonData> _onDelete;
 
@@ -67,9 +67,9 @@ namespace Title.Custom
 
         private void OnRename()
         {
-            var dialogSettings = new DialogSettings(title:"名前を変更");
+            var dialogSettings = new DialogSettings(title: "名前を変更");
             var input = new InputFieldSettings(_patternJsonData.PatternName);
-            _inputDialog.ShowDialog(x => _onRename?.Invoke(_patternJsonData, x), null, x => "", dialogSettings,input);
+            _inputDialog.ShowDialog(x => _onRename?.Invoke(_patternJsonData, x), null, x => "", dialogSettings, input);
             _panelControl.OnHidden();
         }
 
@@ -80,8 +80,8 @@ namespace Title.Custom
         }
         private void OnDelete()
         {
-            var dialogSettings = new DialogSettings(title: "本当に削除しますか？",confirmButton:"削除");
-            _confirmationDialog.ShowDialog(() => _onDelete?.Invoke(_patternJsonData),null, dialogSettings);;
+            var dialogSettings = new DialogSettings(title: "本当に削除しますか？", confirmButton: "削除");
+            _confirmationDialog.ShowDialog(() => _onDelete?.Invoke(_patternJsonData), null, dialogSettings); ;
             _panelControl.OnHidden();
         }
     }
