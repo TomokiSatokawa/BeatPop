@@ -6237,11 +6237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame.UI.TutorialUIControl
   _videos:
-  - {fileID: 32900000, guid: b10b8af7c4c8ef34c9d14ff91cbc7cbf, type: 3}
-  - {fileID: 32900000, guid: 1ea671f0eead4424384bb03521e87f26, type: 3}
-  - {fileID: 32900000, guid: cbfcedf75d1dfb44a8872edf296b3c09, type: 3}
-  - {fileID: 32900000, guid: cbfcedf75d1dfb44a8872edf296b3c09, type: 3}
-  - {fileID: 32900000, guid: cbfcedf75d1dfb44a8872edf296b3c09, type: 3}
+  - {fileID: 32900000, guid: 7a3fe58ceeabea54ea1983eff7e6d964, type: 3}
+  - {fileID: 32900000, guid: acc46a2059b84034d8d717d1ac1c200b, type: 3}
+  - {fileID: 32900000, guid: b94dda9110977ca45ab63f2de5dc1b49, type: 3}
+  - {fileID: 32900000, guid: e1672b0f7f5940249afb33395aa47ff7, type: 3}
+  - {fileID: 32900000, guid: 1d7cf6ae83190a64496bbc0d543a81b8, type: 3}
   _nextButton: {fileID: 946301492}
   _clauseButton: {fileID: 1442674112}
   _backButton: {fileID: 158912382}
