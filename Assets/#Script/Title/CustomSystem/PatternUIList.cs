@@ -76,6 +76,7 @@ namespace Title.Custom
 
             //ファイルを削除
             CustomDataLoader.I.DeletePattern(pattern);
+            FileStorage.Save().Forget();
         }
 
         public void ResetPattern()
@@ -98,30 +99,28 @@ namespace Title.Custom
 
         private void InitializePatternUI(PatternJsonData pattern, PatternUIControl patternUI)
         {
-            Action<PatternUIControl> onSelect = uiData =>
+            Action<PatternUIControl> onOpen = uiData =>
             {
                 SelectPattern(uiData);
                 _onPatternSelect?.Invoke();
             };
 
-            patternUI.SetData(pattern, onSelect, _optionMenu.Open);
+            patternUI.SetData(pattern, onOpen, _optionMenu.Open);
             if (pattern.IsSelect)
             {
-                SelectPattern(patternUI);
+                patternUI.OnSelect();
                 _usePattern = patternUI;
             }
+            else
+                patternUI.OnDeselect();
+
             patternUI.ShowSetPattern(pattern.IsSelect);
         }
 
         public void SelectPattern(PatternUIControl patternUI)
         {
-            if (_currentSelect != null)
-            {
-                _currentSelect.OnDeselect();
-                SavePattern();
-            }
-            patternUI.OnSelect();
             _currentSelect = patternUI;
+            Debug.Log("Select");
 
             //カスタムの値を変更
             _sound.SetCustom(patternUI.PatternData.SoundPattern);
@@ -138,6 +137,7 @@ namespace Title.Custom
             _usePattern?.ShowSetPattern(false);
             _usePattern.PatternData.IsSelect = false;
             CustomDataLoader.I.SavePattern(_usePattern.PatternData);
+            InitializePatternUI(_usePattern.PatternData, _usePattern);
 
             _usePattern = patternUI;
             _usePattern.PatternData.IsSelect = true;
@@ -145,7 +145,7 @@ namespace Title.Custom
             _usePattern.ShowSetPattern(true);
 
             InitializePatternUI(patternUI.PatternData, patternUI);
-            OnSave();
+            FileStorage.Save().Forget();
         }
 
         public void SetPattern()
@@ -163,6 +163,7 @@ namespace Title.Custom
 
         public void SavePattern()
         {
+            Debug.Log("Save");
             if (_currentSelect == null) return;
             _currentSelect.PatternData.SoundPattern = _sound.GetCustom();
             _currentSelect.PatternData.ChartPattern = _chart.GetCustom();
@@ -171,6 +172,7 @@ namespace Title.Custom
             _currentSelect.PatternData.SpeedPattern = _stage.GetCustom();
             _currentSelect.PatternData.OtherPattern = _other.GetCustom();
             CustomDataLoader.I.SavePattern(_currentSelect.PatternData);
+            FileStorage.Save().Forget();
         }
 
         public void RenamePattern(PatternJsonData patternData, string newName)
@@ -181,10 +183,6 @@ namespace Title.Custom
             if (!TryFindPatternUI(patternData, out var patternUI)) return;
 
             InitializePatternUI(patternData, patternUI);
-        }
-
-        public void OnSave()
-        {
             FileStorage.Save().Forget();
         }
 
