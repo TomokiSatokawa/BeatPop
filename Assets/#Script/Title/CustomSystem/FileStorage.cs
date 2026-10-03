@@ -110,8 +110,7 @@ namespace Title.Custom
         {
 #if UNITY_IOS && !UNITY_EDITOR
             // ƒƒ‚ƒŠã‚Ì‚İ‚ÅŠ®Œ‹‚³‚¹‚é‚½‚ßAˆ—¬Œ÷‚Æ‚µ‚Äˆµ‚¤
-            await UniTask.CompletedTask;
-            return true;
+            return;
 #elif UNITY_WEBGL && !UNITY_EDITOR
             string path = GetPath(folderName, fileName);
             if (FS_FileExists(path) == 0)
@@ -120,8 +119,7 @@ namespace Title.Custom
             FS_WriteFile(path, text);
             FS_Sync();
 
-            await UniTask.CompletedTask;
-            return true;
+            return;
 #else
             string path = GetPath(folderName, fileName);
             _requests.Add(FileOperationRequest.Create(OperationType.CreateOrUpdate, path, text));

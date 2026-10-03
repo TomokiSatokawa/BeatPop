@@ -142,7 +142,7 @@ namespace Title.Custom
         private void UpdateManifestFile()
         {
 #if UNITY_IOS && !UNITY_EDITOR
-            await UniTask.CompletedTask;
+           return;
 #else
             string manifestJson = JsonUtility.ToJson(_manifestData, true);
             FileStorage.UpdateFile(FolderName, ManifestFileName, manifestJson);
