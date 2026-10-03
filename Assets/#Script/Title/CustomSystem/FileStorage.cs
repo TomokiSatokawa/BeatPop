@@ -44,9 +44,9 @@ namespace Title.Custom
 
         public static string GetPath(string folderName, string fileName)
         {
-#if (UNITY_WEBGL || UNITY_IOS) && !UNITY_EDITOR
-            return $"{Application.persistentDataPath}/{folderName}/{fileName}";
-#else
+//#if (UNITY_WEBGL || UNITY_IOS) && !UNITY_EDITOR
+//            return $"{Application.persistentDataPath}/{folderName}/{fileName}";
+//#else
 
             return Path.Combine(
                 Application.persistentDataPath,
@@ -54,50 +54,50 @@ namespace Title.Custom
                 folderName,
                 fileName
             );
-#endif
+//#endif
         }
 
         public static string GetRootFolderPath()
         {
-#if (UNITY_WEBGL || UNITY_IOS) && !UNITY_EDITOR
-            return $"{Application.persistentDataPath}/{RootFolder}";
-#else
+//#if (UNITY_WEBGL || UNITY_IOS) && !UNITY_EDITOR
+//            return $"{Application.persistentDataPath}/{RootFolder}";
+//#else
             return Path.Combine(
                 Application.persistentDataPath,
                 RootFolder
             );
-#endif
+//#endif
         }
 
         public static async UniTask<bool> TryGetText(string folderName, string fileName, Action<string> onSuccess)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // iOSでは常にローカル読み込みをスキップ（メモリ保持データを使用する前提）
-            await UniTask.CompletedTask;
-            return false;
-#elif UNITY_WEBGL && !UNITY_EDITOR
-            if (FS_FileExists(path) == 0)
-                return false;
+//#if UNITY_IOS && !UNITY_EDITOR
+//            // iOSでは常にローカル読み込みをスキップ（メモリ保持データを使用する前提）
+//            await UniTask.CompletedTask;
+//            return false;
+//#elif UNITY_WEBGL && !UNITY_EDITOR
+//            if (FS_FileExists(path) == 0)
+//                return false;
 
-            IntPtr ptr = FS_ReadFile(path);
+//            IntPtr ptr = FS_ReadFile(path);
 
-            if (ptr == IntPtr.Zero)
-                return false;
+//            if (ptr == IntPtr.Zero)
+//                return false;
 
-            string text = Marshal.PtrToStringAuto(ptr);
+//            string text = Marshal.PtrToStringAuto(ptr);
 
-            onSuccess?.Invoke(text);
+//            onSuccess?.Invoke(text);
 
-            await UniTask.CompletedTask;
-            return true;
-#else
+//            await UniTask.CompletedTask;
+//            return true;
+//#else
             string path = GetPath(folderName, fileName);
             if (!File.Exists(path))
                 return false;
 
             onSuccess?.Invoke(File.ReadAllText(path));
             return true;
-#endif
+//#endif
         }
 
         public static void CreateFile(string folderName, string fileName, string text)
@@ -108,22 +108,22 @@ namespace Title.Custom
 
         public static void UpdateFile(string folderName, string fileName, string text)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // メモリ上のみで完結させるため、処理成功として扱う
-            return;
-#elif UNITY_WEBGL && !UNITY_EDITOR
-            string path = GetPath(folderName, fileName);
-            if (FS_FileExists(path) == 0)
-                return false;
+//#if UNITY_IOS && !UNITY_EDITOR
+//            // メモリ上のみで完結させるため、処理成功として扱う
+//            return;
+//#elif UNITY_WEBGL && !UNITY_EDITOR
+//            string path = GetPath(folderName, fileName);
+//            if (FS_FileExists(path) == 0)
+//                return false;
 
-            FS_WriteFile(path, text);
-            FS_Sync();
+//            FS_WriteFile(path, text);
+//            FS_Sync();
 
-            return;
-#else
+//            return;
+//#else
             string path = GetPath(folderName, fileName);
             _requests.Add(FileOperationRequest.Create(OperationType.CreateOrUpdate, path, text));
-#endif
+//#endif
         }
 
         public static void RenameFile(string folderName, string oldFileName, string newFileName)
@@ -142,32 +142,32 @@ namespace Title.Custom
 
         public static async UniTask DeleteAllFile()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            await UniTask.CompletedTask;
-#elif UNITY_WEBGL && !UNITY_EDITOR
-            string path = GetRootFolderPath();
-            if (FS_DirectoryExists(path) == 0)
-                return;
+//#if UNITY_IOS && !UNITY_EDITOR
+//            await UniTask.CompletedTask;
+//#elif UNITY_WEBGL && !UNITY_EDITOR
+//            string path = GetRootFolderPath();
+//            if (FS_DirectoryExists(path) == 0)
+//                return;
 
-            FS_DeleteDirectory(path, true);
-            FS_Sync();
+//            FS_DeleteDirectory(path, true);
+//            FS_Sync();
 
-            await UniTask.CompletedTask;
-#else
+//            await UniTask.CompletedTask;
+//#else
             string path = GetRootFolderPath();
             if (!Directory.Exists(path))
                 return;
 
             Directory.Delete(path, true);
-#endif
+//#endif
         }
 
         public static async UniTask Save()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            _requests.Clear();
-            return;
-#endif
+//#if UNITY_IOS && !UNITY_EDITOR
+//            _requests.Clear();
+//            return;
+//#endif
             async UniTask Create(FileOperationRequest req)
             {
                 string dir = Path.GetDirectoryName(req.Path);

@@ -28,22 +28,22 @@ namespace Title.Custom
 
         public async UniTask LoadManifest()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // iOSの場合はメモリ上にデフォルトパターンのみを生成
-            _inMemoryPatterns.Clear();
-            var defaultPattern = _patternLoader.GetDefaultPattern();
-            defaultPattern.IsSelect = true;
-            defaultPattern.FileName = "song_0000.json";
-            defaultPattern.IsDefault = true;
-            _inMemoryPatterns.Add(defaultPattern);
+//#if UNITY_IOS && !UNITY_EDITOR
+//            // iOSの場合はメモリ上にデフォルトパターンのみを生成
+//            _inMemoryPatterns.Clear();
+//            var defaultPattern = _patternLoader.GetDefaultPattern();
+//            defaultPattern.IsSelect = true;
+//            defaultPattern.FileName = "song_0000.json";
+//            defaultPattern.IsDefault = true;
+//            _inMemoryPatterns.Add(defaultPattern);
 
-            _manifestData = new ManifestData
-            {
-                FileName = new string[] { defaultPattern.FileName }
-            };
+//            _manifestData = new ManifestData
+//            {
+//                FileName = new string[] { defaultPattern.FileName }
+//            };
 
-            await UniTask.CompletedTask;
-#else
+//            await UniTask.CompletedTask;
+//#else
             string manifestJson = "";
 
             if (!await FileStorage.TryGetText(FolderName, ManifestFileName, t => manifestJson = t))
@@ -63,15 +63,15 @@ namespace Title.Custom
 
                 await UniTask.Yield();
             }
-#endif
+//#endif
         }
 
         public async UniTask<PatternJsonData[]> GetAllCustomPattern()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            await UniTask.CompletedTask;
-            return _inMemoryPatterns.ToArray();
-#else
+//#if UNITY_IOS && !UNITY_EDITOR
+//            await UniTask.CompletedTask;
+//            return _inMemoryPatterns.ToArray();
+//#else
             var result = new PatternJsonData[_manifestData.FileName.Length];
             for (int i = 0; i < _manifestData.FileName.Length; i++)
             {
@@ -85,21 +85,21 @@ namespace Title.Custom
                 result[i] = JsonUtility.FromJson<PatternJsonData>(patternJson);
             }
             return result;
-#endif
+//#endif
         }
 
         public async UniTask AddPattern(PatternJsonData patternData)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            string fileName = $"song_{_inMemoryPatterns.Count:D4}.json";
-            patternData.FileName = fileName;
-            _inMemoryPatterns.Add(patternData);
+//#if UNITY_IOS && !UNITY_EDITOR
+//            string fileName = $"song_{_inMemoryPatterns.Count:D4}.json";
+//            patternData.FileName = fileName;
+//            _inMemoryPatterns.Add(patternData);
 
-            Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
-            _manifestData.FileName[^1] = fileName;
+//            Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
+//            _manifestData.FileName[^1] = fileName;
 
-            await UniTask.CompletedTask;
-#else
+//            await UniTask.CompletedTask;
+//#else
             Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
 
             string filName = $"song_{(_manifestData.FileName.Length - 1):D4}.json";
@@ -109,44 +109,44 @@ namespace Title.Custom
             string patternJson = JsonUtility.ToJson(patternData, true);
             FileStorage.CreateFile(FolderName, filName, patternJson);
             UpdateManifestFile();
-#endif
+//#endif
         }
 
         public void SavePattern(PatternJsonData patternData)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            int index = _inMemoryPatterns.FindIndex(x => x.FileName == patternData.FileName);
-            if (index >= 0)
-            {
-                _inMemoryPatterns[index] = patternData;
-            }
-            return;
-#else
+//#if UNITY_IOS && !UNITY_EDITOR
+//            int index = _inMemoryPatterns.FindIndex(x => x.FileName == patternData.FileName);
+//            if (index >= 0)
+//            {
+//                _inMemoryPatterns[index] = patternData;
+//            }
+//            return;
+//#else
             string patternJson = JsonUtility.ToJson(patternData, true);
             FileStorage.UpdateFile(FolderName, patternData.FileName, patternJson);
-#endif
+//#endif
         }
 
         public void DeletePattern(PatternJsonData patternData)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            _inMemoryPatterns.RemoveAll(x => x.FileName == patternData.FileName);
-            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
-           return;
-#else
+//#if UNITY_IOS && !UNITY_EDITOR
+//            _inMemoryPatterns.RemoveAll(x => x.FileName == patternData.FileName);
+//            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
+//           return;
+//#else
             FileStorage.DeleteFile(FolderName, patternData.FileName);
             _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
-#endif
+//#endif
         }
 
         private void UpdateManifestFile()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-           return;
-#else
+//#if UNITY_IOS && !UNITY_EDITOR
+//           return;
+//#else
             string manifestJson = JsonUtility.ToJson(_manifestData, true);
             FileStorage.UpdateFile(FolderName, ManifestFileName, manifestJson);
-#endif
+//#endif
         }
 
         private async UniTask<string> CreateDefaultManifest()

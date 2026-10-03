@@ -53,4 +53,5 @@ public enum CustomOtherType
     MissPerformance = 1 << 3,
     UsePostProcess = 1 << 4,
     PlayStagePerformance = 1 << 5,
+    NodeEffect = 1 << 6,
 }

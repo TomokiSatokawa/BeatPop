@@ -34,13 +34,13 @@ namespace Title.PlayerData
 
         public async UniTask LoadData()
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            // iOS実機環境ではストレージを読み書きせず、メモリ上にインスタンスを保持する
-            _info = new PlayerInfo();
-            _records = new PlayerRecords();
-            _settingsData = new SettingsData();
-            await UniTask.CompletedTask;
-#else
+//#if UNITY_IOS && !UNITY_EDITOR
+//            // iOS実機環境ではストレージを読み書きせず、メモリ上にインスタンスを保持する
+//            _info = new PlayerInfo();
+//            _records = new PlayerRecords();
+//            _settingsData = new SettingsData();
+//            await UniTask.CompletedTask;
+//#else
             _info = await TryGetCreateFile<PlayerInfo>(InfoFileName);
             _records = await TryGetCreateFile<PlayerRecords>(RecordsFileName);
             _settingsData = await TryGetCreateFile<SettingsData>(SettingsFileName);
@@ -49,7 +49,7 @@ namespace Title.PlayerData
             _info.OnUpdateData.Subscribe(_ => UpdateFile(InfoFileName, _info));
             _records.OnUpdateData.Subscribe(_ => UpdateFile(RecordsFileName, _records));
             _settingsData.OnUpdateData.Subscribe(_ => UpdateFile(SettingsFileName, _settingsData));
-#endif
+//#endif
         }
 
         private async UniTask<T> TryGetCreateFile<T>(string fileName) where T : new()
