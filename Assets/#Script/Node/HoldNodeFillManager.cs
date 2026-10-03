@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using Common.PlaySystem;
 using InGame.Effect;
 using Input;
 using Sound;
+using Title.Custom;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +17,16 @@ namespace InGame.Node
         [SerializeField] private Transform[] _lane;
 
         private Dictionary<NodeData, FillData> _activeFillData = new();
+        private bool _isHoldEffectEnable = true;
+
+        private void Start()
+        {
+            if (SongPlayContext.I != null && SongPlayContext.I.PatternData != null)
+            {
+                var flag = OtherCustomFlags.Create(SongPlayContext.I.PatternData.OtherPattern.Flags);
+                _isHoldEffectEnable = !flag.Has(CustomOtherType.NodeEffect);
+            }
+        }
 
         public void AddClone(NodeData start, NodeData end, PoolObject startObject)
         {
@@ -24,7 +36,7 @@ namespace InGame.Node
             float goal = StageConfig .I.StageLayout.GoalPos;
             float delete = StageConfig .I.StageLayout.DeletePos;
 
-            var fillData = new FillData(start, end, _lane[start.Lane], clone, goal, delete);
+            var fillData = new FillData(start, end, _lane[start.Lane], clone, goal, delete,_isHoldEffectEnable);
             fillData.SetNodeObject(start: startObject);
             _activeFillData.Add(end, fillData);
         }
@@ -85,11 +97,13 @@ namespace InGame.Node
             private readonly float _tapPosZ;
             private readonly float _deletePosZ;
             private readonly HoldEffect _effect;
+            private readonly bool _isPlayEffect;
 
-            public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float tapZ,float deletePos)
+            public FillData(NodeData start, NodeData end, Transform lane, float cloneZ, float tapZ,float deletePos,bool isPlayEffect = true)
             {
                 _fillObject = PoolManager.I.Get<PoolObject>(PoolPrefabType.HoldNoteFill);
-                _effect = PoolManager.I.Get<HoldEffect>(PoolPrefabType.HoldFillEffect);
+                
+
                 StartNode = start;
                 _endNode = end;
                 _lane = lane;
@@ -98,7 +112,14 @@ namespace InGame.Node
                 _deletePosZ = deletePos;
                 _fillObject.gameObject.SetActive(false);
 
-                _effect.transform.position = new Vector3(_lane.transform.position.x, _lane.transform.position.y, _tapPosZ);
+                //HoldEffect
+                _isPlayEffect = isPlayEffect;
+
+                if (_isPlayEffect)
+                {
+                    _effect = PoolManager.I.Get<HoldEffect>(PoolPrefabType.HoldFillEffect);
+                    _effect.transform.position = new Vector3(_lane.transform.position.x, _lane.transform.position.y, _tapPosZ);
+                }
             }
 
             public void Tick(float deltaTime)
@@ -109,7 +130,8 @@ namespace InGame.Node
                 UpdateInput();
                 UpdateSound();
 
-                _effect.SetEmission(_isInput);
+                if(_isPlayEffect)
+                    _effect.SetEmission(_isInput);
             }
 
             public void SetNodeObject(PoolObject start = null, PoolObject end = null)
@@ -125,8 +147,8 @@ namespace InGame.Node
 
             public void Remove()
             {
-                _fillObject.Release();
-                _effect.Release();
+                _fillObject?.Release();
+                _effect?.Release();
                 SoundManager.LaneSE[StartNode.Lane].StopBGM();
             }
 

@@ -1,9 +1,11 @@
 using Common.BeatUpdate;
+using Common.PlaySystem;
 using InGame.Effect;
 using InGame.Score;
 using Input;
 using R3;
 using Sound;
+using Title.Custom;
 using UnityEngine;
 
 namespace InGame.Node
@@ -18,6 +20,7 @@ namespace InGame.Node
         [SerializeField] private LaneClickEffect _laneClick;
 
         private readonly Subject<(IReadOnlyJudgementData, int)> _showJudge = new();
+        private bool _isNodeEffectEnable = true;
         public Observable<(IReadOnlyJudgementData Judge, int lane)> ShowJudge => _showJudge;
 
         public void Start()
@@ -30,6 +33,12 @@ namespace InGame.Node
 
             _nodeController.OnRemoveNode.Subscribe(HandleRemove).AddTo(this);
             _nodeController.OnHitNode.Subscribe(HandleHit).AddTo(this);
+
+            if (SongPlayContext.I != null && SongPlayContext.I.PatternData != null)
+            {
+                var flag = OtherCustomFlags.Create(SongPlayContext.I.PatternData.OtherPattern.Flags);
+                _isNodeEffectEnable = !flag.Has(CustomOtherType.NodeEffect);
+            }
         }
 
         public void HandleHit(NodeObject targetNode)
@@ -41,11 +50,14 @@ namespace InGame.Node
             }
 
             //タップエフェクト
-            var tapEffect = PoolManager.I.Get<TapEffect>(targetNode.NodeObjData.TapEffect);
-            Vector3 pos = targetNode.transform.position;
-            pos.z = StageConfig.I.StageLayout.GoalPos;
-            tapEffect.transform.position = pos;
-            tapEffect.SetColor(targetNode.NodeObjData.NodeColor);
+            if (_isNodeEffectEnable)
+            {
+                var tapEffect = PoolManager.I.Get<TapEffect>(targetNode.NodeObjData.TapEffect);
+                Vector3 pos = targetNode.transform.position;
+                pos.z = StageConfig.I.StageLayout.GoalPos;
+                tapEffect.transform.position = pos;
+                tapEffect.SetColor(targetNode.NodeObjData.NodeColor);
+            }
 
             //ジャッチUI
             var judgeData = ExecuteJudgeNode(targetNode.NodeData);
