@@ -1607,7 +1607,7 @@ MonoBehaviour:
   _rankData: {fileID: 11400000, guid: 02264a35c84237140b0f800a4266de0e, type: 2}
   _bgmStartWaitTime: 0
   _fadeDuration: 1
-  _bgmVolume: 0.6
+  _bgmVolume: 0.683
 --- !u!114 &398536586
 MonoBehaviour:
   m_ObjectHideFlags: 0

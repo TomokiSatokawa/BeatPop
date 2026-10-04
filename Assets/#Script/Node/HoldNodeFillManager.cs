@@ -92,6 +92,9 @@ namespace InGame.Node
             private bool _isInput;
             private bool _isPreviousInput;
 
+
+            private SEData _sEData;
+
             private readonly Transform _lane;
             private readonly float _clonePosZ;
             private readonly float _tapPosZ;
@@ -114,6 +117,8 @@ namespace InGame.Node
 
                 //HoldEffect
                 _isPlayEffect = isPlayEffect;
+
+                _sEData = InGameCustomSoundData.I.NodeSE[PoolPrefabType.HoldNoteFill];
 
                 if (_isPlayEffect)
                 {
@@ -158,7 +163,7 @@ namespace InGame.Node
 
                 if (_isInput)
                 {
-                    SoundManager.LaneSE[StartNode.Lane].PlayBGM(InGameCustomSoundData.I.NodeSE[PoolPrefabType.HoldNoteFill].Clip, isLoop: true);
+                    SoundManager.LaneSE[StartNode.Lane].PlayBGM(_sEData.Clip,volume: _sEData.Volume, isLoop: true);
                 }
                 else
                 {

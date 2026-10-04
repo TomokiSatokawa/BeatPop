@@ -120,7 +120,6 @@ namespace Title.Custom
         public void SelectPattern(PatternUIControl patternUI)
         {
             _currentSelect = patternUI;
-            Debug.Log("Select");
 
             //カスタムの値を変更
             _sound.SetCustom(patternUI.PatternData.SoundPattern);
@@ -163,7 +162,6 @@ namespace Title.Custom
 
         public void SavePattern()
         {
-            Debug.Log("Save");
             if (_currentSelect == null) return;
             _currentSelect.PatternData.SoundPattern = _sound.GetCustom();
             _currentSelect.PatternData.ChartPattern = _chart.GetCustom();

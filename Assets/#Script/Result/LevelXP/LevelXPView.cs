@@ -7,9 +7,6 @@ namespace Result.UI
 
     public class LevelXPView : MonoBehaviour
     {
-        //TODO:Level•ÊSO‚É‚·‚é
-        private const int LevelUpXP = 1000;
-
         [SerializeField] private TextMeshProUGUI _rankText;
         [SerializeField] private TextMeshProUGUI _addXpText;
         [SerializeField] private Image _xpSlider;
