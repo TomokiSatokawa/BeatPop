@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Title.Common;
 using Title.PlayerData;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Title.SongSelect
 {
@@ -12,8 +14,9 @@ namespace Title.SongSelect
         [SerializeField] private SongListDataBase _songListData;
         [SerializeField] private ButtonsToggle _difficultyFilter;
         [SerializeField] private RangeUIControl _bgmRangeFilter;
+        [SerializeField] private int _recommenderCount;
 
-        public IReadOnlyList<SongSelectData> GetRecommendation()
+        public IReadOnlyList<SongSelectData> GetAll()
         {
             var result = new List<SongSelectData>();
             foreach (var songData in _songListData.SongDatas)
@@ -26,6 +29,80 @@ namespace Title.SongSelect
                     result.Add(new SongSelectData(songData, difficulty));
                 }
             }
+            return result;
+        }
+
+        public IReadOnlyList<SongSelectData> GetRecommender()
+        {
+            if (PlayerDataLoader.Records.RecentPlayRecords?.Count == 0)
+            {
+                return GetRandom(_recommenderCount);
+            }
+
+            var cost = new Dictionary<SongSelectData, float>();
+
+            foreach (var songData in _songListData.SongDatas)
+            {
+                foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
+                {
+                    if (songData.Charts.GetChart(difficulty) == null) continue;
+
+                    var songSelectData = new SongSelectData(songData, difficulty);
+
+
+                    foreach (var record in PlayerDataLoader.Records.RecentPlayRecords)
+                    {
+                        var recordSongData = _songListData.GetSongData(record.SongIndex);
+                        int recordLevel = recordSongData.Charts.GetLevel((Difficulty)record.Difficulty);
+
+                        float bpmCost = Mathf.Abs(recordSongData.BPM - songData.BPM);
+                        float levelCost = Mathf.Abs(songData.Charts.GetLevel(difficulty) - recordLevel);
+                        float totalCost = levelCost + bpmCost;
+
+                        if (!cost.TryGetValue(songSelectData, out float currentCost) ||
+                            totalCost < currentCost)
+                        {
+                            cost[songSelectData] = totalCost;
+                        }
+                    }
+                }
+            }
+
+
+
+            return cost.OrderBy(x => x.Value).Take(_recommenderCount).Select(x => x.Key).ToList();
+        }
+
+        public IReadOnlyList<SongSelectData> GetRandom(int count)
+        {
+            var result = new List<SongSelectData>();
+            var used = new HashSet<(int SongIndex, Difficulty Difficulty)>();
+
+            int difficultyCount = Enum.GetValues(typeof(Difficulty)).Length;
+            int maxCount = _songListData.SongDatas.Count * difficultyCount;
+
+            count = Mathf.Min(count, maxCount);
+
+            while (result.Count < count)
+            {
+                int songIndex = Random.Range(0, _songListData.SongDatas.Count);
+                var songData = _songListData.SongDatas[songIndex];
+
+                Difficulty difficulty = (Difficulty)Random.Range(0, difficultyCount);
+
+                if (songData.Charts.GetChart(difficulty) == null)
+                {
+                    continue;
+                }
+
+                if (!used.Add((songIndex, difficulty)))
+                {
+                    continue;
+                }
+
+                result.Add(new SongSelectData(songData, difficulty));
+            }
+
             return result;
         }
 

@@ -21,7 +21,7 @@ namespace Title.SongSelect
         public void InitialView()
         {
             DeleteChildren();
-            AddContents("Ç®Ç∑Ç∑Çﬂ", SongRecommender.I.GetRecommendation());
+            AddContents("Ç®Ç∑Ç∑Çﬂ", SongRecommender.I.GetRecommender());
             AddContents("ç≈ãﬂÇÃÉvÉåÉC", SongRecommender.I.GetPlayHistory());
             ClonedActive();
         }
