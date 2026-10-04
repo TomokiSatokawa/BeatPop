@@ -68,8 +68,6 @@ namespace Title.SongSelect
                 }
             }
 
-
-
             return cost.OrderBy(x => x.Value).Take(_recommenderCount).Select(x => x.Key).ToList();
         }
 
@@ -139,13 +137,33 @@ namespace Title.SongSelect
         {
             var result = new List<SongSelectData>();
 
+            string normalizedKeyword = NormalizeKeyword(keyword);
+
+            if (string.IsNullOrEmpty(normalizedKeyword))
+            {
+                return result;
+            }
+
             foreach (var songData in _songListData.SongDatas)
             {
-                if (!songData.SongName.Contains(keyword)) continue;
+                string songName = NormalizeKeyword(songData.SongName);
+
+                if (!songName.Contains(normalizedKeyword))
+                {
+                    continue;
+                }
+
                 foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
                 {
-                    if (songData.Charts.GetChart(difficulty) == null) continue;
-                    if (!SongFilter(songData, difficulty)) continue;
+                    if (songData.Charts.GetChart(difficulty) == null)
+                    {
+                        continue;
+                    }
+
+                    if (!SongFilter(songData, difficulty))
+                    {
+                        continue;
+                    }
 
                     result.Add(new SongSelectData(songData, difficulty));
                 }
@@ -153,7 +171,17 @@ namespace Title.SongSelect
 
             return result;
         }
+
+        private string NormalizeKeyword(string value)
+        {
+            return value
+                .Trim()
+                .Replace(" ", "")
+                .Replace("Å@", "")
+                .ToLowerInvariant();
+        }
     }
+
     public struct SongSelectData
     {
         public readonly IReadOnlySongData SongData;

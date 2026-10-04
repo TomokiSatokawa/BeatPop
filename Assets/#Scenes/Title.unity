@@ -29234,8 +29234,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1887127831}
   m_HandleRect: {fileID: 1887127830}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -34855,7 +34855,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2129949730}
   m_HandleRect: {fileID: 2129949729}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -38487,7 +38487,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 346274206}
   m_Direction: 2
   m_Value: 1.0000005
-  m_Size: 0.85060906
+  m_Size: 0.8506091
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -39187,7 +39187,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 266844658}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.26384503
+  m_Size: 0.26384506
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -46619,6 +46619,7 @@ MonoBehaviour:
   _songListData: {fileID: 11400000, guid: d00d36adcbb0f5340a9a3b64245c167f, type: 2}
   _difficultyFilter: {fileID: 512070435}
   _bgmRangeFilter: {fileID: 1561458887}
+  _recommenderCount: 12
 --- !u!114 &1909526573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52171,8 +52172,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1697646409}
   m_HandleRect: {fileID: 1697646408}
   m_Direction: 0
-  m_Value: 0.5
-  m_Size: 0.9994457
+  m_Value: 0.50006104
+  m_Size: 0.9994458
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
