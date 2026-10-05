@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Common.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -29,7 +30,19 @@ namespace Title.Custom
         private PatternUIControl _usePattern;
 
         public PatternJsonData CurrentSelectData => _currentSelect.PatternData;
-        public PatternJsonData UsePattern => _usePattern.PatternData;
+        public PatternJsonData UsePattern => _usePattern?.PatternData ?? null;
+
+        private void Start()
+        {
+            UpdateUsePattern().Forget();
+            ShowList();
+        }
+
+        public async UniTask UpdateUsePattern()
+        {
+            var patterns = await CustomDataLoader.I.GetAllCustomPattern();
+            var usePattern = patterns.Where(x => x.IsSelect).First();
+        }
 
         public async void ShowList()
         {

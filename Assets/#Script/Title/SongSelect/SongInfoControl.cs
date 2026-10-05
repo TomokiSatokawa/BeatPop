@@ -4,6 +4,7 @@ using Common.PlaySystem;
 using Common.UI;
 using DG.Tweening;
 using Sound;
+using Title.Custom;
 using Title.PlayerData;
 using TMPro;
 using UnityEngine;
@@ -30,11 +31,13 @@ namespace Title.SongSelect
         [SerializeField] private TextMeshProUGUI _secondInfo;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _nodeCount;
+        [SerializeField] private TextMeshProUGUI _currentCustom;
         [Header("Other")]
         [SerializeField] private DifficultyColor _difficultyColor;
         [SerializeField] private SongPlayLoader _playLoader;
         [SerializeField] private DifficultyButtonSegmented _segmentControl;
         [SerializeField] private TitleSoundController _songPreviewPlayer;
+        [SerializeField] private PatternUIList _patternUIList;
         [Header("SE")]
         [SerializeField] private SESoundType _playStartSE;
         [Header("Debug")]
@@ -52,7 +55,7 @@ namespace Title.SongSelect
         public void ShowInfo(SongSelectData data)
         {
             _currentData = data;
-            UpdateInfoUI(data);
+            UpdateInfoUIAsync(data);
 
             OnActiveAnimation();
             foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
@@ -66,7 +69,7 @@ namespace Title.SongSelect
             _songPreviewPlayer.PlayPreview(CurrentData.Value.SongData);
         }
 
-        private async void UpdateInfoUI(SongSelectData data)
+        private async void UpdateInfoUIAsync(SongSelectData data)
         {
             if (data.Equals(default)) return;
 
@@ -78,11 +81,23 @@ namespace Title.SongSelect
             _highScoreInfo.text = PlayerDataLoader.Records.TryGetHighScore(data, out int highScrore) ? highScrore.ToString() : "-----";
             _secondInfo.text = UIFormat.SecondToText(data.SongData.Audio.length);
 
+            UpdateCustomName();
+
             var textAsset = data.GetNodeJson();
             if (textAsset != null)
             {
                 _nodeCount.text = (await NodeDataSerializer.DeserializeJson(textAsset.text)).Nodes.Count.ToString();
             }
+        }
+
+        public async void UpdateCustomName()
+        {
+            if(_patternUIList.UsePattern == null)
+            {
+                await _patternUIList.UpdateUsePattern();
+            }
+
+            _currentCustom.text = _patternUIList.UsePattern?.PatternName ?? "";
         }
 
         public void OnChangeDifficulty(int value)
@@ -94,7 +109,7 @@ namespace Title.SongSelect
             if (Enum.IsDefined(typeof(Difficulty), value))
             {
                 _currentData = new SongSelectData(_currentData.Value.SongData, (Difficulty)value);
-                UpdateInfoUI(_currentData.Value);
+                UpdateInfoUIAsync(_currentData.Value);
                 return;
             }
             Debug.LogError("ïsê≥Ç»ìÔà’ìxÇÃíl");
