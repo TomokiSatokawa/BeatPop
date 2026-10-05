@@ -43,6 +43,9 @@ namespace Title.PlayerData
                 return true;
             }
 
+            //リザルトを保存する
+            _highScores[highScoreIndex].AddResult(resultType);
+
             //ハイスコアを更新する
             if (_highScores[highScoreIndex].Score <= score)
             {
@@ -52,7 +55,6 @@ namespace Title.PlayerData
                 return true;
             }
 
-            _highScores[highScoreIndex].AddResult(resultType);
             highScore = _highScores[highScoreIndex].Score;
             return false;
         }
@@ -142,7 +144,7 @@ namespace Title.PlayerData
             _songIndex = songIndex;
             _difficulty = difficulty;
             _score = score;
-            _fullCombo = resultType == ResultType.FullCombo;
+            _fullCombo = resultType != ResultType.Clear;
             _allPerfect = resultType == ResultType.AllPerfect;
         }
 
@@ -159,7 +161,7 @@ namespace Title.PlayerData
         /// </summary>
         public void AddResult(ResultType resultType)
         {
-            _fullCombo |= resultType is ResultType.FullCombo or ResultType.AllPerfect;
+            _fullCombo |= resultType != ResultType.Clear;
             _allPerfect |= resultType == ResultType.AllPerfect;
         }
     }

@@ -52,6 +52,13 @@ namespace Title.PlayerData
 //#endif
         }
 
+        public void SaveFile()
+        {
+            UpdateFile(InfoFileName, _info);
+            UpdateFile(RecordsFileName, _records);
+            UpdateFile(SettingsFileName, _settingsData);
+        }
+
         private async UniTask<T> TryGetCreateFile<T>(string fileName) where T : new()
         {
             string infoFile = "";

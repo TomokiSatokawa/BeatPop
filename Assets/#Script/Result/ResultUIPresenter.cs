@@ -58,6 +58,7 @@ namespace Result.UI
                 _highScoreView.ShowHighScore();
             else
                 _highScoreView.HiddenHighScore();
+
         }
 
         public void ShowPlayerPanel()

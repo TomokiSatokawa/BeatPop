@@ -6513,6 +6513,7 @@ GameObject:
   - component: {fileID: 1274596750}
   - component: {fileID: 1274596754}
   - component: {fileID: 1274596753}
+  - component: {fileID: 1274596755}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -6664,6 +6665,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
+--- !u!114 &1274596755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274596748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 1274596750}
+  _isMainButton: 1
 --- !u!1 &1339822184
 GameObject:
   m_ObjectHideFlags: 0
@@ -8482,6 +8497,7 @@ GameObject:
   - component: {fileID: 1783687319}
   - component: {fileID: 1783687323}
   - component: {fileID: 1783687322}
+  - component: {fileID: 1783687324}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -8633,6 +8649,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594ec4ba130d3164695175fde7d928ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPointerHover
+--- !u!114 &1783687324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783687317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0f29512a504ee4ba2761d46f032206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Common.UI.ButtonClickSE
+  _button: {fileID: 1783687319}
+  _isMainButton: 1
 --- !u!1 &1830203566
 GameObject:
   m_ObjectHideFlags: 0

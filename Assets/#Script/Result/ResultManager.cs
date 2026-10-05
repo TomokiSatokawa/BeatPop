@@ -64,6 +64,9 @@ namespace Result.UI
 
         public async void ReturnTitle()
         {
+            PlayerDataLoader.I.SaveFile();
+            await FileStorage.Save();
+
             GameManager.DontDestroyRelease();
 
             UniTask fade = _fadeImageControl.FadeOut(FadeType.White);
