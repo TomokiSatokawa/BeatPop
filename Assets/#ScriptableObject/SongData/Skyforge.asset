@@ -18,11 +18,11 @@ MonoBehaviour:
   _jacket: {fileID: 21300000, guid: ebfac5e0821e82546a970141612d2904, type: 3}
   _charts:
     EasyLevel: 0
-    EasyJson: {fileID: 0}
+    EasyJson: {fileID: 4900000, guid: d1c01f6a3344c0d45a3d01b48c223722, type: 3}
     NormalLevel: 8
-    NormalJson: {fileID: 4900000, guid: 82e9270fadcc2bf49b2a69601590f09a, type: 3}
-    HardLevel: 0
-    HardJson: {fileID: 0}
+    NormalJson: {fileID: 4900000, guid: 5cd7bd19e576bb04f8fc70a5edde4d44, type: 3}
+    HardLevel: 9
+    HardJson: {fileID: 4900000, guid: e288bb904172fa743a56c9134a76d3b1, type: 3}
     ExpertLevel: 25
     ExpertJson: {fileID: 4900000, guid: 82e9270fadcc2bf49b2a69601590f09a, type: 3}
   _audioClip: {fileID: 8300000, guid: 551401c8c270b8a4aa3eb40309f488a3, type: 3}

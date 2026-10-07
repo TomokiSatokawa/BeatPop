@@ -21,7 +21,7 @@ MonoBehaviour:
     EasyJson: {fileID: 4900000, guid: 10380b09128968a45a879d0ade27a5f4, type: 3}
     NormalLevel: 9
     NormalJson: {fileID: 4900000, guid: e3dc45f89fdeea845b19fc40c617f930, type: 3}
-    HardLevel: 10
+    HardLevel: 12
     HardJson: {fileID: 4900000, guid: 972090a71d195d94a95542dd5e3962c1, type: 3}
     ExpertLevel: 21
     ExpertJson: {fileID: 4900000, guid: 189e14709e055634dbfd07664b90f346, type: 3}
