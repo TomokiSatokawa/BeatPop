@@ -19,11 +19,11 @@ MonoBehaviour:
   _charts:
     EasyLevel: 1
     EasyJson: {fileID: 0}
-    NormalLevel: 8
+    NormalLevel: 14
     NormalJson: {fileID: 4900000, guid: 1d61683ef803cbe4d84f0ad4ccd58739, type: 3}
-    HardLevel: 11
+    HardLevel: 16
     HardJson: {fileID: 4900000, guid: 4956d2cd0b7add64aa4905279e576571, type: 3}
-    ExpertLevel: 24
+    ExpertLevel: 33
     ExpertJson: {fileID: 4900000, guid: 9bdb0118080cd7c4ba67594e98c6be69, type: 3}
   _audioClip: {fileID: 8300000, guid: 776ee367d39150c4a8729b2f57f3b8e5, type: 3}
   _stageTimeOffSet: 0

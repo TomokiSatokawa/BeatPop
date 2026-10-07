@@ -17,13 +17,13 @@ MonoBehaviour:
   _bpm: 163.5
   _jacket: {fileID: 21300000, guid: 3aa1928f9d2a38c45ad14d631078640e, type: 3}
   _charts:
-    EasyLevel: 0
+    EasyLevel: 7
     EasyJson: {fileID: 4900000, guid: a60cef63e87f31346b7fd8e5046b0b1f, type: 3}
-    NormalLevel: 8
+    NormalLevel: 10
     NormalJson: {fileID: 4900000, guid: e019f4b20c514594fa2c524784978c1d, type: 3}
-    HardLevel: 11
+    HardLevel: 17
     HardJson: {fileID: 4900000, guid: 052434ded871a4b4eaf6248697954cf0, type: 3}
-    ExpertLevel: 27
+    ExpertLevel: 28
     ExpertJson: {fileID: 4900000, guid: 95d5cfdfc0bf76240b1f795ecc38c4db, type: 3}
   _audioClip: {fileID: 8300000, guid: a25ffad7ecacfc446b70bc84d782e35c, type: 3}
   _stageTimeOffSet: 0
