@@ -14,6 +14,7 @@ namespace Title.Custom
         private ManifestData _manifestData;
         private const string ManifestFileName = "manifest.json";
         private const string FolderName = "CustomData";
+        public static readonly int MaxPatternCount = 10;
 
         // iOS用のインメモリ保存キャッシュ
         private readonly List<PatternJsonData> _inMemoryPatterns = new();
@@ -54,11 +55,12 @@ namespace Title.Custom
 
             _manifestData = JsonUtility.FromJson<ManifestData>(manifestJson);
 
-            foreach (var filePath in _manifestData.FileName)
+            foreach (var fileIndex in _manifestData.FileIndexes)
             {
-                if (!await FileStorage.TryGetText(FolderName, filePath, null))
+                string fileName = GetFileName(fileIndex);
+                if (!await FileStorage.TryGetText(FolderName, fileName, null))
                 {
-                    Debug.LogError($"ファイル破損 {filePath}");
+                    Debug.LogError($"ファイル破損 {fileName}");
                 }
 
                 await UniTask.Yield();
@@ -72,14 +74,14 @@ namespace Title.Custom
 //            await UniTask.CompletedTask;
 //            return _inMemoryPatterns.ToArray();
 //#else
-            var result = new PatternJsonData[_manifestData.FileName.Length];
-            for (int i = 0; i < _manifestData.FileName.Length; i++)
+            var result = new PatternJsonData[_manifestData.FileIndexes.Length];
+            for (int i = 0; i < _manifestData.FileIndexes.Length; i++)
             {
                 string patternJson = "";
-                string fileName = _manifestData.FileName[i];
-                if (!await FileStorage.TryGetText(FolderName, fileName, t => patternJson = t))
+                int fileIndex = _manifestData.FileIndexes[i];
+                if (!await FileStorage.TryGetText(FolderName, GetFileName(fileIndex), t => patternJson = t))
                 {
-                    Debug.LogError($"{fileName}");
+                    Debug.LogError($"{fileIndex}");
                     continue;
                 }
                 result[i] = JsonUtility.FromJson<PatternJsonData>(patternJson);
@@ -88,27 +90,44 @@ namespace Title.Custom
 //#endif
         }
 
-        public async UniTask AddPattern(PatternJsonData patternData)
+        public bool AddPattern(PatternJsonData patternData)
         {
-//#if UNITY_IOS && !UNITY_EDITOR
-//            string fileName = $"song_{_inMemoryPatterns.Count:D4}.json";
-//            patternData.FileName = fileName;
-//            _inMemoryPatterns.Add(patternData);
+            //#if UNITY_IOS && !UNITY_EDITOR
+            //            string fileName = $"song_{_inMemoryPatterns.Count:D4}.json";
+            //            patternData.FileName = fileName;
+            //            _inMemoryPatterns.Add(patternData);
 
-//            Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
-//            _manifestData.FileName[^1] = fileName;
+            //            Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
+            //            _manifestData.FileName[^1] = fileName;
 
-//            await UniTask.CompletedTask;
-//#else
-            Array.Resize(ref _manifestData.FileName, _manifestData.FileName.Length + 1);
+            //            await UniTask.CompletedTask;
+            //#else
 
-            string filName = $"song_{(_manifestData.FileName.Length - 1):D4}.json";
-            _manifestData.FileName[_manifestData.FileName.Length - 1] = filName;
-            patternData.FileName = filName;
+            if (_manifestData.FileIndexes.Length >= MaxPatternCount)
+                return false;
+
+            Array.Resize(ref _manifestData.FileIndexes, _manifestData.FileIndexes.Length + 1);
+
+
+            int newIndex = -1;
+            for (int i = 0; i < 10; i++)
+            {
+                if (_manifestData.FileIndexes.Contains(i)) continue;
+                newIndex = i;
+                break;
+            }
+
+            if (newIndex == -1)
+                return false;
+
+                _manifestData.FileIndexes[_manifestData.FileIndexes.Length - 1] = newIndex;
+            patternData.FileIndex = newIndex;
 
             string patternJson = JsonUtility.ToJson(patternData, true);
-            FileStorage.CreateFile(FolderName, filName, patternJson);
+            FileStorage.CreateFile(FolderName, GetFileName(newIndex), patternJson);
             UpdateManifestFile();
+
+            return true;
 //#endif
         }
 
@@ -123,19 +142,22 @@ namespace Title.Custom
 //            return;
 //#else
             string patternJson = JsonUtility.ToJson(patternData, true);
-            FileStorage.UpdateFile(FolderName, patternData.FileName, patternJson);
+            FileStorage.UpdateFile(FolderName, GetFileName(patternData.FileIndex), patternJson);
 //#endif
         }
 
         public void DeletePattern(PatternJsonData patternData)
         {
-//#if UNITY_IOS && !UNITY_EDITOR
-//            _inMemoryPatterns.RemoveAll(x => x.FileName == patternData.FileName);
-//            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
-//           return;
-//#else
-            FileStorage.DeleteFile(FolderName, patternData.FileName);
-            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
+            //#if UNITY_IOS && !UNITY_EDITOR
+            //            _inMemoryPatterns.RemoveAll(x => x.FileName == patternData.FileName);
+            //            _manifestData.FileName = _manifestData.FileName.Where(x => x != patternData.FileName).ToArray();
+            //           return;
+            //#else
+
+            string fileName = GetFileName(patternData.FileIndex);
+
+            FileStorage.DeleteFile(FolderName, fileName);
+            _manifestData.FileIndexes = _manifestData.FileIndexes.Where(x => x != patternData.FileIndex).ToArray();
 //#endif
         }
 
@@ -153,20 +175,21 @@ namespace Title.Custom
         {
             var manifestData = new ManifestData();
 
-            string fileName = $"song_{0:D4}.json";
+            int fileIndex = 0;
+            string fileName = GetFileName(fileIndex);
 
             if (!await FileStorage.TryGetText(FolderName, fileName, null))
             {
                 PatternJsonData patternJsonData = _patternLoader.GetDefaultPattern();
                 patternJsonData.IsSelect = true;
-                patternJsonData.FileName = fileName;
+                patternJsonData.FileIndex = fileIndex;
                 patternJsonData.IsDefault = true;
                 string patternJson = JsonUtility.ToJson(patternJsonData, true);
                 FileStorage.CreateFile(FolderName, fileName, patternJson);
             }
 
-            manifestData.FileName = new string[1];
-            manifestData.FileName[0] = fileName;
+            manifestData.FileIndexes = new int[1];
+            manifestData.FileIndexes[0] = fileIndex;
 
             return JsonUtility.ToJson(manifestData, true);
         }
@@ -174,7 +197,12 @@ namespace Title.Custom
         [System.Serializable]
         public class ManifestData
         {
-            public string[] FileName;
+            public int[] FileIndexes;
+        }
+
+        private static string GetFileName(int index)
+        {
+            return $"song_{index:D4}.json";
         }
     }
 }

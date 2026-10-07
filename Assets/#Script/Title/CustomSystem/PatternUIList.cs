@@ -24,6 +24,7 @@ namespace Title.Custom
         [SerializeField] private CustomStage _stage;
         [SerializeField] private CustomOther _other;
         [SerializeField] private UnityEvent _onPatternSelect;
+        [SerializeField] private string _createPatternName;
 
         private List<PatternUIControl> _clonedUI = new();
         private PatternUIControl _currentSelect;
@@ -69,8 +70,15 @@ namespace Title.Custom
         public void CreatePattern()
         {
             var newPattern = _patternLoader.GetDefaultPattern();
-            AddPatternUI(newPattern);
-            CustomDataLoader.I.AddPattern(newPattern).Forget();
+            newPattern.PatternName = _createPatternName;
+
+            if (CustomDataLoader.I.AddPattern(newPattern))
+            {
+                AddPatternUI(newPattern);
+                FileStorage.Save().Forget();
+            }
+            else
+                Debug.Log("ÉpÉ^Å[Éìí«â¡é∏îs");
         }
 
         public void DeletePattern(PatternJsonData pattern)

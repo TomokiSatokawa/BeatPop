@@ -29515,7 +29515,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1887127830}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -32079,6 +32079,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _createPatternName: "\u65B0\u898F\u30D1\u30BF\u30FC\u30F3"
 --- !u!114 &1278408205
 MonoBehaviour:
   m_ObjectHideFlags: 0

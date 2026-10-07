@@ -25,7 +25,7 @@ namespace Title.Custom
     public class PatternJsonData
     {
         public string PatternName = "デフォルト";
-        public string FileName;
+        public int FileIndex;
         public bool IsSelect;
         public bool IsDefault = false;
         public CustomSoundPattern SoundPattern;
