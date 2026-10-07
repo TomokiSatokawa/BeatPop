@@ -46,6 +46,7 @@ namespace Title.SongSelect
                 foreach (Difficulty difficulty in Enum.GetValues(typeof(Difficulty)))
                 {
                     if (songData.Charts.GetChart(difficulty) == null) continue;
+                    if (!SongFilter(songData, difficulty)) continue;
 
                     var songSelectData = new SongSelectData(songData, difficulty);
 
@@ -81,17 +82,20 @@ namespace Title.SongSelect
 
             count = Mathf.Min(count, maxCount);
 
-            while (result.Count < count)
+            int maxAttempts = maxCount * 10;
+            int attempts = 0;
+
+            while (result.Count < count && attempts < maxAttempts)
             {
+                attempts++;
+
                 int songIndex = Random.Range(0, _songListData.SongDatas.Count);
                 var songData = _songListData.SongDatas[songIndex];
 
                 Difficulty difficulty = (Difficulty)Random.Range(0, difficultyCount);
 
-                if (songData.Charts.GetChart(difficulty) == null)
-                {
-                    continue;
-                }
+                if (songData.Charts.GetChart(difficulty) == null) continue;
+                if (!SongFilter(songData, difficulty)) continue;
 
                 if (!used.Add((songIndex, difficulty)))
                 {

@@ -25,9 +25,13 @@ namespace BeatPop.Editor
             GetWindow<BeatmapDifficultyAnalyzerWindow>(
                 "ïàñ ìÔà’ìxâêÕ");
         }
+        private Vector2 _scrollPosition;
 
         private void OnGUI()
         {
+            _scrollPosition = EditorGUILayout.BeginScrollView(
+                _scrollPosition);
+
             EditorGUILayout.Space(8);
 
             EditorGUILayout.LabelField(
@@ -64,14 +68,14 @@ namespace BeatPop.Editor
                 }
             }
 
-            if (_result == null)
+            if (_result != null)
             {
-                return;
+                EditorGUILayout.Space(16);
+
+                DrawResult();
             }
 
-            EditorGUILayout.Space(16);
-
-            DrawResult();
+            EditorGUILayout.EndScrollView();
         }
 
         private void Analyze()
